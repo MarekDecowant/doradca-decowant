@@ -123,7 +123,7 @@ html, body { max-width: 100%; overflow-x: hidden; }
       <div class="dc-section">
         <h3>Ustawienia obliczeń</h3>
         <div class="dc-grid">
-          <div class="dc-field"><label for="dc-layers">Liczba warstw</label><input id="dc-layers" type="number" min="1" max="4" step="1"></div>
+          <div id="dc-layers-wrap" class="dc-field"><label for="dc-layers">Liczba warstw</label><input id="dc-layers" type="number" min="1" max="4" step="1"></div>
           <div class="dc-field"><label for="dc-waste">Zapas materiału</label><select id="dc-waste"><option value="0" selected>0%</option><option value="5">5%</option><option value="10">10%</option><option value="15">15%</option></select></div>
           <div id="dc-variant-wrap" class="dc-field dc-full dc-hidden"><label for="dc-variant">Wariant / sposób aplikacji</label><select id="dc-variant"></select></div>
         </div>
@@ -160,7 +160,17 @@ html, body { max-width: 100%; overflow-x: hidden; }
 
     Object.keys(PRODUCTS).forEach(k=>{const o=document.createElement('option');o.value=k;o.textContent=PRODUCTS[k].name;product.appendChild(o)});
     function fmt(n,d=2){return Number(n).toLocaleString('pl-PL',{maximumFractionDigits:d})}
-    function updateProduct(){const p=PRODUCTS[product.value];layers.value=p.layers;waste.value=String(p.waste ?? 0);variant.innerHTML='';if(p.variants){p.variants.forEach((v,i)=>{const o=document.createElement('option');o.value=i;o.textContent=v.name;variant.appendChild(o)});variantWrap.classList.remove('dc-hidden')}else variantWrap.classList.add('dc-hidden')}
+    function updateProduct(){
+      const p=PRODUCTS[product.value];
+      layers.value=p.layers;
+      $('dc-layers-wrap').classList.toggle('dc-hidden',p.layers!==2);
+      waste.value=String(p.waste ?? 0);
+      variant.innerHTML='';
+      if(p.variants){
+        p.variants.forEach((v,i)=>{const o=document.createElement('option');o.value=i;o.textContent=v.name;variant.appendChild(o)});
+        variantWrap.classList.remove('dc-hidden');
+      }else variantWrap.classList.add('dc-hidden');
+    }
     function updateMode(){const dims=mode.value==='dimensions';$('dc-area-fields').classList.toggle('dc-hidden',dims);$('dc-dim-fields').classList.toggle('dc-hidden',!dims)}
     $('dc-subtract').addEventListener('change',e=>$('dc-opening-fields').classList.toggle('dc-hidden',!e.target.checked));
     product.addEventListener('change',updateProduct);mode.addEventListener('change',updateMode);
