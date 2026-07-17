@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kalkulator materiałów Decowant</title>
+</head>
+<body>
+<div id="decowant-material-calculator" class="dc-calc">
+  <style>
+    #decowant-material-calculator{--dc:#2f5146;--dc2:#eaf1ee;--line:#d9e1de;--text:#1f2926;--muted:#66736e;max-width:980px;margin:24px auto;font-family:Arial,sans-serif;color:var(--text)}
+    #decowant-material-calculator *{box-sizing:border-box}
+    .dc-card{border:1px solid var(--line);border-radius:14px;background:#fff;overflow:hidden;box-shadow:0 6px 22px rgba(0,0,0,.05)}
+    .dc-head{padding:24px;background:var(--dc);color:#fff}
+    .dc-head h2{margin:0 0 8px;font-size:28px;line-height:1.2}.dc-head p{margin:0;opacity:.92}
+    .dc-body{padding:22px}.dc-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.dc-full{grid-column:1/-1}
+    .dc-field label{display:block;font-weight:700;margin-bottom:7px}.dc-field small{display:block;color:var(--muted);margin-top:5px}
+    .dc-field input,.dc-field select{width:100%;min-height:44px;padding:10px 12px;border:1px solid #bfcac6;border-radius:8px;background:#fff;font-size:16px;color:var(--text)}
+    .dc-field input:focus,.dc-field select:focus{outline:2px solid rgba(47,81,70,.2);border-color:var(--dc)}
+    .dc-check{display:flex;align-items:center;gap:9px;padding-top:28px}.dc-check input{width:18px;height:18px}
+    .dc-section{margin-top:22px;padding-top:20px;border-top:1px solid var(--line)}.dc-section h3{margin:0 0 14px;font-size:19px}
+    .dc-openings{display:grid;grid-template-columns:1fr 1fr;gap:16px}.dc-hidden{display:none!important}
+    .dc-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}.dc-btn{border:0;border-radius:9px;padding:13px 20px;font-size:16px;font-weight:700;cursor:pointer}.dc-primary{background:var(--dc);color:#fff}.dc-secondary{background:#eef2f0;color:var(--text)}
+    .dc-results{margin-top:22px;border-radius:12px;background:var(--dc2);padding:20px}.dc-results h3{margin:0 0 15px}.dc-result-main{font-size:22px;font-weight:800;margin-bottom:10px}.dc-result-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.dc-result-box{background:#fff;border:1px solid var(--line);padding:14px;border-radius:9px}.dc-result-box strong{display:block;margin-bottom:5px}.dc-note{margin-top:14px;font-size:14px;line-height:1.45;color:#4d5c57}.dc-warning{margin-top:12px;padding:11px 13px;border-left:4px solid #b67a00;background:#fff7df;border-radius:5px}.dc-error{padding:12px;background:#ffe9e7;color:#8a2018;border-radius:8px}
+    @media(max-width:700px){.dc-grid,.dc-openings,.dc-result-grid{grid-template-columns:1fr}.dc-full{grid-column:auto}.dc-check{padding-top:0}.dc-head h2{font-size:23px}.dc-body{padding:16px}}
+  
+/* Ulepszony widok mobilny */
+* { box-sizing: border-box; }
+html, body { max-width: 100%; overflow-x: hidden; }
+.dc-calculator { width: 100%; max-width: 1180px; margin: 0 auto; padding: 16px; }
+.dc-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.dc-field, .dc-card, .dc-result { min-width: 0; }
+.dc-field input,
+.dc-field select,
+.dc-field textarea,
+.dc-calculator button {
+  width: 100%;
+  max-width: 100%;
+  min-height: 48px;
+  font-size: 16px;
+}
+.dc-result { overflow-wrap: anywhere; word-break: normal; }
+.dc-result table { width: 100%; border-collapse: collapse; }
+.dc-result table td,
+.dc-result table th { padding: 10px 8px; vertical-align: top; }
+
+@media (max-width: 768px) {
+  .dc-calculator { padding: 10px; }
+  .dc-grid { grid-template-columns: 1fr !important; gap: 12px; }
+  .dc-row, .dc-fields, .dc-form-row {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+  .dc-card { padding: 14px !important; border-radius: 12px; }
+  .dc-calculator h1 { font-size: 26px; line-height: 1.2; }
+  .dc-calculator h2 { font-size: 21px; line-height: 1.25; }
+  .dc-calculator h3 { font-size: 18px; line-height: 1.3; }
+  .dc-calculator button {
+    position: relative;
+    z-index: 2;
+    min-height: 52px;
+    padding: 14px 16px;
+    touch-action: manipulation;
+  }
+  .dc-result table,
+  .dc-result tbody,
+  .dc-result tr,
+  .dc-result td,
+  .dc-result th {
+    display: block;
+    width: 100%;
+  }
+  .dc-result tr {
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+  }
+  .dc-result td,
+  .dc-result th {
+    border: 0 !important;
+    padding: 4px 0 !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .dc-calculator { padding: 8px; }
+  .dc-card { padding: 12px !important; }
+  .dc-calculator h1 { font-size: 23px; }
+  .dc-field label { font-size: 14px; }
+}
+
+</style>
+
+  <div class="dc-card">
+    <div class="dc-head">
+      <h2>Kalkulator materiałów Decowant</h2>
+      <p>Oblicz orientacyjną ilość produktu bez automatycznego zapasu. Możesz samodzielnie dodać zapas.</p>
+    </div>
+    <div class="dc-body">
+      <div class="dc-grid">
+        <div class="dc-field dc-full"><label for="dc-product">Produkt</label><select id="dc-product"></select></div>
+        <div class="dc-field"><label for="dc-room">Miejsce zastosowania</label><select id="dc-room"><option value="dry">Pokój / salon / sypialnia</option><option value="hall">Korytarz / wiatrołap / klatka schodowa</option><option value="kitchen">Kuchnia</option><option value="bathroom">Łazienka</option></select></div>
+        <div class="dc-field"><label for="dc-mode">Sposób podania powierzchni</label><select id="dc-mode"><option value="area">Znam powierzchnię w m²</option><option value="dimensions">Podam wymiary ścian</option></select></div>
+      </div>
+
+      <div id="dc-area-fields" class="dc-section">
+        <div class="dc-grid"><div class="dc-field"><label for="dc-area">Powierzchnia</label><input id="dc-area" type="number" min="1" step="0.1" value="10"><small>Minimalna powierzchnia: 1 m².</small></div></div>
+      </div>
+
+      <div id="dc-dim-fields" class="dc-section dc-hidden">
+        <h3>Wymiary ścian</h3>
+        <div class="dc-grid">
+          <div class="dc-field"><label for="dc-width">Łączna szerokość ścian (m)</label><input id="dc-width" type="number" min="0" step="0.01" value="4"></div>
+          <div class="dc-field"><label for="dc-height">Wysokość (m)</label><input id="dc-height" type="number" min="0" step="0.01" value="2.5"></div>
+          <div class="dc-check dc-full"><input id="dc-subtract" type="checkbox" checked><label for="dc-subtract">Odejmij powierzchnię okien i drzwi</label></div>
+        </div>
+        <div id="dc-opening-fields" class="dc-openings">
+          <div class="dc-field"><label for="dc-windows">Łączna powierzchnia okien (m²)</label><input id="dc-windows" type="number" min="0" step="0.01" value="0"></div>
+          <div class="dc-field"><label for="dc-doors">Łączna powierzchnia drzwi (m²)</label><input id="dc-doors" type="number" min="0" step="0.01" value="0"></div>
+        </div>
+      </div>
+
+      <div class="dc-section">
+        <h3>Ustawienia obliczeń</h3>
+        <div class="dc-grid">
+          <div class="dc-field"><label for="dc-layers">Liczba warstw</label><input id="dc-layers" type="number" min="1" max="4" step="1"></div>
+          <div class="dc-field"><label for="dc-waste">Zapas materiału</label><select id="dc-waste"><option value="0" selected>0%</option><option value="5">5%</option><option value="10">10%</option><option value="15">15%</option></select></div>
+          <div id="dc-variant-wrap" class="dc-field dc-full dc-hidden"><label for="dc-variant">Wariant / sposób aplikacji</label><select id="dc-variant"></select></div>
+        </div>
+      </div>
+
+      <div class="dc-actions"><button class="dc-btn dc-primary" id="dc-calculate" type="button">Oblicz ilość materiału</button><button class="dc-btn dc-secondary" id="dc-reset" type="button">Wyczyść</button></div>
+      <div id="dc-output" class="dc-results" aria-live="polite"><p>Wybierz produkt i wpisz powierzchnię, a następnie kliknij „Oblicz”.</p></div>
+    </div>
+  </div>
+
+  <script>
+  (function(){
+    'use strict';
+    const PRODUCTS = {
+      colorMatt:{name:'FOX Color Matt',kind:'coveragePerUnit',yield:14,packages:[2.5,5,10],unit:'l',layers:2,waste:0,primer:'Grunt dobierany do chłonności i stanu podłoża.',lacquer:'none',note:'Wydajność do 14 m²/l na jedną warstwę.'},
+      decomal:{name:'DECOMAL',kind:'coveragePerPackage',yield:7,packages:[1],packageLabel:'opak. 1 kg',layers:1,waste:0,primer:'DECOMAL Podkład',primerYield:7,primerPackages:[1.5,3],primerUnit:'kg',lacquer:'room',note:'Przyjęto korzystniejszą wydajność: do 7 m² z opakowania 1 kg.'},
+      decomalmat:{name:'DECOMALmat',kind:'coveragePerPackage',yield:7,packages:[1],packageLabel:'opak. 1 kg',layers:1,waste:0,primer:'DECOMAL Podkład',primerYield:7,primerPackages:[1.5,3],primerUnit:'kg',lacquer:'room',note:'Przyjęto korzystniejszą wydajność: do 7 m² z opakowania 1 kg.'},
+      decomalStar:{name:'DECOMAL STAR',kind:'coveragePerPackage',yield:7,packages:[1],packageLabel:'opak. 1 kg',layers:1,waste:0,primer:'DECOMAL Podkład',primerYield:7,primerPackages:[1.5,3],primerUnit:'kg',lacquer:'room',note:'Przyjęto korzystniejszą wydajność: do 7 m² z opakowania 1 kg.'},
+      decomalDuo:{name:'DECOMAL DUO',kind:'coveragePerPackage',yield:7,packages:[1],packageLabel:'zestaw P1 + P2',layers:2,waste:0,primer:'DECOMAL Podkład',primerYield:7,primerPackages:[1.5,3],primerUnit:'kg',lacquer:'room',note:'Program liczy pełne zestawy P1 + P2. Dwie aplikacje tworzą jeden kompletny efekt.'},
+      beton:{name:'DECOMAL Beton Architektoniczny',kind:'coveragePerPackage',yield:4.5,packages:[1],packageLabel:'opak. 4 kg',layers:2,waste:0,primer:'Podkład kwarcowy zalecany do betonu',lacquer:'always',note:'Jedno opakowanie 4 kg wystarcza do ok. 4,5 m² przy wykonaniu systemu dwuwarstwowego.'},
+      podklad:{name:'DECOMAL Podkład',kind:'coveragePerUnit',yield:7,packages:[1.5,3],unit:'kg',layers:1,waste:0,primer:'Nie dotyczy',lacquer:'none'},
+      provence:{name:'Provence',kind:'coveragePerUnit',yield:7,packages:[1,3,5],unit:'kg',layers:1,waste:0,primer:'DK Quarzo lub DECOMAL Podkład',primerYield:5,primerPackages:[1.5,3],primerUnit:'kg',lacquer:'room'},
+      aurum:{name:'Aurum',kind:'coveragePerUnit',yield:8,packages:[0.75,2.25],unit:'kg',layers:1,waste:0,primer:'DK Quarzo',lacquer:'room',variants:[{name:'Pędzel – do 8 m²/kg',yield:8},{name:'Paca INOX – do 6 m²/kg',yield:6}]},
+      kalahari:{name:'Kalahari',kind:'coveragePerUnit',yield:10,packages:[1],unit:'l',layers:1,waste:0,primer:'Farba podkładowa w zbliżonym kolorze',lacquer:'room'},
+      diamento:{name:'Diamento 3D',kind:'coveragePerUnit',yield:5,packages:[1,3],unit:'l',layers:1,waste:0,primer:'Farba podkładowa zgodna z systemem',lacquer:'room',note:'Opakowanie 3 l może być dostępne tylko dla wybranych wariantów.'},
+      trawertyn:{name:'Trawertyn FOX',kind:'coveragePerUnit',yield:0.7,packages:[5,10],unit:'kg',layers:2,waste:0,primer:'Podkład systemowy',lacquer:'always',variants:[{name:'Ekstra drobny – 1,25 m²/kg',yield:1.25},{name:'Drobny – 0,70 m²/kg',yield:0.7},{name:'Gruby – 0,40 m²/kg',yield:0.4}]},
+      concreteFini:{name:'Concrete Fini',kind:'consumption',consumption:1.2,packages:[5,22],unit:'kg',layers:1,waste:0,primer:'DK Quarzo GG',lacquer:'always',note:'Zużycie 1,2 kg/m² na jedną warstwę.'},
+      concreteGrosso:{name:'Concrete Grosso',kind:'consumption',consumption:2,packages:[5,22],unit:'kg',layers:1,waste:0,primer:'DK Quarzo GG',lacquer:'always',note:'Do obliczenia przyjęto korzystniejszą normę 2 kg/m².'},
+      universum:{name:'Universum',kind:'consumption',consumption:0.65,packages:[1,2.5,5,10],unit:'kg',layers:2,waste:0,primer:'Podkład zgodny z systemem',lacquer:'room',note:'Do obliczenia przyjęto korzystniejszą normę 0,65 kg/m² dla dwóch warstw.'},
+      ceramicWhite:{name:'Decoverni Ceramic White',kind:'coveragePerUnit',yield:16,packages:[1,2.5],unit:'l',layers:2,waste:0,primer:'Grunt zależnie od chłonności podłoża',lacquer:'none',note:'Przyjęto wydajność do 16 m²/l na jedną warstwę.'}
+    };
+    const $=id=>document.getElementById(id);
+    const product=$('dc-product'), mode=$('dc-mode'), layers=$('dc-layers'), waste=$('dc-waste'), variantWrap=$('dc-variant-wrap'), variant=$('dc-variant');
+
+    Object.keys(PRODUCTS).forEach(k=>{const o=document.createElement('option');o.value=k;o.textContent=PRODUCTS[k].name;product.appendChild(o)});
+    function fmt(n,d=2){return Number(n).toLocaleString('pl-PL',{maximumFractionDigits:d})}
+    function updateProduct(){const p=PRODUCTS[product.value];layers.value=p.layers;waste.value=String(p.waste ?? 0);variant.innerHTML='';if(p.variants){p.variants.forEach((v,i)=>{const o=document.createElement('option');o.value=i;o.textContent=v.name;variant.appendChild(o)});variantWrap.classList.remove('dc-hidden')}else variantWrap.classList.add('dc-hidden')}
+    function updateMode(){const dims=mode.value==='dimensions';$('dc-area-fields').classList.toggle('dc-hidden',dims);$('dc-dim-fields').classList.toggle('dc-hidden',!dims)}
+    $('dc-subtract').addEventListener('change',e=>$('dc-opening-fields').classList.toggle('dc-hidden',!e.target.checked));
+    product.addEventListener('change',updateProduct);mode.addEventListener('change',updateMode);
+
+    function areaValue(){if(mode.value==='area') return Number($('dc-area').value);let a=Number($('dc-width').value)*Number($('dc-height').value);if($('dc-subtract').checked)a-=Number($('dc-windows').value||0)+Number($('dc-doors').value||0);return a}
+    function optimize(required,sizes){
+      if(!sizes||!sizes.length||!isFinite(required)||required<=0)return null;
+      const scaled=sizes.map(x=>Math.round(x*100)).sort((a,b)=>b-a),req=Math.ceil(required*100),smallest=Math.min(...scaled);
+      const maxItems=Math.ceil(req/smallest)+1;let best=null;
+      function walk(i,total,counts,itemCount){
+        if(i===scaled.length-1){
+          const count=Math.max(0,Math.ceil((req-total)/scaled[i])),finalTotal=total+count*scaled[i],finalCount=itemCount+count;
+          if(finalTotal<req)return;
+          const candidate={total:finalTotal,count:finalCount,counts:counts.concat(count)};
+          if(!best||candidate.total<best.total||(candidate.total===best.total&&candidate.count<best.count))best=candidate;
+          return;
+        }
+        const limit=Math.min(maxItems-itemCount,Math.ceil(Math.max(0,req-total)/scaled[i])+1);
+        for(let count=0;count<=limit;count++)walk(i+1,total+count*scaled[i],counts.concat(count),itemCount+count);
+      }
+      walk(0,0,[],0);if(!best)return null;const counts={};
+      best.counts.forEach((count,i)=>{if(count)counts[scaled[i]/100]=count});
+      return {total:best.total/100,counts};
+    }
+    function packageText(opt,unit){if(!opt)return 'Dobierz ręcznie';return Object.keys(opt.counts).sort((a,b)=>b-a).map(s=>opt.counts[s]+' × '+fmt(s)+' '+unit).join(' + ')}
+    function lacquerText(p,room,area){if(p.lacquer==='none')return 'Lakier nie jest wymagany w standardowym systemie.';const wet=room==='kitchen'||room==='bathroom';if(p.lacquer==='always'||wet){const liters=area/10;return 'Zabezpieczenie zalecane/wymagane: ok. '+fmt(liters,1)+' l lakieru (przyjęto 10 m²/l).'}if(room==='hall')return 'Lakier zalecany ze względu na intensywne użytkowanie; orientacyjnie '+fmt(area/10,1)+' l.';return 'W suchym pomieszczeniu lakier jest opcjonalny, o ile karta produktu nie stanowi inaczej.'}
+    function calculate(){
+      const p=PRODUCTS[product.value],area=areaValue(),layerCount=Math.max(1,Number(layers.value||1)),reserve=Number(waste.value||0);
+      if(!isFinite(area)||area<1){$('dc-output').innerHTML='<div class="dc-error">Wpisz prawidłową powierzchnię co najmniej 1 m².</div>';return}
+      const calcArea=area*(1+reserve/100);let required,opt,main;
+      if(p.kind==='consumption'){
+        const factor=layerCount/(p.layers||1);required=calcArea*p.consumption*factor;opt=optimize(required,p.packages);main=packageText(opt,p.unit);
+      }else if(p.kind==='coveragePerPackage'){
+        let y=p.yield;if(p.variants)y=p.variants[Number(variant.value)||0].yield;const factor=layerCount/(p.layers||1);required=calcArea/y*factor;const count=Math.ceil(required);opt={total:count,counts:{1:count}};main=count+' × '+p.packageLabel;
+      }else{
+        let y=p.yield;if(p.variants)y=p.variants[Number(variant.value)||0].yield;required=calcArea*layerCount/y;opt=optimize(required,p.packages);main=packageText(opt,p.unit);
+      }
+      let primer='Podkład: '+p.primer;
+      if(p.primerYield&&p.primerPackages){const pr=calcArea/p.primerYield;const po=optimize(pr,p.primerPackages);primer+=' — do zamówienia: '+packageText(po,p.primerUnit||'kg')}
+      const requiredLabel = p.kind==='coveragePerPackage'
+        ? fmt(required,2)+' opak. ('+p.packageLabel+')'
+        : fmt(required,2)+' '+p.unit;
+      const orderedTotal = opt ? (p.kind==='coveragePerPackage' ? fmt(opt.total,0)+' opak.' : fmt(opt.total,2)+' '+p.unit) : '—';
+      const warn=layerCount!==p.layers?'<div class="dc-warning">Wybrano '+layerCount+' warstw, podczas gdy ustawienie zalecane dla tego produktu to '+p.layers+'. Wynik został odpowiednio przeliczony.</div>':'';
+      $('dc-output').innerHTML='<h3>Wynik</h3><div class="dc-result-main">Do zamówienia: '+main+'</div><div class="dc-result-grid"><div class="dc-result-box dc-full"><strong>Produkt</strong>'+p.name+'</div><div class="dc-result-box"><strong>Obliczone zapotrzebowanie</strong>'+requiredLabel+'</div><div class="dc-result-box"><strong>Łącznie w zamawianych opakowaniach</strong>'+orderedTotal+'</div><div class="dc-result-box"><strong>Powierzchnia netto</strong>'+fmt(area)+' m²</div><div class="dc-result-box"><strong>Powierzchnia z zapasem</strong>'+fmt(calcArea)+' m²</div><div class="dc-result-box"><strong>Warstwy</strong>'+layerCount+'</div><div class="dc-result-box"><strong>Zapas</strong>'+reserve+'%</div><div class="dc-result-box dc-full"><strong>Podkład</strong>'+primer+'</div><div class="dc-result-box dc-full"><strong>Lakier / zabezpieczenie</strong>'+lacquerText(p,$('dc-room').value,calcArea)+'</div></div>'+warn+'<div class="dc-note">'+(p.note?p.note+' ':'')+'Wynik jest orientacyjny i domyślnie nie zawiera zapasu. Obliczenia wykorzystują wyższą wydajność z zakresu technicznego produktu. Rzeczywiste zużycie zależy od chłonności i równości podłoża, sposobu aplikacji oraz doświadczenia wykonawcy. Materiał jest zaokrąglany w górę do pełnych opakowań.</div><a class="dc-shop-link" href="https://www.sklepdecowant.pl/" target="_blank" rel="noopener">Przejdź do sklepu Decowant →</a>';
+    }
+    $('dc-calculate').addEventListener('click',calculate);
+    $('dc-reset').addEventListener('click',()=>{$('dc-area').value=10;$('dc-width').value=4;$('dc-height').value=2.5;$('dc-windows').value=0;$('dc-doors').value=0;product.selectedIndex=0;mode.value='area';$('dc-room').value='dry';updateMode();updateProduct();$('dc-output').innerHTML='<p>Wybierz produkt i wpisz powierzchnię, a następnie kliknij „Oblicz”.</p>'});
+    updateMode();updateProduct();
+  })();
+  </script>
+</div>
+
+</body>
+</html>
