@@ -707,7 +707,7 @@
           <section class="step" data-step="application">
             <div class="kicker">Pytanie 3</div>
             <h2 class="question">Kto będzie wykonywał dekorację?</h2>
-            <p class="helper">To pytanie pomaga dobrać prostszy lub bardziej efektowny system.</p>
+            <p class="helper">Pokażemy wskazówkę dopasowaną do sposobu wykonania. Dobór produktu zawsze potwierdź z instrukcją wybranego efektu.</p>
 
             <div class="options">
               <button class="opt" data-answer="application" data-value="sam">
@@ -771,7 +771,7 @@
           <section class="step" data-step="usage">
             <div class="kicker">Pytanie 4</div>
             <h2 class="question">Co jest dla Ciebie najważniejsze?</h2>
-            <p class="helper">Ostatni wybór doprecyzuje rekomendację.</p>
+            <p class="helper">Ostatni wybór doda praktyczną wskazówkę, która pomoże porównać rekomendowane rozwiązania.</p>
 
             <div class="options">
               <button class="opt" data-answer="usage" data-value="wyglad">
@@ -846,7 +846,7 @@
 
         <div class="side-card">
           <h3>Kominek</h3>
-          <p>Przy czarnych i bardzo intensywnych kolorach nie wybieraj lakieru matowego. Bezpieczniejsza będzie satyna albo lakier hydrofobowy.</p>
+          <p>Przy kominku nie dobieraj lakieru wyłącznie po połysku. Zgodność całego systemu z temperaturą i podłożem potwierdź w instrukcji wybranego produktu.</p>
         </div>
       </aside>
     </div>
@@ -959,9 +959,9 @@
       },
 
       lakiery: {
-        name: 'Lakier zabezpieczający',
-        img: 'img/produkt-decomalmat-ciemny.jpg',
-        desc: 'Dobierany do koloru i efektu. Przy intensywnych kolorach na kominku preferuj satynę albo hydrofob, a nie lakier matowy.',
+        name: 'Dobór lakieru do systemu',
+        img: 'img/hydrostop-gloss.webp',
+        desc: 'Dobierz lakier do konkretnego efektu, miejsca zastosowania i instrukcji produktu. Przy kominku potwierdź zgodność kompletnego systemu z temperaturą i podłożem.',
         link: 'https://www.sklepdecowant.pl/pl/searchquery/lakier/1/full/5',
         cta: 'Zobacz lakiery'
       },
@@ -970,14 +970,6 @@
         name: 'Aurum Decoverni / Design Decowant',
         img: 'img/aurum-szary-lazienka.webp',
         desc: 'Elegancki efekt dekoracyjny premium z metalicznym charakterem. Może być produktem głównym, który następnie zabezpiecza się lakierem.',
-        link: 'https://www.sklepdecowant.pl/pl/searchquery/aurum/1/full/5',
-        cta: 'Zobacz Aurum'
-      },
-
-      aurumGreen: {
-        name: 'Aurum – butelkowa zieleń',
-        img: 'img/aurum-zielony-korytarz.jpg',
-        desc: 'Aurum w odcieniu butelkowej zieleni. Efekt dekoracyjny premium do eleganckich wnętrz, korytarzy i ścian akcentowych.',
         link: 'https://www.sklepdecowant.pl/pl/searchquery/aurum/1/full/5',
         cta: 'Zobacz Aurum'
       },
@@ -1064,10 +1056,10 @@
       if(state.wetMainProduct === 'decomalmat') return ['decomalmat','lakierHydro'];
       if(state.wetMainProduct === 'decomal') return ['decomal','lakierHydro'];
       if(state.wetMainProduct === 'duo') return ['duo','lakierHydro'];
-      if(state.wetMainProduct === 'aurum') return ['aurum','aurumGreen','lakierHydro'];
+      if(state.wetMainProduct === 'aurum') return ['aurum','lakierHydro'];
       if(state.wetMainProduct === 'provence') return ['provence','lakierHydro'];
 
-      return ['decomalmat','decomal','duo','aurum','aurumGreen','provence','lakierHydro'];
+      return ['decomalmat','decomal','duo','aurum','provence','lakierHydro'];
     }
 
     function chooseProducts(){
@@ -1079,14 +1071,14 @@
       }
 
       if(state.room === 'kominek'){
-        if(state.effect === 'metal' || state.effect === 'wow') return ['decomal','duo','aurum','aurumGreen','lakiery'];
+        if(state.effect === 'metal' || state.effect === 'wow') return ['decomal','duo','aurum','lakiery'];
         if(state.effect === 'natural') return ['provence','decomalmat','lakiery'];
 
         return ['decomalmat','provence','lakiery'];
       }
 
-      if(state.effect === 'metal') return ['decomal','duo','aurum','aurumGreen'];
-      if(state.effect === 'wow') return ['duo','decomal','aurum','aurumGreen'];
+      if(state.effect === 'metal') return ['decomal','duo','aurum'];
+      if(state.effect === 'wow') return ['duo','decomal','aurum'];
       if(state.effect === 'natural') return ['provence','decomalmat','beton'];
 
       return ['decomalmat','provence','beton'];
@@ -1201,9 +1193,9 @@
 
       if(state.room === 'kominek'){
         if(state.fireplaceColor === 'ciemny'){
-          n.push('<div class="note warning"><strong>Ważne przy ciemnym kominku:</strong> przy czarnych, grafitowych i bardzo intensywnych kolorach nie rekomendujemy lakieru matowego. Bezpieczniejsza będzie satyna albo lakier hydrofobowy.</div>');
+          n.push('<div class="note warning"><strong>Ważne przy ciemnym kominku:</strong> nie dobieraj lakieru wyłącznie po połysku. Przed zakupem potwierdź zgodność wybranego produktu, lakieru, podłoża i temperatury z instrukcją systemu.</div>');
         }else{
-          n.push('<div class="note"><strong>Dobór lakieru do kominka:</strong> przy jasnym lub nieustalonym kolorze potwierdź wykończenie lakieru z instrukcją wybranego produktu.</div>');
+          n.push('<div class="note"><strong>Dobór lakieru do kominka:</strong> przed zakupem potwierdź zgodność wybranego produktu, lakieru, podłoża i temperatury z instrukcją systemu.</div>');
         }
         n.push('<div class="note"><strong>Uwaga:</strong> Beton Hydrofobowy traktujemy głównie jako produkt do stref mokrych, nie jako podstawową rekomendację na kominek.</div>');
       }
