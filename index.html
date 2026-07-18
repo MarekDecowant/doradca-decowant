@@ -101,6 +101,33 @@
       line-height:1.65;
     }
 
+    .hero-actions{
+      position:relative;
+      z-index:1;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:22px;
+    }
+
+    .hero-link{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:44px;
+      padding:11px 15px;
+      border-radius:999px;
+      text-decoration:none;
+      font-weight:900;
+      background:var(--orange);
+      color:#111;
+    }
+
+    .hero-link-light{
+      background:#fff;
+      color:#111;
+    }
+
     .shell{
       margin-top:18px;
       display:grid;
@@ -446,6 +473,8 @@
     @media(max-width:680px){
       .page{width:min(100% - 18px,1120px);padding:10px 0 18px}
       .hero{padding:24px 20px;border-radius:22px}
+      .hero-actions{flex-direction:column}
+      .hero-link{width:100%}
       .panel{padding:18px;border-radius:22px}
       .options,.products{grid-template-columns:1fr}
       .side{grid-template-columns:1fr}
@@ -466,6 +495,10 @@
       <span class="badge">Doradca Decowant</span>
       <h1>Dobierz efekt dekoracyjny do swojego pomieszczenia</h1>
       <p>Odpowiedz na kilka krótkich pytań. Doradca podpowie produkt główny oraz właściwy lakier zabezpieczający — szczególnie przy kuchni, łazience, pasie międzymeblowym i kominku.</p>
+      <div class="hero-actions" aria-label="Przydatne narzędzia">
+        <a class="hero-link" href="https://marekdecowant.github.io/doradca-decowant/kalkulator-materialow.html" target="_blank" rel="noopener">Oblicz zużycie materiałów</a>
+        <a class="hero-link hero-link-light" href="https://sklep150695.shoparena.pl/pl_PL/collection/PROBKI-FARB/10?preview=true" target="_blank" rel="noopener">Zamów próbki farb i efektów</a>
+      </div>
     </section>
 
     <div class="shell">
@@ -510,7 +543,7 @@
               </button>
 
               <button class="opt" data-answer="room" data-value="lazienka">
-                <img src="img/beton-hydrofobowy-lazienka.jpg" alt="Łazienka z betonem hydrofobowym">
+                <img src="img/lazienka-beton-hydrofobowy.jpg" alt="Łazienka z efektem Betonu Hydrofobowego">
                 <div class="opt-content">
                   <span>Łazienka</span>
                   <small>Strefa wilgoci: Beton Hydrofobowy albo dekoracja zabezpieczona lakierem hydrofobowym.</small>
@@ -518,10 +551,10 @@
               </button>
 
               <button class="opt" data-answer="room" data-value="korytarz">
-                <img src="img/korytarz-decomalmat.jpg" alt="Korytarz z efektem DECOMALmat">
+                <img src="img/decomal-biala-perla-schody.webp" alt="Schody z efektem DECOMAL Biała Perła">
                 <div class="opt-content">
                   <span>Korytarz / wiatrołap / schody</span>
-                  <small>Ładne, ale praktyczne wykończenie na co dzień.</small>
+                  <small>DECOMAL Biała Perła — jasny efekt do reprezentacyjnego ciągu komunikacyjnego.</small>
                 </div>
               </button>
 
@@ -550,7 +583,7 @@
 
             <div class="options">
               <button class="opt" data-answer="wetSystem" data-value="betonHydro">
-                <img src="img/beton-hydrofobowy-lazienka.jpg" alt="Beton Hydrofobowy w łazience">
+                <img src="img/lazienka-beton-hydrofobowy.jpg" alt="Beton Hydrofobowy w łazience">
                 <div class="opt-content">
                   <span>Beton Hydrofobowy</span>
                   <small>Tynk dekoracyjny do stref mokrych — łazienka, kuchnia, pas międzymeblowy.</small>
@@ -566,7 +599,7 @@
               </button>
 
               <button class="opt" data-answer="wetSystem" data-value="nieWiem">
-                <img src="img/beton-hydrofobowy-lazienka.jpg" alt="Łazienka z betonem hydrofobowym">
+                <img src="img/lazienka-beton-hydrofobowy.jpg" alt="Łazienka z efektem Betonu Hydrofobowego">
                 <div class="opt-content">
                   <span>Nie wiem, co będzie lepsze</span>
                   <small>Pokażemy obie ścieżki: Beton Hydrofobowy oraz dekorację pokrytą lakierem.</small>
@@ -606,7 +639,7 @@
               </button>
 
               <button class="opt" data-answer="wetMainProduct" data-value="aurum">
-                <img src="img/aurum-braz-sztukateria.jpg" alt="Aurum Decoverni w kolorze brązowym">
+                <img src="img/aurum-szary-lazienka.webp" alt="Aurum Szary w łazience">
                 <div class="opt-content">
                   <span>Aurum Decoverni / Design Decowant</span>
                   <small>Efekt premium + lakier zabezpieczający.</small>
@@ -614,7 +647,7 @@
               </button>
 
               <button class="opt" data-answer="wetMainProduct" data-value="provence">
-                <img src="img/provence-zielona-lazienka.jpg" alt="Provence w zielonej łazience">
+                <img src="img/provence-butelkowa-zielen-lazienka.webp" alt="Provence Butelkowa Zieleń w łazience">
                 <div class="opt-content">
                   <span>Provence</span>
                   <small>Naturalny efekt glinki weneckiej + lakier zabezpieczający.</small>
@@ -622,7 +655,7 @@
               </button>
 
               <button class="opt" data-answer="wetMainProduct" data-value="nieWiem">
-                <img src="img/beton-hydrofobowy-lazienka.jpg" alt="Nie wiem, który produkt wybrać">
+                <img src="img/lazienka-beton-hydrofobowy.jpg" alt="Porównanie systemów do łazienki">
                 <div class="opt-content">
                   <span>Nie wiem</span>
                   <small>Pokażemy najbezpieczniejsze kierunki do porównania.</small>
@@ -646,7 +679,7 @@
               </button>
 
               <button class="opt" data-answer="effect" data-value="metal">
-                <img src="img/aurum-braz-sztukateria.jpg" alt="Metaliczny efekt Aurum">
+                <img src="img/aurum-szary-lazienka.webp" alt="Aurum Szary — efekt dekoracyjny">
                 <div class="opt-content">
                   <span>Połysk / metalik / refleksy</span>
                   <small>DECOMAL, DECOMAL DUO, Aurum Decoverni / Design Decowant.</small>
@@ -654,7 +687,7 @@
               </button>
 
               <button class="opt" data-answer="effect" data-value="natural">
-                <img src="img/provence-zielona-lazienka.jpg" alt="Naturalny efekt Provence">
+                <img src="img/provence-butelkowa-zielen-lazienka.webp" alt="Provence Butelkowa Zieleń — naturalny efekt">
                 <div class="opt-content">
                   <span>Naturalny, ciepły, przetarty</span>
                   <small>Provence i spokojniejsze dekoracje.</small>
@@ -678,7 +711,7 @@
 
             <div class="options">
               <button class="opt" data-answer="application" data-value="sam">
-                <img src="img/korytarz-decomalmat.jpg" alt="Samodzielna dekoracja">
+                <img src="img/decomal-biala-perla-schody.webp" alt="Schody z jasnym efektem dekoracyjnym">
                 <div class="opt-content">
                   <span>Samodzielnie</span>
                   <small>Wynik będzie bardziej praktyczny i bezpieczny aplikacyjnie.</small>
@@ -750,7 +783,7 @@
               </button>
 
               <button class="opt" data-answer="usage" data-value="praktycznosc">
-                <img src="img/beton-hydrofobowy-lazienka.jpg" alt="Praktyczność">
+                <img src="img/lazienka-beton-hydrofobowy.jpg" alt="Praktyczne wykończenie w strefie wilgoci">
                 <div class="opt-content">
                   <span>Praktyczność i łatwiejsze utrzymanie</span>
                   <small>Priorytet: odporność na codzienne użytkowanie.</small>
@@ -758,7 +791,7 @@
               </button>
 
               <button class="opt" data-answer="usage" data-value="latwosc">
-                <img src="img/korytarz-decomalmat.jpg" alt="Łatwiejsza aplikacja">
+                <img src="img/decomal-biala-perla-schody.webp" alt="Jasny efekt dekoracyjny w komunikacji">
                 <div class="opt-content">
                   <span>Łatwiejsza aplikacja</span>
                   <small>Priorytet: rozsądny wybór do samodzielnego wykonania.</small>
@@ -782,6 +815,8 @@
 
           <div class="actions">
             <button class="btn btn-light" type="button" id="restartBtn">Rozwiąż ponownie</button>
+            <a class="btn btn-outline" href="https://marekdecowant.github.io/doradca-decowant/kalkulator-materialow.html" target="_blank" rel="noopener">Oblicz zużycie materiałów</a>
+            <a class="btn btn-orange" href="https://sklep150695.shoparena.pl/pl_PL/collection/PROBKI-FARB/10?preview=true" target="_blank" rel="noopener">Zamów próbki kolorów</a>
             <a class="btn btn-dark" href="https://www.sklepdecowant.pl/pl/i/Instrukcje-wykonania-tynkow-i-farb-dekoracyjnych/17" target="_blank" rel="noopener">Instrukcje wykonania</a>
           </div>
         </section>
@@ -801,6 +836,8 @@
         <div class="side-card">
           <h3>Pomocne linki</h3>
           <div class="mini-links">
+            <a class="mini-link" href="https://marekdecowant.github.io/doradca-decowant/kalkulator-materialow.html" target="_blank" rel="noopener">Kalkulator zużycia materiałów</a>
+            <a class="mini-link" href="https://sklep150695.shoparena.pl/pl_PL/collection/PROBKI-FARB/10?preview=true" target="_blank" rel="noopener">Próbki farb i efektów</a>
             <a class="mini-link" href="https://www.sklepdecowant.pl/pl/i/Instrukcje-wykonania-tynkow-i-farb-dekoracyjnych/17" target="_blank" rel="noopener">Instrukcje wykonania</a>
             <a class="mini-link" href="https://www.sklepdecowant.pl/pl/i/Zdjecia-klientow/18" target="_blank" rel="noopener">Galeria klientów</a>
             <a class="mini-link" href="tel:727624783">Zadzwoń: 727 624 783</a>
@@ -875,7 +912,7 @@
     const products = {
       decomalmat: {
         name: 'DECOMALmat',
-        img: 'img/salon-decomalmat.jpg',
+        img: 'img/decomalmat-puszka.webp',
         desc: 'Matowa farba dekoracyjna premium do spokojnych, nowoczesnych i eleganckich powierzchni. Może być produktem głównym zabezpieczanym lakierem.',
         link: 'https://www.sklepdecowant.pl/pl/c/DECOMALmat/79',
         cta: 'Zobacz DECOMALmat'
@@ -883,7 +920,7 @@
 
       decomal: {
         name: 'DECOMAL',
-        img: 'img/salon-decomal.jpg',
+        img: 'img/decomal-puszka.webp',
         desc: 'Dekoracyjny efekt metaliczny z refleksami światła. Może być produktem głównym, który następnie zabezpiecza się lakierem.',
         link: 'https://www.sklepdecowant.pl/pl/c/DECOMAL/77',
         cta: 'Zobacz DECOMAL'
@@ -891,7 +928,7 @@
 
       duo: {
         name: 'DECOMAL DUO',
-        img: 'img/lokal-decomal-duo.jpg',
+        img: 'img/decomal-duo-zestaw.webp',
         desc: 'Mocniejszy efekt dekoracyjny z głębią i pracą światła. Dla ścian, które mają robić wrażenie.',
         link: 'https://www.sklepdecowant.pl/pl/c/DECOMAL-DUO/80',
         cta: 'Zobacz DECOMAL DUO'
@@ -899,7 +936,7 @@
 
       provence: {
         name: 'Provence',
-        img: 'img/provence-zielona-lazienka.jpg',
+        img: 'img/provence-butelkowa-zielen-lazienka.webp',
         desc: 'Efekt glinki weneckiej o naturalnym, ciepłym i przetartym charakterze. Może być stosowany również w łazience lub kuchni, ale wtedy wymaga odpowiedniego zabezpieczenia lakierem.',
         link: 'https://www.sklepdecowant.pl/pl/searchquery/provence/1/full/5',
         cta: 'Zobacz Provence'
@@ -907,15 +944,15 @@
 
       betonHydro: {
         name: 'Beton Hydrofobowy',
-        img: 'img/beton-hydrofobowy-lazienka.jpg',
+        img: 'img/lazienka-beton-hydrofobowy.jpg',
         desc: 'Tynk dekoracyjny do stref mokrych: łazienka, kuchnia, pas międzymeblowy i renowacja powierzchni z płytkami.',
-        link: 'https://www.sklepdecowant.pl/pl/searchquery/beton%20hydrofobowy/1/full/5',
+        link: 'https://www.sklepdecowant.pl/pl/p/FOX-DE-FOX-DEKORATOR-BETON-HYDROFOBOWY-SZARY-14-KG/1073',
         cta: 'Zobacz Beton Hydrofobowy'
       },
 
       lakierHydro: {
         name: 'Lakier hydrofobowy',
-        img: 'img/kuchnia-provence-lakier-hydrofobowy.jpg',
+        img: 'img/hydrostop-gloss.webp',
         desc: 'Do zabezpieczenia farby, tynku lub dekoracji w miejscach narażonych na wilgoć, zachlapania i zabrudzenia.',
         link: 'https://www.sklepdecowant.pl/pl/searchquery/lakier%20hydrofobowy/1/full/5',
         cta: 'Zobacz lakier hydrofobowy'
@@ -931,7 +968,7 @@
 
       aurum: {
         name: 'Aurum Decoverni / Design Decowant',
-        img: 'img/aurum-braz-sztukateria.jpg',
+        img: 'img/aurum-szary-lazienka.webp',
         desc: 'Elegancki efekt dekoracyjny premium z metalicznym charakterem. Może być produktem głównym, który następnie zabezpiecza się lakierem.',
         link: 'https://www.sklepdecowant.pl/pl/searchquery/aurum/1/full/5',
         cta: 'Zobacz Aurum'
@@ -947,7 +984,7 @@
 
       beton: {
         name: 'Efekty betonowe / mineralne',
-        img: 'img/beton-hydrofobowy-lazienka.jpg',
+        img: 'img/fox-beton-5kg.webp',
         desc: 'Surowszy, bardziej minimalistyczny charakter ściany. Dobry kierunek przy matowych i naturalnych aranżacjach.',
         link: 'https://www.sklepdecowant.pl/pl/searchquery/beton/1/full/5',
         cta: 'Zobacz efekty betonowe'
@@ -1038,7 +1075,7 @@
         if(state.wetSystem === 'betonHydro') return ['betonHydro'];
         if(state.wetSystem === 'dekoracjaLakier') return wetMainProductKeys();
 
-        return ['betonHydro','decomalmat','decomal','duo','aurum','aurumGreen','provence','lakierHydro'];
+        return ['betonHydro','decomalmat','lakierHydro'];
       }
 
       if(state.room === 'kominek'){
@@ -1163,7 +1200,11 @@
       let n = [];
 
       if(state.room === 'kominek'){
-        n.push('<div class="note warning"><strong>Ważne przy kominku:</strong> przy czarnych, grafitowych i bardzo intensywnych kolorach nie rekomendujemy lakieru matowego. Bezpieczniejsza będzie satyna albo lakier hydrofobowy.</div>');
+        if(state.fireplaceColor === 'ciemny'){
+          n.push('<div class="note warning"><strong>Ważne przy ciemnym kominku:</strong> przy czarnych, grafitowych i bardzo intensywnych kolorach nie rekomendujemy lakieru matowego. Bezpieczniejsza będzie satyna albo lakier hydrofobowy.</div>');
+        }else{
+          n.push('<div class="note"><strong>Dobór lakieru do kominka:</strong> przy jasnym lub nieustalonym kolorze potwierdź wykończenie lakieru z instrukcją wybranego produktu.</div>');
+        }
         n.push('<div class="note"><strong>Uwaga:</strong> Beton Hydrofobowy traktujemy głównie jako produkt do stref mokrych, nie jako podstawową rekomendację na kominek.</div>');
       }
 
@@ -1177,6 +1218,26 @@
 
       if(isWetRoom() && state.wetSystem === 'dekoracjaLakier'){
         n.push('<div class="note"><strong>Logika systemu:</strong> najpierw wybierasz produkt główny dający efekt dekoracyjny, a następnie pokrywasz go odpowiednim lakierem zabezpieczającym.</div>');
+      }
+
+      if(isWetRoom() && state.wetSystem === 'nieWiem'){
+        n.push('<div class="note"><strong>Najprostsze porównanie:</strong> Beton Hydrofobowy jest gotowym kierunkiem do stref wilgoci. Dekoracja + lakier daje większy wybór efektu, ale wymaga dobrania obu produktów jako systemu.</div>');
+      }
+
+      if(state.application === 'sam'){
+        n.push('<div class="note"><strong>Wykonanie samodzielne:</strong> przed zakupem obejrzyj instrukcję i zacznij od mniejszej powierzchni próbnej. Końcowy efekt zależy od podłoża, narzędzi, techniki i światła.</div>');
+      }
+
+      if(state.application === 'fachowiec'){
+        n.push('<div class="note"><strong>Wykonanie przez fachowca:</strong> przed zakupem ustal z wykonawcą wybrany efekt, kolor i pełny system produktów.</div>');
+      }
+
+      if(state.usage === 'praktycznosc'){
+        n.push('<div class="note"><strong>Priorytet: praktyczność.</strong> Przy wyborze porównaj odporność i sposób zabezpieczenia powierzchni w instrukcji konkretnego produktu.</div>');
+      }
+
+      if(state.usage === 'latwosc'){
+        n.push('<div class="note"><strong>Priorytet: łatwiejsza aplikacja.</strong> Wybierz jeden kierunek, sprawdź instrukcję wykonania i w razie wątpliwości skontaktuj się przed zakupem.</div>');
       }
 
       n.push('<div class="note"><strong>Przed zakupem:</strong> obejrzyj instrukcję wykonania i realizacje klientów. Kolor oraz efekt mogą wyglądać inaczej w zależności od oświetlenia, podłoża i techniki aplikacji.</div>');
