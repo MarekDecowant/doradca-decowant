@@ -149,7 +149,7 @@ html, body { max-width: 100%; overflow-x: hidden; }
       aurum:{name:'Aurum',kind:'coveragePerUnit',yield:8,packages:[0.75,2.25],unit:'kg',layers:1,waste:0,primer:'DK Quarzo',lacquer:'room',variants:[{name:'Pędzel – do 8 m²/kg',yield:8},{name:'Paca INOX – do 6 m²/kg',yield:6}]},
       kalahari:{name:'Kalahari',kind:'coveragePerUnit',yield:10,packages:[1],unit:'l',layers:1,waste:0,primer:'Farba podkładowa w zbliżonym kolorze',lacquer:'room'},
       diamento:{name:'Diamento 3D',kind:'coveragePerUnit',yield:5,packages:[1,3],unit:'l',layers:1,waste:0,primer:'Farba podkładowa zgodna z systemem',lacquer:'room',note:'Opakowanie 3 l może być dostępne tylko dla wybranych wariantów.'},
-      trawertyn:{name:'Trawertyn FOX',kind:'coveragePerUnit',yield:0.7,packages:[5,10],unit:'kg',layers:2,waste:0,primer:'Podkład systemowy',lacquer:'always',variants:[{name:'Ekstra drobny – 1,25 m²/kg',yield:1.25},{name:'Drobny – 0,70 m²/kg',yield:0.7},{name:'Gruby – 0,40 m²/kg',yield:0.4}]},
+      trawertyn:{name:'Trawertyn Wapienny FOX',kind:'coveragePerUnit',yield:0.6,packages:[5,10],unit:'kg',layers:2,fixedLayers:true,yieldIncludesLayers:true,waste:0,primer:'Podkład systemowy',lacquer:'always',note:'Wydajność jest podana dla pełnego systemu dwuwarstwowego. Dla wariantu drobnego 10 kg wystarcza na ok. 6 m².',variants:[{name:'Ekstra drobny – 1,25 m²/kg (2 warstwy)',yield:1.25},{name:'Drobny – 0,60 m²/kg (10 kg / ok. 6 m², 2 warstwy)',yield:0.6},{name:'Gruby – 0,40 m²/kg (2 warstwy)',yield:0.4}]},
       concreteFini:{name:'Concrete Fini',kind:'consumption',consumption:1.2,packages:[5,22],unit:'kg',layers:1,waste:0,primer:'DK Quarzo GG',lacquer:'always',note:'Zużycie 1,2 kg/m² na jedną warstwę.'},
       concreteGrosso:{name:'Concrete Grosso',kind:'consumption',consumption:2,packages:[5,22],unit:'kg',layers:1,waste:0,primer:'DK Quarzo GG',lacquer:'always',note:'Do obliczenia przyjęto korzystniejszą normę 2 kg/m².'},
       universum:{name:'Universum',kind:'consumption',consumption:0.65,packages:[1,2.5,5,10],unit:'kg',layers:2,waste:0,primer:'Podkład zgodny z systemem',lacquer:'room',note:'Do obliczenia przyjęto korzystniejszą normę 0,65 kg/m² dla dwóch warstw.'},
@@ -163,7 +163,7 @@ html, body { max-width: 100%; overflow-x: hidden; }
     function updateProduct(){
       const p=PRODUCTS[product.value];
       layers.value=p.layers;
-      $('dc-layers-wrap').classList.toggle('dc-hidden',p.layers!==2);
+      $('dc-layers-wrap').classList.toggle('dc-hidden',p.layers!==2||p.fixedLayers);
       waste.value=String(p.waste ?? 0);
       variant.innerHTML='';
       if(p.variants){
@@ -198,7 +198,7 @@ html, body { max-width: 100%; overflow-x: hidden; }
     function packageText(opt,unit){if(!opt)return 'Dobierz ręcznie';return Object.keys(opt.counts).sort((a,b)=>b-a).map(s=>opt.counts[s]+' × '+fmt(s)+' '+unit).join(' + ')}
     function lacquerText(p,room,area){if(p.lacquer==='none')return 'Lakier nie jest wymagany w standardowym systemie.';const wet=room==='kitchen'||room==='bathroom';if(p.lacquer==='always'||wet){const liters=area/10;return 'Zabezpieczenie zalecane/wymagane: ok. '+fmt(liters,1)+' l lakieru (przyjęto 10 m²/l).'}if(room==='hall')return 'Lakier zalecany ze względu na intensywne użytkowanie; orientacyjnie '+fmt(area/10,1)+' l.';return 'W suchym pomieszczeniu lakier jest opcjonalny, o ile karta produktu nie stanowi inaczej.'}
     function calculate(){
-      const p=PRODUCTS[product.value],area=areaValue(),layerCount=Math.max(1,Number(layers.value||1)),reserve=Number(waste.value||0);
+      const p=PRODUCTS[product.value],area=areaValue(),layerCount=p.fixedLayers?p.layers:Math.max(1,Number(layers.value||1)),reserve=Number(waste.value||0);
       if(!isFinite(area)||area<1){$('dc-output').innerHTML='<div class="dc-error">Wpisz prawidłową powierzchnię co najmniej 1 m².</div>';return}
       const calcArea=area*(1+reserve/100);let required,opt,main;
       if(p.kind==='consumption'){
@@ -206,7 +206,7 @@ html, body { max-width: 100%; overflow-x: hidden; }
       }else if(p.kind==='coveragePerPackage'){
         let y=p.yield;if(p.variants)y=p.variants[Number(variant.value)||0].yield;const factor=layerCount/(p.layers||1);required=calcArea/y*factor;const count=Math.ceil(required);opt={total:count,counts:{1:count}};main=count+' × '+p.packageLabel;
       }else{
-        let y=p.yield;if(p.variants)y=p.variants[Number(variant.value)||0].yield;required=calcArea*layerCount/y;opt=optimize(required,p.packages);main=packageText(opt,p.unit);
+        let y=p.yield;if(p.variants)y=p.variants[Number(variant.value)||0].yield;const layerFactor=p.yieldIncludesLayers?1:layerCount;required=calcArea*layerFactor/y;opt=optimize(required,p.packages);main=packageText(opt,p.unit);
       }
       let primer='Podkład: '+p.primer;
       if(p.primerYield&&p.primerPackages){const pr=calcArea/p.primerYield;const po=optimize(pr,p.primerPackages);primer+=' — do zamówienia: '+packageText(po,p.primerUnit||'kg')}
@@ -214,7 +214,7 @@ html, body { max-width: 100%; overflow-x: hidden; }
         ? fmt(required,2)+' opak. ('+p.packageLabel+')'
         : fmt(required,2)+' '+p.unit;
       const orderedTotal = opt ? (p.kind==='coveragePerPackage' ? fmt(opt.total,0)+' opak.' : fmt(opt.total,2)+' '+p.unit) : '—';
-      const warn=layerCount!==p.layers?'<div class="dc-warning">Wybrano '+layerCount+' warstw, podczas gdy ustawienie zalecane dla tego produktu to '+p.layers+'. Wynik został odpowiednio przeliczony.</div>':'';
+      const warn=!p.fixedLayers&&layerCount!==p.layers?'<div class="dc-warning">Wybrano '+layerCount+' warstw, podczas gdy ustawienie zalecane dla tego produktu to '+p.layers+'. Wynik został odpowiednio przeliczony.</div>':'';
       $('dc-output').innerHTML='<h3>Wynik</h3><div class="dc-result-main">Do zamówienia: '+main+'</div><div class="dc-result-grid"><div class="dc-result-box dc-full"><strong>Produkt</strong>'+p.name+'</div><div class="dc-result-box"><strong>Obliczone zapotrzebowanie</strong>'+requiredLabel+'</div><div class="dc-result-box"><strong>Łącznie w zamawianych opakowaniach</strong>'+orderedTotal+'</div><div class="dc-result-box"><strong>Powierzchnia netto</strong>'+fmt(area)+' m²</div><div class="dc-result-box"><strong>Powierzchnia z zapasem</strong>'+fmt(calcArea)+' m²</div><div class="dc-result-box"><strong>Warstwy</strong>'+layerCount+'</div><div class="dc-result-box"><strong>Zapas</strong>'+reserve+'%</div><div class="dc-result-box dc-full"><strong>Podkład</strong>'+primer+'</div><div class="dc-result-box dc-full"><strong>Lakier / zabezpieczenie</strong>'+lacquerText(p,$('dc-room').value,calcArea)+'</div></div>'+warn+'<div class="dc-note">'+(p.note?p.note+' ':'')+'Wynik jest orientacyjny i domyślnie nie zawiera zapasu. Obliczenia wykorzystują wyższą wydajność z zakresu technicznego produktu. Rzeczywiste zużycie zależy od chłonności i równości podłoża, sposobu aplikacji oraz doświadczenia wykonawcy. Materiał jest zaokrąglany w górę do pełnych opakowań.</div><a class="dc-shop-link" href="https://www.sklepdecowant.pl/" target="_blank" rel="noopener">Przejdź do sklepu Decowant →</a>';
     }
     $('dc-calculate').addEventListener('click',calculate);
