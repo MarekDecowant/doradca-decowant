@@ -155,6 +155,23 @@ html, body { max-width: 100%; overflow-x: hidden; }
       universum:{name:'Universum',kind:'consumption',consumption:0.65,packages:[1,2.5,5,10],unit:'kg',layers:2,waste:0,primer:'Podkład zgodny z systemem',lacquer:'room',note:'Do obliczenia przyjęto korzystniejszą normę 0,65 kg/m² dla dwóch warstw.'},
       ceramicWhite:{name:'Decoverni Ceramic White',kind:'coveragePerUnit',yield:16,packages:[1,2.5],unit:'l',layers:2,waste:0,primer:'Grunt zależnie od chłonności podłoża',lacquer:'none',note:'Przyjęto wydajność do 16 m²/l na jedną warstwę.'}
     };
+    const SHOP_LINKS = {
+      colorMatt:{label:'Dobierz kolor Color Matt',url:'https://marekdecowant.github.io/kalkulator-ncs/'},
+      decomal:{label:'Zobacz DECOMAL',url:'https://www.sklepdecowant.pl/pl/collection/DECOMAL/6'},
+      decomalmat:{label:'Zobacz DECOMALmat',url:'https://www.sklepdecowant.pl/pl/c/DECOMALmat/79'},
+      decomalStar:{label:'Zobacz DECOMAL STAR',url:'https://www.sklepdecowant.pl/pl/searchquery/DECOMAL%20STAR/1/phot/5?url=DECOMAL-STAR'},
+      decomalDuo:{label:'Zobacz DECOMAL DUO',url:'https://www.sklepdecowant.pl/pl/c/DECOMAL-DUO/80'},
+      beton:{label:'Zobacz Beton Architektoniczny',url:'https://www.sklepdecowant.pl/pl/searchquery/DECOMAL%20Beton%20Architektoniczny/1/phot/5?url=DECOMAL-Beton-Architektoniczny'},
+      podklad:{label:'Zobacz DECOMAL Podkład',url:'https://www.sklepdecowant.pl/pl/p/DECOMAL-podklad-1.5-kg/1766'},
+      provence:{label:'Zobacz Provence',url:'https://www.sklepdecowant.pl/pl/searchquery/Provence/1/phot/5?url=Provence'},
+      aurum:{label:'Zobacz Aurum',url:'https://www.sklepdecowant.pl/pl/searchquery/Aurum/1/phot/5?url=Aurum'},
+      kalahari:{label:'Zobacz Kalahari',url:'https://www.sklepdecowant.pl/pl/searchquery/Kalahari/1/phot/5?url=Kalahari'},
+      diamento:{label:'Zobacz Diamento 3D',url:'https://www.sklepdecowant.pl/pl/searchquery/Diamento%203D/1/phot/5?url=Diamento-3D'},
+      concreteFini:{label:'Zobacz Concrete Fini',url:'https://www.sklepdecowant.pl/pl/p/BETON-CONCRETE-FINI-5-KG/618'},
+      concreteGrosso:{label:'Zobacz Concrete Grosso',url:'https://www.sklepdecowant.pl/pl/searchquery/Concrete%20Grosso/1/phot/5?url=Concrete-Grosso'},
+      universum:{label:'Zobacz Universum',url:'https://www.sklepdecowant.pl/pl/searchquery/Universum/1/phot/5?url=Universum'},
+      ceramicWhite:{label:'Zobacz Ceramic White',url:'https://www.sklepdecowant.pl/pl/searchquery/Ceramic%20White/1/phot/5?url=Ceramic-White'}
+    };
     const $=id=>document.getElementById(id);
     const product=$('dc-product'), mode=$('dc-mode'), layers=$('dc-layers'), waste=$('dc-waste'), variantWrap=$('dc-variant-wrap'), variant=$('dc-variant');
 
@@ -214,7 +231,7 @@ html, body { max-width: 100%; overflow-x: hidden; }
         ? fmt(required,2)+' opak. ('+p.packageLabel+')'
         : fmt(required,2)+' '+p.unit;
       const orderedTotal = opt ? (p.kind==='coveragePerPackage' ? fmt(opt.total,0)+' opak.' : fmt(opt.total,2)+' '+p.unit) : '—';
-      const selectedVariant=p.variants?p.variants[Number(variant.value)||0]:null;const productLinks=selectedVariant&&selectedVariant.shopLinks?'<div class="dc-product-links">'+selectedVariant.shopLinks.map(link=>'<a class="dc-product-link" href="'+link.url+'" target="_blank" rel="noopener">Zobacz: '+link.label+' →</a>').join('')+'</div>':'';const warn=!p.fixedLayers&&layerCount!==p.layers?'<div class="dc-warning">Wybrano '+layerCount+' warstw, podczas gdy ustawienie zalecane dla tego produktu to '+p.layers+'. Wynik został odpowiednio przeliczony.</div>':'';
+      const selectedVariant=p.variants?p.variants[Number(variant.value)||0]:null;const directLink=SHOP_LINKS[product.value];const variantLinks=selectedVariant&&selectedVariant.shopLinks?selectedVariant.shopLinks:[];const allLinks=directLink?[...variantLinks,directLink]:variantLinks;const productLinks=allLinks.length?'<div class="dc-product-links">'+allLinks.map(link=>'<a class="dc-product-link" href="'+link.url+'" target="_blank" rel="noopener">'+link.label+' →</a>').join('')+'</div>':'';const warn=!p.fixedLayers&&layerCount!==p.layers?'<div class="dc-warning">Wybrano '+layerCount+' warstw, podczas gdy ustawienie zalecane dla tego produktu to '+p.layers+'. Wynik został odpowiednio przeliczony.</div>':'';
       $('dc-output').innerHTML='<h3>Wynik</h3><div class="dc-result-main">Do zamówienia: '+main+'</div><div class="dc-result-grid"><div class="dc-result-box dc-full"><strong>Produkt</strong>'+p.name+'</div><div class="dc-result-box"><strong>Obliczone zapotrzebowanie</strong>'+requiredLabel+'</div><div class="dc-result-box"><strong>Łącznie w zamawianych opakowaniach</strong>'+orderedTotal+'</div><div class="dc-result-box"><strong>Powierzchnia netto</strong>'+fmt(area)+' m²</div><div class="dc-result-box"><strong>Powierzchnia z zapasem</strong>'+fmt(calcArea)+' m²</div><div class="dc-result-box"><strong>Warstwy</strong>'+layerCount+'</div><div class="dc-result-box"><strong>Zapas</strong>'+reserve+'%</div><div class="dc-result-box dc-full"><strong>Podkład</strong>'+primer+'</div><div class="dc-result-box dc-full"><strong>Lakier / zabezpieczenie</strong>'+lacquerText(p,$('dc-room').value,calcArea)+'</div></div>'+warn +productLinks+'<div class="dc-note">'+(p.note?p.note+' ':'')+'Wynik jest orientacyjny i domyślnie nie zawiera zapasu. Obliczenia wykorzystują wyższą wydajność z zakresu technicznego produktu. Rzeczywiste zużycie zależy od chłonności i równości podłoża, sposobu aplikacji oraz doświadczenia wykonawcy. Materiał jest zaokrąglany w górę do pełnych opakowań.</div><a class="dc-shop-link" href="https://www.sklepdecowant.pl/" target="_blank" rel="noopener">Przejdź do sklepu Decowant →</a>';
     }
     $('dc-calculate').addEventListener('click',calculate);
