@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Decowant – Koło Fortuny 2026</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="top"><div class="wrap"><h1>Koło Fortuny <span>Decowant 2026</span></h1><div class="actions"><button id="operatorLogin">Obsługa</button><button id="adminLogin">Administrator</button><button id="logout" class="hide">Wyloguj</button></div></div></header>
+<main class="page">
+<section id="setup" class="card hide"><h2>Konfiguracja urządzenia</h2><p>Na tym urządzeniu nie ustawiono PIN-ów. Aby skonfigurować oficjalne urządzenie obsługi, otwórz ten adres z końcówką <b>?setup=1</b>.</p><div id="setupFields" class="hide"><label>PIN administratora</label><input id="adminPinSetup" type="password" inputmode="numeric"><label>PIN obsługi</label><input id="operatorPinSetup" type="password" inputmode="numeric"><button id="saveSetup" class="green">Zapisz PIN-y</button></div></section>
+<div id="app" class="hide">
+<div class="status"><span id="modeBadge" class="badge test">TRYB TESTOWY</span><span id="modeInfo">Testy nie zmieniają puli i nie zapisują graczy do nagrody głównej.</span><b id="summary"></b></div>
+<div class="layout">
+<section class="card"><div class="head"><h2>Losowanie</h2><span id="authState">Zablokowane</span></div><div class="body">
+<div id="locked" class="lock"><b>Losowanie zablokowane.</b><p>Zaloguj obsługę. Osoba przypadkowo odwiedzająca stronę nie może losować na oficjalnym urządzeniu.</p><button id="loginInline" class="green">Zaloguj obsługę</button></div>
+<div id="wheelPanel" class="hide">
+<div class="customer"><div><label>Nr telefonu klienta</label><input id="phone" type="tel" placeholder="501 234 567"></div><div><label>Liczba kupionych losów</label><input id="tickets" type="number" min="1" max="100" value="1"></div><button id="addCustomer" class="green">Dodaj pakiet losów</button></div>
+<div id="activeSession" class="session hide"><div><b id="sessionPhone"></b><small>Pakiet: <span id="sessionBought"></span></small></div><div><small>Pozostało</small><strong id="sessionLeft">0</strong></div><button id="cancelSession">Anuluj niewykorzystany pakiet</button></div>
+<div class="wheelWrap"><div class="pointer"></div><canvas id="wheel" width="620" height="620"></canvas><div class="hub">DECOWANT<br>2026</div></div>
+<div class="center"><button id="spin" class="green big" disabled>ZAKRĘĆ KOŁEM</button></div><p id="testNote" class="testNote">TRYB TESTOWY: wynik jest symulowany, stany nagród nie maleją.</p><div id="result" class="result hide"><small id="resultNo"></small><strong id="resultName"></strong></div>
+</div></div></section>
+<section class="card"><div class="head"><h2>Nagrody na kole</h2><span id="available"></span></div><div class="body"><div id="publicPrizes" class="prizes"></div></div></section>
+</div>
+<section id="admin" class="card admin hide"><div class="head"><h2>Panel administratora</h2><span>Dane oficjalnej gry są zapisane lokalnie na tym urządzeniu.</span></div><div class="body">
+<nav class="tabs"><button class="tab on" data-tab="prizes">Nagrody</button><button class="tab" data-tab="game">Gra</button><button class="tab" data-tab="players">Gracze</button><button class="tab" data-tab="grand">Nagroda główna</button><button class="tab" data-tab="backup">Kopia</button><button class="tab" data-tab="security">PIN-y</button></nav>
+<div id="tab-prizes" class="panel on"><div class="section"><div class="row"><div><h3>Nagrody i szanse</h3><p>Im nagroda tańsza i jest jej więcej, tym łatwiej ją wygrać. Droższe i rzadkie nagrody nadal mają dodatnią szansę.</p></div><button id="addPrize" class="green">+ Dodaj nagrodę</button></div><code>waga = ilość^0,75 / (1 + wartość/50)^0,65</code><div id="prizeEditor" class="editor"></div></div></div>
+<div id="tab-game" class="panel"><div class="twocol"><div class="section"><h3>Sterowanie grą</h3><div id="gameText"></div><div id="testControls"><button id="startLive" class="green">ROZPOCZNIJ GRĘ NA ŻYWO</button><p>START nie kasuje bazy nagród. Testy nie zmniejszają ilości.</p></div><div id="liveControls" class="hide"><p class="ok">Gra LIVE działa. Nie można przypadkowo nacisnąć START drugi raz.</p><button id="endLive" class="red">ZAKOŃCZ GRĘ</button></div><div id="endedControls" class="hide"><button id="newEdition" class="orange">NOWA EDYCJA – zachowaj nagrody</button><p>Czyści uczestników i historię, ale zachowuje definicje nagród i przywraca ich ilości startowe.</p></div></div><div class="section"><h3>Podsumowanie</h3><div id="gameStats"></div></div></div><div class="section"><h3>Historia losowań</h3><div class="table"><table><thead><tr><th>Czas</th><th>Tryb</th><th>Telefon</th><th>Nr</th><th>Nagroda</th></tr></thead><tbody id="spinHistory"></tbody></table></div></div></div>
+<div id="tab-players" class="panel"><div class="section"><h3>Uczestnicy LIVE</h3><p>Każdy kupiony los = jeden udział w losowaniu nagrody głównej. Ten sam numer telefonu jest łączony.</p><div class="table"><table><thead><tr><th>Telefon</th><th>Losy</th><th>Użyte</th><th>Szansa główna</th><th></th></tr></thead><tbody id="players"></tbody></table></div></div></div>
+<div id="tab-grand" class="panel"><div class="twocol"><div class="section"><h3>Nagroda główna</h3><label>Nazwa nagrody</label><input id="grandName" type="text"><p>Losowanie dostępne dopiero po zakończeniu gry. Każdy wykupiony los zwiększa szansę klienta.</p><button id="drawGrand" class="orange">WYLOSUJ NAGRODĘ GŁÓWNĄ</button></div><div class="section"><h3>Wynik</h3><div id="grandEmpty">Jeszcze nie losowano.</div><div id="grandResult" class="grand hide"><small>ZWYCIĘZCA</small><strong id="grandPhone"></strong><span id="grandTickets"></span><b id="grandPrize"></b></div></div></div></div>
+<div id="tab-backup" class="panel"><div class="twocol"><div class="section"><h3>Kopia bezpieczeństwa</h3><p>Pobierz JSON przed startem imprezy i przed losowaniem głównym.</p><button id="export" class="green">Pobierz kopię JSON</button></div><div class="section"><h3>Wczytaj kopię</h3><input id="import" type="file" accept="application/json"><p>Wczytanie zastąpi stan na tym urządzeniu.</p></div></div></div>
+<div id="tab-security" class="panel"><div class="twocol"><div class="section"><h3>Zmień PIN administratora</h3><input id="newAdminPin" type="password" inputmode="numeric"><button id="changeAdminPin">Zmień</button></div><div class="section"><h3>Zmień PIN obsługi</h3><input id="newOperatorPin" type="password" inputmode="numeric"><button id="changeOperatorPin">Zmień</button></div></div><div class="section warn"><h3>Ważne</h3><p>GitHub Pages jest statyczny. Oficjalny stan gry i PIN-y są lokalne dla urządzenia obsługi. Inny komputer nie może zmienić oficjalnej gry. Jeśli kiedyś chcesz prowadzić jedną wspólną grę z kilku urządzeń, trzeba podłączyć backend (np. Supabase).</p></div></div>
+</div></section>
+</div>
+</main>
+<div id="loginModal" class="modal hide"><div class="dialog"><h3 id="loginTitle">Logowanie</h3><label>PIN</label><input id="loginPin" type="password" inputmode="numeric"><p id="loginHelp"></p><div class="modalActions"><button data-close="loginModal">Anuluj</button><button id="loginSubmit" class="green">Zaloguj</button></div></div></div>
+<div id="confirmModal" class="modal hide"><div class="dialog"><h3 id="confirmTitle">Potwierdź</h3><p id="confirmText"></p><div id="phraseWrap" class="hide"><label>Wpisz: <b id="phraseLabel"></b></label><input id="phraseInput"></div><div class="modalActions"><button data-close="confirmModal">Anuluj</button><button id="confirmOk" class="red">Potwierdź</button></div></div></div>
+<script src="app.js"></script>
+</body></html>
