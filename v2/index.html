@@ -867,7 +867,7 @@
             <img class="advisor-photo" src="img/room-bathroom.jpg" data-remote-src="https://images.unsplash.com/photo-1704428381342-ea9df943619e?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="">
           </div>
           <div class="floating-badge">
-            <span class="badge-icon">6–7</span>
+            <span class="badge-icon">5–7</span>
             <span><strong>Dobór do metrażu</strong><span>z uwzględnieniem wydajności systemu</span></span>
           </div>
         </div>
@@ -1074,7 +1074,7 @@
     const IS_PRODUCTION = location.hostname.toLowerCase() === 'marekdecowant.github.io';
     const IS_REVIEW = new URLSearchParams(location.search).has('review');
     const IMAGE_BASE = 'img/';
-    const APP_VERSION = 'pro-2.8-beta-2026-08-29';
+    const APP_VERSION = 'pro-2.10-beta-2026-08-29';
 
     const PHOTO_LIBRARY = {
       salon:{local:'room-salon.jpg',remote:'https://images.unsplash.com/photo-1742541656775-5fc717774c02?auto=format&fit=crop&w=1100&q=80'},
@@ -1293,7 +1293,7 @@
           ['Przygotowanie podłoża','Równe, stabilne i odpylone podłoże — dekoracja podkreśla sposób przygotowania ściany.'],
           ['Grunt wodny','Dobierz do chłonności podłoża.'],
           ['Decoverni Quarzo','Podkład systemowy barwiony w kierunku wybranego koloru Provence.'],
-          ['Provence','Nakładaj płaskim pędzlem krzyżowo; materiału dekoracyjnego nie mieszaj mechanicznie.'],
+          ['Provence','Nie mieszaj mechanicznie. Nakładaj jedną warstwę płaskim pędzlem ruchami na krzyż, pracując etapami po 2–3 m² i łącząc mokre z mokrym. Półsuchym pędzlem skoryguj smugi, a gdy powierzchnia zacznie matowieć, rozgnieć flokuły duoszpachelką.'],
           ['Wykończenie / ochrona','W strefach narażonych na wilgoć i zabrudzenia dobierz właściwe zabezpieczenie.']
         ],
         colors: {
@@ -1462,7 +1462,7 @@
       color: {
         title:'W jakim kierunku kolorystycznym idziemy?', help:'Na wyniku pokażemy pasujące warianty. Ostateczny wybór zawsze potwierdź próbką w swoim świetle.',
         options:[
-          ['light','Jasny neutralny','Biel, śmietanka, jasny szary'], ['warm','Ciepły beż / kaszmir','Piaskowy, cappuccino, szampański'],
+          ['light','Jasny neutralny','Biel, śmietanka, jasny szary'], ['warm','Ciepły beż','Cappuccino, kaszmir, piaskowy lub szampański — zależnie od produktu'],
           ['grey','Szary / grafit','Od jasnego betonu do grafitu'], ['green','Zieleń','Szałwia, oliwka, butelkowa zieleń'],
           ['blue','Niebieski / granat','Chłodne odcienie i morski kierunek'], ['dark','Ciemny i intensywny','Czerń, głęboki grafit, mocny kolor']
         ]
@@ -1496,14 +1496,27 @@
     };
 
     function getSteps() {
+      let steps;
       if (app.mode === 'calc' && app.answers.calcProduct && products[app.answers.calcProduct]?.type !== 'paint') {
-        return ['calcProduct','room','exposure','color','substrate','area'];
+        steps = ['calcProduct','room','exposure','color','substrate','area'];
+      } else if (app.answers.exposure === 'wet' && app.mode === 'paint') {
+        steps = ['room','exposure','color','substrate','area'];
+      } else if (app.answers.exposure === 'wet' && app.mode === 'calc') {
+        steps = ['calcProduct','room','exposure','color','substrate','area'];
+      } else {
+        steps = [...modeSteps[app.mode]];
       }
-      if (app.answers.exposure === 'wet') {
-        if (app.mode === 'paint') return ['room','exposure','color','substrate','area'];
-        if (app.mode === 'calc') return ['calcProduct','room','exposure','color','substrate','area'];
-      }
-      return modeSteps[app.mode];
+
+      // Nie pokazuj kart, na których po wcześniejszych odpowiedziach została tylko jedna możliwość.
+      // Odpowiedź jest zapisywana automatycznie, a użytkownik przechodzi od razu do kolejnej realnej decyzji.
+      const visible=[];
+      steps.forEach(key=>{
+        if(key==='area'){visible.push(key);return;}
+        const options=questionData(key)?.options || [];
+        if(options.length===1){app.answers[key]=options[0][0];return;}
+        visible.push(key);
+      });
+      return visible;
     }
 
     // Uzupełnienie bazy o właściwości potrzebne do profesjonalnego doboru farb.
@@ -2099,7 +2112,6 @@
       if (a.room === 'hall' && ['ceramic','colormatt','decomalmat'].includes(p.id)) score += 3;
       if (a.room === 'commercial' && ['decomal','star','aurum','colormatt','ceramic'].includes(p.id)) score += 2;
       if (a.exposure === 'splash' && ['ceramic','colormatt','beton'].includes(p.id)) score += 4;
-      if (a.substrate === 'tile') score += p.id === 'beton' ? 18 : -16;
       if (a.exposure === 'wet') score += p.id === 'beton' ? 35 : -35;
       return score;
     }
@@ -2126,11 +2138,11 @@
         const primary = products[a.calcProduct];
         return {primary, alternatives:rankAlternatives(primary,a), meta:{override:'calc'}};
       }
-      if (a.exposure === 'wet' || a.substrate === 'tile') {
+      if (a.exposure === 'wet') {
         return {
           primary:products.beton,
           alternatives:[],
-          meta:{override:a.exposure === 'wet' ? 'wet' : 'tile', requestedMode:app.mode}
+          meta:{override:'wet', requestedMode:app.mode}
         };
       }
       const list = Object.values(products)
@@ -2229,16 +2241,15 @@
 
     function warningsFor(p,a,meta) {
       const w=[];
-      if (meta?.requestedMode === 'paint' && ['wet','tile'].includes(meta.override)) {
-        w.push(['danger', meta.override === 'wet'
-          ? 'Wybrałeś farbę gładką, ale zwykła farba nie jest rekomendowana do bezpośredniej strefy mokrej. Doradca świadomie zmienił ścieżkę na kompletny system dekoracyjny odporny na wodę.'
-          : 'Wybrałeś farbę gładką na płytki. Doradca nie zaleca nakładania zwykłej farby ściennej bezpośrednio na glazurę i dlatego pokazuje system przeznaczony do trudnego podłoża.']);
+      if (meta?.requestedMode === 'paint' && meta.override === 'wet') {
+        w.push(['danger','Wybrałeś farbę gładką, ale zwykła farba nie jest rekomendowana do bezpośredniej strefy mokrej. Doradca świadomie zmienił ścieżkę na kompletny system dekoracyjny odporny na wodę.']);
       }
       if (a.exposure === 'wet') w.push(['danger','Bezpośrednia strefa mokra wymaga poprawnie wykonanej hydroizolacji podłoża oraz zachowania ciągłości systemu przy narożach, odpływach i przejściach instalacyjnych.']);
       if (a.exposure === 'splash' && p.id !== 'beton' && p.type === 'effect') w.push(['warning','Zachlapania i częste mycie wymagają kompatybilnego zabezpieczenia. Nie dobieraj lakieru wyłącznie po stopniu połysku.']);
       if (a.room === 'kitchen') w.push(['warning','Za płytą grzewczą rozważ osłonę szklaną. Powłoka zmywalna nie zawsze chroni przed długotrwałym działaniem gorącego tłuszczu.']);
       if (a.exposure === 'heat' || a.room === 'fireplace') w.push(['danger','Na kominku przed zakupem potwierdź temperaturę powierzchni, dylatacje oraz wymagania producenta wkładu. Dekoracja nie jest powłoką do bezpośredniego kontaktu z ogniem.']);
-      if (a.substrate === 'tile') w.push(['warning','Płytki muszą być stabilne, dokładnie odtłuszczone i przygotowane właściwym gruntem sczepnym. Luźne płytki lub słabe fugi najpierw napraw.']);
+      if (a.substrate === 'tile' && p.id === 'beton') w.push(['warning','Na płytkach: sprawdź stabilność okładziny, dokładnie ją umyj i odtłuść, usuń resztki silikonu, lekko zmatów oraz zastosuj grunt sczepny. Tynk nie wymaga pełnej warstwy gładzi; głębokie fugi lub nierówności wyrównaj przed dekoracją.']);
+      if (a.substrate === 'tile' && p.id !== 'beton') w.push(['warning',`Wybrany produkt ${p.name} pozostaje bez zmian. Płytki wymagają jednak mycia i odtłuszczenia, usunięcia silikonu, zmatowienia, gruntu sczepnego, cienkiej gładzi zakrywającej fugi i kruszywo, szlifowania, odpylenia oraz gruntu głęboko penetrującego.`]);
       if (a.substrate === 'unknown') w.push(['warning','Przed zakupem wykonaj test przyczepności albo skonsultuj zdjęcie podłoża. Błędna ocena starej powłoki może osłabić cały system.']);
       const preferredColor = p.colors?.[a.color]?.[0];
       if (preferredColor?.fit === 'nearest') w.push(['warning','W tej rodzinie nie ma jednoznacznie potwierdzonego gotowego wariantu w wybranym kierunku kolorystycznym. Pokazuję najbliższą opcję — zacznij od próbki.']);
@@ -2252,7 +2263,7 @@
     function resultKickerFor(p,a,meta) {
       if (app.mode === 'calc') return 'Kalkulacja wybranego systemu';
       if (meta?.override === 'wet') return 'Rekomendacja systemowa — woda ma pierwszeństwo';
-      if (meta?.override === 'tile') return 'Rekomendacja systemowa — trudne podłoże';
+      if (a.substrate === 'tile') return 'Wybrany efekt na płytkach — pełny system warstw';
       if (a.exposure === 'heat' || a.room === 'fireplace') return 'Rekomendacja warunkowa — potwierdź temperaturę';
       if (app.mode === 'paint') return 'Najlepsza farba do wskazanych warunków';
       return 'Najlepsze dopasowanie';
@@ -2263,14 +2274,15 @@
       const effectLabels = {matte:'matowej struktury',metallic:'metalicznych refleksów',glitter:'brokatu i blasku',clouds:'efektu chmur',clay:'naturalnych przetarć',glamour:'efektu glamour',concrete:'betonu',sand:'drobnego piasku',smooth:'gładkiej powierzchni'};
       if (app.mode==='calc') return `Przeliczyłem wybrany produkt dla ${a.area} m². Poniżej znajdziesz także pełny układ warstw i elementy, których nie warto pomijać.`;
       if (meta?.requestedMode === 'paint' && meta.override === 'wet') return `Wybrałeś farbę gładką do bezpośredniej strefy mokrej. Doradca nie rekomenduje tam zwykłej farby i wskazuje Beton Hydrofobowy FOX. Dla tego produktu nie ma dedykowanej próbki, dlatego otrzymasz kartę produktu oraz właściwe poradniki.`;
-      if (meta?.requestedMode === 'paint' && meta.override === 'tile') return `Wybrałeś farbę gładką na płytki. Zamiast sugerować malowanie glazury zwykłą farbą ścienną Doradca wskazuje system przeznaczony do odpowiednio przygotowanego, niechłonnego podłoża.`;
-      if (meta?.override === 'wet' || meta?.override === 'tile') return `Ten system został wskazany przede wszystkim ze względu na ${meta.override==='wet'?'bezpośredni kontakt z wodą':'trudne, niechłonne podłoże'}. W tych warunkach technologia ma pierwszeństwo przed samym wyglądem.`;
+      if (meta?.override === 'wet') return `Ten system został wskazany przede wszystkim ze względu na bezpośredni kontakt z wodą. W tych warunkach technologia ma pierwszeństwo przed samym wyglądem.`;
+      if (a.substrate === 'tile') return `Zachowujemy wybrany efekt i rekomendujemy ${p.name}. Płytki nie zmieniają produktu na Beton — zmieniają sposób przygotowania podłoża i wymagany układ warstw.`;
       return `${p.summary} Odpowiada kierunkowi ${effectLabels[a.effect] || 'wybranego wykończenia'} ${roomPhrases[a.room] || 'w pomieszczeniu'} i uwzględnia wskazane warunki użytkowania.`;
     }
 
     function resultContextFor(p,a,meta) {
       if (meta?.override === 'wet') return 'To nie jest zamiana produktu „na podobny”, lecz świadoma zmiana technologii. W bezpośredniej strefie mokrej wynik wymaga poprawnej hydroizolacji i wykonania wszystkich detali systemowych.';
-      if (meta?.override === 'tile') return 'Nie nakładaj produktu bezpośrednio na płytki. Wynik zakłada ocenę stabilności okładziny, odtłuszczenie i właściwy grunt sczepny.';
+      if (a.substrate === 'tile' && p.id === 'beton') return 'Tynk na płytkach: stabilna okładzina → dokładne czyszczenie i odtłuszczenie → lekkie matowienie → grunt sczepny → wyrównanie głębokich fug, jeśli jest potrzebne → dekoracja. Pełna gładź nie jest wymagana.';
+      if (a.substrate === 'tile') return `Farba na płytkach: stabilna okładzina → czyszczenie i odtłuszczenie → matowienie → grunt sczepny → cienka gładź → szlifowanie i odpylenie → grunt głęboko penetrujący → właściwy podkład oraz ${p.name}.`;
       if (a.exposure === 'heat' || a.room === 'fireplace') return 'Dobór wizualny jest wstępny. Przed zakupem potwierdź, czy temperatura powierzchni mieści się w wymaganiach wszystkich warstw systemu.';
       return '';
     }
@@ -2287,8 +2299,30 @@
       return null;
     }
 
+    function systemFor(primary) {
+      if (app.answers.substrate !== 'tile') return primary.system;
+      const tileBase = [
+        ['Ocena i dokładne mycie płytek','Sprawdź, czy wszystkie płytki i fugi są stabilne. Usuń tłuszcz, detergenty, osady, kurz oraz resztki silikonu; luźne elementy najpierw napraw.'],
+        ['Lekkie matowienie','Delikatnie zmatów szkliwioną powierzchnię papierem ściernym, aby odebrać jej śliskość, następnie dokładnie odpyl.'],
+        ['Grunt sczepny','Na niechłonne płytki zastosuj grunt sczepny, np. FOX Strong lub Atlas Ultragrunt, zgodnie z kartą wybranego produktu.']
+      ];
+      if (primary.id === 'beton') {
+        const tail = primary.system.filter(([name])=>!/ocena podłoża|grunt sczepny/i.test(name));
+        return [...tileBase,
+          ['Fugi i lokalne nierówności','Tynk dekoracyjny nie wymaga pełnej gładzi. Jeśli fugi są głębokie lub płytki nierówne, wyrównaj je przed dekoracją zgodnie z systemem.'],
+          ...tail
+        ];
+      }
+      const tail = primary.system.filter(([name])=>!/przygotowanie podłoża|grunt wodny/i.test(name));
+      return [...tileBase,
+        ['Cienka warstwa gładzi','Zakryj fugi, różnice poziomów i kruszywo gruntu sczepnego. Farby dekoracyjnej ani gładkiej nie nakładaj bezpośrednio na chropowaty grunt.'],
+        ['Szlifowanie, odpylenie i grunt wodny','Po wyschnięciu gładzi delikatnie ją wyszlifuj, dokładnie odpyl i zastosuj grunt głęboko penetrujący. Dopiero potem wykonaj właściwy system produktu.'],
+        ...tail
+      ];
+    }
+
     function renderSystem(primary) {
-      el('systemList').innerHTML = primary.system.map(([name,desc],i) => {
+      el('systemList').innerHTML = systemFor(primary).map(([name,desc],i) => {
         const link = componentLinkFor(primary,name);
         return `<li class="system-item"><span class="system-step">${i+1}</span><span><b>${name}</b><span>${desc}</span>${link ? `<a class="system-shop-link" data-track="system_component" data-component="${name}" href="${tracked(link,`${primary.id}_system_${i+1}`)}" target="_blank" rel="noopener">Znajdź w sklepie →</a>` : ''}</span></li>`;
       }).join('');
