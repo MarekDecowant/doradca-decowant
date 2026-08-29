@@ -867,7 +867,7 @@
             <img class="advisor-photo" src="img/room-bathroom.jpg" data-remote-src="https://images.unsplash.com/photo-1704428381342-ea9df943619e?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="">
           </div>
           <div class="floating-badge">
-            <span class="badge-icon">5–7</span>
+            <span class="badge-icon">6–7</span>
             <span><strong>Dobór do metrażu</strong><span>z uwzględnieniem wydajności systemu</span></span>
           </div>
         </div>
@@ -1504,6 +1504,10 @@
     function getSteps() {
       if (app.mode === 'calc' && app.answers.calcProduct && products[app.answers.calcProduct]?.type !== 'paint') {
         return ['calcProduct','room','exposure','color','substrate','area'];
+      }
+      if (app.answers.exposure === 'wet') {
+        if (app.mode === 'paint') return ['room','exposure','color','substrate','area'];
+        if (app.mode === 'calc') return ['calcProduct','room','exposure','color','substrate','area'];
       }
       return modeSteps[app.mode];
     }
