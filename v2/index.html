@@ -1088,7 +1088,7 @@
     const IS_PRODUCTION = location.hostname.toLowerCase() === 'marekdecowant.github.io';
     const IS_REVIEW = new URLSearchParams(location.search).has('review');
     const IMAGE_BASE = 'img/';
-    const APP_VERSION = 'pro-2.14-beta-2026-08-29';
+    const APP_VERSION = 'pro-2.15-beta-2026-08-29';
 
     const PHOTO_LIBRARY = {
       salon:{local:'room-salon.jpg',remote:'https://images.unsplash.com/photo-1742541656775-5fc717774c02?auto=format&fit=crop&w=1100&q=80'},
@@ -1690,6 +1690,11 @@
       hydrostop: `${STORE}/pl/p/VERNICE-HYDROSTOP-GLOSS-1L/1771`,
       hydrostopSatin: `${STORE}/pl/p/VERNICE-HYDROSTOP-SATINE-1L/1770`,
       tools: `${STORE}/pl/collection/NRZEDZIA-DO-DEKORACJI/12`,
+      paintTools: `${STORE}/pl/c/MALARSKIE/67`,
+      paintRoller: `${STORE}/pl/p/WALEK-POLYACRILFIELD-25-CM-MOTIVE-RUNO-12MM/1864`,
+      paintRollerHandle: `${STORE}/pl/p/UCHWYT-MALARSKI-GRAFIT-258mm-dl-31cm/1193`,
+      paintBrush: `${STORE}/pl/p/PEDZEL-MOTIVE-RED-2/1546`,
+      paintTray: `${STORE}/pl/p/KUWETA-MALARSKA-V-PRO-DO-25-MOTIVE/1842`,
       samples: `${STORE}/pl/collection/PROBKI-FARB/10`
     };
 
@@ -2514,13 +2519,14 @@
     }
 
     function toolsFor(primary) {
-      const category = COMPONENT_URLS.tools;
+      const category = primary.type === 'paint' ? COMPONENT_URLS.paintTools : COMPONENT_URLS.tools;
       const tools=[];
       const add=(name,desc,icon='•',url=category)=>{if(!tools.some(item=>item.name===name))tools.push({name,desc,icon,url});};
       if (primary.type === 'paint') {
-        add('Wałek malarski','Dobierz runo do gładkości podłoża; farbę rozprowadzaj równomiernie i nie pracuj suchym wałkiem.','▥');
-        add('Pędzel do odcięć','Do narożników, krawędzi oraz miejsc niedostępnych dla wałka.','╱');
-        add('Kuweta lub kratka','Pomaga równomiernie załadować wałek i ograniczyć różnice w warstwie.','▤');
+        add('Wałek malarski 25 cm — runo 12 mm','Do farb emulsyjnych, akrylowych i lateksowych na gładkich oraz standardowo przygotowanych ścianach.','▥',COMPONENT_URLS.paintRoller);
+        add('Uchwyt do wałka 25 cm / 8 mm','Uchwyt dopasowany wymiarem do proponowanego wałka malarskiego.','⌁',COMPONENT_URLS.paintRollerHandle);
+        add('Pędzel malarski do odcięć 2″','Do narożników, krawędzi, listew oraz miejsc niedostępnych dla wałka.','╱',COMPONENT_URLS.paintBrush);
+        add('Kuweta malarska do wałka 25 cm','Pomaga równomiernie załadować wałek i ograniczyć różnice w grubości warstwy.','▤',COMPONENT_URLS.paintTray);
       } else if (['decomal','star','decomalmat','kalahari'].includes(primary.id)) {
         add('Pędzel dekoracyjny Decowant','Do prowadzenia produktu i formowania właściwego układu efektu.','╱',COMPONENT_URLS.brush);
         if (['decomal','star'].includes(primary.id)) add('Paca INOX','Użyj tylko wtedy, gdy wybrana technika produktu przewiduje aplikację lub wygładzenie pacą.','◇');
