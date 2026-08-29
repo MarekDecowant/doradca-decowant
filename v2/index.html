@@ -1074,7 +1074,7 @@
     const IS_PRODUCTION = location.hostname.toLowerCase() === 'marekdecowant.github.io';
     const IS_REVIEW = new URLSearchParams(location.search).has('review');
     const IMAGE_BASE = 'img/';
-    const APP_VERSION = 'pro-2.11-beta-2026-08-29';
+    const APP_VERSION = 'pro-2.12-beta-2026-08-29';
 
     const PHOTO_LIBRARY = {
       salon:{local:'room-salon.jpg',remote:'https://images.unsplash.com/photo-1742541656775-5fc717774c02?auto=format&fit=crop&w=1100&q=80'},
@@ -1799,7 +1799,7 @@
     }
 
     const EXPOSURES_BY_ROOM = {
-      salon:['dry','splash'], bedroom:['dry'], hall:['dry','splash'], kitchen:['dry','splash'],
+      salon:['dry'], bedroom:['dry'], hall:['dry','splash'], kitchen:['dry','splash'],
       bathroom:['dry','splash','wet'], fireplace:['dry','heat'], commercial:['dry','splash'], ceiling:['dry']
     };
 
