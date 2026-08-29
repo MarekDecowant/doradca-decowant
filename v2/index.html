@@ -412,6 +412,14 @@
       display: grid; place-items: center; font-size: 11px; color: transparent;
     }
     .selected .option-check { background: var(--brand); color: #fff; border-color: var(--brand); }
+    .option-icon.color-swatch {
+      background: var(--swatch) !important;
+      border: 2px solid rgba(255,255,255,.92);
+      box-shadow: 0 0 0 1px rgba(31,33,29,.14), 0 5px 12px rgba(31,33,29,.10);
+    }
+    .option-card[data-step="color"].selected .color-swatch {
+      box-shadow: 0 0 0 2px var(--brand), 0 7px 15px rgba(90,62,31,.18);
+    }
 
     .input-panel {
       max-width: 650px;
@@ -1066,7 +1074,7 @@
     const IS_PRODUCTION = location.hostname.toLowerCase() === 'marekdecowant.github.io';
     const IS_REVIEW = new URLSearchParams(location.search).has('review');
     const IMAGE_BASE = 'img/';
-    const APP_VERSION = 'pro-2.6-beta-2026-08-29';
+    const APP_VERSION = 'pro-2.7-beta-2026-08-29';
 
     const PHOTO_LIBRARY = {
       salon:{local:'room-salon.jpg',remote:'https://images.unsplash.com/photo-1742541656775-5fc717774c02?auto=format&fit=crop&w=1100&q=80'},
@@ -1090,7 +1098,7 @@
       concrete:{src:'../img/beton-hydrofobowy-lazienka.jpg'},
       sand:{src:'../img/sypialnia-provence.jpg'},
       smooth:{local:'effect-smooth.jpg'},
-      plaster:{local:'substrate-plaster.jpg'}, painted:{local:'substrate-painted.jpg'}, tile:{local:'substrate-tile.jpg'}, unknown:{local:'substrate-unknown.jpg'},
+      plaster:{local:'substrate-plaster-v2.webp'}, painted:{local:'substrate-painted-v2.webp'}, tile:{local:'substrate-tile-v2.webp'}, unknown:{local:'substrate-unknown-v2.webp'},
       first:{local:'skill-first.jpg'}, some:{local:'skill-some.jpg'}, pro:{local:'skill-pro.jpg'},
       one:{local:'substrate-painted.jpg'}, two:{local:'mode-paint.jpg'},
       palette:{local:'effect-smooth.jpg'}, antireflex:{local:'effect-matte.jpg'}, wash:{local:'exposure-splash.jpg'}, ready:{local:'mode-paint.jpg'},
@@ -1123,6 +1131,15 @@
       dry:'strefa sucha', splash:'zachlapania', wet:'kontakt z wodą', heat:'podwyższona temperatura'
     };
     function visualTagFor(key,value) { return key === 'effect' || key === 'exposure' ? (VISUAL_TAGS[value] || '') : ''; }
+
+    const COLOR_SWATCHES = {
+      light:'linear-gradient(135deg,#fffdf8 0%,#d8d3c8 100%)',
+      warm:'linear-gradient(135deg,#ead9bd 0%,#aa8059 100%)',
+      grey:'linear-gradient(135deg,#d7d5d0 0%,#666a6b 100%)',
+      green:'linear-gradient(135deg,#b7c2a7 0%,#3f5d4a 100%)',
+      blue:'linear-gradient(135deg,#b9cbd2 0%,#3d586b 100%)',
+      dark:'linear-gradient(135deg,#69665f 0%,#1e211f 100%)'
+    };
 
     function photoMarkup(spec, alt='') {
       if (!spec) return '';
@@ -1479,7 +1496,7 @@
     };
 
     const modeSteps = {
-      effect: ['room','exposure','effect','skill','color','substrate','area'],
+      effect: ['room','exposure','effect','color','substrate','area'],
       paint: ['room','exposure','color','substrate','coats','area'],
       calc: ['calcProduct','room','exposure','color','substrate','coats','area']
     };
@@ -1875,7 +1892,7 @@
                 ${photoMarkup(media, `${label} — zdjęcie inspiracyjne`)}
                 ${visualTagFor(key,value) ? `<span class="option-visual-tag">${visualTagFor(key,value)}</span>` : ''}
                 <span class="option-body">
-                  <span class="option-icon">${iconSvg(value)}</span>
+                  <span class="option-icon ${key==='color'?'color-swatch':''}"${key==='color'?` style="--swatch:${COLOR_SWATCHES[value]}"`:''}>${key==='color'?'':iconSvg(value)}</span>
                   <span class="option-copy"><b>${label}</b><span>${desc || ''}</span></span>
                   <span class="option-check">✓</span>
                 </span>
@@ -2027,7 +2044,6 @@
       } else if (p.exposure.includes(a.exposure)) score += 6;
       else if (a.exposure) score -= 10;
 
-      if (a.skill && p.skills.includes(a.skill)) score += 3;
       const preferredColor = p.colors?.[a.color]?.[0];
       if (preferredColor?.fit === 'nearest') score -= 2;
       else if (preferredColor) score += 2;
@@ -2051,10 +2067,6 @@
         }
       }
 
-      if (a.skill === 'first') {
-        if (['decomalmat','decomal','star','kalahari','colormatt','ceramic','antyreflex'].includes(p.id)) score += 5;
-        if (['aurum','beton'].includes(p.id)) score -= 3;
-      }
       if (a.room === 'hall' && ['ceramic','colormatt','decomalmat'].includes(p.id)) score += 3;
       if (a.room === 'commercial' && ['decomal','star','aurum','colormatt','ceramic'].includes(p.id)) score += 2;
       if (a.exposure === 'splash' && ['ceramic','colormatt','beton'].includes(p.id)) score += 4;
@@ -2202,7 +2214,7 @@
       const preferredColor = p.colors?.[a.color]?.[0];
       if (preferredColor?.fit === 'nearest') w.push(['warning','W tej rodzinie nie ma jednoznacznie potwierdzonego gotowego wariantu w wybranym kierunku kolorystycznym. Pokazuję najbliższą opcję — zacznij od próbki.']);
       if (a.color === 'dark' && p.type === 'effect') w.push(['warning','Ciemnych i intensywnych efektów nie zabezpieczaj przypadkowym lakierem matowym — może wyszarzyć lub stłumić kolor. Dobierz kompatybilny wariant po konsultacji.']);
-      if (a.skill === 'first' && ['aurum','beton','provence'].includes(p.id)) w.push(['warning','To system wymagający spokojnej pracy i próby technicznej. Najpierw przećwicz ruch narzędzia na próbce lub płycie.']);
+      if (['aurum','beton','provence'].includes(p.id)) w.push(['warning','To system wymagający spokojnej, etapowej pracy i próby technicznej. Przed wykonaniem całej ściany przećwicz ruch narzędzia na próbce lub płycie; przy braku doświadczenia rozważ wykonawcę.']);
       if (p.id === 'antyreflex' && a.color !== 'light') w.push(['warning','Antyreflex jest w Doradcy traktowany jako rozwiązanie do bieli i bardzo jasnych powierzchni. Dla koloru wybierz standardowy Color Matt lub gotowy wariant Ceramic White.']);
       if (!w.length) w.push(['success','Wybrane warunki są typowe dla tego systemu. Mimo to wykonaj próbę koloru i techniki przed rozpoczęciem całej powierzchni.']);
       return w;
@@ -2298,7 +2310,8 @@
       el('resultContextNote').hidden=!context;
       el('resultContextNote').textContent=context;
       const areaLabel=app.answers.areaMode==='dimensions'?`${formatArea(area)} m² z wymiarów`:`${formatArea(area)} m²`;
-      el('resultTags').innerHTML=[...primary.why,areaLabel].map(x=>`<span class="result-tag">${x}</span>`).join('');
+      const applicationLevels={decomal:'łatwiejsza aplikacja',star:'łatwiejsza aplikacja',decomalmat:'łatwiejsza aplikacja',duo:'aplikacja etapowa',provence:'aplikacja wymagająca próby',aurum:'aplikacja zaawansowana',beton:'aplikacja zaawansowana',kalahari:'łatwiejsza aplikacja',colormatt:'standardowe malowanie',ceramic:'standardowe malowanie',antyreflex:'standardowe malowanie'};
+      el('resultTags').innerHTML=[...primary.why,applicationLevels[primary.id],areaLabel].filter(Boolean).map(x=>`<span class="result-tag">${x}</span>`).join('');
       const resultMedia = mediaFor('product',primary.id) || {local:primary.image};
       const remoteAttr = resultMedia.remote ? ` data-remote-src="${resultMedia.remote.replace(/&/g,'&amp;')}"` : '';
       el('resultImage').innerHTML=`<img class="advisor-photo" src="${photoSrc(resultMedia,primary.image)}"${remoteAttr} alt="Wizualizacja efektu dla rekomendacji ${primary.name}" onerror="this.style.display='none'"><span class="result-image-note" id="resultImageNote">Wizualizacja efektu produktu</span>`;
@@ -2327,7 +2340,7 @@
         const variant=p.colors?.[app.answers.color]?.[0] || Object.values(p.colors || {})[0]?.[0];
         const label = p.type === 'paint'
           ? (i===0?'Inny priorytet farby':'Alternatywna linia kolorystyczna')
-          : (i===0?'Łatwiejsza / spokojniejsza opcja':'Inny charakter efektu');
+          : (i===0?'Najbliższa alternatywa':'Inny charakter efektu');
         const media = mediaFor('product',p.id) || {local:p.image};
         const remoteAttr = media.remote ? ` data-remote-src="${media.remote.replace(/&/g,'&amp;')}"` : '';
         return `<article class="alt-card"><div class="alt-image"><img class="advisor-photo" src="${photoSrc(media,p.image)}"${remoteAttr} alt="Wizualizacja efektu dla alternatywy ${p.name}" onerror="this.style.display='none'"></div><div class="alt-copy"><span class="alt-label">${label}</span><h3>${p.name}</h3><p>${p.summary}</p><a class="text-link" data-track="alternative" data-product="${p.id}" href="${tracked(variant?.link||p.productLink,`${p.id}_alternative`)}" target="_blank" rel="noopener">Zobacz produkt →</a></div></article>`;
