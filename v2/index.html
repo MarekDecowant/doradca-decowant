@@ -2155,9 +2155,9 @@
         };
       }
       if (c.kind === 'provence') {
-        const sizes=[24,12,6]; let left=area; const selection=[];
-        sizes.forEach(size=>{const count=Math.floor(left/size);if(count){selection.push([size,count]);left-=size*count;}});
-        if(left>0){const fit=[6,12,24].find(s=>s>=left)||24;const found=selection.find(x=>x[0]===fit);if(found)found[1]++;else selection.push([fit,1]);}
+        const sizes=[24,12,6];
+        const optimized=packOptimizer(area,sizes);
+        const selection=optimized.counts.map((count,index)=>[sizes[index],count]).filter(([,count])=>count>0);
         const total=selection.reduce((s,[size,count])=>s+size*count,0);
         const txt=selection.sort((a,b)=>b[0]-a[0]).map(([size,count])=>`${count} × zestaw ${size} m²`).join(' + ');
         return {number:selection.reduce((s,x)=>s+x[1],0),main:txt,detail:`Łączna deklarowana powierzchnia zestawów: ok. ${total} m².`,caution:'Provence jest efektem ręcznie formowanym. Przy mocnych przetarciach lub nierównym podłożu potwierdź dodatkowy zapas.',level:'safe'};
@@ -2218,13 +2218,13 @@
     }
 
     function recommendationReason(p,a,meta) {
-      const roomLabels = {salon:'salonu',bedroom:'sypialni',hall:'przedpokoju lub schodów',kitchen:'kuchni',bathroom:'łazienki',fireplace:'okolicy kominka',commercial:'lokalu lub biura',ceiling:'sufitu'};
+      const roomPhrases = {salon:'w salonie',bedroom:'w sypialni',hall:'w przedpokoju lub na schodach',kitchen:'w kuchni',bathroom:'w łazience',fireplace:'w okolicy kominka',commercial:'w lokalu lub biurze',ceiling:'na suficie'};
       const effectLabels = {matte:'matowej struktury',metallic:'metalicznych refleksów',glitter:'brokatu i blasku',clouds:'efektu chmur',clay:'naturalnych przetarć',glamour:'efektu glamour',concrete:'betonu',sand:'drobnego piasku',smooth:'gładkiej powierzchni'};
       if (app.mode==='calc') return `Przeliczyłem wybrany produkt dla ${a.area} m². Poniżej znajdziesz także pełny układ warstw i elementy, których nie warto pomijać.`;
       if (meta?.requestedMode === 'paint' && meta.override === 'wet') return `Wybrałeś farbę gładką do bezpośredniej strefy mokrej. Doradca nie rekomenduje tam zwykłej farby i wskazuje Beton Hydrofobowy FOX. Dla tego produktu nie ma dedykowanej próbki, dlatego otrzymasz kartę produktu oraz właściwe poradniki.`;
       if (meta?.requestedMode === 'paint' && meta.override === 'tile') return `Wybrałeś farbę gładką na płytki. Zamiast sugerować malowanie glazury zwykłą farbą ścienną Doradca wskazuje system przeznaczony do odpowiednio przygotowanego, niechłonnego podłoża.`;
       if (meta?.override === 'wet' || meta?.override === 'tile') return `Ten system został wskazany przede wszystkim ze względu na ${meta.override==='wet'?'bezpośredni kontakt z wodą':'trudne, niechłonne podłoże'}. W tych warunkach technologia ma pierwszeństwo przed samym wyglądem.`;
-      return `${p.summary} Odpowiada kierunkowi ${effectLabels[a.effect] || 'wybranego wykończenia'} w ${roomLabels[a.room] || 'pomieszczeniu'} i uwzględnia wskazane warunki użytkowania.`;
+      return `${p.summary} Odpowiada kierunkowi ${effectLabels[a.effect] || 'wybranego wykończenia'} ${roomPhrases[a.room] || 'w pomieszczeniu'} i uwzględnia wskazane warunki użytkowania.`;
     }
 
     function resultContextFor(p,a,meta) {
