@@ -896,14 +896,14 @@
             <span class="mode-link">Dobierz farbę →</span>
           </button>
           <button class="mode-card" data-start-mode="calc">
-            <span class="mode-media"><img class="advisor-photo" src="img/mode-calc.jpg" alt="Wałek malarski na ścianie — kalkulator zużycia"></span>
+            <span class="mode-media"><img class="advisor-photo" src="img/mode-calc-v2.webp" alt="Wałek malarski podczas nakładania farby — kalkulator zużycia"></span>
             <span class="mode-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M7 7h10M8 12h.01M12 12h.01M16 12h.01M8 16h.01M12 16h.01M16 16h.01"/></svg></span>
             <h3>Mam już produkt</h3>
             <p>Policz potrzebną ilość wybranego systemu i sprawdź, czego jeszcze potrzeba.</p>
             <span class="mode-link">Przejdź do kalkulatora →</span>
           </button>
         </div>
-        <p class="photo-source-note">Zdjęcia aranżacyjne są inspiracją. Rzeczywisty kolor i strukturę produktu zawsze potwierdź próbką w swoim oświetleniu.</p>
+        <p class="photo-source-note">Zdjęcia realizacji i wizualizacje są inspiracją. Rzeczywisty kolor i strukturę produktu zawsze potwierdź próbką w swoim oświetleniu.</p>
       </section>
     </div>
 
@@ -1066,7 +1066,7 @@
     const IS_PRODUCTION = location.hostname.toLowerCase() === 'marekdecowant.github.io';
     const IS_REVIEW = new URLSearchParams(location.search).has('review');
     const IMAGE_BASE = 'img/';
-    const APP_VERSION = 'pro-2.5-beta-2026-08-29';
+    const APP_VERSION = 'pro-2.6-beta-2026-08-29';
 
     const PHOTO_LIBRARY = {
       salon:{local:'room-salon.jpg',remote:'https://images.unsplash.com/photo-1742541656775-5fc717774c02?auto=format&fit=crop&w=1100&q=80'},
@@ -1081,21 +1081,27 @@
       splash:{local:'exposure-splash.jpg',remote:'https://images.unsplash.com/photo-1745835449652-72ec0de4f732?auto=format&fit=crop&w=1000&q=78'},
       wet:{local:'exposure-wet.jpg',remote:'https://images.unsplash.com/photo-1704428381342-ea9df943619e?auto=format&fit=crop&w=1000&q=78'},
       heat:{local:'exposure-heat.jpg',remote:'https://images.unsplash.com/photo-1758915753369-6a33c7bc1d76?auto=format&fit=crop&w=1000&q=78'},
-      matte:{local:'effect-matte.jpg'}, metallic:{local:'effect-metallic.jpg'}, glitter:{local:'effect-glitter.jpg'},
-      clouds:{local:'effect-clouds.jpg'}, clay:{local:'effect-clay.jpg'}, glamour:{local:'effect-glamour.jpg'},
-      concrete:{local:'effect-concrete.jpg'}, sand:{local:'effect-sand.jpg'}, smooth:{local:'effect-smooth.jpg'},
+      matte:{src:'../img/korytarz-decomalmat.jpg'},
+      metallic:{src:'../img/salon-decomal.jpg'},
+      glitter:{local:'result-star.jpg'},
+      clouds:{src:'../img/lokal-decomal-duo.jpg'},
+      clay:{src:'../img/provence-zielona-lazienka.jpg'},
+      glamour:{src:'../img/aurum-braz-sztukateria.jpg'},
+      concrete:{src:'../img/beton-hydrofobowy-lazienka.jpg'},
+      sand:{src:'../img/sypialnia-provence.jpg'},
+      smooth:{local:'effect-smooth.jpg'},
       plaster:{local:'substrate-plaster.jpg'}, painted:{local:'substrate-painted.jpg'}, tile:{local:'substrate-tile.jpg'}, unknown:{local:'substrate-unknown.jpg'},
       first:{local:'skill-first.jpg'}, some:{local:'skill-some.jpg'}, pro:{local:'skill-pro.jpg'},
       one:{local:'substrate-painted.jpg'}, two:{local:'mode-paint.jpg'},
       palette:{local:'effect-smooth.jpg'}, antireflex:{local:'effect-matte.jpg'}, wash:{local:'exposure-splash.jpg'}, ready:{local:'mode-paint.jpg'},
-      decomal:{local:'result-decomal.jpg',remote:'https://images.unsplash.com/photo-1742541656775-5fc717774c02?auto=format&fit=crop&w=1100&q=80'},
-      star:{local:'result-star.jpg',remote:'https://images.unsplash.com/photo-1759735218086-67f9f853ab8b?auto=format&fit=crop&w=1100&q=80'},
-      decomalmat:{local:'result-decomalmat.jpg',remote:'https://images.unsplash.com/photo-1761330439714-3f33c66e10a9?auto=format&fit=crop&w=1100&q=80'},
-      duo:{local:'effect-clouds.jpg',remote:'https://images.unsplash.com/photo-1765371514743-45bd8e6c0a28?auto=format&fit=crop&w=1100&q=80'},
-      provence:{local:'room-bedroom.jpg',remote:'https://images.pexels.com/photos/36025792/pexels-photo-36025792/free-photo-of-modern-bedroom-interior-with-green-accent-wall.jpeg?auto=compress&dpr=1&h=900&w=1400'},
-      aurum:{local:'room-fireplace.jpg',remote:'https://images.unsplash.com/photo-1758915753369-6a33c7bc1d76?auto=format&fit=crop&w=1100&q=80'},
-      beton:{local:'room-bathroom.jpg',remote:'https://images.unsplash.com/photo-1704428381342-ea9df943619e?auto=format&fit=crop&w=1100&q=80'},
-      kalahari:{local:'effect-sand.jpg',remote:'https://images.unsplash.com/photo-1755018237540-b2e68e1248f5?auto=format&fit=crop&w=1100&q=80'},
+      decomal:{src:'../img/salon-decomal.jpg'},
+      star:{local:'result-star.jpg'},
+      decomalmat:{src:'../img/korytarz-decomalmat.jpg'},
+      duo:{src:'../img/lokal-decomal-duo.jpg'},
+      provence:{src:'../img/provence-zielona-lazienka.jpg'},
+      aurum:{src:'../img/aurum-braz-sztukateria.jpg'},
+      beton:{src:'../img/beton-hydrofobowy-lazienka.jpg'},
+      kalahari:{src:'../img/sypialnia-provence.jpg'},
       colormatt:{local:'mode-paint.jpg',remote:'https://images.unsplash.com/photo-1761330439714-3f33c66e10a9?auto=format&fit=crop&w=1100&q=80'},
       ceramic:{local:'room-kitchen.jpg',remote:'https://images.unsplash.com/photo-1745835449652-72ec0de4f732?auto=format&fit=crop&w=1100&q=80'},
       antyreflex:{local:'room-ceiling.jpg',remote:'https://images.unsplash.com/photo-1761330439714-3f33c66e10a9?auto=format&fit=crop&w=1100&q=80'}
@@ -1103,6 +1109,12 @@
 
     function mediaFor(key,value) {
       return PHOTO_LIBRARY[value] || PHOTO_LIBRARY[key] || null;
+    }
+
+    function photoSrc(spec, fallback='') {
+      if (spec?.src) return spec.src;
+      const local = spec?.local || fallback;
+      return local ? `${IMAGE_BASE}${local}` : '';
     }
 
     const VISUAL_TAGS = {
@@ -1115,7 +1127,8 @@
     function photoMarkup(spec, alt='') {
       if (!spec) return '';
       const remote = spec.remote ? ` data-remote-src="${spec.remote.replace(/&/g,'&amp;')}"` : '';
-      return `<span class="option-media"><img class="advisor-photo" src="${IMAGE_BASE}${spec.local}"${remote} alt="${alt.replace(/"/g,'&quot;')}"></span>`;
+      const src = photoSrc(spec);
+      return `<span class="option-media"><img class="advisor-photo" src="${src}"${remote} alt="${alt.replace(/"/g,'&quot;')}"></span>`;
     }
 
     function hydrateRemoteImages(root=document) {
@@ -1579,7 +1592,7 @@
       preparation:{id:'preparation',title:'Grunt wodny a farba podkładowa',description:'Kiedy stabilizować podłoże, a kiedy budować warstwę podkładową.',url:`${STORE}/pl/n/9`,image:'substrate-plaster.jpg'},
       colors:{id:'colors',title:'Jak dobierać kolory tynków i farb w domu',description:'Światło, wielkość pomieszczenia i funkcja dekoracyjnej ściany.',url:`${STORE}/pl/n/19`,image:'mode-paint.jpg'},
       kalahari:{id:'kalahari',title:'Zrób to sam — FOX Kalahari',description:'Podkład, pędzel i sposób uzyskania piaskowego efektu.',url:`${STORE}/pl/n/6`,image:'effect-sand.jpg'},
-      tools:{id:'tools',title:'Jak korzystać z narzędzi DECOWANT przed zakupem',description:'Kalkulatory, próbki, filmy i pomoc przy kompletowaniu systemu.',url:`${STORE}/jak-korzystac-z-narzedzi-decowant-przed-zakupem`,image:'mode-calc.jpg'}
+      tools:{id:'tools',title:'Jak korzystać z narzędzi DECOWANT przed zakupem',description:'Kalkulatory, próbki, filmy i pomoc przy kompletowaniu systemu.',url:`${STORE}/jak-korzystac-z-narzedzi-decowant-przed-zakupem`,image:'mode-calc-v2.webp'}
     };
     function guidesFor(primary,answers) {
       const ids=[]; const add=id=>{if(id&&!ids.includes(id))ids.push(id);};
@@ -1794,9 +1807,36 @@
           : base.help;
         data.options = data.options.filter(([value]) => paintFlow || value !== 'ceiling');
       }
+      if (key === 'effect' && app.answers.room) {
+        const room = app.answers.room;
+        const exposure = app.answers.exposure;
+        const compatible = Object.values(products).filter(product => {
+          if (product.type !== 'effect' || !product.rooms.includes(room)) return false;
+          if (!exposure) return true;
+          if (exposure === 'heat') return room === 'fireplace';
+          return product.exposure.includes(exposure);
+        });
+        const allowedEffects = new Set(compatible.flatMap(product => product.effects));
+        if (allowedEffects.size) {
+          data.options = data.options.filter(([value]) => allowedEffects.has(value));
+          data.help = exposure === 'wet'
+            ? 'W bezpośredniej strefie mokrej pokazujemy wyłącznie efekt dostępny w systemie przeznaczonym do stałego kontaktu z wodą.'
+            : 'Pokazujemy tylko efekty, które mają odpowiedni system produktowy do wybranego pomieszczenia i stopnia kontaktu z wodą.';
+        }
+      }
       if (key === 'exposure') {
         const allowed = validExposuresForRoom(app.answers.room);
         data.options = data.options.filter(([value]) => allowed.includes(value));
+        if (app.answers.room === 'bathroom') {
+          data.title = 'Gdzie znajduje się dekorowana ściana w łazience?';
+          data.help = 'Łazienka ma strefy o różnym kontakcie z wodą. Wybierz najbardziej wymagający warunek występujący na tej konkretnej ścianie.';
+          data.options = data.options.map(([value,label,desc]) => {
+            if (value === 'dry') return [value,'Sucha ściana w łazience','Sufit lub ściana poza umywalką, wanną i prysznicem'];
+            if (value === 'splash') return [value,'Strefa narażona na zachlapania','Okolice umywalki lub wanny bez stałego kontaktu z wodą'];
+            if (value === 'wet') return [value,'Bezpośrednia strefa mokra','Wnętrze prysznica, ściana przy wannie lub częsty kontakt z wodą'];
+            return [value,label,desc];
+          });
+        }
         if (app.answers.room === 'fireplace') {
           data.help = 'Wybierz „okolica kominka” tylko wtedy, gdy powierzchnia rzeczywiście się nagrzewa. Temperaturę podłoża trzeba potwierdzić przed zakupem.';
         }
@@ -2222,7 +2262,7 @@
       sampleBtn.hidden=!sampleUrl; sampleInfo.className=`sample-info ${sampleUrl?'available':'unavailable'}`;
       if(sampleUrl){sampleBtn.href=tracked(sampleUrl,`${primary.id}_sample`);sampleBtn.dataset.product=primary.id;sampleBtn.dataset.variant=variant?.name||primary.name;sampleBtn.dataset.track='sample';sampleBtn.textContent=sampleType==='mokra'?'Zamów próbkę mokrą':sampleType==='sucha'?'Zamów próbkę suchą':'Zamów próbkę';sampleInfo.textContent=`Dla wariantu „${variant?.name||primary.name}” mamy dedykowaną próbkę ${sampleType||'produktu'}. Link prowadzi bezpośrednio do właściwej próbki.`;}
       else{sampleBtn.removeAttribute('href');sampleBtn.removeAttribute('data-track');sampleInfo.textContent=primary.id==='beton'?'Beton Hydrofobowy FOX nie ma w ofercie dedykowanej próbki. Doradca nie kieruje do przypadkowych próbek — sprawdź kartę produktu i poradniki poniżej.':`Dla wariantu „${variant?.name||primary.name}” nie mamy potwierdzonej dedykowanej próbki. Doradca nie pokaże w zamian przypadkowego produktu.`;}
-      const imageNote=el('resultImageNote');if(imageNote)imageNote.textContent=sampleUrl?'Inspiracja aranżacyjna — kolor i strukturę potwierdź właściwą próbką':'Inspiracja aranżacyjna — sprawdź kartę produktu i poradnik wykonania';
+      const imageNote=el('resultImageNote');if(imageNote)imageNote.textContent=sampleUrl?`Wizualizacja ${primary.name} — kolor i strukturę potwierdź właściwą próbką`:`Wizualizacja ${primary.name} — sprawdź kartę produktu i poradnik wykonania`;
       const variantName=variant?.name||primary.name;el('productPreviewName').textContent=primary.name;el('productPreviewVariant').textContent=variantName;
       const previewImage=el('productPreviewImage'),previewFallback=el('productThumbFallback'),imageUrl=variant?.productImage||primary.productImage||'';
       previewImage.onload=null;previewImage.onerror=null;previewImage.hidden=true;previewFallback.hidden=false;previewFallback.className='product-thumb-fallback';
@@ -2261,7 +2301,7 @@
       el('resultTags').innerHTML=[...primary.why,areaLabel].map(x=>`<span class="result-tag">${x}</span>`).join('');
       const resultMedia = mediaFor('product',primary.id) || {local:primary.image};
       const remoteAttr = resultMedia.remote ? ` data-remote-src="${resultMedia.remote.replace(/&/g,'&amp;')}"` : '';
-      el('resultImage').innerHTML=`<img class="advisor-photo" src="${IMAGE_BASE+(resultMedia.local || primary.image)}"${remoteAttr} alt="Inspiracja wnętrza dla rekomendacji ${primary.name}" onerror="this.style.display='none'"><span class="result-image-note" id="resultImageNote">Inspiracja aranżacyjna</span>`;
+      el('resultImage').innerHTML=`<img class="advisor-photo" src="${photoSrc(resultMedia,primary.image)}"${remoteAttr} alt="Wizualizacja efektu dla rekomendacji ${primary.name}" onerror="this.style.display='none'"><span class="result-image-note" id="resultImageNote">Wizualizacja efektu produktu</span>`;
       hydrateRemoteImages(el('resultImage'));
       const dim=app.answers.areaMode==='dimensions'?dimensionBreakdown():null;
       el('quantityIntro').textContent=dim?`Metraż wyliczony z wymiarów: ${formatArea(dim.net)} m² netto + ${dim.reservePct}% zapasu = ${formatArea(dim.total)} m².`:'Obliczenie orientacyjne na podstawie podanego metrażu.';
@@ -2290,7 +2330,7 @@
           : (i===0?'Łatwiejsza / spokojniejsza opcja':'Inny charakter efektu');
         const media = mediaFor('product',p.id) || {local:p.image};
         const remoteAttr = media.remote ? ` data-remote-src="${media.remote.replace(/&/g,'&amp;')}"` : '';
-        return `<article class="alt-card"><div class="alt-image"><img class="advisor-photo" src="${IMAGE_BASE+(media.local || p.image)}"${remoteAttr} alt="Inspiracja dla alternatywy ${p.name}" onerror="this.style.display='none'"></div><div class="alt-copy"><span class="alt-label">${label}</span><h3>${p.name}</h3><p>${p.summary}</p><a class="text-link" data-track="alternative" data-product="${p.id}" href="${tracked(variant?.link||p.productLink,`${p.id}_alternative`)}" target="_blank" rel="noopener">Zobacz produkt →</a></div></article>`;
+        return `<article class="alt-card"><div class="alt-image"><img class="advisor-photo" src="${photoSrc(media,p.image)}"${remoteAttr} alt="Wizualizacja efektu dla alternatywy ${p.name}" onerror="this.style.display='none'"></div><div class="alt-copy"><span class="alt-label">${label}</span><h3>${p.name}</h3><p>${p.summary}</p><a class="text-link" data-track="alternative" data-product="${p.id}" href="${tracked(variant?.link||p.productLink,`${p.id}_alternative`)}" target="_blank" rel="noopener">Zobacz produkt →</a></div></article>`;
       }).join('');
       hydrateRemoteImages(el('alternativesGrid'));
     }
