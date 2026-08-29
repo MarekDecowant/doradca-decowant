@@ -783,6 +783,13 @@
     .sample-info { margin-top:10px; padding:12px 13px; border-radius:13px; border:1px solid rgba(31,33,29,.10); background:#f5f2ea; color:#5b5e57; font-size:12.5px; line-height:1.5; }
     .sample-info.available { background:#edf7f1; border-color:rgba(63,110,88,.18); color:#315844; }
     .sample-info.unavailable { background:#fff5e6; border-color:rgba(154,102,43,.20); color:#704b20; }
+    .tool-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:14px; }
+    .tool-item { display:flex; gap:10px; align-items:flex-start; padding:12px; border:1px solid var(--line); border-radius:13px; background:#fbfaf6; color:var(--ink); text-decoration:none; }
+    .tool-item:hover { border-color:rgba(164,119,63,.42); background:#fffaf1; }
+    .tool-icon { flex:0 0 30px; width:30px; height:30px; display:grid; place-items:center; border-radius:9px; background:#eee6d4; color:var(--brand-dark); font-weight:900; }
+    .tool-copy b,.tool-copy span { display:block; }
+    .tool-copy b { font-size:13px; margin-bottom:3px; }
+    .tool-copy span { font-size:11.5px; line-height:1.4; color:var(--muted); }
     .product-thumb-fallback { display:grid; place-items:center; text-align:center; padding:8px; line-height:1.05; }
     .product-thumb-fallback small { display:block; font-size:8px; letter-spacing:.12em; margin-bottom:3px; opacity:.7; }
     .product-thumb-fallback strong { font-size:11px; overflow-wrap:anywhere; }
@@ -818,6 +825,7 @@
       .area-summary-final { align-items:flex-start; flex-direction:column; }
       .guide-grid { grid-template-columns:1fr; }
       .guides-intro { align-items:flex-start; flex-direction:column; }
+      .tool-grid { grid-template-columns:1fr; }
     }
 
   </style>
@@ -980,6 +988,12 @@
               <ol class="system-list" id="systemList"></ol>
             </section>
 
+            <section class="result-card" style="margin-top:18px" id="toolsCard">
+              <h3>Narzędzia do wykonania</h3>
+              <p>Lista jest dopasowana do wybranego produktu, podłoża i techniki pracy.</p>
+              <div class="tool-grid" id="toolsGrid"></div>
+            </section>
+
             <section class="result-card" style="margin-top:18px" id="warningCard">
               <h3>Ważne dla Twojego zastosowania</h3>
               <div id="warnings"></div>
@@ -1074,7 +1088,7 @@
     const IS_PRODUCTION = location.hostname.toLowerCase() === 'marekdecowant.github.io';
     const IS_REVIEW = new URLSearchParams(location.search).has('review');
     const IMAGE_BASE = 'img/';
-    const APP_VERSION = 'pro-2.12-beta-2026-08-29';
+    const APP_VERSION = 'pro-2.13-beta-2026-08-29';
 
     const PHOTO_LIBRARY = {
       salon:{local:'room-salon.jpg',remote:'https://images.unsplash.com/photo-1742541656775-5fc717774c02?auto=format&fit=crop&w=1100&q=80'},
@@ -1084,6 +1098,7 @@
       bathroom:{local:'room-bathroom.jpg',remote:'https://images.unsplash.com/photo-1704428381342-ea9df943619e?auto=format&fit=crop&w=1100&q=80'},
       fireplace:{local:'room-fireplace.jpg',remote:'https://images.unsplash.com/photo-1758915753369-6a33c7bc1d76?auto=format&fit=crop&w=1100&q=80'},
       commercial:{local:'room-commercial.jpg',remote:'https://images.unsplash.com/photo-1765371514743-45bd8e6c0a28?auto=format&fit=crop&w=1100&q=80'},
+      garage:{local:'room-commercial.jpg'},
       ceiling:{local:'room-ceiling.jpg',remote:'https://images.unsplash.com/photo-1761330439714-3f33c66e10a9?auto=format&fit=crop&w=1100&q=80'},
       dry:{local:'exposure-dry.jpg',remote:'https://images.unsplash.com/photo-1761330439714-3f33c66e10a9?auto=format&fit=crop&w=1000&q=78'},
       splash:{local:'exposure-splash.jpg',remote:'https://images.unsplash.com/photo-1745835449652-72ec0de4f732?auto=format&fit=crop&w=1000&q=78'},
@@ -1116,6 +1131,9 @@
     };
 
     function mediaFor(key,value) {
+      if (key === 'exposure' && value === 'splash' && app?.answers?.room && PHOTO_LIBRARY[app.answers.room]) {
+        return PHOTO_LIBRARY[app.answers.room];
+      }
       return PHOTO_LIBRARY[value] || PHOTO_LIBRARY[key] || null;
     }
 
@@ -1161,7 +1179,7 @@
     }
 
     const ICONS = {
-      salon: '▰', bedroom: '☾', hall: '↗', kitchen: '◫', bathroom: '◉', fireplace: '♨', commercial: '◇',
+      salon: '▰', bedroom: '☾', hall: '↗', kitchen: '◫', bathroom: '◉', fireplace: '♨', commercial: '◇', garage: '▣',
       dry: '○', splash: '≈', wet: '≋', heat: '♨',
       matte: '◌', metallic: '✦', glitter: '✧', clouds: '☁', clay: '≋', glamour: '◆', concrete: '▦', smooth: '▭', sand: '⠿',
       first: '1', some: '2', pro: '3', light: '◻', warm: '◩', grey: '◧', green: '●', blue: '●', dark: '■',
@@ -1196,7 +1214,7 @@
           ['Przygotowanie podłoża','Czyste, suche, nośne i odpylone; nierówności napraw przed rozpoczęciem.'],
           ['Grunt wodny','Dobierz do chłonności podłoża i pozostaw do pełnego wyschnięcia.'],
           ['DECOMAL PODKŁAD','Dedykowana warstwa podkładowa dla rodziny DECOMAL.'],
-          ['DECOMAL','Nakładaj płaskim pędzlem, pacą inox, rękawicą lub wałkiem; pracuj odcinkami.'],
+          ['DECOMAL','Nakładaj pędzlem dekoracyjnym Decowant lub pacą INOX — zgodnie z techniką właściwą dla wybranego wariantu. Pracuj odcinkami i zachowuj ciągłość łączeń.'],
           ['Zabezpieczenie','W suchym pomieszczeniu zwykle opcjonalne; przy zachlapaniach użyj kompatybilnego zabezpieczenia.']
         ],
         colors: {
@@ -1244,7 +1262,7 @@
           ['Przygotowanie podłoża','Nośne, czyste, równe i odpylone podłoże.'],
           ['Grunt wodny','Stosuj, gdy podłoże jest chłonne lub niejednorodne.'],
           ['DECOMAL PODKŁAD','W nowej, ujednoliconej technologii rodziny DECOMAL użyj dedykowanego podkładu.'],
-          ['DECOMALmat','Nakładaj zgodnie z wybraną techniką, utrzymując ciągłość pracy na ścianie.'],
+          ['DECOMALmat','Nakładaj jedną warstwę pędzlem dekoracyjnym, zgodnie z kartą konkretnego wariantu i utrzymując ciągłość pracy na ścianie.'],
           ['Zabezpieczenie','W strefach narażonych na zabrudzenia dobierz kompatybilną powłokę; dla ciemnych kolorów nie wybieraj przypadkowo matowego lakieru.']
         ],
         colors: {
@@ -1268,8 +1286,8 @@
           ['Przygotowanie podłoża','Czyste, stabilne i równe podłoże.'],
           ['Grunt wodny','Wyrównaj chłonność przed podkładem.'],
           ['DECOMAL PODKŁAD','Dedykowany podkład rodziny DECOMAL; występuje w aktualnych zestawach DUO.'],
-          ['Dwa kolory DECOMAL','Buduj przejścia kolorystyczne etapami zgodnie z instrukcją.'],
-          ['Gąbka syntetyczna','Narzędzie do łączenia kolorów i uzyskania efektu chmur.']
+          ['P1 i P2 — praca mokre w mokre','Nakładaj oba kolory gąbką syntetyczną i łącz nieregularne plamy, zanim materiał przeschnie na granicy pól.'],
+          ['Wygładzenie pacą','Po uformowaniu przejść wygładź powierzchnię pacą zgodnie z instrukcją wariantu, aby uzyskać miękki efekt chmur.']
         ],
         colors: {
           light: [{name:'Szary + Biała Perła',hex:'#c2c2bd',link:`${STORE}/pl/p/DECOMAL-DUO-SZARY-I-BIALA-PERLA/1570`,sample:null}],
@@ -1378,7 +1396,7 @@
       },
       colormatt: {
         id: 'colormatt', name: 'FOX Color Matt', title: 'FOX Color Matt — głęboki mat w szerokiej palecie NCS',
-        type: 'paint', effects: ['smooth'], rooms: ['salon','bedroom','hall','kitchen','commercial','bathroom'], exposure: ['dry','splash'], skills: ['first','some','pro'],
+        type: 'paint', effects: ['smooth'], rooms: ['salon','bedroom','hall','kitchen','commercial','bathroom','garage'], exposure: ['dry','splash'], skills: ['first','some','pro'],
         image: 'mode-paint.jpg',
         summary: 'Uniwersalna farba gładka, gdy priorytetem jest pełny mat, szeroki wybór kolorów NCS i odporność na codzienne mycie oraz szorowanie.',
         why: ['do 14 m²/l na warstwę', 'matowe wykończenie', 'ponad dwa tysiące kierunków NCS'],
@@ -1401,8 +1419,8 @@
         }
       },
       ceramic: {
-        id: 'ceramic', name: 'Decoverni Ceramic White', title: 'Ceramic White — gładka, matowa farba do wymagających wnętrz',
-        type: 'paint', effects: ['smooth'], rooms: ['kitchen','hall','bathroom','commercial','salon','bedroom'], exposure: ['dry','splash'], skills: ['first','some','pro'],
+        id: 'ceramic', name: 'DK Ceramic', title: 'DK Ceramic — gładka, matowa farba do wymagających wnętrz',
+        type: 'paint', effects: ['smooth'], rooms: ['kitchen','hall','bathroom','commercial','salon','bedroom','garage'], exposure: ['dry','splash'], skills: ['first','some','pro'],
         image: 'room-kitchen.jpg',
         summary: 'Dobry wybór do miejsc, w których ściana ma pozostać matowa, ale będzie częściej dotykana, myta lub narażona na codzienne zabrudzenia.',
         why: ['matowa i zmywalna', 'wydajność około 12–16 m²/l', 'gotowe kolory DECOWANT'],
@@ -1412,7 +1430,7 @@
         system: [
           ['Przygotowanie podłoża','Podłoże powinno być czyste, suche, równe i stabilne.'],
           ['Grunt / podkład','Dobierz do chłonności ściany i planowanego koloru.'],
-          ['Pierwsza warstwa Ceramic White','Nakładaj wałkiem, pędzlem lub natryskowo.'],
+          ['Pierwsza warstwa DK Ceramic','Nakładaj wałkiem, pędzlem lub natryskowo.'],
           ['Druga warstwa','Nakładaj po pełnym wyschnięciu poprzedniej warstwy.']
         ],
         colors: {
@@ -1420,7 +1438,6 @@
           warm: [{name:'Kaszmir',hex:'#cbb8a0',link:`${STORE}/pl/p/Decoverni-Ceramic-White-Kaszmir-2%2C5-l/1751`,sample:null,productImage:`${STORE}/environment/cache/images/productGfx_7199_50_50/Farba-ceramiczna-zmywalna-Decoverni-Ceramic-White-Kaszmir-2-5L.png`},{name:'Cappuccino',hex:'#ad8d70',link:`${STORE}/pl/p/Farba-ceramiczna-zmywalna-Decoverni-Ceramic-White-Cappuccino-1L/1744`,sample:null}],
           grey: [{name:'Popielaty',hex:'#aaa9a4',link:`${STORE}/pl/c/FARBY-CERAMICZNE/49`,sample:null}],
           green: [{name:'Oliwkowy',hex:'#7d8065',link:`${STORE}/pl/c/FARBY-CERAMICZNE/49`,sample:null}],
-          blue: [{name:'Chłodny kierunek',hex:'#9aa2a4',link:`${STORE}/pl/c/FARBY-CERAMICZNE/49`,sample:null}],
           dark: [{name:'Mokka',hex:'#625246',link:`${STORE}/pl/p/-Farba-ceramiczna-zmywalna-Decoverni-Ceramic-White-Mokka-2%2C5L/1792`,sample:null}]
         }
       }
@@ -1433,7 +1450,8 @@
           ['salon','Salon / ściana TV','Dekoracyjny punkt wnętrza'], ['bedroom','Sypialnia','Spokojna, mniej obciążona powierzchnia'],
           ['hall','Przedpokój / schody','Częsty dotyk i zabrudzenia'], ['kitchen','Kuchnia','Para, tłuszcz i zachlapania'],
           ['bathroom','Łazienka','Podwyższona wilgotność lub strefa mokra'], ['fireplace','Kominek','Podłoże pracujące termicznie'],
-          ['commercial','Biuro / lokal','Intensywne użytkowanie i efekt reprezentacyjny']
+          ['commercial','Biuro / lokal','Intensywne użytkowanie i efekt reprezentacyjny'],
+          ['garage','Garaż / pomieszczenie gospodarcze','Zabrudzenia, dotyk i częstsze czyszczenie']
         ]
       },
       exposure: {
@@ -1484,14 +1502,21 @@
           ['decomal','DECOMAL','Metaliczny'],['star','DECOMAL STAR','Metaliczny z brokatem'],['decomalmat','DECOMALmat','Matowa struktura'],
           ['duo','DECOMAL DUO','Efekt chmur'],['provence','Provence','Glinka i przetarcia'],['aurum','Aurum','Glamour / vintage'],
           ['beton','Beton Hydrofobowy','Beton i strefy mokre'],['kalahari','Kalahari','Efekt piasku'],
-          ['colormatt','FOX Color Matt','Farba gładka'],['ceramic','Ceramic White','Farba ceramiczna']
+          ['colormatt','FOX Color Matt','Farba gładka'],['ceramic','DK Ceramic','Farba ceramiczna']
+        ]
+      },
+      paintProduct: {
+        title:'Którą farbę chcesz zastosować?', help:'Color Matt daje szeroką paletę NCS, a DK Ceramic oferuje gotowe kolory i wysoką odporność użytkową. Wybór produktu pozostaje po Twojej stronie.',
+        options:[
+          ['colormatt','FOX Color Matt','Domyślny wybór: szeroka paleta NCS i głęboki mat'],
+          ['ceramic','DK Ceramic','Gotowe kolory i farba do wymagających wnętrz']
         ]
       }
     };
 
     const modeSteps = {
       effect: ['room','exposure','effect','color','substrate','area'],
-      paint: ['room','exposure','color','substrate','coats','area'],
+      paint: ['room','exposure','paintProduct','color','substrate','coats','area'],
       calc: ['calcProduct','room','exposure','color','substrate','coats','area']
     };
 
@@ -1568,7 +1593,7 @@
     if (!optionData.calcProduct.options.some(x => x[0] === 'antyreflex')) {
       optionData.calcProduct.options.push(['antyreflex','FOX Color Matt Antyreflex','Głęboki mat do sufitów i jasnych ścian']);
     }
-    modeSteps.paint = ['room','exposure','paintPriority','color','substrate','coats','area'];
+    modeSteps.paint = ['room','exposure','paintProduct','color','substrate','coats','area'];
 
 
 
@@ -1651,6 +1676,7 @@
       brush: `${STORE}/pl/p/Pedzel-Decowant-120x8-MM/891`,
       hydrostop: `${STORE}/pl/p/VERNICE-HYDROSTOP-GLOSS-1L/1771`,
       hydrostopSatin: `${STORE}/pl/p/VERNICE-HYDROSTOP-SATINE-1L/1770`,
+      tools: `${STORE}/pl/collection/NRZEDZIA-DO-DEKORACJI/12`,
       samples: `${STORE}/pl/collection/PROBKI-FARB/10`
     };
 
@@ -1800,7 +1826,7 @@
 
     const EXPOSURES_BY_ROOM = {
       salon:['dry'], bedroom:['dry'], hall:['dry','splash'], kitchen:['dry','splash'],
-      bathroom:['dry','splash','wet'], fireplace:['dry','heat'], commercial:['dry','splash'], ceiling:['dry']
+      bathroom:['dry','splash','wet'], fireplace:['dry','heat'], commercial:['dry','splash'], garage:['dry','splash'], ceiling:['dry']
     };
 
     function validExposuresForRoom(room) {
@@ -1816,6 +1842,12 @@
       if (app.mode === 'calc' && app.answers.calcProduct && products[app.answers.calcProduct]?.type !== 'paint') {
         delete app.answers.coats;
         delete app.answers.paintPriority;
+      }
+      if (app.mode === 'paint' && ['wet','heat'].includes(app.answers.exposure)) {
+        delete app.answers.exposure;
+      }
+      if (app.mode === 'paint' && app.answers.paintProduct && !['colormatt','ceramic'].includes(app.answers.paintProduct)) {
+        delete app.answers.paintProduct;
       }
       if (app.mode === 'calc' && app.answers.calcProduct) {
         const selectedProduct = products[app.answers.calcProduct];
@@ -1850,7 +1882,8 @@
         });
       }
       if (app.mode === 'paint') {
-        return Object.values(products).filter(product => product.type === 'paint'
+        if (app.answers.paintProduct) return [products[app.answers.paintProduct]].filter(Boolean);
+        return Object.values(products).filter(product => ['colormatt','ceramic'].includes(product.id)
           && (!app.answers.room || product.rooms.includes(app.answers.room))
           && (!app.answers.exposure || product.exposure.includes(app.answers.exposure)));
       }
@@ -1867,6 +1900,13 @@
           ? 'Pomieszczenie i rodzaj powierzchni wpływają na wymagany mat, odporność na mycie oraz dobór podkładu.'
           : base.help;
         data.options = data.options.filter(([value]) => paintFlow || value !== 'ceiling');
+        if (paintFlow && app.mode !== 'calc') {
+          const supportedRooms = new Set(['colormatt','ceramic'].flatMap(id => products[id].rooms));
+          data.options = data.options.filter(([value]) => supportedRooms.has(value));
+        } else if (!paintFlow) {
+          const supportedRooms = new Set(Object.values(products).filter(product => product.type === 'effect').flatMap(product => product.rooms));
+          data.options = data.options.filter(([value]) => supportedRooms.has(value));
+        }
         if (app.mode === 'calc' && app.answers.calcProduct) {
           const selectedProduct = products[app.answers.calcProduct];
           data.options = data.options.filter(([value]) => selectedProduct?.rooms.includes(value));
@@ -1898,9 +1938,21 @@
           data.help = 'Pokazujemy wyłącznie kierunki kolorystyczne dostępne dla systemów pasujących do wcześniejszych odpowiedzi. Nie zastępujemy brakującego koloru „najbliższym” produktem.';
         }
       }
+      if (key === 'paintPriority') {
+        const candidates = Object.values(products).filter(product => product.type === 'paint'
+          && (!app.answers.room || product.rooms.includes(app.answers.room))
+          && (!app.answers.exposure || product.exposure.includes(app.answers.exposure)));
+        if (candidates.length) {
+          data.options = data.options.filter(([value]) => candidates.some(product => product.strengths?.includes(value)));
+          data.help = 'Pokazujemy tylko przewagi dostępne w farbach pasujących do wybranego miejsca i sposobu użytkowania ściany.';
+        }
+      }
       if (key === 'exposure') {
         const allowed = validExposuresForRoom(app.answers.room);
         data.options = data.options.filter(([value]) => allowed.includes(value));
+        if (app.mode === 'paint') {
+          data.options = data.options.filter(([value]) => !['wet','heat'].includes(value));
+        }
         if (app.mode === 'calc' && app.answers.calcProduct) {
           const selectedProduct = products[app.answers.calcProduct];
           data.options = data.options.filter(([value]) => selectedProduct?.exposure.includes(value));
@@ -1918,6 +1970,34 @@
         }
         if (app.answers.room === 'fireplace') {
           data.help = 'Wybierz „okolica kominka” tylko wtedy, gdy powierzchnia rzeczywiście się nagrzewa. Temperaturę podłoża trzeba potwierdzić przed zakupem.';
+        }
+        if (app.answers.room === 'hall') {
+          data.title = 'Jak intensywnie będzie użytkowana ściana?';
+          data.help = 'W przedpokoju ważniejsze od wody są dotyk, zabrudzenia i częste czyszczenie.';
+          data.options = data.options.map(([value,label,desc]) => value === 'dry'
+            ? [value,'Standardowe użytkowanie','Ściana rzadko dotykana i czyszczona']
+            : value === 'splash' ? [value,'Częsty dotyk i mycie','Schody, wąski korytarz lub intensywnie użytkowana ściana'] : [value,label,desc]);
+        }
+        if (app.answers.room === 'kitchen') {
+          data.title = 'Gdzie znajduje się dekorowana ściana w kuchni?';
+          data.help = 'Wybierz warunki dotyczące tej konkretnej ściany, a nie całego pomieszczenia.';
+          data.options = data.options.map(([value,label,desc]) => value === 'dry'
+            ? [value,'Poza strefą roboczą','Ściana bez regularnego kontaktu z wodą i tłuszczem']
+            : value === 'splash' ? [value,'Mycie, tłuszcz i zachlapania','Pas roboczy, okolice zlewu lub intensywnie użytkowana ściana'] : [value,label,desc]);
+        }
+        if (app.answers.room === 'commercial') {
+          data.title = 'Jak intensywnie będzie użytkowana ściana?';
+          data.help = 'W lokalu lub biurze liczą się dotyk, zabrudzenia i częstotliwość czyszczenia.';
+          data.options = data.options.map(([value,label,desc]) => value === 'dry'
+            ? [value,'Standardowe użytkowanie','Dekoracyjna ściana poza ciągiem komunikacyjnym']
+            : value === 'splash' ? [value,'Częste czyszczenie','Recepcja, korytarz lub miejsce intensywnie użytkowane'] : [value,label,desc]);
+        }
+        if (app.answers.room === 'garage') {
+          data.title = 'Jak intensywnie będzie użytkowana ściana?';
+          data.help = 'W garażu dobieramy odporność do zabrudzeń i częstotliwości czyszczenia, a nie do samej nazwy pomieszczenia.';
+          data.options = data.options.map(([value,label,desc]) => value === 'dry'
+            ? [value,'Standardowe użytkowanie','Sucha ściana, bez częstego szorowania']
+            : value === 'splash' ? [value,'Częste mycie i zabrudzenia','Ściana narażona na brud, dotyk i regularne czyszczenie'] : [value,label,desc]);
         }
       }
       return data;
@@ -1977,6 +2057,9 @@
                 delete app.answers.exposure;
               }
             }
+            if (key === 'paintProduct' && previousValue !== nextValue) {
+              delete app.answers.color;
+            }
             app.answers[key] = nextValue;
             normalizeDependentAnswers();
             wizardBody.querySelectorAll('.option-card').forEach(x => {
@@ -2000,7 +2083,7 @@
       if(!Array.isArray(app.answers.walls)||!app.answers.walls.length)app.answers.walls=[{width:'',height:'',qty:1}];
       if(!Array.isArray(app.answers.openings))app.answers.openings=[];
       if(!app.answers.ceiling||typeof app.answers.ceiling!=='object')app.answers.ceiling={enabled:false,width:'',length:''};
-      const r=Number(app.answers.reserve); app.answers.reserve=[0,5,10,15].includes(r)?r:10;
+      const r=Number(app.answers.reserve); app.answers.reserve=[0,5,10,15].includes(r)?r:0;
     }
     function dimensionBreakdown() {
       ensureAreaModel();
@@ -2166,7 +2249,17 @@
       const a = app.answers;
       if (app.mode === 'calc') {
         const primary = products[a.calcProduct];
-        return {primary, alternatives:rankAlternatives(primary,a), meta:{override:'calc'}};
+        return {primary, alternatives:[], meta:{override:'calc'}};
+      }
+      if (app.mode === 'paint' && a.paintProduct && products[a.paintProduct]) {
+        const primary = products[a.paintProduct];
+        const alternatives = ['colormatt','ceramic']
+          .filter(id => id !== primary.id)
+          .map(id => products[id])
+          .filter(p => (!a.room || p.rooms.includes(a.room))
+            && (!a.exposure || p.exposure.includes(a.exposure))
+            && (!a.color || hasActualColor(p,a.color)));
+        return {primary, alternatives, meta:{override:null,selectedPaint:true}};
       }
       if (a.exposure === 'wet') {
         return {
@@ -2180,7 +2273,14 @@
         .filter(x=>x.s>-900)
         .sort((x,y)=>y.s-x.s);
       const primary = list[0].p;
-      return {primary, alternatives:list.slice(1,3).map(x=>x.p), meta:{override:null,score:list[0].s}};
+      const alternatives = list.slice(1).filter(({p}) => {
+        if (a.room && !p.rooms.includes(a.room)) return false;
+        if (a.exposure && a.exposure !== 'heat' && !p.exposure.includes(a.exposure)) return false;
+        if (app.mode === 'effect' && a.effect && !p.effects.includes(a.effect)) return false;
+        if (a.color && !hasActualColor(p,a.color)) return false;
+        return true;
+      }).slice(0,2).map(({p})=>p);
+      return {primary, alternatives, meta:{override:null,score:list[0].s}};
     }
 
     function packOptimizer(required, sizes) {
@@ -2252,11 +2352,9 @@
       if (c.kind === 'paint') {
         const coats = app.answers.coats === 'one' ? 1 : c.defaultCoats;
         const liters = area*coats/c.per;
-        const reservePct = app.answers.areaMode === 'dimensions' ? 0 : 10;
-        const withReserve = liters*(1+reservePct/100);
-        const opt=packOptimizer(withReserve,c.packs);
+        const opt=packOptimizer(liters,c.packs);
         const parts=opt.counts.map((n,i)=>n?`${n} × ${c.packs[i]} l`:null).filter(Boolean).join(' + ');
-        const reserveText = reservePct ? ` oraz ${reservePct}% zapasu` : ' — wybrany zapas jest już zawarty w metrażu z wymiarów';
+        const reserveText = app.answers.areaMode === 'dimensions' ? ' — wybrany zapas jest już zawarty w metrażu z wymiarów' : ' — bez automatycznie doliczanego zapasu';
         const coatsLabel = coats === 1 ? 'warstwa' : 'warstwy';
         return {number:Number(opt.total.toFixed(1)),main:parts,detail:`${area} m² × ${coats} ${coatsLabel}, wydajność nominalna ${c.per} m²/l${reserveText}. Łącznie ${opt.total.toFixed(1).replace('.',',')} l.`,caution:'Duża zmiana koloru, mocno chłonne podłoże albo nierówne krycie mogą wymagać dodatkowej warstwy.',level:'safe'};
       }
@@ -2279,6 +2377,7 @@
       }
       if (a.exposure === 'wet') w.push(['danger','Bezpośrednia strefa mokra wymaga poprawnie wykonanej hydroizolacji podłoża oraz zachowania ciągłości systemu przy narożach, odpływach i przejściach instalacyjnych.']);
       if (a.exposure === 'splash' && p.id !== 'beton' && p.type === 'effect') w.push(['warning','Zachlapania i częste mycie wymagają kompatybilnego zabezpieczenia. Nie dobieraj lakieru wyłącznie po stopniu połysku.']);
+      if (p.type === 'paint' && (a.room === 'bathroom' || a.room === 'garage' || a.exposure === 'splash')) w.push(['warning','Color Matt i DK Ceramic są farbami do wnętrz. Przy częstym myciu w łazience poza strefą mokrą lub w garażu można rozważyć kompatybilny lakier ochronny, ale najpierw wykonaj próbę — lakier może zmienić stopień połysku i odbiór koloru.']);
       if (a.room === 'kitchen') w.push(['warning','Za płytą grzewczą rozważ osłonę szklaną. Powłoka zmywalna nie zawsze chroni przed długotrwałym działaniem gorącego tłuszczu.']);
       if (a.exposure === 'heat' || a.room === 'fireplace') w.push(['danger','Na kominku przed zakupem potwierdź temperaturę powierzchni, dylatacje oraz wymagania producenta wkładu. Dekoracja nie jest powłoką do bezpośredniego kontaktu z ogniem.']);
       if (a.substrate === 'tile' && p.id === 'beton') w.push(['warning','Na płytkach: sprawdź stabilność okładziny, dokładnie ją umyj i odtłuść, usuń resztki silikonu, lekko zmatów oraz zastosuj grunt sczepny. Tynk nie wymaga pełnej warstwy gładzi; głębokie fugi lub nierówności wyrównaj przed dekoracją.']);
@@ -2288,7 +2387,7 @@
       if (preferredColor?.fit === 'nearest') w.push(['warning','W tej rodzinie nie ma jednoznacznie potwierdzonego gotowego wariantu w wybranym kierunku kolorystycznym. Pokazuję najbliższą opcję — zacznij od próbki.']);
       if (a.color === 'dark' && p.type === 'effect') w.push(['warning','Ciemnych i intensywnych efektów nie zabezpieczaj przypadkowym lakierem matowym — może wyszarzyć lub stłumić kolor. Dobierz kompatybilny wariant po konsultacji.']);
       if (['aurum','beton','provence'].includes(p.id)) w.push(['warning','To system wymagający spokojnej, etapowej pracy i próby technicznej. Przed wykonaniem całej ściany przećwicz ruch narzędzia na próbce lub płycie; przy braku doświadczenia rozważ wykonawcę.']);
-      if (p.id === 'antyreflex' && a.color !== 'light') w.push(['warning','Antyreflex jest w Doradcy traktowany jako rozwiązanie do bieli i bardzo jasnych powierzchni. Dla koloru wybierz standardowy Color Matt lub gotowy wariant Ceramic White.']);
+      if (p.id === 'antyreflex' && a.color !== 'light') w.push(['warning','Antyreflex jest w Doradcy traktowany jako rozwiązanie do bieli i bardzo jasnych powierzchni. Dla koloru wybierz standardowy Color Matt lub gotowy wariant DK Ceramic.']);
       if (!w.length) w.push(['success','Wybrane warunki są typowe dla tego systemu. Mimo to wykonaj próbę koloru i techniki przed rozpoczęciem całej powierzchni.']);
       return w;
     }
@@ -2296,19 +2395,20 @@
     function resultKickerFor(p,a,meta) {
       if (app.mode === 'calc') return 'Kalkulacja wybranego systemu';
       if (meta?.override === 'wet') return 'Rekomendacja systemowa — woda ma pierwszeństwo';
-      if (a.substrate === 'tile') return 'Wybrany efekt na płytkach — pełny system warstw';
+      if (a.substrate === 'tile') return 'Wybrany produkt na płytkach — pełny system warstw';
       if (a.exposure === 'heat' || a.room === 'fireplace') return 'Rekomendacja warunkowa — potwierdź temperaturę';
-      if (app.mode === 'paint') return 'Najlepsza farba do wskazanych warunków';
+      if (app.mode === 'paint') return 'Wybrana farba i pełny system wykonania';
       return 'Najlepsze dopasowanie';
     }
 
     function recommendationReason(p,a,meta) {
-      const roomPhrases = {salon:'w salonie',bedroom:'w sypialni',hall:'w przedpokoju lub na schodach',kitchen:'w kuchni',bathroom:'w łazience',fireplace:'w okolicy kominka',commercial:'w lokalu lub biurze',ceiling:'na suficie'};
+      const roomPhrases = {salon:'w salonie',bedroom:'w sypialni',hall:'w przedpokoju lub na schodach',kitchen:'w kuchni',bathroom:'w łazience',fireplace:'w okolicy kominka',commercial:'w lokalu lub biurze',garage:'w garażu lub pomieszczeniu gospodarczym',ceiling:'na suficie'};
       const effectLabels = {matte:'matowej struktury',metallic:'metalicznych refleksów',glitter:'brokatu i blasku',clouds:'efektu chmur',clay:'naturalnych przetarć',glamour:'efektu glamour',concrete:'betonu',sand:'drobnego piasku',smooth:'gładkiej powierzchni'};
       if (app.mode==='calc') return `Przeliczyłem wybrany produkt dla ${a.area} m². Poniżej znajdziesz także pełny układ warstw i elementy, których nie warto pomijać.`;
       if (meta?.requestedMode === 'paint' && meta.override === 'wet') return `Wybrałeś farbę gładką do bezpośredniej strefy mokrej. Doradca nie rekomenduje tam zwykłej farby i wskazuje Beton Hydrofobowy FOX. Dla tego produktu nie ma dedykowanej próbki, dlatego otrzymasz kartę produktu oraz właściwe poradniki.`;
       if (meta?.override === 'wet') return `Ten system został wskazany przede wszystkim ze względu na bezpośredni kontakt z wodą. W tych warunkach technologia ma pierwszeństwo przed samym wyglądem.`;
       if (a.substrate === 'tile') return `Zachowujemy wybrany efekt i rekomendujemy ${p.name}. Płytki nie zmieniają produktu na Beton — zmieniają sposób przygotowania podłoża i wymagany układ warstw.`;
+      if (app.mode === 'paint' && meta?.selectedPaint) return `Wybrałeś ${p.name} ${roomPhrases[a.room] || 'do wnętrza'}. Doradca zachowuje ten wybór i dobiera do niego kolor, liczbę warstw, przygotowanie podłoża oraz opcjonalne zabezpieczenie.`;
       return `${p.summary} Odpowiada kierunkowi ${effectLabels[a.effect] || 'wybranego wykończenia'} ${roomPhrases[a.room] || 'w pomieszczeniu'} i uwzględnia wskazane warunki użytkowania.`;
     }
 
@@ -2316,6 +2416,8 @@
       if (meta?.override === 'wet') return 'To nie jest zamiana produktu „na podobny”, lecz świadoma zmiana technologii. W bezpośredniej strefie mokrej wynik wymaga poprawnej hydroizolacji i wykonania wszystkich detali systemowych.';
       if (a.substrate === 'tile' && p.id === 'beton') return 'Tynk na płytkach: stabilna okładzina → dokładne czyszczenie i odtłuszczenie → lekkie matowienie → grunt sczepny → wyrównanie głębokich fug, jeśli jest potrzebne → dekoracja. Pełna gładź nie jest wymagana.';
       if (a.substrate === 'tile') return `Farba na płytkach: stabilna okładzina → czyszczenie i odtłuszczenie → matowienie → grunt sczepny → cienka gładź → szlifowanie i odpylenie → grunt głęboko penetrujący → właściwy podkład oraz ${p.name}.`;
+      if (p.type === 'paint' && a.room === 'bathroom') return 'Farba gładka jest dobierana do suchej ściany lub miejsca narażonego na okresowe zachlapania. Ta ścieżka nie dotyczy wnętrza prysznica ani powierzchni pozostającej w stałym kontakcie z wodą.';
+      if (p.type === 'paint' && a.room === 'garage') return 'W garażu o potrzebie dodatkowego lakieru decyduje częstotliwość mycia i rodzaj zabrudzeń. Lakier jest opcją, a nie obowiązkowym składnikiem każdej realizacji.';
       if (a.exposure === 'heat' || a.room === 'fireplace') return 'Dobór wizualny jest wstępny. Przed zakupem potwierdź, czy temperatura powierzchni mieści się w wymaganiach wszystkich warstw systemu.';
       return '';
     }
@@ -2326,14 +2428,18 @@
       if (n.includes('grunt sczepny')) return COMPONENT_URLS.strong;
       if (n.includes('initium')) return COMPONENT_URLS.initium;
       if (n.includes('pędzel') || n.includes('gąbka') || n === 'narzędzie') return COMPONENT_URLS.brush;
-      if (n.includes('hydrostop') || n.includes('zabezpieczenie') || n.includes('ochrona')) return app.answers.color === 'dark' ? COMPONENT_URLS.hydrostopSatin : COMPONENT_URLS.hydrostop;
+      if (n.includes('hydrostop') || n.includes('zabezpieczenie') || n.includes('ochrona') || n.includes('lakier')) return app.answers.color === 'dark' ? COMPONENT_URLS.hydrostopSatin : COMPONENT_URLS.hydrostop;
       const productNeedles = [p.name.toLowerCase(), p.id, 'decomal star','decomalmat','provence','aurum','kalahari','beton hydrofobowy','color matt','ceramic white'];
       if (productNeedles.some(x => x && n.includes(x))) return app.selectedVariant?.link || p.productLink;
       return null;
     }
 
     function systemFor(primary) {
-      if (app.answers.substrate !== 'tile') return primary.system;
+      const addOptionalPaintProtection = system => {
+        if (primary.type !== 'paint' || !(['bathroom','garage'].includes(app.answers.room) || app.answers.exposure === 'splash')) return system;
+        return [...system, ['Lakier ochronny — opcjonalnie','Rozważ go tylko przy częstym myciu w łazience poza strefą mokrą albo w garażu. Wykonaj próbę zgodności i wyglądu; lakier może zmienić mat oraz kolor farby i nie zastępuje hydroizolacji.']];
+      };
+      if (app.answers.substrate !== 'tile') return addOptionalPaintProtection(primary.system);
       const tileBase = [
         ['Ocena i dokładne mycie płytek','Sprawdź, czy wszystkie płytki i fugi są stabilne. Usuń tłuszcz, detergenty, osady, kurz oraz resztki silikonu; luźne elementy najpierw napraw.'],
         ['Lekkie matowienie','Delikatnie zmatów szkliwioną powierzchnię papierem ściernym, aby odebrać jej śliskość, następnie dokładnie odpyl.'],
@@ -2341,17 +2447,17 @@
       ];
       if (primary.id === 'beton') {
         const tail = primary.system.filter(([name])=>!/ocena podłoża|grunt sczepny/i.test(name));
-        return [...tileBase,
+        return addOptionalPaintProtection([...tileBase,
           ['Fugi i lokalne nierówności','Tynk dekoracyjny nie wymaga pełnej gładzi. Jeśli fugi są głębokie lub płytki nierówne, wyrównaj je przed dekoracją zgodnie z systemem.'],
           ...tail
-        ];
+        ]);
       }
       const tail = primary.system.filter(([name])=>!/przygotowanie podłoża|grunt wodny/i.test(name));
-      return [...tileBase,
+      return addOptionalPaintProtection([...tileBase,
         ['Cienka warstwa gładzi','Zakryj fugi, różnice poziomów i kruszywo gruntu sczepnego. Farby dekoracyjnej ani gładkiej nie nakładaj bezpośrednio na chropowaty grunt.'],
         ['Szlifowanie, odpylenie i grunt wodny','Po wyschnięciu gładzi delikatnie ją wyszlifuj, dokładnie odpyl i zastosuj grunt głęboko penetrujący. Dopiero potem wykonaj właściwy system produktu.'],
         ...tail
-      ];
+      ]);
     }
 
     function renderSystem(primary) {
@@ -2359,6 +2465,44 @@
         const link = componentLinkFor(primary,name);
         return `<li class="system-item"><span class="system-step">${i+1}</span><span><b>${name}</b><span>${desc}</span>${link ? `<a class="system-shop-link" data-track="system_component" data-component="${name}" href="${tracked(link,`${primary.id}_system_${i+1}`)}" target="_blank" rel="noopener">Znajdź w sklepie →</a>` : ''}</span></li>`;
       }).join('');
+    }
+
+    function toolsFor(primary) {
+      const category = COMPONENT_URLS.tools;
+      const tools=[];
+      const add=(name,desc,icon='•',url=category)=>{if(!tools.some(item=>item.name===name))tools.push({name,desc,icon,url});};
+      if (primary.type === 'paint') {
+        add('Wałek malarski','Dobierz runo do gładkości podłoża; farbę rozprowadzaj równomiernie i nie pracuj suchym wałkiem.','▥');
+        add('Pędzel do odcięć','Do narożników, krawędzi oraz miejsc niedostępnych dla wałka.','╱');
+        add('Kuweta lub kratka','Pomaga równomiernie załadować wałek i ograniczyć różnice w warstwie.','▤');
+      } else if (['decomal','star','decomalmat','kalahari'].includes(primary.id)) {
+        add('Pędzel dekoracyjny Decowant','Do prowadzenia produktu i formowania właściwego układu efektu.','╱',COMPONENT_URLS.brush);
+        if (['decomal','star'].includes(primary.id)) add('Paca INOX','Użyj tylko wtedy, gdy wybrana technika produktu przewiduje aplikację lub wygładzenie pacą.','◇');
+      } else if (primary.id === 'duo') {
+        add('Gąbka syntetyczna','Do nakładania P1 i P2 mokre w mokre; w zestawie sprawdź jej aktualną zawartość.','●');
+        add('Paca do wygładzenia','Do połączenia przejść i wykończenia efektu chmur we właściwym momencie.','◇');
+      } else if (primary.id === 'provence') {
+        add('Płaski pędzel dekoracyjny','Do jednej warstwy nakładanej ruchami na krzyż.','╱',COMPONENT_URLS.brush);
+        add('Duoszpachelka','Do rozgniatania flokuł, gdy powierzchnia zaczyna matowieć.','◇');
+      } else if (primary.id === 'aurum') {
+        add('Pędzel dekoracyjny','Do nakładania i formowania pierwszej części efektu.','╱',COMPONENT_URLS.brush);
+        add('Duoszpachelka lub paca INOX','Do wykonania metalicznych przetarć zgodnie z instrukcją wariantu.','◇');
+      } else if (primary.id === 'beton') {
+        add('Paca INOX','Do nakładania oraz strukturyzowania Betonu Hydrofobowego zgodnie z instrukcją.','◇');
+        add('Narzędzie do detali','Do narożników, krawędzi i przejść instalacyjnych bez przerywania ciągłości warstw.','╱');
+      }
+      if (app.answers.substrate === 'tile') {
+        add('Papier ścierny','Do lekkiego zmatowienia szkliwionej powierzchni przed gruntem sczepnym.','≋');
+        add('Narzędzia do mycia i odtłuszczania','Do usunięcia tłuszczu, detergentów, osadów i pyłu z płytek.','○');
+      }
+      add('Taśma i folia ochronna','Do zabezpieczenia krawędzi, podłogi i sąsiednich powierzchni.','□');
+      return tools.slice(0,6);
+    }
+
+    function renderTools(primary) {
+      const list=toolsFor(primary), card=el('toolsCard');
+      card.hidden=!list.length;
+      el('toolsGrid').innerHTML=list.map((tool,index)=>`<a class="tool-item" href="${tracked(tool.url,`${primary.id}_tool_${index+1}`)}" target="_blank" rel="noopener" data-track="tool" data-product="${primary.id}" data-component="${tool.name}"><span class="tool-icon" aria-hidden="true">${tool.icon}</span><span class="tool-copy"><b>${tool.name}</b><span>${tool.desc}</span></span></a>`).join('');
     }
 
     function updateVariantCta(primary, variant, index = 0) {
@@ -2424,6 +2568,7 @@
       el('warnings').innerHTML=warningsFor(primary,app.answers,meta).map(([type,text])=>`<div class="warning-box ${type==='success'?'success-box':type==='danger'?'danger-box':''}">${text}</div>`).join('');
       const colors=chosenColors(primary);
       renderColorChoices(primary,colors);
+      renderTools(primary);
       renderAlternatives(alternatives);
       renderGuides(primary);
       saveProgress('result');
@@ -2540,7 +2685,7 @@
     } else if(demo==='wet') {
       app.mode='effect';app.answers={room:'bathroom',exposure:'wet',effect:'concrete',skill:'some',color:'grey',substrate:'tile',area:'8'};showResult({skipScroll:true});
     } else if(demo==='paint') {
-      app.mode='paint';app.answers={room:'ceiling',exposure:'dry',paintPriority:'antireflex',color:'light',substrate:'plaster',coats:'two',area:'45'};showResult({skipScroll:true});
+      app.mode='paint';app.answers={room:'salon',exposure:'dry',paintProduct:'colormatt',color:'warm',substrate:'plaster',coats:'two',area:'45'};showResult({skipScroll:true});
     } else {
       refreshResumeCard();
     }
