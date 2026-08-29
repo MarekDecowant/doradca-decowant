@@ -1002,8 +1002,8 @@
 
           <aside>
             <section class="result-card">
-              <h3>Wybierz kierunek koloru</h3>
-              <p>Monitor nie oddaje koloru i struktury w 100%. Przy efekcie dekoracyjnym próbka jest najbezpieczniejszym etapem wyboru.</p>
+              <h3 id="colorSectionTitle">Wybierz kierunek koloru</h3>
+              <p id="colorSectionHelp">Monitor nie oddaje koloru i struktury w 100%. Przy efekcie dekoracyjnym próbka jest najbezpieczniejszym etapem wyboru.</p>
               <div class="color-grid" id="colorGrid"></div>
             </section>
 
@@ -1088,7 +1088,7 @@
     const IS_PRODUCTION = location.hostname.toLowerCase() === 'marekdecowant.github.io';
     const IS_REVIEW = new URLSearchParams(location.search).has('review');
     const IMAGE_BASE = 'img/';
-    const APP_VERSION = 'pro-2.13-beta-2026-08-29';
+    const APP_VERSION = 'pro-2.14-beta-2026-08-29';
 
     const PHOTO_LIBRARY = {
       salon:{local:'room-salon.jpg',remote:'https://images.unsplash.com/photo-1742541656775-5fc717774c02?auto=format&fit=crop&w=1100&q=80'},
@@ -1410,16 +1410,16 @@
           ['Druga warstwa','Nakładaj po wyschnięciu pierwszej, zachowując jednolity kierunek pracy.']
         ],
         colors: {
-          light: [{name:'Jasny NCS',hex:'#e8e4da',link:tracked('https://marekdecowant.github.io/kalkulator-ncs/','ncs_light'),sample:null}],
+          light: [{name:'Ciepła biel — NCS S 0603-G80Y',hex:'#e8e4d6',link:`${STORE}/pl/p/Color-Matt-NCS-Grupa-1-5L/1347?ncs=S%200603-G80Y`,sample:null,cta:'Konkretny kod NCS'}],
           warm: [{name:'013 Ciepły Kaszmir',hex:'#c9b9a3',link:`${STORE}/pl/p/FOX-DEKORATOR-COLOR-MATT-2%2C5-l-NCS-nr.013-CIEPLY-KASZMIR/1391`,sample:`${STORE}/pl/p/FARBA-Color-Matt-013-Probka-mokra/1353`,productImage:`${STORE}/environment/cache/images/productGfx_6260_50_50/color-matt-013.png`}],
-          grey: [{name:'Szaro-beżowy NCS',hex:'#aaa69e',link:tracked('https://marekdecowant.github.io/kalkulator-ncs/','ncs_grey'),sample:null}],
-          green: [{name:'Szałwia NCS',hex:'#879282',link:tracked('https://marekdecowant.github.io/kalkulator-ncs/','ncs_green'),sample:null}],
-          blue: [{name:'Szaroniebieski NCS',hex:'#7e8991',link:tracked('https://marekdecowant.github.io/kalkulator-ncs/','ncs_blue'),sample:null}],
-          dark: [{name:'Ciemny NCS',hex:'#3f4240',link:tracked('https://marekdecowant.github.io/kalkulator-ncs/','ncs_dark'),sample:null}]
+          grey: [{name:'Prawdziwy Greige — NCS S 1502-Y50R',hex:'#aaa69e',link:`${STORE}/pl/p/FOX-DEKORATOR-COLOR-MATT-2%2C5L-NCS-1502-Y50R-PRAWDZIWY-GREIGE/1604`,sample:`${STORE}/pl/p/FARBA-S-1502-Y50R-PROBKA-MOKRA/1472`}],
+          green: [{name:'Szałwiowa Zieleń — NCS S 2005-G20Y',hex:'#879282',link:`${STORE}/pl/p/FOX-DEKORATOR-COLOR-MATT-2%2C5L-NCS-nr-2005-G20Y-SZALWIOWA-ZIELEN/1602`,sample:null}],
+          blue: [{name:'Idealny Granat — NCS S 5020-R90B',hex:'#33465f',link:`${STORE}/pl/p/FOX-DEKORATOR-COLOR-MATT-2%2C5-l-NCS-5020-R90B-IDEALNY-GRANAT/1517`,sample:null}],
+          dark: [{name:'094 Czekolada',hex:'#55443b',link:`${STORE}/pl/p/FOX-DEKORATOR-COLOR-MATT-2%2C5L-NCS-nr.094-Czekolada/1520`,sample:`${STORE}/pl/p/FARBA-PROBKA-MOKRA-KOLOR-094-CZEKOLADA/1560`}]
         }
       },
       ceramic: {
-        id: 'ceramic', name: 'DK Ceramic', title: 'DK Ceramic — gładka, matowa farba do wymagających wnętrz',
+        id: 'ceramic', name: 'Decoverni Ceramic', title: 'Decoverni Ceramic — gładka, matowa farba do wymagających wnętrz',
         type: 'paint', effects: ['smooth'], rooms: ['kitchen','hall','bathroom','commercial','salon','bedroom','garage'], exposure: ['dry','splash'], skills: ['first','some','pro'],
         image: 'room-kitchen.jpg',
         summary: 'Dobry wybór do miejsc, w których ściana ma pozostać matowa, ale będzie częściej dotykana, myta lub narażona na codzienne zabrudzenia.',
@@ -1430,15 +1430,14 @@
         system: [
           ['Przygotowanie podłoża','Podłoże powinno być czyste, suche, równe i stabilne.'],
           ['Grunt / podkład','Dobierz do chłonności ściany i planowanego koloru.'],
-          ['Pierwsza warstwa DK Ceramic','Nakładaj wałkiem, pędzlem lub natryskowo.'],
+          ['Pierwsza warstwa Decoverni Ceramic','Nakładaj wałkiem, pędzlem lub natryskowo.'],
           ['Druga warstwa','Nakładaj po pełnym wyschnięciu poprzedniej warstwy.']
         ],
         colors: {
-          light: [{name:'Śmietanka',hex:'#ede5d6',link:`${STORE}/pl/p/Decoverni-Ceramic-White-2%2C5-l-SMIETANKA/1758`,sample:null}],
-          warm: [{name:'Kaszmir',hex:'#cbb8a0',link:`${STORE}/pl/p/Decoverni-Ceramic-White-Kaszmir-2%2C5-l/1751`,sample:null,productImage:`${STORE}/environment/cache/images/productGfx_7199_50_50/Farba-ceramiczna-zmywalna-Decoverni-Ceramic-White-Kaszmir-2-5L.png`},{name:'Cappuccino',hex:'#ad8d70',link:`${STORE}/pl/p/Farba-ceramiczna-zmywalna-Decoverni-Ceramic-White-Cappuccino-1L/1744`,sample:null}],
-          grey: [{name:'Popielaty',hex:'#aaa9a4',link:`${STORE}/pl/c/FARBY-CERAMICZNE/49`,sample:null}],
-          green: [{name:'Oliwkowy',hex:'#7d8065',link:`${STORE}/pl/c/FARBY-CERAMICZNE/49`,sample:null}],
-          dark: [{name:'Mokka',hex:'#625246',link:`${STORE}/pl/p/-Farba-ceramiczna-zmywalna-Decoverni-Ceramic-White-Mokka-2%2C5L/1792`,sample:null}]
+          light: [{name:'Śmietankowy',hex:'#ede5d6',link:`${STORE}/pl/p/Farba-ceramiczna-zmywalna-Decoverni-Ceramic-White-Smietankowy-2%2C5L/1758`,sample:`${STORE}/pl/p/PROBKA-FARBY-CERAMICZNEJ-DECOVERNI-CERAMIC-WHITE-KOLOR-SMIETANKOWY/1756`}],
+          warm: [{name:'Kaszmir',hex:'#cbb8a0',link:`${STORE}/pl/p/Decoverni-Ceramic-White-Kaszmir-2%2C5-l/1751`,sample:`${STORE}/pl/p/PROBKA-FARBY-CERAMICZNEJ-DECOVERNI-CERAMIC-WHITE-KOLOR-KASZMIR/1740`,productImage:`${STORE}/environment/cache/images/productGfx_7199_50_50/Farba-ceramiczna-zmywalna-Decoverni-Ceramic-White-Kaszmir-2-5L.png`},{name:'Cappuccino',hex:'#ad8d70',link:`${STORE}/pl/p/Farba-ceramiczna-zmywalna-Decoverni-Ceramic-White-Cappuccino-2%2C5L/1750`,sample:`${STORE}/pl/p/PROBKA-FARBY-CERAMICZNEJ-DECOVERNI-CERAMIC-WHITE-KOLOR-CAPPUCCINO/1743`}],
+          grey: [{name:'Popielaty',hex:'#aaa9a4',link:`${STORE}/pl/p/Farba-ceramiczna-zmywalna-Decoverni-Ceramic-White-Popielaty-2%2C5L-/1793`,sample:`${STORE}/pl/p/PROBKA-FARBY-CERAMICZNEJ-DECOVERNI-CERAMIC-WHITE-KOLOR-POPIELATY/1759`}],
+          dark: [{name:'Mokka',hex:'#625246',link:`${STORE}/pl/p/-Farba-ceramiczna-zmywalna-Decoverni-Ceramic-White-Mokka-2%2C5L/1792`,sample:`${STORE}/pl/p/PROBKA-FARBY-CERAMICZNEJ-DECOVERNI-CERAMIC-WHITE-MOKKA/1791`},{name:'Śliwkowy',hex:'#604855',link:`${STORE}/pl/p/Farba-ceramiczna-zmywalna-Decoverni-Ceramic-Kolor-Sliwkowy-2%2C25L-/1784`,sample:`${STORE}/pl/p/PROBKA-FARBY-CERAMICZNEJ-DECOVERNI-CERAMIC-KOLOR-SLIWKOWY/1790`}]
         }
       }
     };
@@ -1502,27 +1501,33 @@
           ['decomal','DECOMAL','Metaliczny'],['star','DECOMAL STAR','Metaliczny z brokatem'],['decomalmat','DECOMALmat','Matowa struktura'],
           ['duo','DECOMAL DUO','Efekt chmur'],['provence','Provence','Glinka i przetarcia'],['aurum','Aurum','Glamour / vintage'],
           ['beton','Beton Hydrofobowy','Beton i strefy mokre'],['kalahari','Kalahari','Efekt piasku'],
-          ['colormatt','FOX Color Matt','Farba gładka'],['ceramic','DK Ceramic','Farba ceramiczna']
+          ['colormatt','FOX Color Matt','Farba gładka'],['ceramic','Decoverni Ceramic','Farba ceramiczna']
         ]
       },
       paintProduct: {
-        title:'Którą farbę chcesz zastosować?', help:'Color Matt daje szeroką paletę NCS, a DK Ceramic oferuje gotowe kolory i wysoką odporność użytkową. Wybór produktu pozostaje po Twojej stronie.',
+        title:'Którą farbę chcesz zastosować?', help:'Color Matt daje szeroką paletę NCS, a Decoverni Ceramic oferuje gotowe kolory i wysoką odporność użytkową. Wybór produktu pozostaje po Twojej stronie.',
         options:[
           ['colormatt','FOX Color Matt','Domyślny wybór: szeroka paleta NCS i głęboki mat'],
-          ['ceramic','DK Ceramic','Gotowe kolory i farba do wymagających wnętrz']
+          ['ceramic','Decoverni Ceramic','Gotowe kolory i farba do wymagających wnętrz']
         ]
+      },
+      paintColor: {
+        title:'Wybierz konkretny kolor', help:'Pokazujemy rzeczywiste kolory dostępne dla wybranej farby. Przy Color Matt kod NCS jest częścią propozycji, a nie ogólnym kierunkiem kolorystycznym.',
+        options:[]
       }
     };
 
     const modeSteps = {
       effect: ['room','exposure','effect','color','substrate','area'],
-      paint: ['room','exposure','paintProduct','color','substrate','coats','area'],
+      paint: ['room','exposure','paintProduct','paintColor','substrate','area'],
       calc: ['calcProduct','room','exposure','color','substrate','coats','area']
     };
 
     function getSteps() {
       let steps;
-      if (app.mode === 'calc' && app.answers.calcProduct && products[app.answers.calcProduct]?.type !== 'paint') {
+      if (app.mode === 'calc' && app.answers.calcProduct && products[app.answers.calcProduct]?.type === 'paint') {
+        steps = ['calcProduct','room','exposure','paintColor','substrate','coats','area'];
+      } else if (app.mode === 'calc' && app.answers.calcProduct && products[app.answers.calcProduct]?.type !== 'paint') {
         steps = ['calcProduct','room','exposure','color','substrate','area'];
       } else if (app.answers.exposure === 'wet' && app.mode === 'paint') {
         steps = ['room','exposure','color','substrate','area'];
@@ -1538,7 +1543,7 @@
       steps.forEach(key=>{
         if(key==='area'){visible.push(key);return;}
         const options=questionData(key)?.options || [];
-        if(options.length===1){app.answers[key]=options[0][0];return;}
+        if(options.length===1){app.answers[key]=options[0][0];if(key==='paintColor')app.answers.color=options[0][3]?.direction||options[0][0].split(':')[0];return;}
         visible.push(key);
       });
       return visible;
@@ -1593,7 +1598,7 @@
     if (!optionData.calcProduct.options.some(x => x[0] === 'antyreflex')) {
       optionData.calcProduct.options.push(['antyreflex','FOX Color Matt Antyreflex','Głęboki mat do sufitów i jasnych ścian']);
     }
-    modeSteps.paint = ['room','exposure','paintProduct','color','substrate','coats','area'];
+    modeSteps.paint = ['room','exposure','paintProduct','paintColor','substrate','area'];
 
 
 
@@ -1632,6 +1637,14 @@
     setSample('aurum','Grafit','/pl/p/PROBKA-SUCHA-40X40-AURUM-GRAFIT/1674','sucha');
     setSample('kalahari','Ciemny Szary','/pl/p/FOX-KALAHARI-CIEMNY-SZARY-PROBKA-MOKRA-/1640','mokra');
     setSample('colormatt','013 Ciepły Kaszmir','/pl/p/FARBA-Color-Matt-013-Probka-mokra/1353','mokra');
+    setSample('colormatt','Prawdziwy Greige','/pl/p/FARBA-S-1502-Y50R-PROBKA-MOKRA/1472','mokra');
+    setSample('colormatt','094 Czekolada','/pl/p/FARBA-PROBKA-MOKRA-KOLOR-094-CZEKOLADA/1560','mokra');
+    setSample('ceramic','Śmietankowy','/pl/p/PROBKA-FARBY-CERAMICZNEJ-DECOVERNI-CERAMIC-WHITE-KOLOR-SMIETANKOWY/1756','mokra');
+    setSample('ceramic','Kaszmir','/pl/p/PROBKA-FARBY-CERAMICZNEJ-DECOVERNI-CERAMIC-WHITE-KOLOR-KASZMIR/1740','mokra');
+    setSample('ceramic','Cappuccino','/pl/p/PROBKA-FARBY-CERAMICZNEJ-DECOVERNI-CERAMIC-WHITE-KOLOR-CAPPUCCINO/1743','mokra');
+    setSample('ceramic','Popielaty','/pl/p/PROBKA-FARBY-CERAMICZNEJ-DECOVERNI-CERAMIC-WHITE-KOLOR-POPIELATY/1759','mokra');
+    setSample('ceramic','Mokka','/pl/p/PROBKA-FARBY-CERAMICZNEJ-DECOVERNI-CERAMIC-WHITE-MOKKA/1791','mokra');
+    setSample('ceramic','Śliwkowy','/pl/p/PROBKA-FARBY-CERAMICZNEJ-DECOVERNI-CERAMIC-KOLOR-SLIWKOWY/1790','mokra');
 
 
     const GUIDE_LIBRARY = {
@@ -1835,6 +1848,7 @@
 
     function normalizeDependentAnswers() {
       const paintFlow = isPaintFlow();
+      if (app.mode === 'paint') delete app.answers.coats;
       if (!paintFlow && app.answers.room === 'ceiling') {
         delete app.answers.room;
         delete app.answers.exposure;
@@ -1864,10 +1878,27 @@
         if (!allowed.includes(app.answers.exposure)) delete app.answers.exposure;
         if (app.answers.room === 'ceiling') app.answers.exposure = 'dry';
       }
+      const paintProductId = app.mode === 'calc' ? app.answers.calcProduct : app.answers.paintProduct;
+      const paintProduct = products[paintProductId];
+      if (paintFlow && paintProduct?.type === 'paint' && app.answers.paintColor) {
+        const variant = selectedPaintVariant(paintProduct);
+        if (variant) app.answers.color = String(app.answers.paintColor).split(':')[0];
+        else {
+          delete app.answers.paintColor;
+          delete app.answers.color;
+        }
+      }
     }
 
     function hasActualColor(product, direction) {
       return (product?.colors?.[direction] || []).some(variant => variant.fit !== 'nearest');
+    }
+
+    function selectedPaintVariant(product) {
+      const value=app.answers.paintColor;
+      if(!value||!product)return null;
+      const [direction,indexText]=String(value).split(':');
+      return product.colors?.[direction]?.[Number(indexText)] || null;
     }
 
     function colorCandidateProducts() {
@@ -1937,6 +1968,17 @@
           data.options = data.options.filter(([value]) => allowed.has(value));
           data.help = 'Pokazujemy wyłącznie kierunki kolorystyczne dostępne dla systemów pasujących do wcześniejszych odpowiedzi. Nie zastępujemy brakującego koloru „najbliższym” produktem.';
         }
+      }
+      if (key === 'paintColor') {
+        const productId = app.mode === 'calc' ? app.answers.calcProduct : app.answers.paintProduct;
+        const product = products[productId];
+        data.title = product ? `Wybierz konkretny kolor ${product.name}` : 'Wybierz konkretny kolor';
+        data.help = product?.id === 'colormatt'
+          ? 'Proponujemy konkretne kolory z oferty DECOWANT. Kod NCS podajemy bezpośrednio przy kolorze, jeśli jest podstawą zamówienia.'
+          : 'Pokazujemy wyłącznie rzeczywiste, nazwane kolory Decoverni Ceramic dostępne w ofercie DECOWANT. Każda z tych propozycji ma przypisaną właściwą próbkę mokrą.';
+        data.options = product ? Object.entries(product.colors || {}).flatMap(([direction,variants]) => variants
+          .filter(variant => variant.fit !== 'nearest')
+          .map((variant,index) => [`${direction}:${index}`,variant.name,product.id === 'colormatt' ? 'Konkretny kolor Color Matt' : 'Gotowy kolor Decoverni Ceramic',{hex:variant.hex,direction,index}])) : [];
       }
       if (key === 'paintPriority') {
         const candidates = Object.values(products).filter(product => product.type === 'paint'
@@ -2021,20 +2063,21 @@
       } else {
         const data = questionData(key);
         const selected = app.answers[key];
+        const isColorChoice = key === 'color' || key === 'paintColor';
         const cls = data.options.length <= 4 ? 'options-grid two' : 'options-grid';
         wizardBody.innerHTML = `
           <div class="question-number">Pytanie ${app.step+1}</div>
           <h2 class="question-title">${data.title}</h2>
           <p class="question-help">${data.help}</p>
           <div class="${cls}" role="group" aria-label="${data.title}">
-            ${data.options.map(([value,label,desc]) => {
+            ${data.options.map(([value,label,desc,meta]) => {
               const media = mediaFor(key,value);
               return `
               <button class="option-card ${media?'has-media':''} ${selected===value?'selected':''}" data-step="${key}" data-value="${value}" aria-pressed="${selected===value}">
                 ${photoMarkup(media, `${label} — zdjęcie inspiracyjne`)}
                 ${visualTagFor(key,value) ? `<span class="option-visual-tag">${visualTagFor(key,value)}</span>` : ''}
                 <span class="option-body">
-                  <span class="option-icon ${key==='color'?'color-swatch':''}"${key==='color'?` style="--swatch:${COLOR_SWATCHES[value]}"`:''}>${key==='color'?'':iconSvg(value)}</span>
+                  <span class="option-icon ${isColorChoice?'color-swatch':''}"${isColorChoice?` style="--swatch:${meta?.hex || COLOR_SWATCHES[value]}"`:''}>${isColorChoice?'':iconSvg(value)}</span>
                   <span class="option-copy"><b>${label}</b><span>${desc || ''}</span></span>
                   <span class="option-check">✓</span>
                 </span>
@@ -2052,6 +2095,8 @@
               const nextType = products[nextValue]?.type;
               delete app.answers.coats;
               delete app.answers.paintPriority;
+              delete app.answers.paintColor;
+              delete app.answers.color;
               if (previousType && nextType && previousType !== nextType) {
                 delete app.answers.room;
                 delete app.answers.exposure;
@@ -2059,8 +2104,10 @@
             }
             if (key === 'paintProduct' && previousValue !== nextValue) {
               delete app.answers.color;
+              delete app.answers.paintColor;
             }
             app.answers[key] = nextValue;
+            if (key === 'paintColor') app.answers.color = nextValue.split(':')[0];
             normalizeDependentAnswers();
             wizardBody.querySelectorAll('.option-card').forEach(x => {
               const selectedNow = x === btn;
@@ -2253,13 +2300,7 @@
       }
       if (app.mode === 'paint' && a.paintProduct && products[a.paintProduct]) {
         const primary = products[a.paintProduct];
-        const alternatives = ['colormatt','ceramic']
-          .filter(id => id !== primary.id)
-          .map(id => products[id])
-          .filter(p => (!a.room || p.rooms.includes(a.room))
-            && (!a.exposure || p.exposure.includes(a.exposure))
-            && (!a.color || hasActualColor(p,a.color)));
-        return {primary, alternatives, meta:{override:null,selectedPaint:true}};
+        return {primary, alternatives:[], meta:{override:null,selectedPaint:true}};
       }
       if (a.exposure === 'wet') {
         return {
@@ -2362,6 +2403,8 @@
     }
 
     function chosenColors(p) {
+      const exactPaint = (app.mode === 'paint' || (app.mode === 'calc' && p.type === 'paint')) ? selectedPaintVariant(p) : null;
+      if (exactPaint) return [exactPaint];
       const preferred = p.colors?.[app.answers.color] || [];
       const extras = Object.entries(p.colors || {}).filter(([k])=>k!==app.answers.color).flatMap(([,v])=>v);
       const all=[...preferred,...extras].filter(c=>c.fit!=='nearest');
@@ -2377,7 +2420,7 @@
       }
       if (a.exposure === 'wet') w.push(['danger','Bezpośrednia strefa mokra wymaga poprawnie wykonanej hydroizolacji podłoża oraz zachowania ciągłości systemu przy narożach, odpływach i przejściach instalacyjnych.']);
       if (a.exposure === 'splash' && p.id !== 'beton' && p.type === 'effect') w.push(['warning','Zachlapania i częste mycie wymagają kompatybilnego zabezpieczenia. Nie dobieraj lakieru wyłącznie po stopniu połysku.']);
-      if (p.type === 'paint' && (a.room === 'bathroom' || a.room === 'garage' || a.exposure === 'splash')) w.push(['warning','Color Matt i DK Ceramic są farbami do wnętrz. Przy częstym myciu w łazience poza strefą mokrą lub w garażu można rozważyć kompatybilny lakier ochronny, ale najpierw wykonaj próbę — lakier może zmienić stopień połysku i odbiór koloru.']);
+      if (p.type === 'paint' && (a.room === 'bathroom' || a.room === 'garage' || a.exposure === 'splash')) w.push(['warning','Color Matt i Decoverni Ceramic są farbami do wnętrz. Przy częstym myciu w łazience poza strefą mokrą lub w garażu można rozważyć kompatybilny lakier ochronny, ale najpierw wykonaj próbę — lakier może zmienić stopień połysku i odbiór koloru.']);
       if (a.room === 'kitchen') w.push(['warning','Za płytą grzewczą rozważ osłonę szklaną. Powłoka zmywalna nie zawsze chroni przed długotrwałym działaniem gorącego tłuszczu.']);
       if (a.exposure === 'heat' || a.room === 'fireplace') w.push(['danger','Na kominku przed zakupem potwierdź temperaturę powierzchni, dylatacje oraz wymagania producenta wkładu. Dekoracja nie jest powłoką do bezpośredniego kontaktu z ogniem.']);
       if (a.substrate === 'tile' && p.id === 'beton') w.push(['warning','Na płytkach: sprawdź stabilność okładziny, dokładnie ją umyj i odtłuść, usuń resztki silikonu, lekko zmatów oraz zastosuj grunt sczepny. Tynk nie wymaga pełnej warstwy gładzi; głębokie fugi lub nierówności wyrównaj przed dekoracją.']);
@@ -2387,7 +2430,7 @@
       if (preferredColor?.fit === 'nearest') w.push(['warning','W tej rodzinie nie ma jednoznacznie potwierdzonego gotowego wariantu w wybranym kierunku kolorystycznym. Pokazuję najbliższą opcję — zacznij od próbki.']);
       if (a.color === 'dark' && p.type === 'effect') w.push(['warning','Ciemnych i intensywnych efektów nie zabezpieczaj przypadkowym lakierem matowym — może wyszarzyć lub stłumić kolor. Dobierz kompatybilny wariant po konsultacji.']);
       if (['aurum','beton','provence'].includes(p.id)) w.push(['warning','To system wymagający spokojnej, etapowej pracy i próby technicznej. Przed wykonaniem całej ściany przećwicz ruch narzędzia na próbce lub płycie; przy braku doświadczenia rozważ wykonawcę.']);
-      if (p.id === 'antyreflex' && a.color !== 'light') w.push(['warning','Antyreflex jest w Doradcy traktowany jako rozwiązanie do bieli i bardzo jasnych powierzchni. Dla koloru wybierz standardowy Color Matt lub gotowy wariant DK Ceramic.']);
+      if (p.id === 'antyreflex' && a.color !== 'light') w.push(['warning','Antyreflex jest w Doradcy traktowany jako rozwiązanie do bieli i bardzo jasnych powierzchni. Dla koloru wybierz standardowy Color Matt lub gotowy wariant Decoverni Ceramic.']);
       if (!w.length) w.push(['success','Wybrane warunki są typowe dla tego systemu. Mimo to wykonaj próbę koloru i techniki przed rozpoczęciem całej powierzchni.']);
       return w;
     }
@@ -2408,7 +2451,10 @@
       if (meta?.requestedMode === 'paint' && meta.override === 'wet') return `Wybrałeś farbę gładką do bezpośredniej strefy mokrej. Doradca nie rekomenduje tam zwykłej farby i wskazuje Beton Hydrofobowy FOX. Dla tego produktu nie ma dedykowanej próbki, dlatego otrzymasz kartę produktu oraz właściwe poradniki.`;
       if (meta?.override === 'wet') return `Ten system został wskazany przede wszystkim ze względu na bezpośredni kontakt z wodą. W tych warunkach technologia ma pierwszeństwo przed samym wyglądem.`;
       if (a.substrate === 'tile') return `Zachowujemy wybrany efekt i rekomendujemy ${p.name}. Płytki nie zmieniają produktu na Beton — zmieniają sposób przygotowania podłoża i wymagany układ warstw.`;
-      if (app.mode === 'paint' && meta?.selectedPaint) return `Wybrałeś ${p.name} ${roomPhrases[a.room] || 'do wnętrza'}. Doradca zachowuje ten wybór i dobiera do niego kolor, liczbę warstw, przygotowanie podłoża oraz opcjonalne zabezpieczenie.`;
+      if (app.mode === 'paint' && meta?.selectedPaint) {
+        const variant = selectedPaintVariant(p);
+        return `Wybrałeś ${p.name}${variant ? ` w kolorze ${variant.name}` : ''} ${roomPhrases[a.room] || 'do wnętrza'}. Doradca zachowuje produkt i konkretny kolor, przyjmuje standardowo dwie warstwy oraz dobiera przygotowanie podłoża i ewentualne zabezpieczenie.`;
+      }
       return `${p.summary} Odpowiada kierunkowi ${effectLabels[a.effect] || 'wybranego wykończenia'} ${roomPhrases[a.room] || 'w pomieszczeniu'} i uwzględnia wskazane warunki użytkowania.`;
     }
 
@@ -2527,6 +2573,13 @@
 
     function renderColorChoices(primary, colors) {
       const grid = el('colorGrid');
+      const exactPaint = (app.mode === 'paint' || (app.mode === 'calc' && primary.type === 'paint')) && selectedPaintVariant(primary);
+      if (exactPaint && colors.length === 1) {
+        const c=colors[0];
+        grid.innerHTML=`<div class="color-choice selected" aria-label="Wybrany kolor ${c.name}"><span class="color-dot" style="background:${c.hex}"></span><span><b>${c.name}</b><span>Wybrany wcześniej — bez ponownego wyboru</span></span></div>`;
+        updateVariantCta(primary,c,0);
+        return;
+      }
       grid.innerHTML = colors.map((c,i)=>`<button class="color-choice ${i===0?'selected':''}" type="button" data-index="${i}" aria-pressed="${i===0}"><span class="color-dot" style="background:${c.hex}"></span><span><b>${c.name}</b><span>${c.cta || 'Wybierz wariant'}</span></span></button>`).join('');
       grid.querySelectorAll('.color-choice').forEach(btn=>btn.addEventListener('click',()=>{
         const index=Number(btn.dataset.index);
@@ -2538,6 +2591,7 @@
 
     function showResult({skipScroll=false} = {}) {
       const {primary, alternatives, meta} = chooseProducts();
+      const exactPaint = primary.type === 'paint' ? selectedPaintVariant(primary) : null;
       const actualDirections=Object.keys(primary.colors || {}).filter(direction=>hasActualColor(primary,direction));
       if(!actualDirections.includes(app.answers.color)) app.answers.color=actualDirections.includes('grey')?'grey':(actualDirections[0]||app.answers.color);
       const area=Number(app.answers.area);
@@ -2553,13 +2607,14 @@
       el('resultContextNote').textContent=context;
       const areaLabel=app.answers.areaMode==='dimensions'?`${formatArea(area)} m² z wymiarów`:`${formatArea(area)} m²`;
       const applicationLevels={decomal:'łatwiejsza aplikacja',star:'łatwiejsza aplikacja',decomalmat:'łatwiejsza aplikacja',duo:'aplikacja etapowa',provence:'aplikacja wymagająca próby',aurum:'aplikacja zaawansowana',beton:'aplikacja zaawansowana',kalahari:'łatwiejsza aplikacja',colormatt:'standardowe malowanie',ceramic:'standardowe malowanie',antyreflex:'standardowe malowanie'};
-      el('resultTags').innerHTML=[...primary.why,applicationLevels[primary.id],areaLabel].filter(Boolean).map(x=>`<span class="result-tag">${x}</span>`).join('');
+      el('resultTags').innerHTML=[exactPaint?.name,...primary.why,applicationLevels[primary.id],areaLabel].filter(Boolean).map(x=>`<span class="result-tag">${x}</span>`).join('');
       const resultMedia = mediaFor('product',primary.id) || {local:primary.image};
       const remoteAttr = resultMedia.remote ? ` data-remote-src="${resultMedia.remote.replace(/&/g,'&amp;')}"` : '';
       el('resultImage').innerHTML=`<img class="advisor-photo" src="${photoSrc(resultMedia,primary.image)}"${remoteAttr} alt="Wizualizacja efektu dla rekomendacji ${primary.name}" onerror="this.style.display='none'"><span class="result-image-note" id="resultImageNote">Wizualizacja efektu produktu</span>`;
       hydrateRemoteImages(el('resultImage'));
       const dim=app.answers.areaMode==='dimensions'?dimensionBreakdown():null;
-      el('quantityIntro').textContent=dim?`Metraż wyliczony z wymiarów: ${formatArea(dim.net)} m² netto + ${dim.reservePct}% zapasu = ${formatArea(dim.total)} m².`:'Obliczenie orientacyjne na podstawie podanego metrażu.';
+      const areaIntro=dim?`Metraż wyliczony z wymiarów: ${formatArea(dim.net)} m² netto + ${dim.reservePct}% zapasu = ${formatArea(dim.total)} m².`:'Obliczenie orientacyjne na podstawie podanego metrażu.';
+      el('quantityIntro').textContent=app.mode==='paint'?`${areaIntro} Doradca przyjmuje standardowo 2 warstwy; inną liczbę ustawisz tylko w Kalkulatorze materiałów.`:areaIntro;
       el('quantityNumber').textContent=qty.number;
       el('quantityMain').textContent=qty.main;
       el('quantityDetail').textContent=qty.detail;
@@ -2567,6 +2622,8 @@
       el('quantityBox').classList.toggle('consult',qty.level==='consult');
       el('warnings').innerHTML=warningsFor(primary,app.answers,meta).map(([type,text])=>`<div class="warning-box ${type==='success'?'success-box':type==='danger'?'danger-box':''}">${text}</div>`).join('');
       const colors=chosenColors(primary);
+      el('colorSectionTitle').textContent=exactPaint?'Wybrany kolor':'Wybierz wariant koloru';
+      el('colorSectionHelp').textContent=exactPaint?'To konkretny wariant wskazany wcześniej. Przed zakupem potwierdź go próbką w docelowym świetle.':'Każdy przycisk prowadzi do konkretnego wariantu produktu. Jeśli mamy potwierdzoną próbkę, pokażemy właściwy link.';
       renderColorChoices(primary,colors);
       renderTools(primary);
       renderAlternatives(alternatives);
@@ -2685,7 +2742,7 @@
     } else if(demo==='wet') {
       app.mode='effect';app.answers={room:'bathroom',exposure:'wet',effect:'concrete',skill:'some',color:'grey',substrate:'tile',area:'8'};showResult({skipScroll:true});
     } else if(demo==='paint') {
-      app.mode='paint';app.answers={room:'salon',exposure:'dry',paintProduct:'colormatt',color:'warm',substrate:'plaster',coats:'two',area:'45'};showResult({skipScroll:true});
+      app.mode='paint';app.answers={room:'salon',exposure:'dry',paintProduct:'colormatt',paintColor:'warm:0',color:'warm',substrate:'plaster',area:'45'};showResult({skipScroll:true});
     } else {
       refreshResumeCard();
     }
