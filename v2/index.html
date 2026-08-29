@@ -1074,7 +1074,7 @@
     const IS_PRODUCTION = location.hostname.toLowerCase() === 'marekdecowant.github.io';
     const IS_REVIEW = new URLSearchParams(location.search).has('review');
     const IMAGE_BASE = 'img/';
-    const APP_VERSION = 'pro-2.10-beta-2026-08-29';
+    const APP_VERSION = 'pro-2.11-beta-2026-08-29';
 
     const PHOTO_LIBRARY = {
       salon:{local:'room-salon.jpg',remote:'https://images.unsplash.com/photo-1742541656775-5fc717774c02?auto=format&fit=crop&w=1100&q=80'},
@@ -1857,6 +1857,11 @@
           ? 'Pomieszczenie i rodzaj powierzchni wpływają na wymagany mat, odporność na mycie oraz dobór podkładu.'
           : base.help;
         data.options = data.options.filter(([value]) => paintFlow || value !== 'ceiling');
+        if (app.mode === 'calc' && app.answers.calcProduct) {
+          const selectedProduct = products[app.answers.calcProduct];
+          data.options = data.options.filter(([value]) => selectedProduct?.rooms.includes(value));
+          data.help = 'Pokazujemy tylko miejsca zastosowania właściwe dla wybranego produktu. Kalkulator nie tworzy przypadkowych połączeń produktu i pomieszczenia.';
+        }
       }
       if (key === 'effect' && app.answers.room) {
         const room = app.answers.room;
@@ -1886,6 +1891,11 @@
       if (key === 'exposure') {
         const allowed = validExposuresForRoom(app.answers.room);
         data.options = data.options.filter(([value]) => allowed.includes(value));
+        if (app.mode === 'calc' && app.answers.calcProduct) {
+          const selectedProduct = products[app.answers.calcProduct];
+          data.options = data.options.filter(([value]) => selectedProduct?.exposure.includes(value));
+          data.help = 'Pokazujemy tylko warunki ekspozycji przewidziane dla wybranego produktu. Jeśli brakuje strefy mokrej lub podwyższonej temperatury, ten produkt nie powinien być tam dobierany automatycznie.';
+        }
         if (app.answers.room === 'bathroom') {
           data.title = 'Gdzie znajduje się dekorowana ściana w łazience?';
           data.help = 'Łazienka ma strefy o różnym kontakcie z wodą. Wybierz najbardziej wymagający warunek występujący na tej konkretnej ścianie.';
@@ -2042,6 +2052,16 @@
       if (key === 'area') {
         const n = Number(app.answers.area);
         if (!Number.isFinite(n) || n < .5 || n > 1000) { el('areaError').hidden=false; (el('areaInput')||wizardBody.querySelector('.dimension-input')||wizardBody.querySelector('[data-area-mode]'))?.focus(); return; }
+        if (app.answers.areaMode === 'dimensions') {
+          const breakdown = dimensionBreakdown();
+          if (breakdown.overdraw) {
+            const error = el('areaError');
+            error.textContent = 'Powierzchnia okien i drzwi nie może być większa niż powierzchnia ścian. Popraw wymiary przed obliczeniem.';
+            error.hidden = false;
+            (wizardBody.querySelector('[data-array="openings"]') || wizardBody.querySelector('.dimension-input'))?.focus();
+            return;
+          }
+        }
       } else {
         const allowed = questionData(key).options.map(([value]) => value);
         if (!app.answers[key] || !allowed.includes(app.answers[key])) {
@@ -2222,10 +2242,12 @@
       if (c.kind === 'paint') {
         const coats = app.answers.coats === 'one' ? 1 : c.defaultCoats;
         const liters = area*coats/c.per;
-        const withReserve = liters*1.1;
+        const reservePct = app.answers.areaMode === 'dimensions' ? 0 : 10;
+        const withReserve = liters*(1+reservePct/100);
         const opt=packOptimizer(withReserve,c.packs);
         const parts=opt.counts.map((n,i)=>n?`${n} × ${c.packs[i]} l`:null).filter(Boolean).join(' + ');
-        return {number:Number(opt.total.toFixed(1)),main:parts,detail:`${area} m² × ${coats} warstw(y), wydajność nominalna ${c.per} m²/l oraz 10% zapasu. Łącznie ${opt.total.toFixed(1).replace('.',',')} l.`,caution:'Duża zmiana koloru, mocno chłonne podłoże albo nierówne krycie mogą wymagać dodatkowej warstwy.',level:'safe'};
+        const reserveText = reservePct ? ` oraz ${reservePct}% zapasu` : ' — wybrany zapas jest już zawarty w metrażu z wymiarów';
+        return {number:Number(opt.total.toFixed(1)),main:parts,detail:`${area} m² × ${coats} warstw(y), wydajność nominalna ${c.per} m²/l${reserveText}. Łącznie ${opt.total.toFixed(1).replace('.',',')} l.`,caution:'Duża zmiana koloru, mocno chłonne podłoże albo nierówne krycie mogą wymagać dodatkowej warstwy.',level:'safe'};
       }
       return {number:'—',main:'Sprawdź kartę produktu',detail:'Brak wiarygodnej kalkulacji.',caution:'Skonsultuj ilość przed zakupem.',level:'consult'};
     }
