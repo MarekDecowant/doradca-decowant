@@ -1817,6 +1817,16 @@
         delete app.answers.coats;
         delete app.answers.paintPriority;
       }
+      if (app.mode === 'calc' && app.answers.calcProduct) {
+        const selectedProduct = products[app.answers.calcProduct];
+        if (app.answers.room && !selectedProduct?.rooms.includes(app.answers.room)) {
+          delete app.answers.room;
+          delete app.answers.exposure;
+        }
+        if (app.answers.exposure && !selectedProduct?.exposure.includes(app.answers.exposure)) {
+          delete app.answers.exposure;
+        }
+      }
       if (app.answers.room) {
         const allowed = validExposuresForRoom(app.answers.room);
         if (!allowed.includes(app.answers.exposure)) delete app.answers.exposure;
@@ -2247,7 +2257,8 @@
         const opt=packOptimizer(withReserve,c.packs);
         const parts=opt.counts.map((n,i)=>n?`${n} × ${c.packs[i]} l`:null).filter(Boolean).join(' + ');
         const reserveText = reservePct ? ` oraz ${reservePct}% zapasu` : ' — wybrany zapas jest już zawarty w metrażu z wymiarów';
-        return {number:Number(opt.total.toFixed(1)),main:parts,detail:`${area} m² × ${coats} warstw(y), wydajność nominalna ${c.per} m²/l${reserveText}. Łącznie ${opt.total.toFixed(1).replace('.',',')} l.`,caution:'Duża zmiana koloru, mocno chłonne podłoże albo nierówne krycie mogą wymagać dodatkowej warstwy.',level:'safe'};
+        const coatsLabel = coats === 1 ? 'warstwa' : 'warstwy';
+        return {number:Number(opt.total.toFixed(1)),main:parts,detail:`${area} m² × ${coats} ${coatsLabel}, wydajność nominalna ${c.per} m²/l${reserveText}. Łącznie ${opt.total.toFixed(1).replace('.',',')} l.`,caution:'Duża zmiana koloru, mocno chłonne podłoże albo nierówne krycie mogą wymagać dodatkowej warstwy.',level:'safe'};
       }
       return {number:'—',main:'Sprawdź kartę produktu',detail:'Brak wiarygodnej kalkulacji.',caution:'Skonsultuj ilość przed zakupem.',level:'consult'};
     }
