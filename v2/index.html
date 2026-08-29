@@ -1,0 +1,2400 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Profesjonalny doradca zakupowy DECOWANT: dobierz efekt, kolor, kompletny system i orientacyjną ilość materiału do swojego wnętrza.">
+  <meta name="theme-color" content="#171814">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <link rel="canonical" href="https://marekdecowant.github.io/doradca-decowant/v2/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pl_PL">
+  <meta property="og:title" content="Doradca DECOWANT — dobierz efekt i kompletny system">
+  <meta property="og:description" content="Wybierz pomieszczenie, efekt i metraż. Otrzymasz rekomendację produktu, układ warstw i orientacyjną ilość materiału.">
+  <meta property="og:url" content="https://marekdecowant.github.io/doradca-decowant/v2/">
+  <meta property="og:image" content="https://marekdecowant.github.io/doradca-decowant/v2/img/salon-decomalmat.jpg">
+  <meta property="og:image:alt" content="Doradca zakupowy DECOWANT — dobór efektu i kompletnego systemu">
+  <title>Doradca DECOWANT PRO V2 — wersja testowa</title>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebApplication",
+    "name":"DECOWANT Doradca zakupowy",
+    "applicationCategory":"ShoppingApplication",
+    "operatingSystem":"Web",
+    "url":"https://marekdecowant.github.io/doradca-decowant/v2/",
+    "description":"Doradca doboru farb, efektów dekoracyjnych, kompletnego systemu i orientacyjnej ilości materiału."
+  }
+  </script>
+  <style>
+    :root {
+      --ink: #1f211d;
+      --muted: #686b63;
+      --paper: #f7f4ed;
+      --paper-2: #efeadd;
+      --card: rgba(255,255,255,.88);
+      --line: rgba(31,33,29,.13);
+      --brand: #a4773f;
+      --brand-dark: #6f4d29;
+      --brand-soft: #ead8bd;
+      --success: #3f6e58;
+      --warning: #9a662b;
+      --danger: #9b4940;
+      --shadow: 0 26px 80px rgba(29, 25, 18, .12);
+      --shadow-soft: 0 12px 35px rgba(29, 25, 18, .09);
+      --radius-xl: 32px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --radius-sm: 11px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 0%, rgba(208,183,145,.23), transparent 34rem),
+        radial-gradient(circle at 100% 20%, rgba(130,144,119,.18), transparent 28rem),
+        var(--paper);
+      min-height: 100vh;
+      line-height: 1.55;
+    }
+
+    button, input, select { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    a { color: inherit; }
+    img { max-width: 100%; display: block; }
+    [hidden] { display: none !important; }
+
+    .skip-link {
+      position: fixed;
+      left: 12px;
+      top: -80px;
+      background: #fff;
+      padding: 10px 14px;
+      z-index: 200;
+      border-radius: 8px;
+      box-shadow: var(--shadow-soft);
+    }
+    .skip-link:focus { top: 12px; }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(18px);
+      background: rgba(247,244,237,.83);
+      border-bottom: 1px solid rgba(31,33,29,.08);
+    }
+    .header-inner {
+      max-width: var(--max);
+      margin: auto;
+      min-height: 72px;
+      padding: 12px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      font-weight: 800;
+      letter-spacing: .035em;
+    }
+    .brand-mark {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      background: linear-gradient(135deg, #3b4036, #171914 70%);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.16), 0 8px 20px rgba(20,21,18,.18);
+      font-family: Georgia, serif;
+      font-size: 17px;
+    }
+    .brand-copy { display: grid; line-height: 1.06; }
+    .brand-copy small {
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: .02em;
+      margin-top: 5px;
+      font-size: 11px;
+    }
+    .header-actions { display: flex; align-items: center; gap: 9px; }
+
+    .btn {
+      border: 0;
+      border-radius: 999px;
+      min-height: 46px;
+      padding: 11px 18px;
+      font-weight: 750;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      text-decoration: none;
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn:focus-visible, .option-card:focus-visible, .mode-card:focus-visible, .swatch:focus-visible {
+      outline: 3px solid rgba(164,119,63,.35);
+      outline-offset: 3px;
+    }
+    .btn-primary {
+      background: var(--ink);
+      color: white;
+      box-shadow: 0 12px 26px rgba(31,33,29,.18);
+    }
+    .btn-primary:hover { background: #0c0d0b; }
+    .btn-brand {
+      background: linear-gradient(135deg, #b98c52, #8b6030);
+      color: #fff;
+      box-shadow: 0 12px 26px rgba(139,96,48,.24);
+    }
+    .btn-ghost {
+      color: var(--ink);
+      background: rgba(255,255,255,.76);
+      border: 1px solid var(--line);
+    }
+    .btn-soft {
+      color: var(--brand-dark);
+      background: var(--brand-soft);
+    }
+    .btn-sm { min-height: 40px; padding: 8px 14px; font-size: 14px; }
+    .btn-icon { width: 45px; padding: 0; }
+    .icon { width: 20px; height: 20px; flex: 0 0 auto; }
+
+    main { overflow: clip; }
+    .shell { max-width: var(--max); margin: 0 auto; padding: 0 22px; }
+
+    .hero {
+      padding: 58px 0 26px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(360px, .95fr);
+      gap: 52px;
+      align-items: center;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--brand-dark);
+      margin-bottom: 18px;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 30px;
+      height: 1px;
+      background: currentColor;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 500;
+      font-size: clamp(44px, 6vw, 78px);
+      line-height: .98;
+      letter-spacing: -.045em;
+      margin-bottom: 25px;
+      max-width: 760px;
+    }
+    h1 em { font-style: italic; color: var(--brand); }
+    .lead {
+      font-size: clamp(17px, 2vw, 21px);
+      color: #50534d;
+      max-width: 700px;
+      margin-bottom: 26px;
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 11px; }
+    .trust-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+      margin-top: 26px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .trust-item { display: inline-flex; align-items: center; gap: 7px; }
+    .trust-dot {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgba(63,110,88,.14);
+      color: var(--success);
+      display: grid;
+      place-items: center;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .hero-gallery {
+      min-height: 520px;
+      position: relative;
+    }
+    .visual-main {
+      position: absolute;
+      inset: 0 22px 48px 0;
+      border-radius: 42px;
+      overflow: hidden;
+      background:
+        linear-gradient(160deg, rgba(26,27,24,.08), rgba(26,27,24,.42)),
+        url("img/salon-decomalmat.jpg") center/cover no-repeat,
+        linear-gradient(145deg, #c9bbaa, #756b61);
+      box-shadow: var(--shadow);
+    }
+    .visual-main::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(21,22,19,.72), transparent 50%);
+    }
+    .visual-caption {
+      position: absolute;
+      z-index: 2;
+      bottom: 26px;
+      left: 28px;
+      right: 28px;
+      color: #fff;
+    }
+    .visual-caption b { display: block; font-size: 22px; margin-bottom: 3px; }
+    .visual-caption span { font-size: 14px; opacity: .84; }
+    .visual-mini {
+      position: absolute;
+      width: 180px;
+      height: 220px;
+      right: 0;
+      bottom: 0;
+      border-radius: 28px;
+      border: 6px solid var(--paper);
+      overflow: hidden;
+      background:
+        linear-gradient(160deg, rgba(26,27,24,.04), rgba(26,27,24,.25)),
+        url("img/provence-zielona-lazienka.jpg") center/cover no-repeat,
+        linear-gradient(145deg, #829182, #243729);
+      box-shadow: var(--shadow-soft);
+    }
+    .floating-badge {
+      position: absolute;
+      top: 26px;
+      left: -25px;
+      z-index: 4;
+      background: rgba(255,255,255,.93);
+      border: 1px solid rgba(255,255,255,.7);
+      border-radius: 18px;
+      box-shadow: var(--shadow-soft);
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      max-width: 220px;
+    }
+    .floating-badge strong { display: block; font-size: 14px; }
+    .floating-badge span { display: block; color: var(--muted); font-size: 12px; margin-top: 2px; }
+    .badge-icon {
+      width: 38px; height: 38px; border-radius: 13px; display: grid; place-items: center;
+      background: var(--brand-soft); color: var(--brand-dark); font-weight: 900;
+    }
+
+    .mode-section { padding: 34px 0 76px; }
+    .section-kicker { color: var(--brand-dark); font-weight: 800; font-size: 13px; text-transform: uppercase; letter-spacing: .1em; }
+    .section-title {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(33px, 4vw, 52px);
+      font-weight: 500;
+      line-height: 1.05;
+      letter-spacing: -.03em;
+      margin: 8px 0 12px;
+    }
+    .section-subtitle { color: var(--muted); max-width: 720px; font-size: 17px; }
+    .mode-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 16px;
+      margin-top: 27px;
+    }
+    .mode-card {
+      text-align: left;
+      border: 1px solid var(--line);
+      background: var(--card);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      cursor: pointer;
+      box-shadow: 0 8px 28px rgba(29,25,18,.045);
+      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+      min-height: 224px;
+      display: flex;
+      flex-direction: column;
+    }
+    .mode-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-soft); border-color: rgba(164,119,63,.34); }
+    .mode-icon {
+      width: 52px; height: 52px; border-radius: 17px;
+      display: grid; place-items: center;
+      background: var(--paper-2); color: var(--brand-dark); margin-bottom: 21px;
+    }
+    .mode-card h3 { font-size: 21px; margin-bottom: 9px; }
+    .mode-card p { color: var(--muted); font-size: 14px; margin-bottom: 18px; }
+    .mode-link { margin-top: auto; font-weight: 800; color: var(--brand-dark); display: inline-flex; gap: 7px; align-items: center; }
+
+    .wizard-section, .result-section { padding: 38px 0 80px; }
+    .wizard-card {
+      border-radius: var(--radius-xl);
+      background: rgba(255,255,255,.9);
+      border: 1px solid rgba(31,33,29,.09);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .wizard-top {
+      padding: 22px 26px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      background: #20221e;
+      color: #fff;
+    }
+    .wizard-top-left { display: flex; align-items: center; gap: 12px; }
+    .wizard-top-title strong { display: block; }
+    .wizard-top-title span { display: block; font-size: 12px; opacity: .67; }
+    .progress-wrap { width: min(310px, 38vw); }
+    .progress-meta { display: flex; justify-content: space-between; font-size: 12px; opacity: .72; margin-bottom: 7px; }
+    .progress-track { height: 6px; border-radius: 999px; background: rgba(255,255,255,.15); overflow: hidden; }
+    .progress-bar { height: 100%; width: 0; border-radius: inherit; background: linear-gradient(90deg, #d9b27b, #f0d7b0); transition: width .35s ease; }
+    .wizard-body { padding: 42px clamp(22px, 5vw, 60px) 32px; min-height: 560px; }
+    .question-number { color: var(--brand-dark); font-size: 13px; font-weight: 850; text-transform: uppercase; letter-spacing: .1em; }
+    .question-title {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(30px, 4vw, 48px);
+      font-weight: 500;
+      line-height: 1.08;
+      letter-spacing: -.025em;
+      max-width: 860px;
+      margin: 8px 0 11px;
+    }
+    .question-help { color: var(--muted); margin-bottom: 26px; max-width: 760px; }
+    .options-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 13px; }
+    .options-grid.two { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .option-card {
+      position: relative;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: #fff;
+      min-height: 126px;
+      padding: 18px;
+      display: flex;
+      align-items: flex-start;
+      gap: 13px;
+      cursor: pointer;
+      text-align: left;
+      transition: border-color .18s ease, background .18s ease, transform .18s ease, box-shadow .18s ease;
+    }
+    .option-card:hover { transform: translateY(-2px); border-color: rgba(164,119,63,.5); box-shadow: 0 8px 22px rgba(29,25,18,.07); }
+    .option-card.selected { border-color: var(--brand); background: #fbf6ed; box-shadow: inset 0 0 0 1px var(--brand); }
+    .option-icon {
+      width: 40px; height: 40px; border-radius: 13px; flex: 0 0 auto;
+      display: grid; place-items: center; background: var(--paper-2); color: var(--brand-dark); font-size: 20px;
+    }
+    .option-card.selected .option-icon { background: var(--brand-soft); }
+    .option-copy b { display: block; margin: 1px 0 4px; font-size: 16px; }
+    .option-copy span { display: block; font-size: 13px; color: var(--muted); }
+    .option-check {
+      margin-left: auto; width: 20px; height: 20px; border: 1px solid rgba(31,33,29,.2); border-radius: 50%; flex: 0 0 auto;
+      display: grid; place-items: center; font-size: 11px; color: transparent;
+    }
+    .selected .option-check { background: var(--brand); color: #fff; border-color: var(--brand); }
+
+    .input-panel {
+      max-width: 650px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      background: #fff;
+    }
+    .area-row { display: grid; grid-template-columns: 1fr 132px; gap: 13px; align-items: end; }
+    .field label { display: block; font-weight: 800; margin-bottom: 8px; }
+    .field input, .field select {
+      width: 100%; min-height: 54px; border-radius: 12px; border: 1px solid rgba(31,33,29,.2); background: #fff;
+      padding: 11px 14px; color: var(--ink); outline: none;
+    }
+    .field input:focus, .field select:focus { border-color: var(--brand); box-shadow: 0 0 0 4px rgba(164,119,63,.12); }
+    .unit-box { min-height: 54px; border-radius: 12px; background: var(--paper-2); display: grid; place-items: center; font-weight: 800; }
+    .field-note { color: var(--muted); font-size: 13px; margin-top: 10px; }
+    .quick-area { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .quick-chip { border: 1px solid var(--line); background: #fff; border-radius: 999px; padding: 7px 12px; cursor: pointer; font-weight: 700; font-size: 13px; }
+    .quick-chip:hover { background: var(--paper-2); }
+    .validation { color: var(--danger); font-weight: 700; font-size: 13px; margin-top: 10px; }
+
+    .wizard-footer {
+      border-top: 1px solid var(--line);
+      padding: 18px 26px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      background: rgba(247,244,237,.72);
+    }
+    .wizard-hint { color: var(--muted); font-size: 13px; }
+    .wizard-nav { display: flex; gap: 9px; }
+
+    .result-hero {
+      border-radius: 34px;
+      overflow: hidden;
+      min-height: 430px;
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      background: #20221e;
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+    .result-copy { padding: clamp(28px, 5vw, 56px); display: flex; flex-direction: column; justify-content: center; }
+    .result-kicker { font-size: 13px; text-transform: uppercase; letter-spacing: .11em; color: #ddbb8b; font-weight: 850; }
+    .result-title {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(37px, 5vw, 62px); font-weight: 500; line-height: 1.02; letter-spacing: -.035em; margin: 10px 0 18px;
+    }
+    .result-summary { color: rgba(255,255,255,.75); font-size: 17px; max-width: 660px; }
+    .result-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0 0; }
+    .result-tag { border: 1px solid rgba(255,255,255,.16); background: rgba(255,255,255,.08); padding: 7px 11px; border-radius: 999px; font-size: 13px; }
+    .result-image {
+      min-height: 430px;
+      position: relative;
+      background: linear-gradient(145deg, #897869, #322e29);
+      overflow: hidden;
+    }
+    .result-image img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+    .result-image::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(32,34,30,.25), transparent 35%); }
+    .result-image-note { position: absolute; z-index: 2; right: 18px; bottom: 18px; padding: 8px 11px; border-radius: 12px; font-size: 12px; background: rgba(20,21,18,.68); backdrop-filter: blur(8px); }
+
+    .result-grid { display: grid; grid-template-columns: minmax(0,1.25fr) minmax(300px,.75fr); gap: 18px; margin-top: 18px; }
+    .result-card {
+      background: rgba(255,255,255,.9); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 25px; box-shadow: 0 7px 24px rgba(29,25,18,.045);
+    }
+    .result-card h3 { font-size: 20px; margin-bottom: 8px; }
+    .result-card > p { color: var(--muted); }
+    .quantity-box { border-radius: 18px; background: #f0e6d7; padding: 20px; display: grid; grid-template-columns: auto 1fr; gap: 15px; align-items: center; margin-top: 16px; }
+    .quantity-number { width: 76px; height: 76px; border-radius: 22px; display: grid; place-items: center; background: #fff; color: var(--brand-dark); font-size: 28px; font-weight: 900; box-shadow: 0 8px 22px rgba(74,52,29,.09); }
+    .quantity-main { font-weight: 850; font-size: 18px; }
+    .quantity-detail { color: #695846; font-size: 13px; margin-top: 3px; }
+
+    .system-list { list-style: none; margin: 17px 0 0; padding: 0; display: grid; gap: 11px; }
+    .system-item { display: grid; grid-template-columns: 34px 1fr; gap: 11px; align-items: start; padding-bottom: 11px; border-bottom: 1px solid rgba(31,33,29,.08); }
+    .system-item:last-child { border-bottom: 0; padding-bottom: 0; }
+    .system-step { width: 32px; height: 32px; border-radius: 11px; background: var(--paper-2); display: grid; place-items: center; color: var(--brand-dark); font-weight: 900; font-size: 12px; }
+    .system-item b { display: block; }
+    .system-item span { color: var(--muted); font-size: 13px; }
+
+    .warning-box { border-left: 4px solid var(--warning); background: #fff7e8; border-radius: 0 15px 15px 0; padding: 15px 16px; margin-top: 14px; color: #6d512d; font-size: 14px; }
+    .success-box { border-left-color: var(--success); background: #edf7f0; color: #315b46; }
+    .danger-box { border-left-color: var(--danger); background: #fbefed; color: #773b35; }
+
+    .product-preview {
+      display: grid; grid-template-columns: 84px 1fr; gap: 14px; align-items: center; margin: 15px 0 2px;
+      padding: 12px; border: 1px solid var(--line); border-radius: 17px; background: linear-gradient(135deg,#fff,#f7f1e7);
+    }
+    .product-thumb {
+      width: 84px; height: 84px; border-radius: 14px; overflow: hidden; position: relative; display: grid; place-items: center;
+      background: linear-gradient(145deg,#eee5d8,#d8c8b3); color: var(--brand-dark); font-family: Georgia,"Times New Roman",serif;
+      font-size: 32px; box-shadow: inset 0 0 0 1px rgba(31,33,29,.08);
+    }
+    .product-thumb img { width: 100%; height: 100%; object-fit: contain; background: #fff; }
+    .product-thumb img[hidden], .product-thumb span[hidden] { display: none; }
+    .product-preview-copy { min-width: 0; }
+    .product-preview-label { display: block; color: var(--brand-dark); font-size: 10px; line-height: 1.3; font-weight: 900; letter-spacing: .09em; text-transform: uppercase; }
+    .product-preview-copy b { display: block; margin: 3px 0 2px; font-size: 15px; }
+    .product-preview-copy span:last-child { display: block; color: var(--muted); font-size: 12px; line-height: 1.45; overflow-wrap: anywhere; }
+
+    .result-actions { display: grid; gap: 9px; margin-top: 18px; }
+    .result-actions .btn { width: 100%; }
+    .mini-note { color: var(--muted); font-size: 12px; margin-top: 10px; }
+
+    .color-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; margin-top: 14px; }
+    .color-choice { border: 1px solid var(--line); background: #fff; border-radius: 14px; padding: 11px; display: flex; align-items: center; gap: 10px; text-decoration: none; transition: transform .16s ease, border-color .16s ease; }
+    .color-choice:hover { transform: translateY(-2px); border-color: rgba(164,119,63,.5); }
+    .color-dot { width: 32px; height: 32px; border-radius: 10px; box-shadow: inset 0 0 0 1px rgba(20,21,18,.13); flex: 0 0 auto; }
+    .color-choice b { font-size: 13px; display: block; }
+    .color-choice span { color: var(--muted); font-size: 11px; }
+
+    .alternatives { margin-top: 42px; }
+    .alt-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 15px; margin-top: 18px; }
+    .alt-card { background: rgba(255,255,255,.88); border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden; display: grid; grid-template-columns: 160px 1fr; min-height: 190px; }
+    .alt-image { min-height: 100%; background: linear-gradient(145deg, #c1b5a7, #756b60); position: relative; }
+    .alt-image img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+    .alt-copy { padding: 20px; }
+    .alt-label { color: var(--brand-dark); font-weight: 850; font-size: 12px; text-transform: uppercase; letter-spacing: .08em; }
+    .alt-copy h3 { margin: 5px 0 7px; font-size: 19px; }
+    .alt-copy p { color: var(--muted); font-size: 13px; margin-bottom: 12px; }
+    .text-link { color: var(--brand-dark); font-weight: 850; text-decoration: none; }
+    .text-link:hover { text-decoration: underline; }
+
+    .result-toolbar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 16px; }
+    .toolbar-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    .facts-section { padding: 50px 0 86px; }
+    .facts-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 13px; margin-top: 22px; }
+    .fact-card { border-radius: 18px; background: rgba(255,255,255,.72); border: 1px solid var(--line); padding: 18px; }
+    .fact-card b { display: block; font-size: 15px; margin-bottom: 4px; }
+    .fact-card span { color: var(--muted); font-size: 13px; }
+
+    footer { border-top: 1px solid var(--line); background: rgba(239,234,221,.55); }
+    .footer-inner { max-width: var(--max); margin: auto; padding: 30px 22px 38px; display: grid; grid-template-columns: 1fr auto; gap: 22px; align-items: start; }
+    .footer-copy { color: var(--muted); font-size: 13px; max-width: 780px; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 10px 16px; font-size: 13px; font-weight: 750; }
+    .footer-links a { text-decoration: none; }
+    .footer-links a:hover { text-decoration: underline; }
+
+    .toast {
+      position: fixed; z-index: 100; left: 50%; bottom: 22px; transform: translate(-50%, 30px);
+      background: #171814; color: #fff; padding: 12px 16px; border-radius: 13px; box-shadow: var(--shadow-soft);
+      opacity: 0; pointer-events: none; transition: opacity .2s ease, transform .2s ease; font-size: 14px;
+    }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+    .dev-badge {
+      position: fixed; z-index: 80; right: 14px; top: 78px; border-radius: 999px; padding: 7px 11px;
+      background: rgba(255,242,214,.96); border: 1px solid #e4bf76; color: #70511d; font-size: 11px; font-weight: 850;
+      box-shadow: var(--shadow-soft); backdrop-filter: blur(8px); pointer-events: none;
+    }
+
+    @media (max-width: 980px) {
+      .hero { grid-template-columns: 1fr; gap: 30px; padding-top: 42px; }
+      .hero-gallery { min-height: 450px; max-width: 680px; width: 100%; }
+      .mode-grid { grid-template-columns: 1fr; }
+      .mode-card { min-height: 0; }
+      .options-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .result-hero { grid-template-columns: 1fr; }
+      .result-image { min-height: 330px; order: -1; }
+      .result-grid { grid-template-columns: 1fr; }
+      .facts-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .alt-grid { grid-template-columns: 1fr; }
+    }
+
+    .resume-card {
+      margin: -28px 0 54px;
+      padding: 18px 20px;
+      border: 1px solid rgba(164,119,63,.26);
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(255,255,255,.9), rgba(244,235,219,.88));
+      box-shadow: var(--shadow-soft);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 18px;
+      align-items: center;
+    }
+    .resume-card[hidden] { display: none; }
+    .resume-copy { display: flex; align-items: flex-start; gap: 13px; }
+    .resume-icon { width: 38px; height: 38px; border-radius: 13px; background: rgba(164,119,63,.14); color: var(--brand); display: grid; place-items: center; font-weight: 900; flex: 0 0 auto; }
+    .resume-copy strong { display: block; margin-bottom: 3px; }
+    .resume-copy span { display: block; color: var(--muted); font-size: 13px; line-height: 1.55; }
+    .resume-actions { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+    .system-shop-link { display: inline-flex; margin-top: 5px; color: #744f25 !important; font-weight: 850; text-decoration: none; font-size: 12px !important; }
+    .system-shop-link:hover { text-decoration: underline; }
+    .color-choice { width: 100%; text-align: left; cursor: pointer; font: inherit; }
+    .color-choice.selected { border-color: rgba(164,119,63,.82); background: #fff9ef; box-shadow: 0 0 0 2px rgba(164,119,63,.12); }
+    .color-choice.selected::after { content: "✓"; margin-left: auto; color: var(--brand); font-weight: 900; }
+    .result-context-note { margin: 0 0 15px; padding: 12px 14px; border-radius: 14px; background: rgba(221,187,139,.12); border: 1px solid rgba(221,187,139,.25); font-size: 13px; line-height: 1.55; }
+    .result-context-note[hidden] { display: none; }
+    .cta-status { margin-top: 10px; padding: 10px 12px; border-radius: 12px; background: rgba(63,110,88,.08); color: #315c49; font-size: 12px; line-height: 1.5; }
+    .cta-status[hidden] { display: none; }
+    .quantity-box.consult { background: #fff5e6; }
+    .quantity-box.consult .quantity-number { background: #fff; color: #8b5b25; }
+    .result-card .btn[hidden] { display: none; }
+
+    @media (max-width: 650px) {
+      .shell, .header-inner { padding-left: 16px; padding-right: 16px; }
+      .resume-card { grid-template-columns: 1fr; margin: -8px 0 36px; padding: 16px; }
+      .resume-actions { justify-content: stretch; }
+      .resume-actions .btn { flex: 1; }
+
+      .header-inner { min-height: 64px; }
+      .brand-copy small { display: none; }
+      .header-actions .btn-ghost { display: none; }
+      .hero { padding-top: 31px; }
+      h1 { font-size: clamp(41px, 13vw, 58px); }
+      .lead { font-size: 17px; }
+      .hero-actions .btn { width: 100%; }
+      .hero-gallery { min-height: 370px; }
+      .visual-main { inset: 0 18px 42px 0; border-radius: 30px; }
+      .visual-mini { width: 132px; height: 168px; border-width: 5px; border-radius: 23px; }
+      .floating-badge { left: 10px; top: 12px; max-width: 190px; padding: 10px 11px; }
+      .badge-icon { width: 34px; height: 34px; }
+      .wizard-section, .result-section { padding-top: 18px; }
+      .wizard-card { border-radius: 24px; }
+      .wizard-top { align-items: flex-start; padding: 17px 18px; }
+      .progress-wrap { width: 42%; }
+      .wizard-body { padding: 29px 18px 24px; min-height: 600px; }
+      .question-title { font-size: 33px; }
+      .options-grid, .options-grid.two { grid-template-columns: 1fr; }
+      .option-card { min-height: 104px; }
+      .wizard-footer { padding: 14px 17px; }
+      .wizard-hint { display: none; }
+      .wizard-nav { width: 100%; }
+      .wizard-nav .btn { flex: 1; }
+      .area-row { grid-template-columns: 1fr 86px; }
+      .result-hero { border-radius: 25px; }
+      .result-copy { padding: 28px 22px 34px; }
+      .result-image { min-height: 290px; }
+      .result-title { font-size: 40px; }
+      .result-card { padding: 20px; }
+      .quantity-box { grid-template-columns: 62px 1fr; padding: 16px; }
+      .quantity-number { width: 60px; height: 60px; border-radius: 17px; font-size: 22px; }
+      .color-grid { grid-template-columns: 1fr; }
+      .alt-card { grid-template-columns: 115px 1fr; }
+      .facts-grid { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr; }
+      .result-toolbar { padding-top: 30px; }
+      .dev-badge { right: 8px; top: 70px; max-width: calc(100vw - 16px); font-size: 10px; }
+    }
+
+    @media print {
+      .site-header, .mode-section, .facts-section, footer, .result-toolbar, .result-actions, .alternatives, .dev-badge, .toast { display: none !important; }
+      body { background: #fff; }
+      .result-section { padding: 0; }
+      .shell { max-width: none; padding: 0; }
+      .result-hero, .result-card { box-shadow: none; }
+      .result-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; animation: none !important; }
+    }
+
+
+    /* PRO 2.4 — fotografia wspiera decyzję, nie zastępuje próbki */
+    .advisor-photo { width:100%; height:100%; object-fit:cover; display:block; }
+    .advisor-photo.is-remote { animation: photoReveal .34s ease both; }
+    @keyframes photoReveal { from { opacity:.45; filter:saturate(.75); } to { opacity:1; filter:none; } }
+
+    .visual-main > img, .visual-mini > img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+    .visual-main > img { object-position:center; }
+    .visual-mini > img { object-position:center; }
+    .visual-main { background:#b9ad9d; }
+    .visual-mini { background:#7f847d; }
+    .visual-main::after { z-index:1; }
+
+    .mode-card { padding:0 22px 23px; overflow:hidden; min-height:326px; }
+    .mode-media { height:142px; margin:0 -22px 17px; position:relative; overflow:hidden; background:var(--paper-2); }
+    .mode-media::after { content:""; position:absolute; inset:auto 0 0; height:42%; background:linear-gradient(to top,rgba(21,22,19,.28),transparent); pointer-events:none; }
+    .mode-media img { transition:transform .35s ease; }
+    .mode-card:hover .mode-media img { transform:scale(1.035); }
+    .mode-icon { width:44px; height:44px; border-radius:14px; margin:-39px 0 12px; position:relative; z-index:2; border:4px solid #fff; box-shadow:0 8px 18px rgba(28,25,19,.12); }
+
+    .option-card { overflow:hidden; }
+    .option-card.has-media { min-height:224px; padding:0; display:grid; grid-template-rows:112px 1fr; align-items:stretch; gap:0; }
+    .option-media { display:block; position:relative; overflow:hidden; background:var(--paper-2); }
+    .option-media::after { content:""; position:absolute; inset:auto 0 0; height:44%; background:linear-gradient(to top,rgba(18,19,17,.22),transparent); }
+    .option-media img { transition:transform .28s ease; }
+    .option-card.has-media:hover .option-media img { transform:scale(1.04); }
+    .option-body { display:flex; align-items:flex-start; gap:11px; padding:16px; min-width:0; }
+    .option-card.has-media .option-icon { width:34px; height:34px; border-radius:11px; font-size:16px; }
+    .option-card.has-media .option-copy b { font-size:15px; }
+    .option-card.has-media .option-copy span { font-size:12.5px; line-height:1.4; }
+    .option-card.has-media .option-check { position:absolute; top:10px; right:10px; z-index:3; background:rgba(255,255,255,.92); }
+    .option-card.has-media.selected .option-check { background:var(--brand); }
+    .option-card:not(.has-media) .option-body { padding:0; flex:1; }
+
+    .photo-source-note { margin-top:15px; font-size:12px; color:var(--muted); }
+    .photo-source-note a { text-decoration:underline; text-underline-offset:2px; }
+
+    .result-image img, .alt-image img { transition:opacity .28s ease; }
+    .result-image::before { content:""; position:absolute; inset:0; box-shadow:inset 0 0 0 1px rgba(255,255,255,.2); z-index:1; pointer-events:none; }
+    .result-image-note { z-index:2; }
+    .alt-image { background:#d4ccbf; }
+
+    @media (max-width: 980px) {
+      .mode-card { min-height:310px; }
+      .option-card.has-media { min-height:208px; grid-template-rows:100px 1fr; }
+    }
+    @media (max-width: 680px) {
+      .mode-card { min-height:0; padding-bottom:20px; }
+      .mode-media { height:128px; }
+      .options-grid, .options-grid.two { grid-template-columns:1fr 1fr; }
+      .option-card.has-media { min-height:196px; grid-template-rows:94px 1fr; }
+      .option-body { padding:13px; }
+      .option-card.has-media .option-icon { display:none; }
+      .option-card.has-media .option-copy b { font-size:14px; }
+      .option-card.has-media .option-copy span { font-size:11.5px; }
+    }
+    @media (max-width: 430px) {
+      .options-grid, .options-grid.two { grid-template-columns:1fr; }
+      .option-card.has-media { min-height:132px; grid-template-columns:118px 1fr; grid-template-rows:1fr; }
+      .option-media { min-height:132px; }
+      .option-body { align-items:center; }
+    }
+
+
+
+    /* DECOWANT PRO 2.5 BETA */
+    .option-card.has-media { min-height:248px; grid-template-rows:142px 1fr; border-width:1px; background:rgba(255,255,255,.97); }
+    .option-card.has-media .option-media::after { height:58%; background:linear-gradient(to top,rgba(16,17,15,.30),transparent 78%); }
+    .option-card.has-media.selected { border-color:var(--brand); box-shadow:0 18px 38px rgba(75,53,30,.14),inset 0 0 0 1px var(--brand); transform:translateY(-2px); }
+    .option-visual-tag { position:absolute; left:12px; top:112px; z-index:3; padding:6px 9px; border-radius:999px; background:rgba(18,19,17,.76); color:#fff; backdrop-filter:blur(8px); font-size:10px; line-height:1; font-weight:850; text-transform:uppercase; letter-spacing:.08em; }
+    .option-card[data-step="effect"] .option-copy b { font-size:16px; }
+    .option-card[data-step="effect"] .option-media img { filter:saturate(.96) contrast(1.06); }
+    .option-card[data-step="room"] .option-media img { filter:saturate(.88) contrast(1.03); }
+
+    .area-mode-switch { display:grid; grid-template-columns:1fr 1fr; gap:8px; padding:6px; background:#eee8dc; border:1px solid rgba(31,33,29,.09); border-radius:16px; margin-bottom:20px; }
+    .area-mode-btn { border:0; min-height:48px; padding:10px 14px; border-radius:12px; background:transparent; color:var(--muted); font-weight:800; cursor:pointer; }
+    .area-mode-btn.selected { background:#fff; color:var(--ink); box-shadow:0 7px 18px rgba(31,33,29,.09); }
+    .dimension-section { margin-top:18px; padding-top:18px; border-top:1px solid var(--line); }
+    .dimension-section:first-of-type { margin-top:0; padding-top:0; border-top:0; }
+    .dimension-heading { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; margin-bottom:11px; }
+    .dimension-heading h3 { font-size:17px; margin:0 0 2px; }
+    .dimension-heading p { font-size:12px; color:var(--muted); margin:0; }
+    .dimension-list { display:grid; gap:9px; }
+    .dimension-row { display:grid; grid-template-columns:minmax(96px,1.25fr) repeat(3,minmax(72px,.8fr)) 38px; gap:8px; align-items:end; padding:12px; border:1px solid var(--line); border-radius:14px; background:rgba(255,255,255,.76); }
+    .compact-field { display:grid; gap:5px; min-width:0; }
+    .compact-field label { font-size:10px; text-transform:uppercase; letter-spacing:.065em; color:var(--muted); font-weight:800; }
+    .compact-field input,.compact-field select { width:100%; min-height:42px; border:1px solid rgba(31,33,29,.16); border-radius:10px; padding:8px 10px; background:#fff; color:var(--ink); }
+    .remove-row { width:38px; height:42px; border:1px solid rgba(155,73,64,.18); border-radius:10px; background:#fff6f5; color:var(--danger); cursor:pointer; font-size:19px; }
+    .remove-row:disabled { opacity:.35; cursor:not-allowed; }
+    .dimension-add { border:1px dashed rgba(164,119,63,.42); background:#fbf6ed; color:var(--brand-dark); border-radius:12px; padding:10px 13px; font-weight:800; cursor:pointer; margin-top:9px; }
+    .ceiling-toggle { display:flex; align-items:center; gap:10px; font-weight:780; cursor:pointer; margin:4px 0 12px; }
+    .ceiling-toggle input { width:19px; height:19px; accent-color:var(--brand); }
+    .ceiling-fields { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .area-controls { display:grid; grid-template-columns:1fr minmax(180px,.65fr); gap:12px; align-items:end; }
+    .area-summary { margin-top:18px; border-radius:18px; overflow:hidden; background:linear-gradient(135deg,#242620,#161714); color:#fff; box-shadow:0 14px 32px rgba(26,27,23,.17); }
+    .area-summary-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(255,255,255,.10); }
+    .area-summary-cell { padding:14px; background:#20221e; }
+    .area-summary-cell small { display:block; color:rgba(255,255,255,.58); font-size:10px; text-transform:uppercase; letter-spacing:.07em; }
+    .area-summary-cell b { display:block; font-size:17px; margin-top:4px; }
+    .area-summary-final { display:flex; justify-content:space-between; gap:16px; align-items:center; padding:17px 18px; background:linear-gradient(135deg,#87602f,#b98c52); }
+    .area-summary-final span { font-size:13px; opacity:.87; }
+    .area-summary-final strong { font-family:Georgia,serif; font-size:30px; font-weight:500; white-space:nowrap; }
+    .area-alert { margin-top:10px; padding:10px 12px; border-radius:11px; background:#fff5df; color:#75501f; font-size:12px; }
+
+    .sample-info { margin-top:10px; padding:12px 13px; border-radius:13px; border:1px solid rgba(31,33,29,.10); background:#f5f2ea; color:#5b5e57; font-size:12.5px; line-height:1.5; }
+    .sample-info.available { background:#edf7f1; border-color:rgba(63,110,88,.18); color:#315844; }
+    .sample-info.unavailable { background:#fff5e6; border-color:rgba(154,102,43,.20); color:#704b20; }
+    .product-thumb-fallback { display:grid; place-items:center; text-align:center; padding:8px; line-height:1.05; }
+    .product-thumb-fallback small { display:block; font-size:8px; letter-spacing:.12em; margin-bottom:3px; opacity:.7; }
+    .product-thumb-fallback strong { font-size:11px; overflow-wrap:anywhere; }
+
+    .guides-section { padding:58px 0 8px; }
+    .guides-intro { display:flex; align-items:end; justify-content:space-between; gap:22px; margin-bottom:18px; }
+    .guides-intro .section-title { margin-bottom:0; }
+    .guides-intro p { max-width:540px; color:var(--muted); margin:0; }
+    .guide-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+    .guide-card { min-height:215px; border-radius:20px; overflow:hidden; position:relative; isolation:isolate; display:flex; align-items:flex-end; color:#fff; text-decoration:none; box-shadow:var(--shadow-soft); background:#4b4e47; }
+    .guide-card img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:-2; transition:transform .3s ease; }
+    .guide-card::after { content:""; position:absolute; inset:0; z-index:-1; background:linear-gradient(to top,rgba(11,12,10,.94),rgba(11,12,10,.08) 76%); }
+    .guide-card:hover img { transform:scale(1.035); }
+    .guide-copy { padding:18px; }
+    .guide-type { font-size:10px; text-transform:uppercase; letter-spacing:.09em; color:#ebc995; font-weight:850; }
+    .guide-copy h3 { font-size:18px; line-height:1.15; margin:6px 0 7px; }
+    .guide-copy p { color:rgba(255,255,255,.74); font-size:12px; margin:0 0 10px; }
+    .guide-link { font-size:12px; font-weight:850; color:#fff; }
+
+    @media (max-width:900px) {
+      .dimension-row { grid-template-columns:1fr 1fr; }
+      .dimension-row .compact-field:first-child { grid-column:1/-1; }
+      .dimension-row .remove-row { grid-column:2; justify-self:end; }
+      .area-summary-grid { grid-template-columns:1fr 1fr; }
+      .guide-grid { grid-template-columns:1fr 1fr; }
+    }
+    @media (max-width:640px) {
+      .option-card.has-media { min-height:152px; grid-template-columns:132px 1fr; grid-template-rows:1fr; }
+      .option-visual-tag { left:8px; top:auto; bottom:8px; max-width:116px; white-space:normal; line-height:1.15; }
+      .area-mode-switch,.ceiling-fields,.area-controls { grid-template-columns:1fr; }
+      .dimension-row { grid-template-columns:1fr 1fr; }
+      .area-summary-grid { grid-template-columns:1fr 1fr; }
+      .area-summary-final { align-items:flex-start; flex-direction:column; }
+      .guide-grid { grid-template-columns:1fr; }
+      .guides-intro { align-items:flex-start; flex-direction:column; }
+    }
+
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Przejdź do treści</a>
+  <noscript><div style="padding:14px 18px;background:#fff3cd;color:#5f4914;text-align:center">Doradca wymaga włączonej obsługi JavaScript. Możesz też skontaktować się z DECOWANT pod numerem 727 624 783.</div></noscript>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="#home" class="brand" aria-label="DECOWANT Doradca — strona główna">
+        <span class="brand-mark">D</span>
+        <span class="brand-copy">DECOWANT <small>Doradca zakupowy</small></span>
+      </a>
+      <div class="header-actions">
+        <a class="btn btn-ghost btn-sm" href="https://www.sklepdecowant.pl/?utm_source=doradca&utm_medium=referral&utm_campaign=doradca_profesjonalny" target="_blank" rel="noopener">Przejdź do sklepu</a>
+        <button class="btn btn-primary btn-sm" id="headerStart">Dobierz produkt</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="shell" id="home">
+      <section class="hero" aria-labelledby="heroTitle">
+        <div>
+          <div class="eyebrow">Profesjonalny dobór systemu</div>
+          <h1 id="heroTitle">Twój efekt na ścianie. <em>Dobrany bez zgadywania.</em></h1>
+          <p class="lead">Wybierz pomieszczenie, styl i metraż. Doradca wskaże najlepszy produkt, właściwy podkład, zabezpieczenie, narzędzia oraz orientacyjną ilość materiału.</p>
+          <div class="hero-actions">
+            <button class="btn btn-brand" data-start-mode="effect">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M4 19c3.2-4.8 6.1-7.6 11.5-10.5M14 5l5 5M7 20H4v-3"/><path d="M15.5 3.5l5 5-3 3-5-5z"/></svg>
+              Dobierz efekt dekoracyjny
+            </button>
+            <button class="btn btn-ghost" data-start-mode="paint">Dobierz farbę gładką</button>
+          </div>
+          <div class="trust-row" aria-label="Korzyści">
+            <span class="trust-item"><span class="trust-dot">✓</span> rekomendacja produktu</span>
+            <span class="trust-item"><span class="trust-dot">✓</span> pełny system warstw</span>
+            <span class="trust-item"><span class="trust-dot">✓</span> kalkulacja metrażu</span>
+          </div>
+        </div>
+        <div class="hero-gallery" aria-label="Przykładowe kierunki aranżacji">
+          <div class="visual-main">
+            <img class="advisor-photo" src="img/hero-tv-salon.jpg" data-remote-src="https://images.unsplash.com/photo-1759735218086-67f9f853ab8b?auto=format&amp;fit=crop&amp;w=1800&amp;q=82" alt="Nowoczesny salon ze ścianą telewizyjną jako inspiracja do wyboru efektu dekoracyjnego">
+            <div class="visual-caption"><b>Zacznij od efektu we wnętrzu</b><span>Potem dobierzemy system, kolor, narzędzia i ilość.</span></div>
+          </div>
+          <div class="visual-mini" aria-hidden="true">
+            <img class="advisor-photo" src="img/room-bathroom.jpg" data-remote-src="https://images.unsplash.com/photo-1704428381342-ea9df943619e?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="">
+          </div>
+          <div class="floating-badge">
+            <span class="badge-icon">5–7</span>
+            <span><strong>Dobór do metrażu</strong><span>z uwzględnieniem wydajności systemu</span></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="resume-card" id="resumeCard" hidden aria-live="polite">
+        <div class="resume-copy">
+          <span class="resume-icon" aria-hidden="true">↻</span>
+          <span><strong>Masz niedokończony dobór</strong><span id="resumeDescription">Możesz wrócić do ostatniego kroku.</span></span>
+        </div>
+        <div class="resume-actions">
+          <button class="btn btn-brand btn-sm" id="resumeBtn">Wznów dobór</button>
+          <button class="btn btn-ghost btn-sm" id="discardProgressBtn">Zacznij od nowa</button>
+        </div>
+      </section>
+
+      <section class="mode-section" id="modes" aria-labelledby="modesTitle">
+        <span class="section-kicker">Wybierz ścieżkę</span>
+        <h2 class="section-title" id="modesTitle">Od czego zaczynamy?</h2>
+        <p class="section-subtitle">Doradca zawęża wybór do rozwiązań, które mają sens w konkretnych warunkach — zamiast pokazywać setki podobnych produktów.</p>
+        <div class="mode-grid">
+          <button class="mode-card" data-start-mode="effect">
+            <span class="mode-media"><img class="advisor-photo" src="img/mode-effect.jpg" data-remote-src="https://images.unsplash.com/photo-1759735218086-67f9f853ab8b?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="Dekoracyjna ściana w nowoczesnym salonie"></span>
+            <span class="mode-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19c3.2-4.8 6.1-7.6 11.5-10.5M14 5l5 5M7 20H4v-3"/><path d="M15.5 3.5l5 5-3 3-5-5z"/></svg></span>
+            <h3>Efekt dekoracyjny</h3>
+            <p>Metaliczny, matowy, brokatowy, beton, glinka, efekt chmur albo glamour.</p>
+            <span class="mode-link">Rozpocznij dobór →</span>
+          </button>
+          <button class="mode-card" data-start-mode="paint">
+            <span class="mode-media"><img class="advisor-photo" src="img/mode-paint.jpg" data-remote-src="https://images.unsplash.com/photo-1761330439714-3f33c66e10a9?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="Gładka matowa ściana w neutralnym wnętrzu"></span>
+            <span class="mode-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 8h11v7H4zM15 10h3c1.1 0 2 .9 2 2v1c0 1.1-.9 2-2 2h-3M9.5 15v5"/></svg></span>
+            <h3>Farba gładka</h3>
+            <p>Matowa, zmywalna i dobrana do intensywności użytkowania oraz kolorystyki.</p>
+            <span class="mode-link">Dobierz farbę →</span>
+          </button>
+          <button class="mode-card" data-start-mode="calc">
+            <span class="mode-media"><img class="advisor-photo" src="img/mode-calc.jpg" alt="Wałek malarski na ścianie — kalkulator zużycia"></span>
+            <span class="mode-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M7 7h10M8 12h.01M12 12h.01M16 12h.01M8 16h.01M12 16h.01M16 16h.01"/></svg></span>
+            <h3>Mam już produkt</h3>
+            <p>Policz potrzebną ilość wybranego systemu i sprawdź, czego jeszcze potrzeba.</p>
+            <span class="mode-link">Przejdź do kalkulatora →</span>
+          </button>
+        </div>
+        <p class="photo-source-note">Zdjęcia aranżacyjne są inspiracją. Rzeczywisty kolor i strukturę produktu zawsze potwierdź próbką w swoim oświetleniu.</p>
+      </section>
+    </div>
+
+    <section class="wizard-section" id="wizard" hidden aria-live="polite">
+      <div class="shell">
+        <div class="wizard-card">
+          <div class="wizard-top">
+            <div class="wizard-top-left">
+              <span class="brand-mark" style="width:36px;height:36px;font-size:15px">D</span>
+              <span class="wizard-top-title"><strong id="wizardModeTitle">Dobór efektu</strong><span>DECOWANT Doradca</span></span>
+            </div>
+            <div class="progress-wrap" aria-label="Postęp formularza">
+              <div class="progress-meta"><span id="progressLabel">Krok 1 z 7</span><span id="progressPct">14%</span></div>
+              <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
+            </div>
+          </div>
+          <div class="wizard-body" id="wizardBody"></div>
+          <div class="wizard-footer">
+            <span class="wizard-hint">Wynik możesz później zapisać lub udostępnić.</span>
+            <div class="wizard-nav">
+              <button class="btn btn-ghost" id="prevBtn">Wstecz</button>
+              <button class="btn btn-primary" id="nextBtn">Dalej</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="result-section" id="result" hidden aria-live="polite">
+      <div class="shell">
+        <div class="result-toolbar">
+          <button class="btn btn-ghost btn-sm" id="editAnswers">← Zmień odpowiedzi</button>
+          <div class="toolbar-actions">
+            <button class="btn btn-ghost btn-sm" id="shareResult">Udostępnij wynik</button>
+            <button class="btn btn-ghost btn-sm" id="printResult">Drukuj / zapisz PDF</button>
+            <button class="btn btn-soft btn-sm" id="restartBtn">Nowy dobór</button>
+          </div>
+        </div>
+
+        <article class="result-hero">
+          <div class="result-copy">
+            <span class="result-kicker" id="resultKicker">Najlepsze dopasowanie</span>
+            <h2 class="result-title" id="resultTitle">DECOMAL STAR</h2>
+            <p class="result-summary" id="resultSummary"></p>
+            <div class="result-context-note" id="resultContextNote" hidden></div>
+            <div class="result-tags" id="resultTags"></div>
+          </div>
+          <div class="result-image" id="resultImage"><span class="result-image-note" id="resultImageNote">Zdjęcie poglądowe realizacji</span></div>
+        </article>
+
+        <div class="result-grid">
+          <div>
+            <section class="result-card">
+              <h3>Ile materiału potrzebujesz?</h3>
+              <p id="quantityIntro">Obliczenie orientacyjne na podstawie podanego metrażu.</p>
+              <div class="quantity-box" id="quantityBox">
+                <div class="quantity-number" id="quantityNumber">1</div>
+                <div><div class="quantity-main" id="quantityMain"></div><div class="quantity-detail" id="quantityDetail"></div></div>
+              </div>
+              <div class="warning-box" id="quantityCaution"></div>
+            </section>
+
+            <section class="result-card" style="margin-top:18px">
+              <h3>Kompletny system wykonania</h3>
+              <p>To jest lista technologiczna, a nie przypadkowe produkty dodatkowe.</p>
+              <ol class="system-list" id="systemList"></ol>
+            </section>
+
+            <section class="result-card" style="margin-top:18px" id="warningCard">
+              <h3>Ważne dla Twojego zastosowania</h3>
+              <div id="warnings"></div>
+            </section>
+          </div>
+
+          <aside>
+            <section class="result-card">
+              <h3>Wybierz kierunek koloru</h3>
+              <p>Monitor nie oddaje koloru i struktury w 100%. Przy efekcie dekoracyjnym próbka jest najbezpieczniejszym etapem wyboru.</p>
+              <div class="color-grid" id="colorGrid"></div>
+            </section>
+
+            <section class="result-card" style="margin-top:18px">
+              <h3>Przejdź do zakupu</h3>
+              <div class="product-preview" id="productPreview">
+                <div class="product-thumb" aria-hidden="true">
+                  <img id="productPreviewImage" alt="" hidden>
+                  <span id="productThumbFallback">D</span>
+                </div>
+                <div class="product-preview-copy">
+                  <span class="product-preview-label">Produkt z oferty DECOWANT</span>
+                  <b id="productPreviewName">Rekomendowany system</b>
+                  <span id="productPreviewVariant">Wybierz kierunek koloru powyżej.</span>
+                </div>
+              </div>
+              <p id="shopCtaText">Na karcie produktu sprawdź aktualną cenę, wariant oraz dostępność.</p>
+              <div class="result-actions">
+                <a class="btn btn-brand" id="productBtn" target="_blank" rel="noopener">Zobacz rekomendowany wariant</a>
+                <a class="btn btn-ghost" id="sampleBtn" target="_blank" rel="noopener">Zamów próbkę</a>
+                <a class="btn btn-ghost" id="phoneBtn" data-track="phone" href="tel:+48727624783">Skonsultuj dobór: 727 624 783</a>
+              </div>
+              <div class="sample-info" id="sampleInfo"></div>
+              <div class="cta-status" id="ctaStatus" hidden></div>
+              <p class="mini-note">Doradca nie zmienia zamówienia automatycznie. Ostateczny wariant wybierasz w sklepie.</p>
+            </section>
+          </aside>
+        </div>
+
+        <section class="alternatives" id="alternativesSection">
+          <span class="section-kicker">Dwie sensowne alternatywy</span>
+          <h2 class="section-title">Porównaj przed decyzją</h2>
+          <div class="alt-grid" id="alternativesGrid"></div>
+        </section>
+
+        <section class="guides-section" id="guidesSection" hidden>
+          <div class="guides-intro">
+            <div><span class="section-kicker">Pomoc dopasowana do Twojej sytuacji</span><h2 class="section-title">Przeczytaj przed rozpoczęciem</h2></div>
+            <p>Doradca łączy rekomendację zakupową z praktycznymi poradnikami DECOWANT dotyczącymi podłoża, aplikacji i zabezpieczenia.</p>
+          </div>
+          <div class="guide-grid" id="guidesGrid"></div>
+        </section>
+      </div>
+    </section>
+
+    <div class="shell">
+      <section class="facts-section" aria-labelledby="factsTitle">
+        <span class="section-kicker">Jak działa rekomendacja</span>
+        <h2 class="section-title" id="factsTitle">Najpierw warunki, później wygląd</h2>
+        <p class="section-subtitle">W łazience, kuchni czy na trudnym podłożu estetyka nie może wyprzedzać technologii. Dlatego Doradca odrzuca systemy niedopasowane do warunków.</p>
+        <div class="facts-grid">
+          <div class="fact-card"><b>1. Pomieszczenie</b><span>Określa intensywność użytkowania i ryzyko zabrudzeń.</span></div>
+          <div class="fact-card"><b>2. Ekspozycja</b><span>Rozróżnia suchą ścianę, zachlapania i bezpośrednią strefę mokrą.</span></div>
+          <div class="fact-card"><b>3. Podłoże</b><span>Inaczej przygotowuje się tynk, starą farbę oraz płytki.</span></div>
+          <div class="fact-card"><b>4. Metraż</b><span>Przeliczany według deklarowanej wydajności konkretnego systemu.</span></div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-copy">
+        <strong id="footerStatus">DECOWANT Doradca zakupowy — wersja testowa.</strong><br>
+        Wyniki mają charakter orientacyjny. Rzeczywiste zużycie zależy m.in. od chłonności, równości i faktury podłoża, techniki pracy oraz liczby warstw. Przy strefach mokrych, kominku, płytkach albo większych realizacjach potwierdź technologię przed zakupem. Dane produktowe i linki próbek zweryfikowane roboczo: 29.08.2026. Wersja V2 BETA nie zastępuje obecnego Doradcy.
+      </div>
+      <nav class="footer-links" aria-label="Linki pomocnicze">
+        <a href="https://www.sklepdecowant.pl/?utm_source=doradca&utm_medium=referral&utm_campaign=doradca_profesjonalny" target="_blank" rel="noopener">Sklep DECOWANT</a>
+        <a href="https://www.sklepdecowant.pl/dobierz-efekt-dekoracyjny?utm_source=doradca&utm_medium=referral&utm_campaign=doradca_profesjonalny" target="_blank" rel="noopener">Pomoc przed zakupem</a>
+      </nav>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status"></div>
+  <div class="dev-badge" role="status">WERSJA TESTOWA V2 — OBECNY DORADCA POZOSTAJE BEZ ZMIAN</div>
+
+  <script>
+  (() => {
+    'use strict';
+
+    const STORE = 'https://www.sklepdecowant.pl';
+    const IS_PRODUCTION = location.hostname.toLowerCase() === 'marekdecowant.github.io';
+    const IS_REVIEW = new URLSearchParams(location.search).has('review');
+    const IMAGE_BASE = 'img/';
+    const APP_VERSION = 'pro-2.5-beta-2026-08-29';
+
+    const PHOTO_LIBRARY = {
+      salon:{local:'room-salon.jpg',remote:'https://images.unsplash.com/photo-1742541656775-5fc717774c02?auto=format&fit=crop&w=1100&q=80'},
+      bedroom:{local:'room-bedroom.jpg',remote:'https://images.pexels.com/photos/36025792/pexels-photo-36025792/free-photo-of-modern-bedroom-interior-with-green-accent-wall.jpeg?auto=compress&dpr=1&h=900&w=1400'},
+      hall:{local:'room-hall.jpg',remote:'https://images.unsplash.com/photo-1778172884832-78a5de5ec3d2?auto=format&fit=crop&w=1100&q=80'},
+      kitchen:{local:'room-kitchen.jpg',remote:'https://images.unsplash.com/photo-1745835449652-72ec0de4f732?auto=format&fit=crop&w=1100&q=80'},
+      bathroom:{local:'room-bathroom.jpg',remote:'https://images.unsplash.com/photo-1704428381342-ea9df943619e?auto=format&fit=crop&w=1100&q=80'},
+      fireplace:{local:'room-fireplace.jpg',remote:'https://images.unsplash.com/photo-1758915753369-6a33c7bc1d76?auto=format&fit=crop&w=1100&q=80'},
+      commercial:{local:'room-commercial.jpg',remote:'https://images.unsplash.com/photo-1765371514743-45bd8e6c0a28?auto=format&fit=crop&w=1100&q=80'},
+      ceiling:{local:'room-ceiling.jpg',remote:'https://images.unsplash.com/photo-1761330439714-3f33c66e10a9?auto=format&fit=crop&w=1100&q=80'},
+      dry:{local:'exposure-dry.jpg',remote:'https://images.unsplash.com/photo-1761330439714-3f33c66e10a9?auto=format&fit=crop&w=1000&q=78'},
+      splash:{local:'exposure-splash.jpg',remote:'https://images.unsplash.com/photo-1745835449652-72ec0de4f732?auto=format&fit=crop&w=1000&q=78'},
+      wet:{local:'exposure-wet.jpg',remote:'https://images.unsplash.com/photo-1704428381342-ea9df943619e?auto=format&fit=crop&w=1000&q=78'},
+      heat:{local:'exposure-heat.jpg',remote:'https://images.unsplash.com/photo-1758915753369-6a33c7bc1d76?auto=format&fit=crop&w=1000&q=78'},
+      matte:{local:'effect-matte.jpg'}, metallic:{local:'effect-metallic.jpg'}, glitter:{local:'effect-glitter.jpg'},
+      clouds:{local:'effect-clouds.jpg'}, clay:{local:'effect-clay.jpg'}, glamour:{local:'effect-glamour.jpg'},
+      concrete:{local:'effect-concrete.jpg'}, sand:{local:'effect-sand.jpg'}, smooth:{local:'effect-smooth.jpg'},
+      plaster:{local:'substrate-plaster.jpg'}, painted:{local:'substrate-painted.jpg'}, tile:{local:'substrate-tile.jpg'}, unknown:{local:'substrate-unknown.jpg'},
+      first:{local:'skill-first.jpg'}, some:{local:'skill-some.jpg'}, pro:{local:'skill-pro.jpg'},
+      one:{local:'substrate-painted.jpg'}, two:{local:'mode-paint.jpg'},
+      palette:{local:'effect-smooth.jpg'}, antireflex:{local:'effect-matte.jpg'}, wash:{local:'exposure-splash.jpg'}, ready:{local:'mode-paint.jpg'},
+      decomal:{local:'result-decomal.jpg',remote:'https://images.unsplash.com/photo-1742541656775-5fc717774c02?auto=format&fit=crop&w=1100&q=80'},
+      star:{local:'result-star.jpg',remote:'https://images.unsplash.com/photo-1759735218086-67f9f853ab8b?auto=format&fit=crop&w=1100&q=80'},
+      decomalmat:{local:'result-decomalmat.jpg',remote:'https://images.unsplash.com/photo-1761330439714-3f33c66e10a9?auto=format&fit=crop&w=1100&q=80'},
+      duo:{local:'effect-clouds.jpg',remote:'https://images.unsplash.com/photo-1765371514743-45bd8e6c0a28?auto=format&fit=crop&w=1100&q=80'},
+      provence:{local:'room-bedroom.jpg',remote:'https://images.pexels.com/photos/36025792/pexels-photo-36025792/free-photo-of-modern-bedroom-interior-with-green-accent-wall.jpeg?auto=compress&dpr=1&h=900&w=1400'},
+      aurum:{local:'room-fireplace.jpg',remote:'https://images.unsplash.com/photo-1758915753369-6a33c7bc1d76?auto=format&fit=crop&w=1100&q=80'},
+      beton:{local:'room-bathroom.jpg',remote:'https://images.unsplash.com/photo-1704428381342-ea9df943619e?auto=format&fit=crop&w=1100&q=80'},
+      kalahari:{local:'effect-sand.jpg',remote:'https://images.unsplash.com/photo-1755018237540-b2e68e1248f5?auto=format&fit=crop&w=1100&q=80'},
+      colormatt:{local:'mode-paint.jpg',remote:'https://images.unsplash.com/photo-1761330439714-3f33c66e10a9?auto=format&fit=crop&w=1100&q=80'},
+      ceramic:{local:'room-kitchen.jpg',remote:'https://images.unsplash.com/photo-1745835449652-72ec0de4f732?auto=format&fit=crop&w=1100&q=80'},
+      antyreflex:{local:'room-ceiling.jpg',remote:'https://images.unsplash.com/photo-1761330439714-3f33c66e10a9?auto=format&fit=crop&w=1100&q=80'}
+    };
+
+    function mediaFor(key,value) {
+      return PHOTO_LIBRARY[value] || PHOTO_LIBRARY[key] || null;
+    }
+
+    const VISUAL_TAGS = {
+      matte:'bez połysku', metallic:'refleksy światła', glitter:'brokat', clouds:'dwa kolory', clay:'ręczne przetarcia',
+      glamour:'mocny efekt', concrete:'mineralna struktura', sand:'drobne ziarno', smooth:'gładka ściana',
+      dry:'strefa sucha', splash:'zachlapania', wet:'kontakt z wodą', heat:'podwyższona temperatura'
+    };
+    function visualTagFor(key,value) { return key === 'effect' || key === 'exposure' ? (VISUAL_TAGS[value] || '') : ''; }
+
+    function photoMarkup(spec, alt='') {
+      if (!spec) return '';
+      const remote = spec.remote ? ` data-remote-src="${spec.remote.replace(/&/g,'&amp;')}"` : '';
+      return `<span class="option-media"><img class="advisor-photo" src="${IMAGE_BASE}${spec.local}"${remote} alt="${alt.replace(/"/g,'&quot;')}"></span>`;
+    }
+
+    function hydrateRemoteImages(root=document) {
+      root.querySelectorAll('img[data-remote-src]:not([data-remote-tried])').forEach(img => {
+        img.dataset.remoteTried='1';
+        const remote = img.dataset.remoteSrc;
+        if (!remote || location.protocol === 'file:' && !navigator.onLine) return;
+        const probe = new Image();
+        probe.decoding = 'async';
+        probe.onload = () => { img.src = remote; img.classList.add('is-remote'); };
+        probe.src = remote;
+      });
+    }
+
+    const ICONS = {
+      salon: '▰', bedroom: '☾', hall: '↗', kitchen: '◫', bathroom: '◉', fireplace: '♨', commercial: '◇',
+      dry: '○', splash: '≈', wet: '≋', heat: '♨',
+      matte: '◌', metallic: '✦', glitter: '✧', clouds: '☁', clay: '≋', glamour: '◆', concrete: '▦', smooth: '▭', sand: '⠿',
+      first: '1', some: '2', pro: '3', light: '◻', warm: '◩', grey: '◧', green: '●', blue: '●', dark: '■',
+      plaster: '▤', painted: '▥', tile: '▦', unknown: '?', one: '1', two: '2'
+    };
+
+    function tracked(url, content = 'result') {
+      if (!url) url = STORE;
+      try {
+        const target = new URL(url, STORE);
+        target.searchParams.set('utm_source','doradca');
+        target.searchParams.set('utm_medium','referral');
+        target.searchParams.set('utm_campaign','doradca_profesjonalny');
+        target.searchParams.set('utm_content',content);
+        return target.toString();
+      } catch {
+        return url;
+      }
+    }
+
+    const products = {
+      decomal: {
+        id: 'decomal', name: 'DECOMAL', title: 'DECOMAL — metaliczna głębia i opalizujące refleksy',
+        type: 'effect', effects: ['metallic'], rooms: ['salon','bedroom','hall','commercial','kitchen'], exposure: ['dry','splash'], skills: ['first','some','pro'],
+        image: 'result-decomal.jpg',
+        summary: 'Najlepszy wybór, gdy chcesz eleganckiej, metalicznej powierzchni, która zmienia odbiór wraz ze światłem, ale nie potrzebujesz mocnego brokatu.',
+        why: ['efekt metaliczny', 'aplikacja pędzlem lub pacą', 'duży wybór gotowych kolorów'],
+        coverage: { kind:'rangePack', unit:'kg', pack:1, min:5, max:7, label:'1 kg = ok. 5–7 m²' },
+        productLink: `${STORE}/pl/p/ZESTAW-DECOMAL-KOLOR-BIALA-PERLA-/1565`,
+        sampleLink: `${STORE}/pl/p/DECOWANT-DECOMAL-PROBKA-MOKRA-PIASKOWY-BEZ/1557`,
+        system: [
+          ['Przygotowanie podłoża','Czyste, suche, nośne i odpylone; nierówności napraw przed rozpoczęciem.'],
+          ['Grunt wodny','Dobierz do chłonności podłoża i pozostaw do pełnego wyschnięcia.'],
+          ['DECOMAL PODKŁAD','Dedykowana warstwa podkładowa dla rodziny DECOMAL.'],
+          ['DECOMAL','Nakładaj płaskim pędzlem, pacą inox, rękawicą lub wałkiem; pracuj odcinkami.'],
+          ['Zabezpieczenie','W suchym pomieszczeniu zwykle opcjonalne; przy zachlapaniach użyj kompatybilnego zabezpieczenia.']
+        ],
+        colors: {
+          light: [{name:'Biała Perła',hex:'#ebe7df',link:`${STORE}/pl/p/ZESTAW-DECOMAL-KOLOR-BIALA-PERLA-/1565`,sample:`${STORE}/pl/p/DECOWANT-DECOMAL-PROBKA-MOKRA-KOLOR-BIALA-PERLA/1551`,productImage:`${STORE}/environment/cache/images/productGfx_6322_500_500/ZESTAW-BIALA-PERLA.png`}],
+          warm: [{name:'Piaskowy Beż',hex:'#c2a783',link:`${STORE}/pl/p/ZESTAW-DECOMAL-KOLOR-PIASKOWY-BEZ-/1562`,sample:`${STORE}/pl/p/DECOWANT-DECOMAL-PROBKA-MOKRA-PIASKOWY-BEZ/1557`,productImage:`${STORE}/environment/cache/images/productGfx_7172_50_50/ZESTAW-DECOMAL-KOLOR-PIASKOWY-BEZ.png`}],
+          grey: [{name:'Szary',hex:'#8b8b88',link:`${STORE}/pl/p/ZESTAW-DECOMAL-KOLOR-SZARY-/1567`,sample:`${STORE}/pl/p/PROBKA-SUCHA-40X40-DECOMAL-SZARY/1622`}],
+          green: [{name:'Butelkowa Zieleń',hex:'#2f4a3b',link:`${STORE}/pl/p/ZESTAW-DECOMAL-KOLOR-BUTELKOWA-ZIELEN/1613`,sample:`${STORE}/pl/p/DECOWANT-DECOMAL-PROBKA-MOKRA-KOLOR-BUTELKOWA-ZIELEN/1610`}],
+          blue: [{name:'Granatowy Lazur',hex:'#263c59',link:tracked(`${STORE}/pl/collection/DECOMAL/6`,'decomal_blue'),sample:`${STORE}/pl/p/PROBKA-SUCHA-40X40-DECOMAL-GRANATOWY-LAZUR/1810`}],
+          dark: [{name:'Ciemny Grafit',hex:'#34383a',link:tracked(`${STORE}/pl/collection/DECOMAL/6`,'decomal_dark'),sample:`${STORE}/pl/p/PROBKA-SUCHA-40X40-DECOMAL-CIEMNY-GRAFIT/1620`}]
+        }
+      },
+      star: {
+        id: 'star', name: 'DECOMAL STAR', title: 'DECOMAL STAR — metaliczny efekt z brokatem',
+        type: 'effect', effects: ['glitter','metallic'], rooms: ['salon','bedroom','hall','commercial','kitchen'], exposure: ['dry','splash'], skills: ['first','some','pro'],
+        image: 'result-star.jpg',
+        summary: 'Dla wnętrza, w którym dekoracja ma reagować na światło i być wyraźnym punktem aranżacji. Łączy metaliczny charakter DECOMAL z brokatem.',
+        why: ['brokat widoczny w świetle', 'zwykle jedna warstwa dekoracyjna', 'gotowe zestawy 5–7 m²'],
+        coverage: { kind:'rangePack', unit:'kg', pack:1, min:5, max:7, label:'1 kg = ok. 5–7 m² zależnie od techniki' },
+        productLink: `${STORE}/pl/p/ZESTAW-FARBY-DEKORACYJNEJ-Z-BROKATEM-DECOMAL-STAR-SZAMPANSKA-GWIAZDA-5-7M2/1776`,
+        sampleLink: null,
+        system: [
+          ['Przygotowanie podłoża','Ściana powinna być stabilna, równa, czysta i sucha.'],
+          ['Grunt wodny','Ogranicza i wyrównuje chłonność podłoża.'],
+          ['DECOMAL PODKŁAD','Dedykowany podkład rodziny DECOMAL, dobrany do planowanego koloru.'],
+          ['DECOMAL STAR','Płaski pędzel daje charakterystyczny układ; można też użyć pacy, gąbki lub wałka.'],
+          ['Hydrostop / zabezpieczenie','W kuchni lub łazience zastosuj kompatybilne zabezpieczenie; w suchym salonie nie zawsze jest konieczne.']
+        ],
+        colors: {
+          light: [{name:'Biała Gwiazda',hex:'#f1eee8',link:`${STORE}/pl/p/ZESTAW-FARBY-DEKORACYJNEJ-Z-BROKATEM-DECOMAL-STAR-BIALA-GWIAZDA-5-7M2-/1778`,sample:null,productImage:`${STORE}/environment/cache/images/productGfx_7157_50_50/ZESTAW-FARBY-DEKORACYJNEJ-Z-BROKATEM-DECOMAL-STAR-BIALA-GWIAZDA-5-7M2.png`}],
+          warm: [{name:'Szampańska Gwiazda',hex:'#d4b78e',link:`${STORE}/pl/p/ZESTAW-FARBY-DEKORACYJNEJ-Z-BROKATEM-DECOMAL-STAR-SZAMPANSKA-GWIAZDA-5-7M2/1776`,sample:null,productImage:`${STORE}/environment/cache/images/productGfx_7143_50_50/ZESTAW-FARBY-DEKORACYJNEJ-Z-BROKATEM-DECOMAL-STAR-SZAMPANSKA-GWIAZDA-5-7M2.png`},{name:'Piaskowa Gwiazda',hex:'#bfa985',link:`${STORE}/pl/p/ZESTAW-FARBY-DEKORACYJNEJ-Z-BROKATEM-DECOMAL-STAR-PIASKOWA-GWIAZDA-5-7M2-/1806`,sample:null},{name:'Złota Gwiazda',hex:'#b5914c',link:`${STORE}/pl/p/DECOMAL-STAR-ZLOTA-GWIAZDA-1L-/1760`,sample:null}],
+          grey: [{name:'Szara Gwiazda',hex:'#858783',link:`${STORE}/pl/p/DECOMAL-STAR-SZARA-GWIAZDA-1L-/1721`,sample:null},{name:'Grafitowa Gwiazda',hex:'#4e5356',link:`${STORE}/pl/p/ZESTAW-FARBY-DEKORACYJNEJ-Z-BROKATEM-DECOMAL-STAR-GRAFITOWA-GWIAZDA-5-7M2/1777`,sample:null,productImage:`${STORE}/environment/cache/images/productGfx_7150_50_50/ZESTAW-FARBY-DEKORACYJNEJ-Z-BROKATEM-DECOMAL-STAR-GRAFITOWA-GWIAZDA-5-7M2.png`}],
+          green: [{name:'Najbliższy gotowy wariant: Szampańska Gwiazda',hex:'#d4b78e',link:`${STORE}/pl/collection/DECOMAL/6`,sample:null,cta:'Sprawdź paletę STAR →',fit:'nearest'}],
+          blue: [{name:'Najbliższy chłodny wariant: Grafitowa Gwiazda',hex:'#4e5356',link:`${STORE}/pl/collection/DECOMAL/6`,sample:null,cta:'Sprawdź paletę STAR →',fit:'nearest'}],
+          dark: [{name:'Grafitowa Gwiazda',hex:'#383b3d',link:`${STORE}/pl/p/ZESTAW-FARBY-DEKORACYJNEJ-Z-BROKATEM-DECOMAL-STAR-GRAFITOWA-GWIAZDA-5-7M2/1777`,sample:null}]
+        }
+      },
+      decomalmat: {
+        id: 'decomalmat', name: 'DECOMALmat', title: 'DECOMALmat — spokojna, matowa struktura premium',
+        type: 'effect', effects: ['matte'], rooms: ['salon','bedroom','hall','commercial','kitchen'], exposure: ['dry','splash'], skills: ['first','some','pro'],
+        image: 'result-decomalmat.jpg',
+        summary: 'Dobry wybór na nowoczesną ścianę bez połysku. Daje widoczną, ale spokojną strukturę i dobrze sprawdza się jako pierwszy efekt dekoracyjny.',
+        why: ['pełny mat', 'łatwy start w dekoracjach', 'wydajność około 10 m²/l'],
+        coverage: { kind:'single', unit:'l', pack:1, per:10, coats:1, label:'1 l = ok. 10 m²' },
+        productLink: `${STORE}/pl/p/DECOWANT-DECOMALmat-KOLOR-BIALY-1l-/1686`,
+        sampleLink: null,
+        system: [
+          ['Przygotowanie podłoża','Nośne, czyste, równe i odpylone podłoże.'],
+          ['Grunt wodny','Stosuj, gdy podłoże jest chłonne lub niejednorodne.'],
+          ['DECOMAL PODKŁAD','W nowej, ujednoliconej technologii rodziny DECOMAL użyj dedykowanego podkładu.'],
+          ['DECOMALmat','Nakładaj zgodnie z wybraną techniką, utrzymując ciągłość pracy na ścianie.'],
+          ['Zabezpieczenie','W strefach narażonych na zabrudzenia dobierz kompatybilną powłokę; dla ciemnych kolorów nie wybieraj przypadkowo matowego lakieru.']
+        ],
+        colors: {
+          light: [{name:'Biały',hex:'#f0eee8',link:`${STORE}/pl/p/DECOWANT-DECOMALmat-KOLOR-BIALY-1l-/1686`,sample:null,productImage:`${STORE}/environment/cache/images/productGfx_6798_0_0/DECOMALmat-BIALY.webp`}],
+          warm: [{name:'Kremowy',hex:'#d8c7a8',link:`${STORE}/pl/p/DECOWANT-DECOMALmat-KOLOR-KREMOWY-1l-/1682`,sample:null}],
+          grey: [{name:'Szary',hex:'#92928e',link:`${STORE}/pl/c/DECOMALmat/79`,sample:`${STORE}/pl/p/DECOWANT-DECOMALmat-PROBKA-MOKRA-KOLOR-SZARY/1667`,cta:'Zobacz warianty szarości →'}],
+          green: [{name:'Brak potwierdzonego gotowego zielonego wariantu',hex:'#7f897b',link:`${STORE}/pl/c/DECOMALmat/79`,sample:null,cta:'Sprawdź aktualną paletę →',fit:'nearest'}],
+          blue: [{name:'Granatowy',hex:'#2d3954',link:`${STORE}/pl/c/DECOMALmat/79`,sample:null,cta:'Zobacz aktualny wariant →'}],
+          dark: [{name:'Czarny',hex:'#20211f',link:`${STORE}/pl/p/DECOWANT-DECOMALmat-KOLOR-CZARNY-1l-/1684`,sample:null,productImage:`${STORE}/environment/cache/images/productGfx_7132_50_50/ZESTAW-DECOMALMAT-CZARNY.png`}]
+        }
+      },
+      duo: {
+        id: 'duo', name: 'DECOMAL DUO', title: 'DECOMAL DUO — miękki efekt chmur i dwóch tonów',
+        type: 'effect', effects: ['clouds','metallic'], rooms: ['salon','bedroom','hall','commercial'], exposure: ['dry','splash'], skills: ['first','some','pro'],
+        image: 'effect-clouds.jpg',
+        summary: 'Dla osób, które chcą nieregularnych przejść, głębi i efektu chmur. Zestaw łączy dwa kolory DECOMAL oraz gąbkę aplikacyjną.',
+        why: ['dwa kolory w jednym systemie', 'gąbka w zestawie', 'efekt miękkich przejść'],
+        coverage: { kind:'duo', per:10, label:'1 zestaw przyjęty konserwatywnie na ok. 10 m²' },
+        productLink: `${STORE}/pl/p/DECOMAL-DUO-BEZ-I-BIALA-PERLA-/1571`,
+        sampleLink: null,
+        system: [
+          ['Przygotowanie podłoża','Czyste, stabilne i równe podłoże.'],
+          ['Grunt wodny','Wyrównaj chłonność przed podkładem.'],
+          ['DECOMAL PODKŁAD','Dedykowany podkład rodziny DECOMAL; występuje w aktualnych zestawach DUO.'],
+          ['Dwa kolory DECOMAL','Buduj przejścia kolorystyczne etapami zgodnie z instrukcją.'],
+          ['Gąbka syntetyczna','Narzędzie do łączenia kolorów i uzyskania efektu chmur.']
+        ],
+        colors: {
+          light: [{name:'Szary + Biała Perła',hex:'#c2c2bd',link:`${STORE}/pl/p/DECOMAL-DUO-SZARY-I-BIALA-PERLA/1570`,sample:null}],
+          warm: [{name:'Beż + Biała Perła',hex:'#cbb89d',link:`${STORE}/pl/p/DECOMAL-DUO-BEZ-I-BIALA-PERLA-/1571`,sample:null,productImage:`${STORE}/environment/cache/images/productGfx_6115_0_0/DECOMALDUO--3.webp`}],
+          grey: [{name:'Szary + Biała Perła',hex:'#90928f',link:`${STORE}/pl/p/DECOMAL-DUO-SZARY-I-BIALA-PERLA/1570`,sample:null}],
+          green: [{name:'Butelkowa Zieleń + Biała Perła',hex:'#2f4a3b',link:`${STORE}/pl/p/DECOMAL-DUO-BUTELKOWA-ZIELEN-I-BIALA-PERLA/1614`,sample:null}],
+          blue: [{name:'Lady Blue',hex:'#7690a8',link:`${STORE}/pl/p/DECOMAL-DUO-LADY-BLUE-EFEKT-CHMUR/1774`,sample:null}],
+          dark: [{name:'Ciemny Grafit + Szary',hex:'#40464a',link:`${STORE}/pl/p/DECOMAL-DUO-CIEMNY-GRAFIT-I-SZARY/1569`,sample:null}]
+        }
+      },
+      provence: {
+        id: 'provence', name: 'Provence', title: 'Provence — matowa glinka z naturalnymi przetarciami',
+        type: 'effect', effects: ['clay','matte'], rooms: ['salon','bedroom','hall','commercial','kitchen','bathroom','fireplace'], exposure: ['dry','splash'], skills: ['some','pro','first'],
+        image: 'provence-zielona-lazienka.jpg',
+        summary: 'Daje charakterystyczne, ręcznie formowane przetarcia oraz głębię kojarzoną z glinką wenecką. Najlepiej wygląda na większej, dobrze przygotowanej płaszczyźnie.',
+        why: ['naturalny efekt przetarć', 'gotowe zestawy 6, 12 i 24 m²', 'duża swoboda ręcznego wykończenia'],
+        coverage: { kind:'provence', label:'gotowe zestawy na ok. 6, 12 i 24 m²' },
+        productLink: `${STORE}/pl/p/PROVENCE-glinka-wenecka-ZESTAW-NA-OK.-12m2-CAPPUCCINO/966`,
+        sampleLink: `${STORE}/pl/p/PROBKA-SUCHA-40X40-PROVENCE-CAPPUCCINO-CEBO-UP/1577`,
+        system: [
+          ['Przygotowanie podłoża','Równe, stabilne i odpylone podłoże — dekoracja podkreśla sposób przygotowania ściany.'],
+          ['Grunt wodny','Dobierz do chłonności podłoża.'],
+          ['Decoverni Quarzo','Podkład systemowy barwiony w kierunku wybranego koloru Provence.'],
+          ['Provence','Nakładaj płaskim pędzlem krzyżowo; materiału dekoracyjnego nie mieszaj mechanicznie.'],
+          ['Wykończenie / ochrona','W strefach narażonych na wilgoć i zabrudzenia dobierz właściwe zabezpieczenie.']
+        ],
+        colors: {
+          light: [{name:'Kremowy',hex:'#dfd1b4',link:`${STORE}/pl/p/PROVENCE-glinka-wenecka-ZESTAW-NA-OK.-12m2-KREMOWY/975`,sample:null}],
+          warm: [{name:'Cappuccino',hex:'#b79572',link:`${STORE}/pl/p/PROVENCE-glinka-wenecka-ZESTAW-NA-OK.-12m2-CAPPUCCINO/966`,sample:`${STORE}/pl/p/PROBKA-SUCHA-40X40-PROVENCE-CAPPUCCINO-CEBO-UP/1577`,productImage:`${STORE}/environment/cache/images/productGfx_2496_0_0/PROVENCE-glinka-wenecka-ZESTAW-NA-OK.-6m2-MOCNE-CAPPUCCINO.webp`}],
+          grey: [{name:'Jasnoszary',hex:'#a9aaa6',link:`${STORE}/pl/p/PROVENCE-glinka-wenecka-ZESTAW-NA-OK.-12m2-JASNOSZARY/972`,sample:null},{name:'Ciemny Granit',hex:'#555957',link:`${STORE}/pl/p/PROVENCE-glinka-wenecka-ZESTAW-NA-OK.-12m2-CIEMNY-GRANIT/974`,sample:`${STORE}/pl/p/PROBKA-SUCHA-40X40-PROVENCE-CIEMNY-GRANIT/1649`}],
+          green: [{name:'Butelkowa Zieleń',hex:'#2d4939',link:`${STORE}/pl/p/PROVENCE-glinka-wenecka-ZESTAW-NA-OK.-6m2-BUTELKOWA-ZIELEN/1414`,sample:null}],
+          blue: [{name:'Morski',hex:'#4d7b7b',link:tracked(`${STORE}/pl/collection/DESIGN-DECOWANT/4`,'provence_morski'),sample:null}],
+          dark: [{name:'Ciemny Granit',hex:'#4b4e4c',link:`${STORE}/pl/p/PROVENCE-glinka-wenecka-ZESTAW-NA-OK.-12m2-CIEMNY-GRANIT/974`,sample:`${STORE}/pl/p/PROBKA-SUCHA-40X40-PROVENCE-CIEMNY-GRANIT/1649`}]
+        }
+      },
+      aurum: {
+        id: 'aurum', name: 'Aurum', title: 'Aurum — metaliczne przetarcia glamour i vintage',
+        type: 'effect', effects: ['glamour','metallic'], rooms: ['salon','bedroom','hall','commercial','bathroom'], exposure: ['dry','splash'], skills: ['some','pro'],
+        image: 'room-fireplace.jpg',
+        summary: 'Najbardziej dekoracyjna propozycja dla eleganckich wnętrz. Tworzy metaliczny „spiek” i wyraźne przetarcia, ale wymaga dokładnego trzymania się systemu.',
+        why: ['efekt glamour/vintage', 'metaliczne przetarcia', 'zestaw na około 5–8 m²'],
+        coverage: { kind:'rangePack', unit:'zest.', pack:1, min:5, max:8, label:'1 zestaw = ok. 5–8 m²' },
+        productLink: `${STORE}/pl/p/DECOVERNI-AURUM-Dekoracja-w-stylu-Glamour-Zestaw-5-8m2-Butelkowa-Zielen/611`,
+        sampleLink: `${STORE}/pl/p/PROBKA-SUCHA-40X40-AURUM-GRAFIT/1674`,
+        system: [
+          ['Przygotowanie podłoża','Podłoże musi być równe, nośne i odpowiednio wysezonowane.'],
+          ['Grunt wodny','Wyrównuje chłonność i wiąże drobny pył.'],
+          ['Decoverni Quarzo','Warstwa podkładowa zgodna z systemem Aurum.'],
+          ['Aurum + właściwy Tiner GOLD / SILVER','Dobierz komponent metaliczny do wariantu zestawu, połącz składniki zgodnie z instrukcją i mieszaj ręcznie. Po połączeniu zaplanuj pracę bez długiego przechowywania.'],
+          ['Zabezpieczenie','Dobierz do ekspozycji i koloru; ciemnej realizacji nie matuj przypadkowym lakierem.']
+        ],
+        colors: {
+          light: [{name:'Szary',hex:'#a2a3a0',link:`${STORE}/pl/p/DECOVERNI-AURUM-Dekoracja-w-stylu-Glamour-Zestaw-5-8-m2-SZARY/793`,sample:null}],
+          warm: [{name:'Złoty Beż',hex:'#b59464',link:tracked(`${STORE}/pl/collection/DESIGN-DECOWANT/4`,'aurum_gold'),sample:null}],
+          grey: [{name:'Grafit',hex:'#565958',link:tracked(`${STORE}/pl/collection/DESIGN-DECOWANT/4`,'aurum_graphite'),sample:`${STORE}/pl/p/PROBKA-SUCHA-40X40-AURUM-GRAFIT/1674`}],
+          green: [{name:'Butelkowa Zieleń',hex:'#294638',link:`${STORE}/pl/p/DECOVERNI-AURUM-Dekoracja-w-stylu-Glamour-Zestaw-5-8m2-Butelkowa-Zielen/611`,sample:null,productImage:`${STORE}/environment/cache/images/productGfx_1805_50_50/DECOVERNI-AURUM---Dekoracja-w-stylu-Glamour-Zestaw-5---8m2-Butelkowa-Zielen.jpg`}],
+          blue: [{name:'Granat',hex:'#263b54',link:tracked(`${STORE}/pl/collection/DESIGN-DECOWANT/4`,'aurum_navy'),sample:null}],
+          dark: [{name:'Grafit',hex:'#343738',link:tracked(`${STORE}/pl/collection/DESIGN-DECOWANT/4`,'aurum_graphite'),sample:`${STORE}/pl/p/PROBKA-SUCHA-40X40-AURUM-GRAFIT/1674`}]
+        }
+      },
+      beton: {
+        id: 'beton', name: 'Beton Hydrofobowy FOX', title: 'Beton Hydrofobowy — rozwiązanie do trudnych i mokrych stref',
+        type: 'effect', effects: ['concrete'], rooms: ['bathroom','kitchen','salon','hall','commercial'], exposure: ['dry','splash','wet'], skills: ['some','pro'],
+        image: 'room-bathroom.jpg',
+        summary: 'Najbezpieczniejsza rekomendacja, gdy liczy się betonowy wygląd, odporność na wodę lub aplikacja na trudnym podłożu, w tym odpowiednio przygotowanych płytkach.',
+        why: ['do stref mokrych', 'możliwa renowacja płytek', 'betonowy efekt bez osobnej warstwy dekoracyjnego lakieru'],
+        coverage: { kind:'beton', pack:14, minKg:2.3, maxKg:2.5, label:'zużycie ok. 2,3–2,5 kg/m²' },
+        productLink: `${STORE}/pl/p/FOX-DEKORATOR-BETON-HYDROFOBOWY-SZARY-14-KG/1073`,
+        sampleLink: null,
+        system: [
+          ['Ocena podłoża','Usuń słabe warstwy; płytki muszą być stabilne, odtłuszczone i odpowiednio zmatowione.'],
+          ['Grunt Sczepny / Strong','Na trudne i niechłonne podłoża, w tym płytki, zastosuj grunt wskazany dla systemu.'],
+          ['Beton Hydrofobowy','Nakładaj w wymaganej grubości i strukturuj zgodnie z instrukcją.'],
+          ['Kontrola detali','W narożach, przy odpływach i przejściach instalacyjnych zachowaj ciągłość poprawnie wykonanej hydroizolacji podłoża.'],
+          ['Eksploatacja','Nie dodawaj przypadkowej powłoki na wierzch; trzymaj się technologii produktu.']
+        ],
+        colors: {
+          light: [{name:'Biały',hex:'#e6e4df',link:`${STORE}/pl/p/FOX-DEKORATOR-BETON-HYDROFOBOWY-14-KG-BIALY/1365`,sample:null}],
+          warm: [{name:'Szary',hex:'#a1a09a',link:`${STORE}/pl/p/FOX-DEKORATOR-BETON-HYDROFOBOWY-SZARY-14-KG/1073`,sample:null,productImage:`${STORE}/environment/cache/images/productGfx_3694_50_50/FOX-DEKORATOR-BETON-HYDROFOBOWY-14-KG.jpg`}],
+          grey: [{name:'Szary',hex:'#8a8b87',link:`${STORE}/pl/p/FOX-DEKORATOR-BETON-HYDROFOBOWY-SZARY-14-KG/1073`,sample:null,productImage:`${STORE}/environment/cache/images/productGfx_3694_50_50/FOX-DEKORATOR-BETON-HYDROFOBOWY-14-KG.jpg`}],
+          green: [{name:'Najbliższy gotowy wariant: Szary',hex:'#8a8b87',link:`${STORE}/pl/p/FOX-DEKORATOR-BETON-HYDROFOBOWY-SZARY-14-KG/1073`,sample:null,cta:'Zobacz neutralny beton →',fit:'nearest'}],
+          blue: [{name:'Najbliższy gotowy wariant: Szary',hex:'#80868a',link:`${STORE}/pl/p/FOX-DEKORATOR-BETON-HYDROFOBOWY-SZARY-14-KG/1073`,sample:null,cta:'Zobacz neutralny beton →',fit:'nearest'}],
+          dark: [{name:'Czarny',hex:'#272827',link:`${STORE}/pl/p/FOX-DEKORATOR-BETON-HYDROFOBOWY-14-KG-CZARNY/1366`,sample:null}]
+        }
+      },
+      kalahari: {
+        id: 'kalahari', name: 'Kalahari', title: 'Kalahari — piaskowa struktura z delikatną poświatą',
+        type: 'effect', effects: ['sand','matte'], rooms: ['salon','bedroom','hall','commercial'], exposure: ['dry'], skills: ['first','some','pro'],
+        image: 'room-bedroom.jpg',
+        summary: 'Dobra propozycja, gdy chcesz drobnej piaskowej struktury, subtelnych refleksów i lekkiego wrażenia głębi bez ciężkich przetarć.',
+        why: ['jednowarstwowy efekt', 'około 8–10 m²/l', 'subtelna struktura piasku'],
+        coverage: { kind:'single', unit:'l', pack:1, per:9, coats:1, label:'1 l = średnio ok. 8–10 m²' },
+        productLink: `${STORE}/pl/p/Fox-Dekorator-KALAHARI-WHITE-ZESTAW-NA-8-10-M2-JASNOSZARY/771`,
+        sampleLink: `${STORE}/pl/p/FOX-KALAHARI-TURKUS-PROBKA-MOKRA-/1641`,
+        system: [
+          ['Przygotowanie podłoża','Czysta, sucha i równa powierzchnia.'],
+          ['Initium Color','Podkład systemowy dobrany kolorystycznie.'],
+          ['Kalahari','Nakładaj pędzlem, formując oczekiwany układ drobinek.'],
+          ['Ciągłość pracy','Kończ pełne płaszczyzny bez przypadkowych łączeń.']
+        ],
+        colors: {
+          light: [{name:'Biały / Jasnoszary',hex:'#dbd9d1',link:`${STORE}/pl/p/Fox-Dekorator-KALAHARI-WHITE-ZESTAW-NA-8-10-M2-JASNOSZARY/771`,sample:null,productImage:`${STORE}/environment/cache/images/productGfx_2313_50_50/Fox-Dekorator-KALAHARI-WHITE-ZESTAW-NA-8-10-M2-JASNOSZARY.jpg`}],
+          warm: [{name:'Cappuccino',hex:'#b79779',link:`${STORE}/pl/p/Fox-Dekorator-KALAHARI-WHITE-ZESTAW-NA-8-10-M2-CAPPUCCINO/772`,sample:null},{name:'Kaszmir Karmelowy',hex:'#c2a27f',link:`${STORE}/pl/p/FOX-KALAHARI-KASZMIR%2C-KARMELOWY-1L/1460`,sample:null}],
+          grey: [{name:'Jasnoszary',hex:'#9b9d99',link:`${STORE}/pl/p/Fox-Dekorator-KALAHARI-WHITE-ZESTAW-NA-8-10-M2-JASNOSZARY/771`,sample:`${STORE}/pl/p/FOX-KALAHARI-CIEMNY-SZARY-PROBKA-MOKRA-/1640`,productImage:`${STORE}/environment/cache/images/productGfx_2313_50_50/Fox-Dekorator-KALAHARI-WHITE-ZESTAW-NA-8-10-M2-JASNOSZARY.jpg`}],
+          green: [{name:'Oaza',hex:'#768b73',link:`${STORE}/pl/p/FOX-KALAHARI-1L-OAZA/632`,sample:`${STORE}/pl/p/FOX-KALAHARI-TURKUS-PROBKA-MOKRA-/1641`}],
+          blue: [{name:'Lapis',hex:'#60798a',link:`${STORE}/pl/p/FOX-KALAHARI-LAPIS/677`,sample:`${STORE}/pl/p/FOX-KALAHARI-TURKUS-PROBKA-MOKRA-/1641`}],
+          dark: [{name:'Ciemny Szary — próbka przed wyborem zestawu',hex:'#555957',link:`${STORE}/pl/producer/FOX-DEKORATOR/23/4/full`,sample:`${STORE}/pl/p/FOX-KALAHARI-CIEMNY-SZARY-PROBKA-MOKRA-/1640`}]
+        }
+      },
+      colormatt: {
+        id: 'colormatt', name: 'FOX Color Matt', title: 'FOX Color Matt — głęboki mat w szerokiej palecie NCS',
+        type: 'paint', effects: ['smooth'], rooms: ['salon','bedroom','hall','kitchen','commercial','bathroom'], exposure: ['dry','splash'], skills: ['first','some','pro'],
+        image: 'mode-paint.jpg',
+        summary: 'Uniwersalna farba gładka, gdy priorytetem jest pełny mat, szeroki wybór kolorów NCS i odporność na codzienne mycie oraz szorowanie.',
+        why: ['do 14 m²/l na warstwę', 'matowe wykończenie', 'ponad dwa tysiące kierunków NCS'],
+        coverage: { kind:'paint', unit:'l', per:14, packs:[10,5,2.5], defaultCoats:2, label:'do 14 m²/l na jedną warstwę' },
+        productLink: `${STORE}/pl/p/FOX-DEKORATOR-COLOR-MATT-2%2C5-l-NCS-nr.013-CIEPLY-KASZMIR/1391`,
+        sampleLink: `${STORE}/pl/p/FARBA-Color-Matt-013-Probka-mokra/1353`,
+        system: [
+          ['Przygotowanie podłoża','Usuń słabe powłoki, uzupełnij ubytki i dokładnie odpyl.'],
+          ['Grunt / farba podkładowa','Dobierz do chłonności oraz kontrastu między starym a nowym kolorem.'],
+          ['Pierwsza warstwa Color Matt','Nakładaj wałkiem, pędzlem lub natryskiem bez pracy „suchym wałkiem”.'],
+          ['Druga warstwa','Nakładaj po wyschnięciu pierwszej, zachowując jednolity kierunek pracy.']
+        ],
+        colors: {
+          light: [{name:'Jasny NCS',hex:'#e8e4da',link:tracked('https://marekdecowant.github.io/kalkulator-ncs/','ncs_light'),sample:null}],
+          warm: [{name:'013 Ciepły Kaszmir',hex:'#c9b9a3',link:`${STORE}/pl/p/FOX-DEKORATOR-COLOR-MATT-2%2C5-l-NCS-nr.013-CIEPLY-KASZMIR/1391`,sample:`${STORE}/pl/p/FARBA-Color-Matt-013-Probka-mokra/1353`,productImage:`${STORE}/environment/cache/images/productGfx_6260_50_50/color-matt-013.png`}],
+          grey: [{name:'Szaro-beżowy NCS',hex:'#aaa69e',link:tracked('https://marekdecowant.github.io/kalkulator-ncs/','ncs_grey'),sample:null}],
+          green: [{name:'Szałwia NCS',hex:'#879282',link:tracked('https://marekdecowant.github.io/kalkulator-ncs/','ncs_green'),sample:null}],
+          blue: [{name:'Szaroniebieski NCS',hex:'#7e8991',link:tracked('https://marekdecowant.github.io/kalkulator-ncs/','ncs_blue'),sample:null}],
+          dark: [{name:'Ciemny NCS',hex:'#3f4240',link:tracked('https://marekdecowant.github.io/kalkulator-ncs/','ncs_dark'),sample:null}]
+        }
+      },
+      ceramic: {
+        id: 'ceramic', name: 'Decoverni Ceramic White', title: 'Ceramic White — gładka, matowa farba do wymagających wnętrz',
+        type: 'paint', effects: ['smooth'], rooms: ['kitchen','hall','bathroom','commercial','salon','bedroom'], exposure: ['dry','splash'], skills: ['first','some','pro'],
+        image: 'room-kitchen.jpg',
+        summary: 'Dobry wybór do miejsc, w których ściana ma pozostać matowa, ale będzie częściej dotykana, myta lub narażona na codzienne zabrudzenia.',
+        why: ['matowa i zmywalna', 'wydajność około 12–16 m²/l', 'gotowe kolory DECOWANT'],
+        coverage: { kind:'paint', unit:'l', per:14, packs:[2.5,1], defaultCoats:2, label:'ok. 12–16 m²/l na jedną warstwę' },
+        productLink: `${STORE}/pl/p/Decoverni-Ceramic-White-Kaszmir-2%2C5-l/1751`,
+        sampleLink: null,
+        system: [
+          ['Przygotowanie podłoża','Podłoże powinno być czyste, suche, równe i stabilne.'],
+          ['Grunt / podkład','Dobierz do chłonności ściany i planowanego koloru.'],
+          ['Pierwsza warstwa Ceramic White','Nakładaj wałkiem, pędzlem lub natryskowo.'],
+          ['Druga warstwa','Nakładaj po pełnym wyschnięciu poprzedniej warstwy.']
+        ],
+        colors: {
+          light: [{name:'Śmietanka',hex:'#ede5d6',link:`${STORE}/pl/p/Decoverni-Ceramic-White-2%2C5-l-SMIETANKA/1758`,sample:null}],
+          warm: [{name:'Kaszmir',hex:'#cbb8a0',link:`${STORE}/pl/p/Decoverni-Ceramic-White-Kaszmir-2%2C5-l/1751`,sample:null,productImage:`${STORE}/environment/cache/images/productGfx_7199_50_50/Farba-ceramiczna-zmywalna-Decoverni-Ceramic-White-Kaszmir-2-5L.png`},{name:'Cappuccino',hex:'#ad8d70',link:`${STORE}/pl/p/Farba-ceramiczna-zmywalna-Decoverni-Ceramic-White-Cappuccino-1L/1744`,sample:null}],
+          grey: [{name:'Popielaty',hex:'#aaa9a4',link:`${STORE}/pl/c/FARBY-CERAMICZNE/49`,sample:null}],
+          green: [{name:'Oliwkowy',hex:'#7d8065',link:`${STORE}/pl/c/FARBY-CERAMICZNE/49`,sample:null}],
+          blue: [{name:'Chłodny kierunek',hex:'#9aa2a4',link:`${STORE}/pl/c/FARBY-CERAMICZNE/49`,sample:null}],
+          dark: [{name:'Mokka',hex:'#625246',link:`${STORE}/pl/p/-Farba-ceramiczna-zmywalna-Decoverni-Ceramic-White-Mokka-2%2C5L/1792`,sample:null}]
+        }
+      }
+    };
+
+    const optionData = {
+      room: {
+        title:'Gdzie chcesz wykonać dekorację?', help:'To określa odporność, sposób zabezpieczenia i najbardziej praktyczne rodziny produktów.',
+        options:[
+          ['salon','Salon / ściana TV','Dekoracyjny punkt wnętrza'], ['bedroom','Sypialnia','Spokojna, mniej obciążona powierzchnia'],
+          ['hall','Przedpokój / schody','Częsty dotyk i zabrudzenia'], ['kitchen','Kuchnia','Para, tłuszcz i zachlapania'],
+          ['bathroom','Łazienka','Podwyższona wilgotność lub strefa mokra'], ['fireplace','Kominek','Podłoże pracujące termicznie'],
+          ['commercial','Biuro / lokal','Intensywne użytkowanie i efekt reprezentacyjny']
+        ]
+      },
+      exposure: {
+        title:'Na co będzie narażona powierzchnia?', help:'Wybierz najbardziej wymagający warunek występujący na tej ścianie.',
+        options:[
+          ['dry','Suche pomieszczenie','Brak regularnych zachlapań'], ['splash','Mycie i okazjonalne zachlapania','Kuchnia, korytarz, okolice umywalki'],
+          ['wet','Bezpośrednia strefa mokra','Prysznic, wanna lub częsty kontakt z wodą'], ['heat','Okolica kominka','Podwyższona temperatura — bez bezpośredniego płomienia']
+        ]
+      },
+      effect: {
+        title:'Jaki efekt chcesz widzieć na ścianie?', help:'Nie wybieraj produktu po nazwie. Wybierz wygląd, a Doradca dopasuje technologię.',
+        options:[
+          ['matte','Matowa struktura','Spokojna powierzchnia bez połysku'], ['metallic','Metaliczne refleksy','Efekt zmieniający się wraz ze światłem'],
+          ['glitter','Brokat i blask','Wyraźnie dekoracyjny punkt wnętrza'], ['clouds','Efekt chmur / dwa kolory','Miękkie, nieregularne przejścia'],
+          ['clay','Glinka i przetarcia','Naturalne, ręcznie modelowane cieniowanie'], ['glamour','Glamour / vintage','Mocne metaliczne przetarcia'],
+          ['concrete','Beton','Surowa mineralna powierzchnia'], ['sand','Drobny piasek','Subtelne drobinki i gra światła']
+        ]
+      },
+      skill: {
+        title:'Jak oceniasz swoje doświadczenie?', help:'Doradca może preferować łatwiejszy system albo pokazać rozwiązania dające większą kontrolę nad efektem.',
+        options:[
+          ['first','Robię to pierwszy raz','Najważniejsza jest przewidywalna aplikacja'], ['some','Mam trochę doświadczenia','Poradzę sobie z pracą etapową i przetarciami'],
+          ['pro','Jestem wykonawcą','Chcę pełnej kontroli nad strukturą']
+        ]
+      },
+      color: {
+        title:'W jakim kierunku kolorystycznym idziemy?', help:'Na wyniku pokażemy pasujące warianty. Ostateczny wybór zawsze potwierdź próbką w swoim świetle.',
+        options:[
+          ['light','Jasny neutralny','Biel, śmietanka, jasny szary'], ['warm','Ciepły beż / kaszmir','Piaskowy, cappuccino, szampański'],
+          ['grey','Szary / grafit','Od jasnego betonu do grafitu'], ['green','Zieleń','Szałwia, oliwka, butelkowa zieleń'],
+          ['blue','Niebieski / granat','Chłodne odcienie i morski kierunek'], ['dark','Ciemny i intensywny','Czerń, głęboki grafit, mocny kolor']
+        ]
+      },
+      substrate: {
+        title:'Na jakim podłożu będziesz pracować?', help:'Stan ściany ma większy wpływ na trwałość niż sama nazwa produktu.',
+        options:[
+          ['plaster','Nowy tynk / gładź','Chłonne podłoże mineralne'], ['painted','Stabilna, pomalowana ściana','Renowacja istniejącej powłoki'],
+          ['tile','Płytki ceramiczne','Podłoże niechłonne i wymagające przyczepności'], ['unknown','Nie mam pewności','Doradca zaznaczy konieczność oceny podłoża']
+        ]
+      },
+      coats: {
+        title:'Ile warstw farby planujesz?', help:'Dwie warstwy są standardem dla większości farb gładkich, ale przy małym kontraście czasem wystarcza mniej.',
+        options:[['one','Jedna warstwa','Tylko przy dobrym kryciu i zbliżonym kolorze'],['two','Dwie warstwy','Bezpieczne założenie dla równego wykończenia']]
+      },
+      calcProduct: {
+        title:'Który produkt chcesz policzyć?', help:'Kalkulator poda ilość oraz właściwe elementy systemu.',
+        options:[
+          ['decomal','DECOMAL','Metaliczny'],['star','DECOMAL STAR','Metaliczny z brokatem'],['decomalmat','DECOMALmat','Matowa struktura'],
+          ['duo','DECOMAL DUO','Efekt chmur'],['provence','Provence','Glinka i przetarcia'],['aurum','Aurum','Glamour / vintage'],
+          ['beton','Beton Hydrofobowy','Beton i strefy mokre'],['kalahari','Kalahari','Efekt piasku'],
+          ['colormatt','FOX Color Matt','Farba gładka'],['ceramic','Ceramic White','Farba ceramiczna']
+        ]
+      }
+    };
+
+    const modeSteps = {
+      effect: ['room','exposure','effect','skill','color','substrate','area'],
+      paint: ['room','exposure','color','substrate','coats','area'],
+      calc: ['calcProduct','room','exposure','color','substrate','coats','area']
+    };
+
+    function getSteps() {
+      if (app.mode === 'calc' && app.answers.calcProduct && products[app.answers.calcProduct]?.type !== 'paint') {
+        return ['calcProduct','room','exposure','color','substrate','area'];
+      }
+      return modeSteps[app.mode];
+    }
+
+    // Uzupełnienie bazy o właściwości potrzebne do profesjonalnego doboru farb.
+    products.colormatt.strengths = ['palette','wash'];
+    products.ceramic.strengths = ['wash','ready'];
+    products.duo.coverage = { kind:'consult', label:'wydajność całego układu DUO wymaga potwierdzenia dla wybranego wariantu' };
+    products.duo.system[2] = ['Podkład przewidziany w zestawie','Skład podkładu różni się między wariantami i zmianami oferty. Przed zakupem sprawdź zawartość konkretnej karty zestawu.'];
+    products.decomalmat.system[2] = ['Podkład systemowy','Wybierz wyłącznie podkład wskazany na karcie konkretnego wariantu DECOMALmat; nie zamieniaj go samodzielnie.'];
+
+    products.antyreflex = {
+      id: 'antyreflex', name: 'FOX Color Matt Antyreflex', title: 'FOX Color Matt Antyreflex — głęboki mat bez refleksów',
+      type: 'paint', effects: ['smooth'], rooms: ['ceiling','salon','bedroom','commercial'], exposure: ['dry'], skills: ['first','some','pro'], strengths: ['antireflex'],
+      image: 'room-ceiling.jpg',
+      summary: 'Najlepszy wybór do białych sufitów i jasnych ścian, kiedy najważniejszy jest głęboki mat oraz ograniczenie widocznych refleksów światła.',
+      why: ['głęboki mat', 'ogranicza refleksy światła', 'do sufitów i jasnych ścian'],
+      coverage: { kind:'paint', unit:'l', per:14, packs:[10,2.5], defaultCoats:2, label:'do 14 m²/l na jedną warstwę' },
+      productLink: `${STORE}/pl/p/-ANTYREFLEX-biala-2%2C5l-FOX-DEKORATOR-COLOR-MATT/254`,
+      sampleLink: null,
+      system: [
+        ['Przygotowanie podłoża','Usuń słabe powłoki, uzupełnij ubytki, wyrównaj powierzchnię i dokładnie odpyl.'],
+        ['Grunt / farba podkładowa','Dobierz do chłonności podłoża i kontrastu kolorystycznego.'],
+        ['Pierwsza warstwa Color Matt Antyreflex','Nakładaj równomiernie, bez pracy suchym wałkiem.'],
+        ['Druga warstwa','Zachowaj ciągłość oraz jednolity kierunek prowadzenia wałka.']
+      ],
+      colors: {
+        light: [{name:'Biała Antyreflex',hex:'#f2f0e9',link:`${STORE}/pl/p/-ANTYREFLEX-biala-2%2C5l-FOX-DEKORATOR-COLOR-MATT/254`,sample:null,productImage:`${STORE}/environment/cache/images/productGfx_744_50_50/1ee386d8b2715be8a64ecce088057fbf.jpg`}]
+      }
+    };
+
+    ICONS.ceiling = '⌑';
+    ICONS.palette = 'N';
+    ICONS.antireflex = '◒';
+    ICONS.wash = '≈';
+    ICONS.ready = '✓';
+
+    if (!optionData.room.options.some(x => x[0] === 'ceiling')) {
+      optionData.room.options.splice(5, 0, ['ceiling','Sufit','Równy, głęboki mat bez odbić światła']);
+    }
+    optionData.paintPriority = {
+      title:'Co ma być największą przewagą farby?',
+      help:'To pytanie rozdziela farbę z szeroką paletą NCS, wariant antyrefleksyjny oraz gotowe kolory o podwyższonej odporności użytkowej.',
+      options:[
+        ['palette','Dokładny kolor z palety NCS','Najważniejszy jest szeroki i precyzyjny wybór odcienia'],
+        ['antireflex','Najgłębszy mat bez refleksów','Sufit lub jasna ściana w wymagającym oświetleniu'],
+        ['wash','Odporność na mycie i dotyk','Kuchnia, korytarz, pokój dziecięcy lub lokal'],
+        ['ready','Gotowy kolor DECOWANT','Chcę wybrać jeden ze sprawdzonych gotowych odcieni']
+      ]
+    };
+    if (!optionData.calcProduct.options.some(x => x[0] === 'antyreflex')) {
+      optionData.calcProduct.options.push(['antyreflex','FOX Color Matt Antyreflex','Głęboki mat do sufitów i jasnych ścian']);
+    }
+    modeSteps.paint = ['room','exposure','paintPriority','color','substrate','coats','area'];
+
+
+
+    function clearSamples(product) {
+      product.sampleLink=null;
+      Object.values(product.colors || {}).flat().forEach(v=>{v.sample=null; delete v.sampleType;});
+    }
+    function setSample(productId,needle,url,type) {
+      const p=products[productId];
+      if(!p) return;
+      for(const variants of Object.values(p.colors || {})) for(const v of variants) {
+        if(v.name.toLowerCase().includes(needle.toLowerCase())) { v.sample=`${STORE}${url}`; v.sampleType=type; }
+      }
+    }
+    Object.values(products).forEach(clearSamples);
+    setSample('decomal','Biała Perła','/pl/p/DECOWANT-DECOMAL-PROBKA-MOKRA-KOLOR-BIALA-PERLA/1551','mokra');
+    setSample('decomal','Piaskowy Beż','/pl/p/DECOWANT-DECOMAL-PROBKA-MOKRA-PIASKOWY-BEZ/1557','mokra');
+    setSample('decomal','Szary','/pl/p/PROBKA-SUCHA-40X40-DECOMAL-SZARY/1622','sucha');
+    setSample('decomal','Butelkowa Zieleń','/pl/p/DECOWANT-DECOMAL-PROBKA-MOKRA-KOLOR-BUTELKOWA-ZIELEN/1610','mokra');
+    setSample('decomal','Granatowy Lazur','/pl/p/PROBKA-SUCHA-40X40-DECOMAL-GRANATOWY-LAZUR/1810','sucha');
+    setSample('decomal','Ciemny Grafit','/pl/p/PROBKA-SUCHA-40X40-DECOMAL-CIEMNY-GRAFIT/1620','sucha');
+    setSample('star','Biała Gwiazda','/pl/p/PROBKA-SUCHA-40X40-DECOMAL-STAR-BIALA-GWIAZDA-/1816','sucha');
+    setSample('star','Szampańska Gwiazda','/pl/p/PROBKA-SUCHA-40X40-DECOMAL-STAR-SZAMPANSKA-GWIAZDA-/1803','sucha');
+    setSample('star','Piaskowa Gwiazda','/pl/p/PROBKA-SUCHA-40X40-DECOMAL-STAR-PIASKOWA-GWIAZDA/1801','sucha');
+    setSample('star','Złota Gwiazda','/pl/p/PROBKA-SUCHA-40X40-DECOMAL-STAR-ZLOTA-GWIAZDA/1815','sucha');
+    setSample('star','Szara Gwiazda','/pl/p/PROBKA-SUCHA-40X40-DECOMAL-STAR-SZARA-GWIAZDA-/1802','sucha');
+    setSample('decomalmat','Biały','/pl/p/DECOWANT-DECOMALmat-PROBKA-MOKRA-KOLOR-BIALY/1663','mokra');
+    setSample('decomalmat','Czarny','/pl/p/DECOWANT-DECOMALmat-PROBKA-MOKRA-KOLOR-CZARNY/1665','mokra');
+    setSample('decomalmat','Granat','/pl/p/DECOWANT-DECOMALmat-PROBKA-MOKRA-KOLOR-GRANAT/1666','mokra');
+    setSample('decomalmat','Szary','/pl/p/DECOWANT-DECOMALmat-PROBKA-MOKRA-KOLOR-SZARY/1667','mokra');
+    setSample('decomalmat','Piaskowy Beż','/pl/p/DECOWANT-DECOMALmat-PROBKA-MOKRA-PIASKOWY-BEZ/1668','mokra');
+    setSample('decomalmat','Kremowy','/pl/p/DECOWANT-DECOMALmat-PROBKA-MOKRA-KREMOWY/1669','mokra');
+    setSample('duo','Butelkowa Zieleń','/pl/p/PROBKA-SUCHA-40X40-DECOMAL-DUO-BUTELKOWA-ZIELEN-BIALA-PERLA/1890','sucha');
+    setSample('provence','Cappuccino','/pl/p/PROBKA-SUCHA-40X40-PROVENCE-CAPPUCCINO-CEBO-UP/1577','sucha');
+    setSample('provence','Ciemny Granit','/pl/p/PROBKA-SUCHA-40X40-PROVENCE-CIEMNY-GRANIT/1649','sucha');
+    setSample('aurum','Grafit','/pl/p/PROBKA-SUCHA-40X40-AURUM-GRAFIT/1674','sucha');
+    setSample('kalahari','Ciemny Szary','/pl/p/FOX-KALAHARI-CIEMNY-SZARY-PROBKA-MOKRA-/1640','mokra');
+    setSample('colormatt','013 Ciepły Kaszmir','/pl/p/FARBA-Color-Matt-013-Probka-mokra/1353','mokra');
+
+
+    const GUIDE_LIBRARY = {
+      bathroom:{id:'bathroom',title:'Jak zrobić tynk dekoracyjny w łazience — krok po kroku',description:'Hydroizolacja, podłoże, strefy mokre i zabezpieczenie.',url:`${STORE}/pl/n/14`,image:'room-bathroom.jpg'},
+      tiles:{id:'tiles',title:'Farba lub tynk na płytki — jak przygotować podłoże',description:'Matowienie, grunt sczepny, wyrównanie fug i dobór systemu.',url:`${STORE}/pl/n/22`,image:'substrate-tile.jpg'},
+      fireplace:{id:'fireplace',title:'Tynk na kominku — na co uważać',description:'Temperatura, podłoże, zabezpieczenie i najczęstsze błędy.',url:`${STORE}/pl/n/24`,image:'room-fireplace.jpg'},
+      dark:{id:'dark',title:'Jak lakierować czarne i grafitowe ściany',description:'Jak ograniczyć szarzenie, mleczny nalot i utratę głębi koloru.',url:`${STORE}/pl/n/25`,image:'effect-glamour.jpg'},
+      concrete:{id:'concrete',title:'Jak wykonać beton architektoniczny na ścianie',description:'Przygotowanie, narzędzia, aplikacja i ochrona powierzchni.',url:`${STORE}/pl/n/20`,image:'effect-concrete.jpg'},
+      kitchen:{id:'kitchen',title:'Pas międzyszafkowy z tynku dekoracyjnego',description:'Praktyczne doświadczenia z kuchni, wodą, parą i tłuszczem.',url:`${STORE}/pl/n/18`,image:'room-kitchen.jpg'},
+      protection:{id:'protection',title:'Lakier, impregnat czy wosk — co wybrać',description:'Dobierz ochronę do efektu, koloru i intensywności użytkowania.',url:`${STORE}/pl/n/11`,image:'exposure-splash.jpg'},
+      preparation:{id:'preparation',title:'Grunt wodny a farba podkładowa',description:'Kiedy stabilizować podłoże, a kiedy budować warstwę podkładową.',url:`${STORE}/pl/n/9`,image:'substrate-plaster.jpg'},
+      colors:{id:'colors',title:'Jak dobierać kolory tynków i farb w domu',description:'Światło, wielkość pomieszczenia i funkcja dekoracyjnej ściany.',url:`${STORE}/pl/n/19`,image:'mode-paint.jpg'},
+      kalahari:{id:'kalahari',title:'Zrób to sam — FOX Kalahari',description:'Podkład, pędzel i sposób uzyskania piaskowego efektu.',url:`${STORE}/pl/n/6`,image:'effect-sand.jpg'},
+      tools:{id:'tools',title:'Jak korzystać z narzędzi DECOWANT przed zakupem',description:'Kalkulatory, próbki, filmy i pomoc przy kompletowaniu systemu.',url:`${STORE}/jak-korzystac-z-narzedzi-decowant-przed-zakupem`,image:'mode-calc.jpg'}
+    };
+    function guidesFor(primary,answers) {
+      const ids=[]; const add=id=>{if(id&&!ids.includes(id))ids.push(id);};
+      if(answers.room==='bathroom'||answers.exposure==='wet')add('bathroom');
+      if(answers.substrate==='tile')add('tiles');
+      if(answers.room==='fireplace'||answers.exposure==='heat')add('fireplace');
+      if(primary.id==='beton'||answers.effect==='concrete')add('concrete');
+      if(answers.room==='kitchen')add('kitchen');
+      if(answers.color==='dark')add('dark');
+      if(answers.exposure==='splash'||answers.exposure==='wet'||primary.system.some(([n])=>/zabezpieczenie|hydrostop|ochrona/i.test(n)))add('protection');
+      if(primary.id==='kalahari')add('kalahari');
+      if(primary.type==='paint')add('colors');
+      if(answers.substrate==='plaster'||answers.substrate==='unknown')add('preparation');
+      add('tools');
+      return ids.slice(0,3).map(id=>GUIDE_LIBRARY[id]).filter(Boolean);
+    }
+    function renderGuides(primary) {
+      const list=guidesFor(primary,app.answers); const section=el('guidesSection'); section.hidden=!list.length;
+      el('guidesGrid').innerHTML=list.map(g=>`<a class="guide-card" href="${tracked(g.url,`guide_${g.id}`)}" target="_blank" rel="noopener" data-track="guide" data-guide="${g.id}"><img src="${IMAGE_BASE}${g.image}" alt="" loading="lazy"><span class="guide-copy"><span class="guide-type">Poradnik DECOWANT</span><h3>${g.title}</h3><p>${g.description}</p><span class="guide-link">Czytaj poradnik →</span></span></a>`).join('');
+    }
+
+    const STORAGE_KEY = 'decowant-advisor-progress-v25';
+    const STORAGE_TTL = 14 * 24 * 60 * 60 * 1000;
+    const COMPONENT_URLS = {
+      quarzo: `${STORE}/pl/p/DECOVERNI-QUARZO-GG-1%2C5-KG-FARBA-GRUNTUJACA/614`,
+      strong: `${STORE}/pl/p/FOX-GRUNT-SCZEPNY-STRONG-1-KG/1078`,
+      initium: `${STORE}/pl/p/FOX-FARBA-PODKLADOWA-INITIUM-COLOR-SZARA-1L/725`,
+      brush: `${STORE}/pl/p/Pedzel-Decowant-120x8-MM/891`,
+      hydrostop: `${STORE}/pl/p/VERNICE-HYDROSTOP-GLOSS-1L/1771`,
+      hydrostopSatin: `${STORE}/pl/p/VERNICE-HYDROSTOP-SATINE-1L/1770`,
+      samples: `${STORE}/pl/collection/PROBKI-FARB/10`
+    };
+
+    const app = {
+      mode: 'effect', step: 0, answers: {}, currentResult: null, selectedVariant: null, resultMeta: null
+    };
+
+    const el = id => document.getElementById(id);
+    const wizard = el('wizard');
+    const result = el('result');
+    const modes = el('modes');
+    const wizardBody = el('wizardBody');
+    const nextBtn = el('nextBtn');
+    const prevBtn = el('prevBtn');
+
+    function track(event, params={}) {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({event, app_version:APP_VERSION, ...params});
+    }
+
+    function safeStorageGet(key) {
+      try { return localStorage.getItem(key); } catch { return null; }
+    }
+    function safeStorageSet(key, value) {
+      try { localStorage.setItem(key, value); return true; } catch { return false; }
+    }
+    function safeStorageRemove(key) {
+      try { localStorage.removeItem(key); } catch {}
+    }
+    function safeReplaceState(url) {
+      try { history.replaceState(null, '', url); } catch {}
+    }
+
+    function saveProgress(view = result.hidden ? 'wizard' : 'result') {
+      if (!Object.keys(app.answers).length) return;
+      safeStorageSet(STORAGE_KEY, JSON.stringify({
+        mode:app.mode, step:app.step, answers:app.answers, view,
+        version:APP_VERSION, savedAt:Date.now()
+      }));
+      refreshResumeCard();
+    }
+
+    function getStoredProgress() {
+      const raw = safeStorageGet(STORAGE_KEY);
+      if (!raw) return null;
+      try {
+        const data = JSON.parse(raw);
+        if (!data?.mode || !data?.answers || !data.savedAt || Date.now() - data.savedAt > STORAGE_TTL) {
+          safeStorageRemove(STORAGE_KEY);
+          return null;
+        }
+        return data;
+      } catch {
+        safeStorageRemove(STORAGE_KEY);
+        return null;
+      }
+    }
+
+    function modeLabel(mode) {
+      return mode === 'effect' ? 'efekt dekoracyjny' : mode === 'paint' ? 'farbę gładką' : 'kalkulację materiału';
+    }
+
+    function refreshResumeCard() {
+      const card = el('resumeCard');
+      if (!card || el('home').hidden) return;
+      const saved = getStoredProgress();
+      card.hidden = !saved;
+      if (!saved) return;
+      const total = (() => {
+        const oldMode = app.mode, oldAnswers = app.answers;
+        app.mode = saved.mode; app.answers = saved.answers;
+        const n = getSteps().length;
+        app.mode = oldMode; app.answers = oldAnswers;
+        return n;
+      })();
+      const step = Math.min(Number(saved.step || 0) + 1, total);
+      const when = new Date(saved.savedAt).toLocaleDateString('pl-PL', {day:'2-digit',month:'2-digit'});
+      el('resumeDescription').textContent = saved.view === 'result'
+        ? `Masz zapisany wynik dla ścieżki „${modeLabel(saved.mode)}” z ${when}.`
+        : `Ścieżka „${modeLabel(saved.mode)}”, krok ${step} z ${total}. Zapis z ${when}.`;
+    }
+
+    function resumeProgress() {
+      const saved = getStoredProgress();
+      if (!saved) { refreshResumeCard(); return; }
+      app.mode = saved.mode;
+      app.answers = {...saved.answers};
+      normalizeDependentAnswers();
+      app.step = Math.min(Number(saved.step || 0), Math.max(0, getSteps().length - 1));
+      app.currentResult = null;
+      el('home').hidden = true;
+      if (saved.view === 'result' && Number(app.answers.area) > 0) {
+        showResult({skipScroll:false});
+      } else {
+        result.hidden = true;
+        wizard.hidden = false;
+        setWizardTitle();
+        renderStep();
+        scrollToSection(wizard);
+      }
+      track('advisor_resume',{mode:app.mode,view:saved.view || 'wizard'});
+    }
+
+    function clearProgress() {
+      safeStorageRemove(STORAGE_KEY);
+      el('resumeCard').hidden = true;
+    }
+
+    function scrollToSection(node) {
+      if (!node) return;
+      const y = node.getBoundingClientRect().top + window.scrollY - 82;
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({top:y, behavior:reduced ? 'auto' : 'smooth'});
+    }
+
+    function setWizardTitle() {
+      el('wizardModeTitle').textContent = app.mode === 'effect'
+        ? 'Dobór efektu dekoracyjnego'
+        : app.mode === 'paint' ? 'Dobór farby gładkiej' : 'Kalkulator materiałów';
+    }
+
+    function start(mode, preset = null) {
+      app.mode = mode;
+      app.step = 0;
+      app.answers = preset ? {...preset} : {};
+      normalizeDependentAnswers();
+      app.currentResult = null;
+      app.selectedVariant = null;
+      app.resultMeta = null;
+      result.hidden = true;
+      el('home').hidden = true;
+      wizard.hidden = false;
+      setWizardTitle();
+      renderStep();
+      scrollToSection(wizard);
+      track('advisor_start', {mode});
+    }
+
+    function iconSvg(key) {
+      const icon = ICONS[key] || '•';
+      return `<span aria-hidden="true">${icon}</span>`;
+    }
+
+    function isPaintFlow() {
+      return app.mode === 'paint' || (app.mode === 'calc' && products[app.answers.calcProduct]?.type === 'paint');
+    }
+
+    const EXPOSURES_BY_ROOM = {
+      salon:['dry','splash'], bedroom:['dry'], hall:['dry','splash'], kitchen:['dry','splash'],
+      bathroom:['dry','splash','wet'], fireplace:['dry','heat'], commercial:['dry','splash'], ceiling:['dry']
+    };
+
+    function validExposuresForRoom(room) {
+      return EXPOSURES_BY_ROOM[room] || ['dry','splash'];
+    }
+
+    function normalizeDependentAnswers() {
+      const paintFlow = isPaintFlow();
+      if (!paintFlow && app.answers.room === 'ceiling') {
+        delete app.answers.room;
+        delete app.answers.exposure;
+      }
+      if (app.mode === 'calc' && app.answers.calcProduct && products[app.answers.calcProduct]?.type !== 'paint') {
+        delete app.answers.coats;
+        delete app.answers.paintPriority;
+      }
+      if (app.answers.room) {
+        const allowed = validExposuresForRoom(app.answers.room);
+        if (!allowed.includes(app.answers.exposure)) delete app.answers.exposure;
+        if (app.answers.room === 'ceiling') app.answers.exposure = 'dry';
+      }
+    }
+
+    function questionData(key) {
+      const base = optionData[key];
+      const data = {...base, options:[...(base?.options || [])]};
+      if (key === 'room') {
+        const paintFlow = isPaintFlow();
+        data.title = paintFlow ? 'Gdzie chcesz malować?' : 'Gdzie chcesz wykonać dekorację?';
+        data.help = paintFlow
+          ? 'Pomieszczenie i rodzaj powierzchni wpływają na wymagany mat, odporność na mycie oraz dobór podkładu.'
+          : base.help;
+        data.options = data.options.filter(([value]) => paintFlow || value !== 'ceiling');
+      }
+      if (key === 'exposure') {
+        const allowed = validExposuresForRoom(app.answers.room);
+        data.options = data.options.filter(([value]) => allowed.includes(value));
+        if (app.answers.room === 'fireplace') {
+          data.help = 'Wybierz „okolica kominka” tylko wtedy, gdy powierzchnia rzeczywiście się nagrzewa. Temperaturę podłoża trzeba potwierdzić przed zakupem.';
+        }
+      }
+      return data;
+    }
+
+    function renderStep() {
+      const steps = getSteps();
+      if (app.step >= steps.length) app.step = steps.length - 1;
+      const key = steps[app.step];
+      const total = steps.length;
+      const pct = Math.round(((app.step+1)/total)*100);
+      el('progressLabel').textContent = `Krok ${app.step+1} z ${total}`;
+      el('progressPct').textContent = `${pct}%`;
+      el('progressBar').style.width = `${pct}%`;
+      prevBtn.disabled = false;
+      prevBtn.textContent = app.step === 0 ? 'Zmień tryb' : 'Wstecz';
+      nextBtn.textContent = app.step === total-1 ? (app.mode === 'calc' ? 'Policz ilość' : 'Pokaż rekomendację') : 'Dalej';
+
+      if (key === 'area') {
+        renderArea();
+      } else {
+        const data = questionData(key);
+        const selected = app.answers[key];
+        const cls = data.options.length <= 4 ? 'options-grid two' : 'options-grid';
+        wizardBody.innerHTML = `
+          <div class="question-number">Pytanie ${app.step+1}</div>
+          <h2 class="question-title">${data.title}</h2>
+          <p class="question-help">${data.help}</p>
+          <div class="${cls}" role="group" aria-label="${data.title}">
+            ${data.options.map(([value,label,desc]) => {
+              const media = mediaFor(key,value);
+              return `
+              <button class="option-card ${media?'has-media':''} ${selected===value?'selected':''}" data-step="${key}" data-value="${value}" aria-pressed="${selected===value}">
+                ${photoMarkup(media, `${label} — zdjęcie inspiracyjne`)}
+                ${visualTagFor(key,value) ? `<span class="option-visual-tag">${visualTagFor(key,value)}</span>` : ''}
+                <span class="option-body">
+                  <span class="option-icon">${iconSvg(value)}</span>
+                  <span class="option-copy"><b>${label}</b><span>${desc || ''}</span></span>
+                  <span class="option-check">✓</span>
+                </span>
+              </button>`;
+            }).join('')}
+          </div>`;
+        hydrateRemoteImages(wizardBody);
+        wizardBody.querySelectorAll('.option-card').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const nextValue = btn.dataset.value;
+            const previousValue = app.answers[key];
+            if (key === 'room' && previousValue !== nextValue) delete app.answers.exposure;
+            if (key === 'calcProduct') {
+              const previousType = products[previousValue]?.type;
+              const nextType = products[nextValue]?.type;
+              delete app.answers.coats;
+              delete app.answers.paintPriority;
+              if (previousType && nextType && previousType !== nextType) {
+                delete app.answers.room;
+                delete app.answers.exposure;
+              }
+            }
+            app.answers[key] = nextValue;
+            normalizeDependentAnswers();
+            wizardBody.querySelectorAll('.option-card').forEach(x => {
+              const selectedNow = x === btn;
+              x.classList.toggle('selected', selectedNow);
+              x.setAttribute('aria-pressed', String(selectedNow));
+            });
+            saveProgress('wizard');
+            track('advisor_answer',{mode:app.mode,step:key,value:btn.dataset.value});
+            // Wybór jest zatwierdzany świadomie przyciskiem „Dalej”.
+          });
+        });
+      }
+      saveProgress('wizard');
+    }
+
+
+    function numberValue(value) { const n=Number(String(value??'').replace(',','.')); return Number.isFinite(n)&&n>=0?n:0; }
+    function ensureAreaModel() {
+      app.answers.areaMode=app.answers.areaMode==='dimensions'?'dimensions':'known';
+      if(!Array.isArray(app.answers.walls)||!app.answers.walls.length)app.answers.walls=[{width:'',height:'',qty:1}];
+      if(!Array.isArray(app.answers.openings))app.answers.openings=[];
+      if(!app.answers.ceiling||typeof app.answers.ceiling!=='object')app.answers.ceiling={enabled:false,width:'',length:''};
+      const r=Number(app.answers.reserve); app.answers.reserve=[0,5,10,15].includes(r)?r:10;
+    }
+    function dimensionBreakdown() {
+      ensureAreaModel();
+      const wallsGross=app.answers.walls.reduce((sum,row)=>sum+numberValue(row.width)*numberValue(row.height)*Math.max(1,numberValue(row.qty)||1),0);
+      const openings=app.answers.openings.reduce((sum,row)=>sum+numberValue(row.width)*numberValue(row.height)*Math.max(1,numberValue(row.qty)||1),0);
+      const wallNet=Math.max(0,wallsGross-openings);
+      const ceiling=app.answers.ceiling.enabled?numberValue(app.answers.ceiling.width)*numberValue(app.answers.ceiling.length):0;
+      const net=wallNet+ceiling, reservePct=Number(app.answers.reserve)||0, reserveArea=net*reservePct/100, total=net+reserveArea;
+      return {wallsGross,openings,wallNet,ceiling,net,reservePct,reserveArea,total,overdraw:openings>wallsGross};
+    }
+    function formatArea(n) { return Number(n||0).toLocaleString('pl-PL',{minimumFractionDigits:n&&n<10?1:0,maximumFractionDigits:2}); }
+    function syncDimensionArea() {
+      const b=dimensionBreakdown(); app.answers.area=b.total>0?String(Math.round(b.total*100)/100):'';
+      const set=(id,v)=>{const n=el(id);if(n)n.textContent=v;};
+      set('wallsGrossOutput',`${formatArea(b.wallsGross)} m²`);set('openingsOutput',`− ${formatArea(b.openings)} m²`);set('ceilingOutput',`${formatArea(b.ceiling)} m²`);set('netOutput',`${formatArea(b.net)} m²`);set('finalAreaOutput',`${formatArea(b.total)} m²`);
+      const w=el('dimensionWarning');if(w){w.hidden=!b.overdraw;w.textContent=b.overdraw?'Powierzchnia otworów jest większa niż powierzchnia ścian. Sprawdź wymiary lub liczbę sztuk.':'';}
+      const err=el('areaError');if(err)err.hidden=true; saveProgress('wizard'); return b;
+    }
+    function dimensionRow(row,index,type) {
+      const isWall=type==='walls', title=isWall?`Ściana ${index+1}`:(row.label||`Otwór ${index+1}`);
+      return `<div class="dimension-row" data-row-type="${type}" data-index="${index}">
+        <div class="compact-field"><label>${isWall?'Element':'Rodzaj otworu'}</label>${isWall?`<input value="${title}" disabled aria-label="${title}">`:`<select data-array="openings" data-index="${index}" data-prop="label"><option ${row.label==='Drzwi'?'selected':''}>Drzwi</option><option ${row.label==='Okno'?'selected':''}>Okno</option><option ${row.label==='Inny otwór'?'selected':''}>Inny otwór</option></select>`}</div>
+        <div class="compact-field"><label>Szerokość [m]</label><input class="dimension-input" type="number" inputmode="decimal" min="0" step="0.01" placeholder="np. 3,60" value="${row.width??''}" data-array="${type}" data-index="${index}" data-prop="width"></div>
+        <div class="compact-field"><label>Wysokość [m]</label><input class="dimension-input" type="number" inputmode="decimal" min="0" step="0.01" placeholder="np. 2,60" value="${row.height??''}" data-array="${type}" data-index="${index}" data-prop="height"></div>
+        <div class="compact-field"><label>Liczba</label><input class="dimension-input" type="number" inputmode="numeric" min="1" step="1" value="${row.qty||1}" data-array="${type}" data-index="${index}" data-prop="qty"></div>
+        <button class="remove-row" type="button" data-remove-array="${type}" data-remove-index="${index}" aria-label="Usuń ${title}" ${isWall&&app.answers.walls.length===1?'disabled':''}>×</button></div>`;
+    }
+    function bindAreaEvents() {
+      wizardBody.querySelectorAll('[data-area-mode]').forEach(btn=>btn.addEventListener('click',()=>{app.answers.areaMode=btn.dataset.areaMode;if(app.answers.areaMode==='dimensions')ensureAreaModel();saveProgress('wizard');renderArea();}));
+      const direct=el('areaInput');if(direct)direct.addEventListener('input',()=>{app.answers.area=direct.value;saveProgress('wizard');el('areaError').hidden=true;});
+      wizardBody.querySelectorAll('[data-area]').forEach(btn=>btn.addEventListener('click',()=>{app.answers.areaMode='known';app.answers.area=btn.dataset.area;renderArea();}));
+      wizardBody.querySelectorAll('[data-array][data-prop]').forEach(input=>{const handler=()=>{const arr=app.answers[input.dataset.array],idx=Number(input.dataset.index);if(!arr?.[idx])return;arr[idx][input.dataset.prop]=input.value;syncDimensionArea();};input.addEventListener('input',handler);input.addEventListener('change',handler);});
+      wizardBody.querySelectorAll('[data-remove-array]').forEach(btn=>btn.addEventListener('click',()=>{const arr=app.answers[btn.dataset.removeArray];if(!Array.isArray(arr))return;if(btn.dataset.removeArray==='walls'&&arr.length===1)return;arr.splice(Number(btn.dataset.removeIndex),1);syncDimensionArea();renderArea();}));
+      el('addWallBtn')?.addEventListener('click',()=>{app.answers.walls.push({width:'',height:'',qty:1});renderArea();});
+      el('addOpeningBtn')?.addEventListener('click',()=>{app.answers.openings.push({label:'Drzwi',width:'',height:'',qty:1});renderArea();});
+      el('ceilingEnabled')?.addEventListener('change',e=>{app.answers.ceiling.enabled=e.target.checked;syncDimensionArea();renderArea();});
+      wizardBody.querySelectorAll('[data-ceiling-prop]').forEach(input=>input.addEventListener('input',()=>{app.answers.ceiling[input.dataset.ceilingProp]=input.value;syncDimensionArea();}));
+      el('reserveSelect')?.addEventListener('change',e=>{app.answers.reserve=Number(e.target.value);syncDimensionArea();});
+      if(app.answers.areaMode==='dimensions')syncDimensionArea();
+    }
+    function renderArea() {
+      ensureAreaModel(); const value=app.answers.area||'', dimensions=app.answers.areaMode==='dimensions', b=dimensionBreakdown();
+      wizardBody.innerHTML=`<div class="question-number">Ostatni krok</div><h2 class="question-title">Jaka jest powierzchnia?</h2><p class="question-help">Wpisz gotowy metraż albo policz go z wymiarów ścian, otworów i sufitu. Wynik może uwzględnić bezpieczny zapas.</p><div class="input-panel">
+        <div class="area-mode-switch" role="tablist"><button type="button" class="area-mode-btn ${dimensions?'':'selected'}" data-area-mode="known">Znam gotowy metraż</button><button type="button" class="area-mode-btn ${dimensions?'selected':''}" data-area-mode="dimensions">Oblicz z wymiarów</button></div>
+        ${!dimensions?`<div class="area-row"><div class="field"><label for="areaInput">Powierzchnia</label><input id="areaInput" type="number" inputmode="decimal" min="0.5" max="1000" step="0.1" value="${value}" placeholder="np. 12"></div><div class="unit-box">m²</div></div><div class="quick-area">${[6,10,12,20,24].map(n=>`<button type="button" class="quick-chip" data-area="${n}">${n} m²</button>`).join('')}</div><p class="field-note">Podaj powierzchnię po odjęciu dużych okien i drzwi.</p>`:`
+        <div class="dimension-section"><div class="dimension-heading"><div><h3>Ściany do policzenia</h3><p>Dodaj każdą ścianę lub kilka identycznych ścian w jednym wierszu.</p></div></div><div class="dimension-list">${app.answers.walls.map((r,i)=>dimensionRow(r,i,'walls')).join('')}</div><button class="dimension-add" type="button" id="addWallBtn">+ Dodaj kolejną ścianę</button></div>
+        <div class="dimension-section"><div class="dimension-heading"><div><h3>Okna i drzwi do odjęcia</h3><p>Opcjonalnie odejmij większe otwory od powierzchni ścian.</p></div></div><div class="dimension-list">${app.answers.openings.map((r,i)=>dimensionRow(r,i,'openings')).join('')}</div><button class="dimension-add" type="button" id="addOpeningBtn">+ Dodaj okno lub drzwi</button></div>
+        <div class="dimension-section"><label class="ceiling-toggle"><input type="checkbox" id="ceilingEnabled" ${app.answers.ceiling.enabled?'checked':''}> Dolicz również sufit</label>${app.answers.ceiling.enabled?`<div class="ceiling-fields"><div class="compact-field"><label>Szerokość sufitu [m]</label><input class="dimension-input" type="number" min="0" step="0.01" value="${app.answers.ceiling.width??''}" data-ceiling-prop="width"></div><div class="compact-field"><label>Długość sufitu [m]</label><input class="dimension-input" type="number" min="0" step="0.01" value="${app.answers.ceiling.length??''}" data-ceiling-prop="length"></div></div>`:''}</div>
+        <div class="dimension-section area-controls"><div><h3 style="font-size:17px;margin-bottom:5px">Zapas materiału</h3><p class="field-note" style="margin:0">Na chłonność, poprawki i mocniejszą strukturę.</p></div><div class="compact-field"><label for="reserveSelect">Dodaj zapas</label><select id="reserveSelect">${[0,5,10,15].map(v=>`<option value="${v}" ${Number(app.answers.reserve)===v?'selected':''}>${v}%</option>`).join('')}</select></div></div>
+        <div class="area-summary"><div class="area-summary-grid"><div class="area-summary-cell"><small>Ściany brutto</small><b id="wallsGrossOutput">${formatArea(b.wallsGross)} m²</b></div><div class="area-summary-cell"><small>Otwory</small><b id="openingsOutput">− ${formatArea(b.openings)} m²</b></div><div class="area-summary-cell"><small>Sufit</small><b id="ceilingOutput">${formatArea(b.ceiling)} m²</b></div><div class="area-summary-cell"><small>Powierzchnia netto</small><b id="netOutput">${formatArea(b.net)} m²</b></div></div><div class="area-summary-final"><span>Powierzchnia przyjęta do obliczeń<br>z zapasem ${b.reservePct}%</span><strong id="finalAreaOutput">${formatArea(b.total)} m²</strong></div></div><div class="area-alert" id="dimensionWarning" ${b.overdraw?'':'hidden'}>${b.overdraw?'Powierzchnia otworów jest większa niż powierzchnia ścian. Sprawdź wymiary.':''}</div>`}
+        <div class="validation" id="areaError" hidden>${dimensions?'Dodaj co najmniej jedną prawidłowo wymierzoną ścianę.':'Wpisz powierzchnię od 0,5 do 1000 m².'}</div></div>`;
+      bindAreaEvents(); if(!dimensions)setTimeout(()=>el('areaInput')?.focus(),80);
+    }
+
+
+    function next() {
+      const steps = getSteps();
+      const key = steps[app.step];
+      if (key === 'area') {
+        const n = Number(app.answers.area);
+        if (!Number.isFinite(n) || n < .5 || n > 1000) { el('areaError').hidden=false; (el('areaInput')||wizardBody.querySelector('.dimension-input')||wizardBody.querySelector('[data-area-mode]'))?.focus(); return; }
+      } else {
+        const allowed = questionData(key).options.map(([value]) => value);
+        if (!app.answers[key] || !allowed.includes(app.answers[key])) {
+          showToast('Wybierz jedną odpowiedź, aby przejść dalej.');
+          return;
+        }
+      }
+      if (app.step < steps.length-1) {
+        app.step++;
+        renderStep();
+        scrollToSection(wizard);
+      } else {
+        showResult();
+      }
+    }
+
+    function previous() {
+      if (app.step === 0) {
+        wizard.hidden = true;
+        result.hidden = true;
+        el('home').hidden = false;
+        refreshResumeCard();
+        scrollToSection(modes);
+        return;
+      }
+      app.step--;
+      renderStep();
+      scrollToSection(wizard);
+    }
+
+    function scoreProduct(p, a, mode = app.mode) {
+      let score = 0;
+      if (mode === 'paint' && p.type !== 'paint') return -999;
+      if (mode === 'effect' && p.type !== 'effect') return -999;
+      if (a.effect && p.effects.includes(a.effect)) score += 18;
+      if (p.rooms.includes(a.room)) score += 6;
+      else if (a.room) score -= 3;
+
+      if (a.exposure === 'heat') {
+        score += p.rooms.includes('fireplace') ? 8 : -4;
+        if (a.effect && p.effects.includes(a.effect)) score += 3;
+      } else if (p.exposure.includes(a.exposure)) score += 6;
+      else if (a.exposure) score -= 10;
+
+      if (a.skill && p.skills.includes(a.skill)) score += 3;
+      const preferredColor = p.colors?.[a.color]?.[0];
+      if (preferredColor?.fit === 'nearest') score -= 2;
+      else if (preferredColor) score += 2;
+      else if (a.color) score -= 4;
+
+      if (mode === 'paint') {
+        if (p.strengths?.includes(a.paintPriority)) score += 13;
+        if (a.room === 'ceiling') {
+          if (p.id === 'antyreflex') score += 22;
+          if (p.id === 'colormatt') score += 4;
+          if (p.id === 'ceramic') score -= 5;
+        }
+        if (p.id === 'antyreflex' && a.color && a.color !== 'light') score -= 14;
+        if (a.exposure === 'splash') {
+          if (['ceramic','colormatt'].includes(p.id)) score += 7;
+          if (p.id === 'antyreflex') score -= 12;
+        }
+        if (['kitchen','hall','bathroom','commercial'].includes(a.room)) {
+          if (p.id === 'ceramic') score += 5;
+          if (p.id === 'colormatt') score += 3;
+        }
+      }
+
+      if (a.skill === 'first') {
+        if (['decomalmat','decomal','star','kalahari','colormatt','ceramic','antyreflex'].includes(p.id)) score += 5;
+        if (['aurum','beton'].includes(p.id)) score -= 3;
+      }
+      if (a.room === 'hall' && ['ceramic','colormatt','decomalmat'].includes(p.id)) score += 3;
+      if (a.room === 'commercial' && ['decomal','star','aurum','colormatt','ceramic'].includes(p.id)) score += 2;
+      if (a.exposure === 'splash' && ['ceramic','colormatt','beton'].includes(p.id)) score += 4;
+      if (a.substrate === 'tile') score += p.id === 'beton' ? 18 : -16;
+      if (a.exposure === 'wet') score += p.id === 'beton' ? 35 : -35;
+      return score;
+    }
+
+    function rankAlternatives(primary, a) {
+      const mode = primary.type === 'paint' ? 'paint' : 'effect';
+      return Object.values(products)
+        .filter(p => p.id !== primary.id && p.type === primary.type)
+        .map(p => {
+          let score = scoreProduct(p, a, mode);
+          const overlap = p.effects.filter(x => primary.effects.includes(x)).length;
+          score += overlap * 5;
+          if (p.strengths?.some(x => primary.strengths?.includes(x))) score += 3;
+          return {p,score};
+        })
+        .sort((x,y)=>y.score-x.score)
+        .slice(0,2)
+        .map(x=>x.p);
+    }
+
+    function chooseProducts() {
+      const a = app.answers;
+      if (app.mode === 'calc') {
+        const primary = products[a.calcProduct];
+        return {primary, alternatives:rankAlternatives(primary,a), meta:{override:'calc'}};
+      }
+      if (a.exposure === 'wet' || a.substrate === 'tile') {
+        return {
+          primary:products.beton,
+          alternatives:[],
+          meta:{override:a.exposure === 'wet' ? 'wet' : 'tile', requestedMode:app.mode}
+        };
+      }
+      const list = Object.values(products)
+        .map(p=>({p,s:scoreProduct(p,a)}))
+        .filter(x=>x.s>-900)
+        .sort((x,y)=>y.s-x.s);
+      const primary = list[0].p;
+      return {primary, alternatives:list.slice(1,3).map(x=>x.p), meta:{override:null,score:list[0].s}};
+    }
+
+    function packOptimizer(required, sizes) {
+      let best = null;
+      const maxCounts = sizes.map(s=>Math.ceil(required/s)+2);
+      function walk(i, counts) {
+        if (i === sizes.length) {
+          const total = counts.reduce((sum,c,idx)=>sum+c*sizes[idx],0);
+          if (total + 1e-9 < required) return;
+          const count = counts.reduce((a,b)=>a+b,0);
+          const candidate = {counts:[...counts], total, waste:total-required, count};
+          if (!best || candidate.waste < best.waste-.001 || (Math.abs(candidate.waste-best.waste)<.001 && candidate.count<best.count)) best=candidate;
+          return;
+        }
+        for (let c=0;c<=maxCounts[i];c++) {counts[i]=c;walk(i+1,counts);}
+      }
+      walk(0,[]);
+      return best;
+    }
+
+    function pluralPack(n) {
+      if (n === 1) return 'opakowanie / zestaw';
+      if ([2,3,4].includes(n % 10) && ![12,13,14].includes(n % 100)) return 'opakowania / zestawy';
+      return 'opakowań / zestawów';
+    }
+
+    function quantityFor(p, area) {
+      const c = p.coverage;
+      if (c.kind === 'rangePack') {
+        const minPacks = Math.ceil(area / c.max);
+        const safePacks = Math.ceil(area / c.min);
+        return {
+          number: safePacks,
+          main: `${safePacks} ${pluralPack(safePacks)}`,
+          detail: minPacks === safePacks
+            ? `${c.label}. Dla ${area} m² wynik jest jednoznaczny.`
+            : `Minimum przy idealnej wydajności: ${minPacks} szt. Bezpieczny wariant zakupowy: ${safePacks} szt.`,
+          caution: minPacks === safePacks
+            ? 'Mimo jednoznacznego wyniku wykonaj próbę na docelowym podłożu.'
+            : `Doradca pokazuje jako wynik ${safePacks} szt., aby nie opierać zakupu na maksymalnej wydajności. Redukcję do ${minPacks} szt. potwierdź dopiero po próbie zużycia.`,
+          level:'safe'
+        };
+      }
+      if (c.kind === 'single') {
+        const packs = Math.ceil(area * (c.coats||1) / c.per);
+        return {number:packs,main:`${packs} × ${c.pack} ${c.unit}`,detail:`${c.label}. Obliczenie dla ${area} m².`,caution:'Kupując materiał z różnych partii, przed aplikacją połącz go w jednym większym pojemniku, o ile instrukcja produktu na to pozwala.',level:'standard'};
+      }
+      if (c.kind === 'consult') {
+        return {
+          number:'—',
+          main:'Potwierdź ilość przed zakupem',
+          detail:'Skład zestawu jest określony na karcie produktu, ale aktualna wydajność całego układu DUO nie jest opisana wystarczająco jednoznacznie, aby podawać pozornie dokładny wynik.',
+          caution:'Doradca celowo nie zgaduje. Podaj metraż podczas konsultacji — po ujednoliceniu danych produktowych kalkulacja może zostać włączona automatycznie.',
+          level:'consult'
+        };
+      }
+      if (c.kind === 'provence') {
+        const sizes=[24,12,6]; let left=area; const selection=[];
+        sizes.forEach(size=>{const count=Math.floor(left/size);if(count){selection.push([size,count]);left-=size*count;}});
+        if(left>0){const fit=[6,12,24].find(s=>s>=left)||24;const found=selection.find(x=>x[0]===fit);if(found)found[1]++;else selection.push([fit,1]);}
+        const total=selection.reduce((s,[size,count])=>s+size*count,0);
+        const txt=selection.sort((a,b)=>b[0]-a[0]).map(([size,count])=>`${count} × zestaw ${size} m²`).join(' + ');
+        return {number:selection.reduce((s,x)=>s+x[1],0),main:txt,detail:`Łączna deklarowana powierzchnia zestawów: ok. ${total} m².`,caution:'Provence jest efektem ręcznie formowanym. Przy mocnych przetarciach lub nierównym podłożu potwierdź dodatkowy zapas.',level:'safe'};
+      }
+      if (c.kind === 'beton') {
+        const minKg=area*c.minKg,maxKg=area*c.maxKg,packs=Math.ceil(maxKg/c.pack);
+        return {number:packs,main:`${packs} × ${c.pack} kg`,detail:`Szacowane zużycie: ${minKg.toFixed(1).replace('.',',')}–${maxKg.toFixed(1).replace('.',',')} kg dla ${area} m².`,caution:'Obliczenie korzysta z górnej granicy zużycia. Na płytkach uwzględnij także właściwy grunt sczepny i przygotowanie fug.',level:'safe'};
+      }
+      if (c.kind === 'paint') {
+        const coats = app.answers.coats === 'one' ? 1 : c.defaultCoats;
+        const liters = area*coats/c.per;
+        const withReserve = liters*1.1;
+        const opt=packOptimizer(withReserve,c.packs);
+        const parts=opt.counts.map((n,i)=>n?`${n} × ${c.packs[i]} l`:null).filter(Boolean).join(' + ');
+        return {number:Number(opt.total.toFixed(1)),main:parts,detail:`${area} m² × ${coats} warstw(y), wydajność nominalna ${c.per} m²/l oraz 10% zapasu. Łącznie ${opt.total.toFixed(1).replace('.',',')} l.`,caution:'Duża zmiana koloru, mocno chłonne podłoże albo nierówne krycie mogą wymagać dodatkowej warstwy.',level:'safe'};
+      }
+      return {number:'—',main:'Sprawdź kartę produktu',detail:'Brak wiarygodnej kalkulacji.',caution:'Skonsultuj ilość przed zakupem.',level:'consult'};
+    }
+
+    function chosenColors(p) {
+      const preferred = p.colors?.[app.answers.color] || [];
+      const extras = Object.entries(p.colors || {}).filter(([k])=>k!==app.answers.color).flatMap(([,v])=>v);
+      const all=[...preferred,...extras];
+      const unique=[];const seen=new Set();
+      all.forEach(c=>{if(!seen.has(c.name)){seen.add(c.name);unique.push(c);}});
+      return unique.slice(0,4);
+    }
+
+    function warningsFor(p,a,meta) {
+      const w=[];
+      if (meta?.requestedMode === 'paint' && ['wet','tile'].includes(meta.override)) {
+        w.push(['danger', meta.override === 'wet'
+          ? 'Wybrałeś farbę gładką, ale zwykła farba nie jest rekomendowana do bezpośredniej strefy mokrej. Doradca świadomie zmienił ścieżkę na kompletny system dekoracyjny odporny na wodę.'
+          : 'Wybrałeś farbę gładką na płytki. Doradca nie zaleca nakładania zwykłej farby ściennej bezpośrednio na glazurę i dlatego pokazuje system przeznaczony do trudnego podłoża.']);
+      }
+      if (a.exposure === 'wet') w.push(['danger','Bezpośrednia strefa mokra wymaga poprawnie wykonanej hydroizolacji podłoża oraz zachowania ciągłości systemu przy narożach, odpływach i przejściach instalacyjnych.']);
+      if (a.exposure === 'splash' && p.id !== 'beton' && p.type === 'effect') w.push(['warning','Zachlapania i częste mycie wymagają kompatybilnego zabezpieczenia. Nie dobieraj lakieru wyłącznie po stopniu połysku.']);
+      if (a.room === 'kitchen') w.push(['warning','Za płytą grzewczą rozważ osłonę szklaną. Powłoka zmywalna nie zawsze chroni przed długotrwałym działaniem gorącego tłuszczu.']);
+      if (a.exposure === 'heat' || a.room === 'fireplace') w.push(['danger','Na kominku przed zakupem potwierdź temperaturę powierzchni, dylatacje oraz wymagania producenta wkładu. Dekoracja nie jest powłoką do bezpośredniego kontaktu z ogniem.']);
+      if (a.substrate === 'tile') w.push(['warning','Płytki muszą być stabilne, dokładnie odtłuszczone i przygotowane właściwym gruntem sczepnym. Luźne płytki lub słabe fugi najpierw napraw.']);
+      if (a.substrate === 'unknown') w.push(['warning','Przed zakupem wykonaj test przyczepności albo skonsultuj zdjęcie podłoża. Błędna ocena starej powłoki może osłabić cały system.']);
+      const preferredColor = p.colors?.[a.color]?.[0];
+      if (preferredColor?.fit === 'nearest') w.push(['warning','W tej rodzinie nie ma jednoznacznie potwierdzonego gotowego wariantu w wybranym kierunku kolorystycznym. Pokazuję najbliższą opcję — zacznij od próbki.']);
+      if (a.color === 'dark' && p.type === 'effect') w.push(['warning','Ciemnych i intensywnych efektów nie zabezpieczaj przypadkowym lakierem matowym — może wyszarzyć lub stłumić kolor. Dobierz kompatybilny wariant po konsultacji.']);
+      if (a.skill === 'first' && ['aurum','beton','provence'].includes(p.id)) w.push(['warning','To system wymagający spokojnej pracy i próby technicznej. Najpierw przećwicz ruch narzędzia na próbce lub płycie.']);
+      if (p.id === 'antyreflex' && a.color !== 'light') w.push(['warning','Antyreflex jest w Doradcy traktowany jako rozwiązanie do bieli i bardzo jasnych powierzchni. Dla koloru wybierz standardowy Color Matt lub gotowy wariant Ceramic White.']);
+      if (!w.length) w.push(['success','Wybrane warunki są typowe dla tego systemu. Mimo to wykonaj próbę koloru i techniki przed rozpoczęciem całej powierzchni.']);
+      return w;
+    }
+
+    function resultKickerFor(p,a,meta) {
+      if (app.mode === 'calc') return 'Kalkulacja wybranego systemu';
+      if (meta?.override === 'wet') return 'Rekomendacja systemowa — woda ma pierwszeństwo';
+      if (meta?.override === 'tile') return 'Rekomendacja systemowa — trudne podłoże';
+      if (a.exposure === 'heat' || a.room === 'fireplace') return 'Rekomendacja warunkowa — potwierdź temperaturę';
+      if (app.mode === 'paint') return 'Najlepsza farba do wskazanych warunków';
+      return 'Najlepsze dopasowanie';
+    }
+
+    function recommendationReason(p,a,meta) {
+      const roomLabels = {salon:'salonu',bedroom:'sypialni',hall:'przedpokoju lub schodów',kitchen:'kuchni',bathroom:'łazienki',fireplace:'okolicy kominka',commercial:'lokalu lub biura',ceiling:'sufitu'};
+      const effectLabels = {matte:'matowej struktury',metallic:'metalicznych refleksów',glitter:'brokatu i blasku',clouds:'efektu chmur',clay:'naturalnych przetarć',glamour:'efektu glamour',concrete:'betonu',sand:'drobnego piasku',smooth:'gładkiej powierzchni'};
+      if (app.mode==='calc') return `Przeliczyłem wybrany produkt dla ${a.area} m². Poniżej znajdziesz także pełny układ warstw i elementy, których nie warto pomijać.`;
+      if (meta?.requestedMode === 'paint' && meta.override === 'wet') return `Wybrałeś farbę gładką do bezpośredniej strefy mokrej. Doradca nie rekomenduje tam zwykłej farby i wskazuje Beton Hydrofobowy FOX. Dla tego produktu nie ma dedykowanej próbki, dlatego otrzymasz kartę produktu oraz właściwe poradniki.`;
+      if (meta?.requestedMode === 'paint' && meta.override === 'tile') return `Wybrałeś farbę gładką na płytki. Zamiast sugerować malowanie glazury zwykłą farbą ścienną Doradca wskazuje system przeznaczony do odpowiednio przygotowanego, niechłonnego podłoża.`;
+      if (meta?.override === 'wet' || meta?.override === 'tile') return `Ten system został wskazany przede wszystkim ze względu na ${meta.override==='wet'?'bezpośredni kontakt z wodą':'trudne, niechłonne podłoże'}. W tych warunkach technologia ma pierwszeństwo przed samym wyglądem.`;
+      return `${p.summary} Odpowiada kierunkowi ${effectLabels[a.effect] || 'wybranego wykończenia'} w ${roomLabels[a.room] || 'pomieszczeniu'} i uwzględnia wskazane warunki użytkowania.`;
+    }
+
+    function resultContextFor(p,a,meta) {
+      if (meta?.override === 'wet') return 'To nie jest zamiana produktu „na podobny”, lecz świadoma zmiana technologii. W bezpośredniej strefie mokrej wynik wymaga poprawnej hydroizolacji i wykonania wszystkich detali systemowych.';
+      if (meta?.override === 'tile') return 'Nie nakładaj produktu bezpośrednio na płytki. Wynik zakłada ocenę stabilności okładziny, odtłuszczenie i właściwy grunt sczepny.';
+      if (a.exposure === 'heat' || a.room === 'fireplace') return 'Dobór wizualny jest wstępny. Przed zakupem potwierdź, czy temperatura powierzchni mieści się w wymaganiach wszystkich warstw systemu.';
+      return '';
+    }
+
+    function componentLinkFor(p,name) {
+      const n = name.toLowerCase();
+      if (n.includes('quarzo')) return COMPONENT_URLS.quarzo;
+      if (n.includes('grunt sczepny')) return COMPONENT_URLS.strong;
+      if (n.includes('initium')) return COMPONENT_URLS.initium;
+      if (n.includes('pędzel') || n.includes('gąbka') || n === 'narzędzie') return COMPONENT_URLS.brush;
+      if (n.includes('hydrostop') || n.includes('zabezpieczenie') || n.includes('ochrona')) return app.answers.color === 'dark' ? COMPONENT_URLS.hydrostopSatin : COMPONENT_URLS.hydrostop;
+      const productNeedles = [p.name.toLowerCase(), p.id, 'decomal star','decomalmat','provence','aurum','kalahari','beton hydrofobowy','color matt','ceramic white'];
+      if (productNeedles.some(x => x && n.includes(x))) return app.selectedVariant?.link || p.productLink;
+      return null;
+    }
+
+    function renderSystem(primary) {
+      el('systemList').innerHTML = primary.system.map(([name,desc],i) => {
+        const link = componentLinkFor(primary,name);
+        return `<li class="system-item"><span class="system-step">${i+1}</span><span><b>${name}</b><span>${desc}</span>${link ? `<a class="system-shop-link" data-track="system_component" data-component="${name}" href="${tracked(link,`${primary.id}_system_${i+1}`)}" target="_blank" rel="noopener">Znajdź w sklepie →</a>` : ''}</span></li>`;
+      }).join('');
+    }
+
+    function updateVariantCta(primary, variant, index = 0) {
+      app.selectedVariant=variant||null;
+      const productUrl=variant?.link||primary.productLink, sampleUrl=variant?.sample||null, sampleType=variant?.sampleType||'';
+      const productBtn=el('productBtn'),sampleBtn=el('sampleBtn'),sampleInfo=el('sampleInfo');
+      productBtn.href=tracked(productUrl,`${primary.id}_main`);productBtn.dataset.product=primary.id;productBtn.dataset.variant=variant?.name||primary.name;productBtn.dataset.track='product';
+      productBtn.textContent=app.resultMeta?.override?'Zobacz rekomendowany system':primary.type==='paint'?'Zobacz rekomendowaną farbę':'Zobacz rekomendowany zestaw';
+      sampleBtn.hidden=!sampleUrl; sampleInfo.className=`sample-info ${sampleUrl?'available':'unavailable'}`;
+      if(sampleUrl){sampleBtn.href=tracked(sampleUrl,`${primary.id}_sample`);sampleBtn.dataset.product=primary.id;sampleBtn.dataset.variant=variant?.name||primary.name;sampleBtn.dataset.track='sample';sampleBtn.textContent=sampleType==='mokra'?'Zamów próbkę mokrą':sampleType==='sucha'?'Zamów próbkę suchą':'Zamów próbkę';sampleInfo.textContent=`Dla wariantu „${variant?.name||primary.name}” mamy dedykowaną próbkę ${sampleType||'produktu'}. Link prowadzi bezpośrednio do właściwej próbki.`;}
+      else{sampleBtn.removeAttribute('href');sampleBtn.removeAttribute('data-track');sampleInfo.textContent=primary.id==='beton'?'Beton Hydrofobowy FOX nie ma w ofercie dedykowanej próbki. Doradca nie kieruje do przypadkowych próbek — sprawdź kartę produktu i poradniki poniżej.':`Dla wariantu „${variant?.name||primary.name}” nie mamy potwierdzonej dedykowanej próbki. Doradca nie pokaże w zamian przypadkowego produktu.`;}
+      const imageNote=el('resultImageNote');if(imageNote)imageNote.textContent=sampleUrl?'Inspiracja aranżacyjna — kolor i strukturę potwierdź właściwą próbką':'Inspiracja aranżacyjna — sprawdź kartę produktu i poradnik wykonania';
+      const variantName=variant?.name||primary.name;el('productPreviewName').textContent=primary.name;el('productPreviewVariant').textContent=variantName;
+      const previewImage=el('productPreviewImage'),previewFallback=el('productThumbFallback'),imageUrl=variant?.productImage||primary.productImage||'';
+      previewImage.onload=null;previewImage.onerror=null;previewImage.hidden=true;previewFallback.hidden=false;previewFallback.className='product-thumb-fallback';
+      const fallbackName=(primary.name||'SYSTEM').replace(/^FOX\s+/i,'').replace(/^DECOVERNI\s+/i,'');previewFallback.innerHTML=`<small>DECOWANT</small><strong>${fallbackName}</strong>`;
+      if(imageUrl){const high=imageUrl.includes('_50_50/')?imageUrl.replace('_50_50/','_500_500/'):imageUrl;let used=false;previewImage.onload=()=>{previewImage.hidden=false;previewFallback.hidden=true;};previewImage.onerror=()=>{if(!used&&high!==imageUrl){used=true;previewImage.src=imageUrl;return;}previewImage.hidden=true;previewFallback.hidden=false;};previewImage.src=high;}else previewImage.removeAttribute('src');
+      el('shopCtaText').textContent=`Wybrany wariant: ${variantName}. Na karcie produktu sprawdź aktualną cenę, skład zestawu i dostępność.`;
+      const status=el('ctaStatus'),nearest=variant?.fit==='nearest';status.hidden=!nearest;if(nearest)status.textContent='To najbliższy dostępny kierunek, a nie potwierdzone dopasowanie kolorystyczne. Przed zakupem skonsultuj odcień.';
+      el('colorGrid').querySelectorAll('.color-choice').forEach((btn,idx)=>{const selected=idx===index;btn.classList.toggle('selected',selected);btn.setAttribute('aria-pressed',String(selected));});renderSystem(primary);
+    }
+
+    function renderColorChoices(primary, colors) {
+      const grid = el('colorGrid');
+      grid.innerHTML = colors.map((c,i)=>`<button class="color-choice ${i===0?'selected':''}" type="button" data-index="${i}" aria-pressed="${i===0}"><span class="color-dot" style="background:${c.hex}"></span><span><b>${c.name}</b><span>${c.cta || 'Wybierz wariant'}</span></span></button>`).join('');
+      grid.querySelectorAll('.color-choice').forEach(btn=>btn.addEventListener('click',()=>{
+        const index=Number(btn.dataset.index);
+        updateVariantCta(primary,colors[index],index);
+        track('advisor_variant_select',{product:primary.id,variant:colors[index]?.name || '',color_direction:app.answers.color});
+      }));
+      updateVariantCta(primary,colors[0],0);
+    }
+
+    function showResult({skipScroll=false} = {}) {
+      const {primary, alternatives, meta} = chooseProducts();
+      const area=Number(app.answers.area);
+      const qty=quantityFor(primary,area);
+      app.resultMeta=meta;
+      app.currentResult={primary:primary.id,alternatives:alternatives.map(x=>x.id),answers:{...app.answers},meta};
+      el('home').hidden=true; wizard.hidden=true; result.hidden=false;
+      el('resultKicker').textContent=resultKickerFor(primary,app.answers,meta);
+      el('resultTitle').textContent=primary.name;
+      el('resultSummary').textContent=recommendationReason(primary,app.answers,meta);
+      const context = resultContextFor(primary,app.answers,meta);
+      el('resultContextNote').hidden=!context;
+      el('resultContextNote').textContent=context;
+      const areaLabel=app.answers.areaMode==='dimensions'?`${formatArea(area)} m² z wymiarów`:`${formatArea(area)} m²`;
+      el('resultTags').innerHTML=[...primary.why,areaLabel].map(x=>`<span class="result-tag">${x}</span>`).join('');
+      const resultMedia = mediaFor('product',primary.id) || {local:primary.image};
+      const remoteAttr = resultMedia.remote ? ` data-remote-src="${resultMedia.remote.replace(/&/g,'&amp;')}"` : '';
+      el('resultImage').innerHTML=`<img class="advisor-photo" src="${IMAGE_BASE+(resultMedia.local || primary.image)}"${remoteAttr} alt="Inspiracja wnętrza dla rekomendacji ${primary.name}" onerror="this.style.display='none'"><span class="result-image-note" id="resultImageNote">Inspiracja aranżacyjna</span>`;
+      hydrateRemoteImages(el('resultImage'));
+      const dim=app.answers.areaMode==='dimensions'?dimensionBreakdown():null;
+      el('quantityIntro').textContent=dim?`Metraż wyliczony z wymiarów: ${formatArea(dim.net)} m² netto + ${dim.reservePct}% zapasu = ${formatArea(dim.total)} m².`:'Obliczenie orientacyjne na podstawie podanego metrażu.';
+      el('quantityNumber').textContent=qty.number;
+      el('quantityMain').textContent=qty.main;
+      el('quantityDetail').textContent=qty.detail;
+      el('quantityCaution').textContent=qty.caution;
+      el('quantityBox').classList.toggle('consult',qty.level==='consult');
+      el('warnings').innerHTML=warningsFor(primary,app.answers,meta).map(([type,text])=>`<div class="warning-box ${type==='success'?'success-box':type==='danger'?'danger-box':''}">${text}</div>`).join('');
+      const colors=chosenColors(primary);
+      renderColorChoices(primary,colors);
+      renderAlternatives(alternatives);
+      renderGuides(primary);
+      saveProgress('result');
+      updateShareUrl();
+      track('advisor_result',{mode:app.mode,product:primary.id,area,color:app.answers.color,room:app.answers.room,exposure:app.answers.exposure,override:meta?.override || 'none'});
+      if (!skipScroll) scrollToSection(result);
+    }
+
+    function renderAlternatives(alts) {
+      el('alternativesSection').hidden=!alts.length;
+      el('alternativesGrid').innerHTML=alts.map((p,i)=>{
+        const variant=p.colors?.[app.answers.color]?.[0] || Object.values(p.colors || {})[0]?.[0];
+        const label = p.type === 'paint'
+          ? (i===0?'Inny priorytet farby':'Alternatywna linia kolorystyczna')
+          : (i===0?'Łatwiejsza / spokojniejsza opcja':'Inny charakter efektu');
+        const media = mediaFor('product',p.id) || {local:p.image};
+        const remoteAttr = media.remote ? ` data-remote-src="${media.remote.replace(/&/g,'&amp;')}"` : '';
+        return `<article class="alt-card"><div class="alt-image"><img class="advisor-photo" src="${IMAGE_BASE+(media.local || p.image)}"${remoteAttr} alt="Inspiracja dla alternatywy ${p.name}" onerror="this.style.display='none'"></div><div class="alt-copy"><span class="alt-label">${label}</span><h3>${p.name}</h3><p>${p.summary}</p><a class="text-link" data-track="alternative" data-product="${p.id}" href="${tracked(variant?.link||p.productLink,`${p.id}_alternative`)}" target="_blank" rel="noopener">Zobacz produkt →</a></div></article>`;
+      }).join('');
+      hydrateRemoteImages(el('alternativesGrid'));
+    }
+
+    function encodeState() {
+      const json=JSON.stringify({m:app.mode,a:app.answers});
+      return btoa(unescape(encodeURIComponent(json))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+    }
+    function decodeState(str) {
+      try {
+        const normalized=str.replace(/-/g,'+').replace(/_/g,'/');
+        const padded=normalized+'='.repeat((4-normalized.length%4)%4);
+        return JSON.parse(decodeURIComponent(escape(atob(padded))));
+      } catch {return null;}
+    }
+    function updateShareUrl() {
+      try {
+        const url=new URL(location.href);
+        url.search='';
+        url.hash=`wynik=${encodeState()}`;
+        safeReplaceState(url);
+      } catch {}
+    }
+
+    async function copyText(text) {
+      try {
+        if (navigator.clipboard?.writeText) { await navigator.clipboard.writeText(text); return true; }
+      } catch {}
+      try {
+        const area=document.createElement('textarea');
+        area.value=text; area.style.position='fixed'; area.style.opacity='0';
+        document.body.appendChild(area); area.select();
+        const ok=document.execCommand('copy'); area.remove(); return ok;
+      } catch { return false; }
+    }
+
+    async function share() {
+      const url=location.href;
+      const text=`Mój wynik Doradcy DECOWANT: ${products[app.currentResult.primary].name}`;
+      try {
+        if (navigator.share) await navigator.share({title:'Doradca DECOWANT',text,url});
+        else if (await copyText(url)) showToast('Link do wyniku skopiowany.');
+        else throw new Error('copy_failed');
+        track('advisor_share',{product:app.currentResult.primary});
+      } catch (e) {
+        if(e.name!=='AbortError') showToast('Nie udało się udostępnić wyniku.');
+      }
+    }
+
+    let toastTimer;
+    function showToast(text) {
+      const t=el('toast'); t.textContent=text; t.classList.add('show');
+      clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('show'),2600);
+    }
+
+    hydrateRemoteImages(document);
+    document.querySelectorAll('[data-start-mode]').forEach(b=>b.addEventListener('click',()=>start(b.dataset.startMode)));
+    el('headerStart').addEventListener('click',()=>start('effect'));
+    el('resumeBtn').addEventListener('click',resumeProgress);
+    el('discardProgressBtn').addEventListener('click',()=>{clearProgress();showToast('Zapisany dobór został usunięty.');});
+    document.querySelector('.brand').addEventListener('click',(event)=>{
+      event.preventDefault(); result.hidden=true; wizard.hidden=true; el('home').hidden=false; refreshResumeCard(); scrollToSection(el('home'));
+    });
+    nextBtn.addEventListener('click',next);
+    prevBtn.addEventListener('click',previous);
+    el('editAnswers').addEventListener('click',()=>{
+      el('home').hidden=true; result.hidden=true; wizard.hidden=false; app.step=getSteps().length-1; setWizardTitle(); renderStep(); scrollToSection(wizard);
+    });
+    el('restartBtn').addEventListener('click',()=>{
+      clearProgress(); safeReplaceState(location.pathname || './'); result.hidden=true; wizard.hidden=true; el('home').hidden=false; refreshResumeCard(); scrollToSection(el('home')); track('advisor_restart');
+    });
+    el('shareResult').addEventListener('click',share);
+    el('printResult').addEventListener('click',()=>{track('advisor_print',{product:app.currentResult?.primary});window.print();});
+
+    document.addEventListener('click',event=>{
+      const link=event.target.closest('a[href]');
+      if(!link) return;
+      const kind=link.dataset.track || (link.hostname && link.hostname.includes('sklepdecowant.pl') ? 'store' : 'link');
+      track('advisor_outbound_click',{
+        kind,
+        product:link.dataset.product || app.currentResult?.primary || '',
+        variant:link.dataset.variant || '',
+        component:link.dataset.component || '',
+        href_host:link.hostname || 'tel'
+      });
+    });
+
+    const demo = new URLSearchParams(location.search).get('demo');
+    const hashMatch=location.hash.match(/wynik=([^&]+)/);
+    if(hashMatch) {
+      const decoded=decodeState(hashMatch[1]);
+      if(decoded?.m && decoded?.a){app.mode=decoded.m;app.answers={...decoded.a};normalizeDependentAnswers();app.step=Math.max(0,getSteps().length-1);showResult({skipScroll:true});}
+      else {showToast('Nie udało się odczytać zapisanego wyniku.'); refreshResumeCard();}
+    } else if(demo==='result') {
+      app.mode='effect';app.answers={room:'salon',exposure:'dry',effect:'glitter',skill:'first',color:'warm',substrate:'painted',area:'12'};showResult({skipScroll:true});
+    } else if(demo==='wet') {
+      app.mode='effect';app.answers={room:'bathroom',exposure:'wet',effect:'concrete',skill:'some',color:'grey',substrate:'tile',area:'8'};showResult({skipScroll:true});
+    } else if(demo==='paint') {
+      app.mode='paint';app.answers={room:'ceiling',exposure:'dry',paintPriority:'antireflex',color:'light',substrate:'plaster',coats:'two',area:'45'};showResult({skipScroll:true});
+    } else {
+      refreshResumeCard();
+    }
+
+  })();
+  </script>
+</body>
+</html>
