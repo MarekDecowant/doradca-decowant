@@ -2,244 +2,955 @@
 <html lang="pl">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Kalkulator materiałów Decowant</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Oblicz ilość farby i tynku, liczbę zestawów oraz podkład. Dobierz narzędzia i zobacz instrukcję wykonania efektu DECOWANT.">
+<meta name="theme-color" content="#2f5146">
+<title>Kalkulator zużycia materiałów | DECOWANT</title>
+<style>
+:root{color-scheme:light;--green:#2f5146;--ink:#24372f;--muted:#586960;--line:#dbe2dc;--pale:#edf3ef;--cream:#f6f5f0}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);font:16px/1.55 Arial,Helvetica,sans-serif;color:var(--ink)}
+a{color:var(--green);text-underline-offset:3px}button,input,select{font:inherit}button,a,input,select,summary{-webkit-tap-highlight-color:transparent}button,a{touch-action:manipulation}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #ae7731;outline-offset:3px}
+.shell{max-width:1000px;margin:auto;padding:24px 20px 40px}.top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:20px}.brand{font-size:21px;font-weight:800;letter-spacing:2px;text-decoration:none}.top>a:last-child{font-size:14px}
+.hero{background:var(--green);color:white;padding:30px 32px;border-radius:18px 18px 0 0}.eyebrow{font-size:12px;letter-spacing:1.8px;text-transform:uppercase;margin:0 0 9px;opacity:.8}h1{font-size:32px;line-height:1.2;margin:0 0 12px;letter-spacing:-.6px}.hero p:last-child{margin:0;max-width:700px;color:#e4ece7}
+.form-card{background:white;border:1px solid var(--line);border-top:0;border-radius:0 0 18px 18px;padding:28px 32px;box-shadow:0 10px 35px #213c2a08}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.full{grid-column:1/-1}.field{min-width:0}.field label{display:block;font-weight:700;margin-bottom:7px}.field input,.field select{display:block;width:100%;max-width:100%;height:48px;padding:10px 12px;border:1px solid #b9c6bd;border-radius:8px;color:var(--ink);background:white}.field select{padding-right:26px;text-overflow:ellipsis}.field small,.muted{color:var(--muted);font-size:14px}.field small{display:block;margin-top:6px}
+.step-title{font-size:18px;margin:0 0 18px;display:flex;align-items:center;gap:10px}.step-title span{display:inline-grid;place-items:center;font-size:13px;width:26px;height:26px;border-radius:50%;background:var(--pale);color:var(--green)}.section{margin-top:26px;padding-top:24px;border-top:1px solid var(--line)}
+.product-summary{margin-top:12px;padding:12px 15px;border-radius:9px;background:var(--pale);font-size:14px}.product-summary strong{display:block}.product-summary p{margin:4px 0 0}.check{display:flex;align-items:center;gap:10px;margin:18px 0;cursor:pointer}.check input{width:20px;height:20px;accent-color:var(--green)}
+details{border:1px solid var(--line);padding:14px 16px;border-radius:10px;margin-top:24px}summary{cursor:pointer;font-weight:700}details[open] summary{margin-bottom:18px}.actions{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap}.button{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;border-radius:9px;padding:11px 17px;background:var(--green);color:white;border:1px solid var(--green);font-weight:700;cursor:pointer;text-decoration:none;font-size:15px}.secondary{color:var(--green);background:white}.plain{border-color:var(--line);color:var(--muted);background:white}.actions .button:first-child{padding-left:24px;padding-right:24px}.error{color:#842519;background:#fff0eb;padding:14px;border-radius:8px;margin-top:18px}.empty{font-size:14px;color:var(--muted);margin:16px 0 0}
+.result{margin-top:26px;scroll-margin-top:20px}.result-head{background:var(--pale);border:1px solid #c9dacf;border-radius:16px;padding:24px 28px}.result-head h2{font-size:15px;font-weight:400;margin:0 0 6px;color:var(--muted)}.result-head .quantity{font-size:28px;line-height:1.25;font-weight:800;margin:0 0 8px;letter-spacing:-.5px}.result-head p{margin:5px 0}.facts{display:flex;gap:10px 22px;flex-wrap:wrap;margin-top:16px;font-size:14px}.shopping{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:16px}.panel{background:white;border:1px solid var(--line);border-radius:13px;padding:22px;min-width:0}.panel h3{font-size:18px;line-height:1.3;margin:0 0 12px}.panel p{margin:8px 0}.panel .button{margin-top:8px}.buttons{display:flex;flex-wrap:wrap;gap:8px}.included{display:inline-block;background:var(--pale);color:var(--green);font-size:12px;font-weight:700;border-radius:20px;padding:4px 9px;margin-bottom:4px}.tool-list{list-style:none;padding:0;margin:0}.tool-list li{padding:10px 0;border-bottom:1px solid #edf0ed}.tool-list li:last-child{border-bottom:0}.tool-list a{display:inline-block;padding:2px 0;font-weight:700}.note{font-size:14px;color:var(--muted);margin:16px 0 0}.notice{border-left:3px solid #b88b4e;padding-left:12px;font-size:14px}.video-panel{display:flex;flex-direction:column;justify-content:space-between}.video-panel .button{align-self:flex-start}.footer{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-top:24px}.footer p{margin:0}[hidden]{display:none!important}
+@media(max-width:680px){.shell{padding:14px 12px 28px}.top{margin-bottom:14px}.brand{font-size:18px}.top>a:last-child{font-size:12px}.hero{padding:24px 20px}h1{font-size:27px}.form-card{padding:22px 18px}.grid,.shopping{grid-template-columns:1fr;gap:16px}.full{grid-column:auto}.hero p:last-child{font-size:15px}.result-head{padding:20px}.result-head .quantity{font-size:25px}.panel{padding:20px}.actions .button:first-child{flex:1}.button{font-size:14px}.facts{gap:6px 15px}.footer{gap:8px}}
+@media(prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+@media print{body{background:white}.top,.hero,form,.footer,.button{display:none}.shell{padding:0;max-width:none}.result{margin:0}.shopping{display:block}.panel,.result-head{break-inside:avoid;margin-bottom:12px}.tool-list a{text-decoration:none}}
+</style>
 </head>
 <body>
-<div id="decowant-material-calculator" class="dc-calc">
-  <style>
-    #decowant-material-calculator{--dc:#2f5146;--dc2:#eaf1ee;--line:#d9e1de;--text:#1f2926;--muted:#66736e;max-width:980px;margin:24px auto;font-family:Arial,sans-serif;color:var(--text)}
-    #decowant-material-calculator *{box-sizing:border-box}
-    .dc-card{border:1px solid var(--line);border-radius:14px;background:#fff;overflow:hidden;box-shadow:0 6px 22px rgba(0,0,0,.05)}
-    .dc-head{padding:24px;background:var(--dc);color:#fff}
-    .dc-head h2{margin:0 0 8px;font-size:28px;line-height:1.2}.dc-head p{margin:0;opacity:.92}
-    .dc-body{padding:22px}.dc-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.dc-full{grid-column:1/-1}
-    .dc-field label{display:block;font-weight:700;margin-bottom:7px}.dc-field small{display:block;color:var(--muted);margin-top:5px}
-    .dc-field input,.dc-field select{width:100%;min-height:44px;padding:10px 12px;border:1px solid #bfcac6;border-radius:8px;background:#fff;font-size:16px;color:var(--text)}
-    .dc-field input:focus,.dc-field select:focus{outline:2px solid rgba(47,81,70,.2);border-color:var(--dc)}
-    .dc-check{display:flex;align-items:center;gap:9px;padding-top:28px}.dc-check input{width:18px;height:18px}
-    .dc-section{margin-top:22px;padding-top:20px;border-top:1px solid var(--line)}.dc-section h3{margin:0 0 14px;font-size:19px}
-    .dc-openings{display:grid;grid-template-columns:1fr 1fr;gap:16px}.dc-hidden{display:none!important}
-    .dc-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}.dc-btn{border:0;border-radius:9px;padding:13px 20px;font-size:16px;font-weight:700;cursor:pointer}.dc-primary{background:var(--dc);color:#fff}.dc-secondary{background:#eef2f0;color:var(--text)}
-    .dc-results{margin-top:22px;border-radius:12px;background:var(--dc2);padding:20px}.dc-results h3{margin:0 0 15px}.dc-result-main{font-size:22px;font-weight:800;margin-bottom:10px}.dc-result-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.dc-result-box{background:#fff;border:1px solid var(--line);padding:14px;border-radius:9px}.dc-result-box strong{display:block;margin-bottom:5px}.dc-note{margin-top:14px;font-size:14px;line-height:1.45;color:#4d5c57}.dc-product-links{margin-top:16px;display:flex;flex-wrap:wrap;gap:10px}.dc-product-link{display:inline-block;padding:11px 14px;border-radius:8px;background:#fff;border:1px solid var(--dc);color:var(--dc)!important;text-decoration:none;font-weight:700}.dc-warning{margin-top:12px;padding:11px 13px;border-left:4px solid #b67a00;background:#fff7df;border-radius:5px}.dc-error{padding:12px;background:#ffe9e7;color:#8a2018;border-radius:8px}
-    @media(max-width:700px){.dc-grid,.dc-openings,.dc-result-grid{grid-template-columns:1fr}.dc-full{grid-column:auto}.dc-check{padding-top:0}.dc-head h2{font-size:23px}.dc-body{padding:16px}}
-  
-/* Ulepszony widok mobilny */
-* { box-sizing: border-box; }
-html, body { max-width: 100%; overflow-x: hidden; }
-.dc-calculator { width: 100%; max-width: 1180px; margin: 0 auto; padding: 16px; }
-.dc-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
-.dc-field, .dc-card, .dc-result { min-width: 0; }
-.dc-field input,
-.dc-field select,
-.dc-field textarea,
-.dc-calculator button {
-  width: 100%;
-  max-width: 100%;
-  min-height: 48px;
-  font-size: 16px;
-}
-.dc-result { overflow-wrap: anywhere; word-break: normal; }
-.dc-result table { width: 100%; border-collapse: collapse; }
-.dc-result table td,
-.dc-result table th { padding: 10px 8px; vertical-align: top; }
-
-@media (max-width: 768px) {
-  .dc-calculator { padding: 10px; }
-  .dc-grid { grid-template-columns: 1fr !important; gap: 12px; }
-  .dc-row, .dc-fields, .dc-form-row {
-    display: grid !important;
-    grid-template-columns: 1fr !important;
-    gap: 12px !important;
-  }
-  .dc-card { padding: 14px !important; border-radius: 12px; }
-  .dc-calculator h1 { font-size: 26px; line-height: 1.2; }
-  .dc-calculator h2 { font-size: 21px; line-height: 1.25; }
-  .dc-calculator h3 { font-size: 18px; line-height: 1.3; }
-  .dc-calculator button {
-    position: relative;
-    z-index: 2;
-    min-height: 52px;
-    padding: 14px 16px;
-    touch-action: manipulation;
-  }
-  .dc-result table,
-  .dc-result tbody,
-  .dc-result tr,
-  .dc-result td,
-  .dc-result th {
-    display: block;
-    width: 100%;
-  }
-  .dc-result tr {
-    padding: 10px 0;
-    border-bottom: 1px solid #ddd;
-  }
-  .dc-result td,
-  .dc-result th {
-    border: 0 !important;
-    padding: 4px 0 !important;
-  }
-}
-
-@media (max-width: 420px) {
-  .dc-calculator { padding: 8px; }
-  .dc-card { padding: 12px !important; }
-  .dc-calculator h1 { font-size: 23px; }
-  .dc-field label { font-size: 14px; }
-}
-
-</style>
-
-  <div class="dc-card">
-    <div class="dc-head">
-      <h2>Kalkulator materiałów Decowant</h2>
-      <p>Oblicz orientacyjną ilość produktu bez automatycznego zapasu. Możesz samodzielnie dodać zapas.</p>
-    </div>
-    <div class="dc-body">
-      <div class="dc-grid">
-        <div class="dc-field dc-full"><label for="dc-product">Produkt</label><select id="dc-product"></select></div>
-        <div class="dc-field"><label for="dc-room">Miejsce zastosowania</label><select id="dc-room"><option value="dry">Pokój / salon / sypialnia</option><option value="hall">Korytarz / wiatrołap / klatka schodowa</option><option value="kitchen">Kuchnia</option><option value="bathroom">Łazienka</option></select></div>
-        <div class="dc-field"><label for="dc-mode">Sposób podania powierzchni</label><select id="dc-mode"><option value="area">Znam powierzchnię w m²</option><option value="dimensions">Podam wymiary ścian</option></select></div>
-      </div>
-
-      <div id="dc-area-fields" class="dc-section">
-        <div class="dc-grid"><div class="dc-field"><label for="dc-area">Powierzchnia</label><input id="dc-area" type="number" min="1" step="0.1" value="10"><small>Minimalna powierzchnia: 1 m².</small></div></div>
-      </div>
-
-      <div id="dc-dim-fields" class="dc-section dc-hidden">
-        <h3>Wymiary ścian</h3>
-        <div class="dc-grid">
-          <div class="dc-field"><label for="dc-width">Łączna szerokość ścian (m)</label><input id="dc-width" type="number" min="0" step="0.01" value="4"></div>
-          <div class="dc-field"><label for="dc-height">Wysokość (m)</label><input id="dc-height" type="number" min="0" step="0.01" value="2.5"></div>
-          <div class="dc-check dc-full"><input id="dc-subtract" type="checkbox" checked><label for="dc-subtract">Odejmij powierzchnię okien i drzwi</label></div>
-        </div>
-        <div id="dc-opening-fields" class="dc-openings">
-          <div class="dc-field"><label for="dc-windows">Łączna powierzchnia okien (m²)</label><input id="dc-windows" type="number" min="0" step="0.01" value="0"></div>
-          <div class="dc-field"><label for="dc-doors">Łączna powierzchnia drzwi (m²)</label><input id="dc-doors" type="number" min="0" step="0.01" value="0"></div>
-        </div>
-      </div>
-
-      <div class="dc-section">
-        <h3>Ustawienia obliczeń</h3>
-        <div class="dc-grid">
-          <div id="dc-layers-wrap" class="dc-field"><label for="dc-layers">Liczba warstw</label><input id="dc-layers" type="number" min="1" max="4" step="1"></div>
-          <div class="dc-field"><label for="dc-waste">Zapas materiału</label><select id="dc-waste"><option value="0" selected>0%</option><option value="5">5%</option><option value="10">10%</option><option value="15">15%</option></select></div>
-          <div id="dc-variant-wrap" class="dc-field dc-full dc-hidden"><label for="dc-variant">Wariant / sposób aplikacji</label><select id="dc-variant"></select></div>
-        </div>
-      </div>
-
-      <div class="dc-actions"><button class="dc-btn dc-primary" id="dc-calculate" type="button">Oblicz ilość materiału</button><button class="dc-btn dc-secondary" id="dc-reset" type="button">Wyczyść</button></div>
-      <div id="dc-output" class="dc-results" aria-live="polite"><p>Wybierz produkt i wpisz powierzchnię, a następnie kliknij „Oblicz”.</p></div>
-    </div>
-  </div>
-
-  <script>
-  (function(){
-    'use strict';
-    const PRODUCTS = {
-      colorMatt:{name:'FOX Color Matt',kind:'coveragePerUnit',yield:14,packages:[2.5,5,10],unit:'l',layers:2,waste:0,primer:'Grunt dobierany do chłonności i stanu podłoża.',lacquer:'none',note:'Wydajność do 14 m²/l na jedną warstwę.'},
-      decomal:{name:'DECOMAL',kind:'coveragePerPackage',yield:7,packages:[1],packageLabel:'opak. 1 kg',layers:1,waste:0,primer:'DECOMAL Podkład',primerYield:7,primerPackages:[1.5,3],primerUnit:'kg',lacquer:'room',note:'Przyjęto korzystniejszą wydajność: do 7 m² z opakowania 1 kg.'},
-      decomalmat:{name:'DECOMALmat',kind:'coveragePerPackage',yield:7,packages:[1],packageLabel:'opak. 1 kg',layers:1,waste:0,primer:'DECOMAL Podkład',primerYield:7,primerPackages:[1.5,3],primerUnit:'kg',lacquer:'room',note:'Przyjęto korzystniejszą wydajność: do 7 m² z opakowania 1 kg.'},
-      decomalStar:{name:'DECOMAL STAR',kind:'coveragePerPackage',yield:7,packages:[1],packageLabel:'opak. 1 kg',layers:1,waste:0,primer:'DECOMAL Podkład',primerYield:7,primerPackages:[1.5,3],primerUnit:'kg',lacquer:'room',note:'Przyjęto korzystniejszą wydajność: do 7 m² z opakowania 1 kg.'},
-      decomalDuo:{name:'DECOMAL DUO',kind:'coveragePerPackage',yield:7,packages:[1],packageLabel:'zestaw P1 + P2',layers:2,waste:0,primer:'DECOMAL Podkład',primerYield:7,primerPackages:[1.5,3],primerUnit:'kg',lacquer:'room',note:'Program liczy pełne zestawy P1 + P2. Dwie aplikacje tworzą jeden kompletny efekt.'},
-      beton:{name:'DECOMAL Beton Architektoniczny',kind:'coveragePerPackage',yield:4.5,packages:[1],packageLabel:'opak. 4 kg',layers:2,waste:0,primer:'Podkład kwarcowy zalecany do betonu',lacquer:'always',note:'Jedno opakowanie 4 kg wystarcza do ok. 4,5 m² przy wykonaniu systemu dwuwarstwowego.'},
-      podklad:{name:'DECOMAL Podkład',kind:'coveragePerUnit',yield:7,packages:[1.5,3],unit:'kg',layers:1,waste:0,primer:'Nie dotyczy',lacquer:'none'},
-      provence:{name:'Provence',kind:'coveragePerUnit',yield:7,packages:[1,3,5],unit:'kg',layers:1,waste:0,primer:'DK Quarzo lub DECOMAL Podkład',primerYield:5,primerPackages:[1.5,3],primerUnit:'kg',lacquer:'room'},
-      aurum:{name:'Aurum',kind:'coveragePerUnit',yield:8,packages:[0.75,2.25],unit:'kg',layers:1,waste:0,primer:'DK Quarzo',lacquer:'room',variants:[{name:'Pędzel – do 8 m²/kg',yield:8},{name:'Paca INOX – do 6 m²/kg',yield:6}]},
-      kalahari:{name:'Kalahari',kind:'coveragePerUnit',yield:10,packages:[1],unit:'l',layers:1,waste:0,primer:'Farba podkładowa w zbliżonym kolorze',lacquer:'room'},
-      diamento:{name:'Diamento 3D',kind:'coveragePerUnit',yield:5,packages:[1,3],unit:'l',layers:1,waste:0,primer:'Farba podkładowa zgodna z systemem',lacquer:'room',note:'Opakowanie 3 l może być dostępne tylko dla wybranych wariantów.'},
-      trawertyn:{name:'Trawertyn Wapienny FOX',kind:'coveragePerUnit',yield:0.6,packages:[5,10],unit:'kg',layers:2,fixedLayers:true,yieldIncludesLayers:true,waste:0,primer:'Podkład systemowy',lacquer:'always',note:'Wydajność jest podana dla pełnego systemu dwuwarstwowego. Dla wariantu drobnego 10 kg wystarcza na ok. 6 m².',variants:[{name:'Ekstra drobny – 1,25 m²/kg (2 warstwy)',yield:1.25,shopLinks:[{label:'Ekstra drobny 5 kg',url:'https://www.sklepdecowant.pl/pl/p/FOX-Trawertyn-wapienny-ekstra-drobne-ziarno-5-kg/1142'},{label:'Ekstra drobny 10 kg',url:'https://www.sklepdecowant.pl/pl/p/FOX-Trawertyn-wapienny-ekstra-drobne-ziarno-Fox-10-kg/727'}]},{name:'Drobny – 0,60 m²/kg (10 kg / ok. 6 m², 2 warstwy)',yield:0.6,shopLinks:[{label:'Drobny 5 kg',url:'https://www.sklepdecowant.pl/pl/p/FOX-Trawertyn-wapienny-drobne-ziarno-5-kg/355'},{label:'Drobny 10 kg',url:'https://www.sklepdecowant.pl/pl/p/FOX-Trawertyn-wapienny-drobne-ziarno-10-kg/675'}]},{name:'Gruby – 0,40 m²/kg (2 warstwy)',yield:0.4,shopLinks:[{label:'Gruby 10 kg',url:'https://www.sklepdecowant.pl/pl/p/Trawertyn-wapienny-grube-ziarno-10-kg/1143'}]}]},
-      concreteFini:{name:'Concrete Fini',kind:'consumption',consumption:1.2,packages:[5,22],unit:'kg',layers:1,waste:0,primer:'DK Quarzo GG',lacquer:'always',note:'Zużycie 1,2 kg/m² na jedną warstwę.'},
-      concreteGrosso:{name:'Concrete Grosso',kind:'consumption',consumption:2,packages:[5,22],unit:'kg',layers:1,waste:0,primer:'DK Quarzo GG',lacquer:'always',note:'Do obliczenia przyjęto korzystniejszą normę 2 kg/m².'},
-      universum:{name:'Universum',kind:'consumption',consumption:0.65,packages:[1,2.5,5,10],unit:'kg',layers:2,waste:0,primer:'Podkład zgodny z systemem',lacquer:'room',note:'Do obliczenia przyjęto korzystniejszą normę 0,65 kg/m² dla dwóch warstw.'},
-      ceramicWhite:{name:'Decoverni Ceramic White',kind:'coveragePerUnit',yield:16,packages:[1,2.5],unit:'l',layers:2,waste:0,primer:'Grunt zależnie od chłonności podłoża',lacquer:'none',note:'Przyjęto wydajność do 16 m²/l na jedną warstwę.'}
-    };
-    const SHOP_LINKS = {
-      colorMatt:{label:'Dobierz kolor Color Matt',url:'https://marekdecowant.github.io/kalkulator-ncs/'},
-      decomal:{label:'Zobacz DECOMAL',url:'https://www.sklepdecowant.pl/pl/collection/DECOMAL/6'},
-      decomalmat:{label:'Zobacz DECOMALmat',url:'https://www.sklepdecowant.pl/pl/c/DECOMALmat/79'},
-      decomalStar:{label:'Zobacz DECOMAL STAR',url:'https://www.sklepdecowant.pl/pl/searchquery/DECOMAL%20STAR/1/phot/5?url=DECOMAL-STAR'},
-      decomalDuo:{label:'Zobacz DECOMAL DUO',url:'https://www.sklepdecowant.pl/pl/c/DECOMAL-DUO/80'},
-      beton:{label:'Zobacz Beton Architektoniczny',url:'https://www.sklepdecowant.pl/pl/searchquery/DECOMAL%20Beton%20Architektoniczny/1/phot/5?url=DECOMAL-Beton-Architektoniczny'},
-      podklad:{label:'Zobacz DECOMAL Podkład',url:'https://www.sklepdecowant.pl/pl/p/DECOMAL-podklad-1.5-kg/1766'},
-      provence:{label:'Zobacz Provence',url:'https://www.sklepdecowant.pl/pl/searchquery/Provence/1/phot/5?url=Provence'},
-      aurum:{label:'Zobacz Aurum',url:'https://www.sklepdecowant.pl/pl/searchquery/Aurum/1/phot/5?url=Aurum'},
-      kalahari:{label:'Zobacz Kalahari',url:'https://www.sklepdecowant.pl/pl/searchquery/Kalahari/1/phot/5?url=Kalahari'},
-      diamento:{label:'Zobacz Diamento 3D',url:'https://www.sklepdecowant.pl/pl/searchquery/Diamento%203D/1/phot/5?url=Diamento-3D'},
-      concreteFini:{label:'Zobacz Concrete Fini',url:'https://www.sklepdecowant.pl/pl/p/BETON-CONCRETE-FINI-5-KG/618'},
-      concreteGrosso:{label:'Zobacz Concrete Grosso',url:'https://www.sklepdecowant.pl/pl/searchquery/Concrete%20Grosso/1/phot/5?url=Concrete-Grosso'},
-      universum:{label:'Zobacz Universum',url:'https://www.sklepdecowant.pl/pl/searchquery/Universum/1/phot/5?url=Universum'},
-      ceramicWhite:{label:'Zobacz Ceramic White',url:'https://www.sklepdecowant.pl/pl/searchquery/Ceramic%20White/1/phot/5?url=Ceramic-White'}
-    };
-    const $=id=>document.getElementById(id);
-    const product=$('dc-product'), mode=$('dc-mode'), layers=$('dc-layers'), waste=$('dc-waste'), variantWrap=$('dc-variant-wrap'), variant=$('dc-variant');
-
-    Object.keys(PRODUCTS).forEach(k=>{const o=document.createElement('option');o.value=k;o.textContent=PRODUCTS[k].name;product.appendChild(o)});
-    function fmt(n,d=2){return Number(n).toLocaleString('pl-PL',{maximumFractionDigits:d})}
-    function updateProduct(){
-      const p=PRODUCTS[product.value];
-      layers.value=p.layers;
-      $('dc-layers-wrap').classList.toggle('dc-hidden',p.layers!==2||p.fixedLayers);
-      waste.value=String(p.waste ?? 0);
-      variant.innerHTML='';
-      if(p.variants){
-        p.variants.forEach((v,i)=>{const o=document.createElement('option');o.value=i;o.textContent=v.name;variant.appendChild(o)});
-        variantWrap.classList.remove('dc-hidden');
-      }else variantWrap.classList.add('dc-hidden');
-    }
-    function updateMode(){const dims=mode.value==='dimensions';$('dc-area-fields').classList.toggle('dc-hidden',dims);$('dc-dim-fields').classList.toggle('dc-hidden',!dims)}
-    $('dc-subtract').addEventListener('change',e=>$('dc-opening-fields').classList.toggle('dc-hidden',!e.target.checked));
-    product.addEventListener('change',updateProduct);mode.addEventListener('change',updateMode);
-
-    function areaValue(){if(mode.value==='area') return Number($('dc-area').value);let a=Number($('dc-width').value)*Number($('dc-height').value);if($('dc-subtract').checked)a-=Number($('dc-windows').value||0)+Number($('dc-doors').value||0);return a}
-    function optimize(required,sizes){
-      if(!sizes||!sizes.length||!isFinite(required)||required<=0)return null;
-      const scaled=sizes.map(x=>Math.round(x*100)).sort((a,b)=>b-a),req=Math.ceil(required*100),smallest=Math.min(...scaled);
-      const maxItems=Math.ceil(req/smallest)+1;let best=null;
-      function walk(i,total,counts,itemCount){
-        if(i===scaled.length-1){
-          const count=Math.max(0,Math.ceil((req-total)/scaled[i])),finalTotal=total+count*scaled[i],finalCount=itemCount+count;
-          if(finalTotal<req)return;
-          const candidate={total:finalTotal,count:finalCount,counts:counts.concat(count)};
-          if(!best||candidate.total<best.total||(candidate.total===best.total&&candidate.count<best.count))best=candidate;
-          return;
-        }
-        const limit=Math.min(maxItems-itemCount,Math.ceil(Math.max(0,req-total)/scaled[i])+1);
-        for(let count=0;count<=limit;count++)walk(i+1,total+count*scaled[i],counts.concat(count),itemCount+count);
+<main class="shell" id="decowant-material-calculator" data-version="2026-09-18-v2">
+<nav class="top" aria-label="Nawigacja"><a class="brand" href="https://www.sklepdecowant.pl/">DECOWANT</a><a href="https://www.sklepdecowant.pl/">Wróć do sklepu →</a></nav>
+<header class="hero"><p class="eyebrow">Kalkulator zużycia materiałów</p><h1>Ile materiału potrzebujesz?</h1><p>Wybierz produkt i podaj metraż. Otrzymasz ilość materiału, potrzebne narzędzia i instrukcję wykonania.</p></header>
+<form id="dc-form" class="form-card" novalidate>
+<h2 class="step-title"><span aria-hidden="true">1</span> Wybierz produkt</h2>
+<div class="field"><label for="dc-product">Farba lub tynk</label><select id="dc-product" aria-describedby="dc-product-tip"></select><small id="dc-product-tip">Ilość liczymy dla wybranego produktu. Kolor wybierzesz później w sklepie.</small></div>
+<div id="dc-product-summary" class="product-summary"></div>
+<div id="dc-variant-wrap" class="field" style="margin-top:16px" hidden><label id="dc-variant-label" for="dc-variant">Sposób wykonania</label><select id="dc-variant"></select></div>
+<section class="section"><h2 class="step-title"><span aria-hidden="true">2</span> Podaj powierzchnię</h2>
+<div class="grid"><div class="field"><label for="dc-mode">Jak podasz metraż?</label><select id="dc-mode"><option value="area">Znam powierzchnię w m²</option><option value="dimensions">Podam wymiary ścian</option></select></div>
+<div class="field" id="dc-area-fields"><label for="dc-area">Powierzchnia (m²)</label><input id="dc-area" type="text" inputmode="decimal" value="10" autocomplete="off" aria-describedby="dc-area-tip"><small id="dc-area-tip">Możesz wpisać np. 12,5.</small></div></div>
+<div id="dc-dim-fields" hidden><div class="grid" style="margin-top:18px"><div class="field"><label for="dc-width">Łączna szerokość ścian (m)</label><input id="dc-width" type="text" inputmode="decimal" value="4" autocomplete="off"></div><div class="field"><label for="dc-height">Wysokość (m)</label><input id="dc-height" type="text" inputmode="decimal" value="2,5" autocomplete="off"></div></div>
+<label class="check"><input id="dc-subtract" type="checkbox" checked>Odejmij powierzchnię okien i drzwi</label>
+<div id="dc-opening-fields" class="grid"><div class="field"><label for="dc-windows">Powierzchnia okien (m²)</label><input id="dc-windows" type="text" inputmode="decimal" value="0" autocomplete="off"></div><div class="field"><label for="dc-doors">Powierzchnia drzwi (m²)</label><input id="dc-doors" type="text" inputmode="decimal" value="0" autocomplete="off"></div></div></div>
+</section>
+<details id="dc-settings"><summary>Dodatkowe ustawienia — pomieszczenie, zapas i warstwy</summary><div class="grid">
+<div class="field"><label for="dc-room">Miejsce zastosowania</label><select id="dc-room"><option value="dry">Pokój / salon / sypialnia</option><option value="hall">Korytarz / wiatrołap / schody</option><option value="kitchen">Kuchnia</option><option value="bathroom">Łazienka</option></select></div>
+<div class="field"><label for="dc-waste">Dodatkowy zapas</label><select id="dc-waste"><option value="0">0% — bez dodatkowego zapasu</option><option value="5">5%</option><option value="10">10%</option><option value="15">15%</option></select><small>Domyślnie liczymy bez zapasu. Materiał zaokrąglamy do pełnych opakowań.</small></div>
+<div id="dc-layers-wrap" class="field" hidden><label for="dc-layers">Liczba warstw</label><select id="dc-layers"></select></div>
+</div></details>
+<div class="actions"><button id="dc-calculate" class="button" type="submit">Oblicz ilość materiału</button><button id="dc-reset" class="button plain" type="reset">Wyczyść</button></div>
+<div id="dc-error" class="error" role="alert" hidden></div><p class="empty" id="dc-empty">Wynik i lista zakupów pojawią się poniżej.</p>
+</form>
+<section id="dc-output" class="result" aria-live="polite" aria-atomic="true" tabindex="-1" hidden></section>
+<noscript><p class="error">Włącz JavaScript, aby obliczyć ilość materiału. Możesz też skorzystać z <a href="https://www.sklepdecowant.pl/pl/i/Instrukcje-wykonania-tynkow-i-farb-dekoracyjnych/17">instrukcji wykonania</a>.</p></noscript>
+<footer class="footer"><p>DECOWANT · pomoc przed zakupem</p><a href="https://www.sklepdecowant.pl/pl/i/Instrukcje-wykonania-tynkow-i-farb-dekoracyjnych/17">Zobacz wszystkie instrukcje →</a></footer>
+</main>
+<script>
+(() => {
+'use strict';
+// Dane: KT DECOMAL 03, KT DECOMALmat, KT Aksamitna Głębia 1.3 oraz karty ofert.
+// Provence / Weneckie Przetarcie / NERO: zestaw 6 m², ustalenie właściciela 18.09.2026.
+// Kolor nie jest parametrem obliczenia. Brak potwierdzonej normy lub opakowania nie tworzy fikcyjnego wyniku.
+const PRODUCTS = [
+  {
+    "name": "DECOMAL",
+    "kind": "coveragePerPackage",
+    "yield": 7,
+    "packages": [
+      1
+    ],
+    "packageLabel": "opak. 1 kg",
+    "layers": 1,
+    "waste": 0,
+    "primer": "DECOMAL Podkład",
+    "primerYield": 7,
+    "primerPackages": [
+      1.5
+    ],
+    "primerUnit": "kg",
+    "note": "Wydajność przy nakładaniu pędzlem: 5–7 m²/kg. W obliczeniu przyjęto 7 m²/kg. Przy aplikacji pacą: 5–6 m²/kg.",
+    "id": "decomal",
+    "group": "DECOWANT",
+    "tools": [
+      "brush"
+    ],
+    "shopLinks": [
+      {
+        "label": "Zobacz DECOMAL",
+        "url": "https://www.sklepdecowant.pl/pl/collection/DECOMAL/6"
       }
-      walk(0,0,[],0);if(!best)return null;const counts={};
-      best.counts.forEach((count,i)=>{if(count)counts[scaled[i]/100]=count});
-      return {total:best.total/100,counts};
-    }
-    function packageText(opt,unit){if(!opt)return 'Dobierz ręcznie';return Object.keys(opt.counts).sort((a,b)=>b-a).map(s=>opt.counts[s]+' × '+fmt(s)+' '+unit).join(' + ')}
-    function lacquerText(p,room,area){if(p.lacquer==='none')return 'Lakier nie jest wymagany w standardowym systemie.';const wet=room==='kitchen'||room==='bathroom';if(p.lacquer==='always'||wet){const liters=area/10;return 'Zabezpieczenie zalecane/wymagane: ok. '+fmt(liters,1)+' l lakieru (przyjęto 10 m²/l).'}if(room==='hall')return 'Lakier zalecany ze względu na intensywne użytkowanie; orientacyjnie '+fmt(area/10,1)+' l.';return 'W suchym pomieszczeniu lakier jest opcjonalny, o ile karta produktu nie stanowi inaczej.'}
-    function calculate(){
-      const p=PRODUCTS[product.value],area=areaValue(),layerCount=p.fixedLayers?p.layers:Math.max(1,Number(layers.value||1)),reserve=Number(waste.value||0);
-      if(!isFinite(area)||area<1){$('dc-output').innerHTML='<div class="dc-error">Wpisz prawidłową powierzchnię co najmniej 1 m².</div>';return}
-      const calcArea=area*(1+reserve/100);let required,opt,main;
-      if(p.kind==='consumption'){
-        const factor=layerCount/(p.layers||1);required=calcArea*p.consumption*factor;opt=optimize(required,p.packages);main=packageText(opt,p.unit);
-      }else if(p.kind==='coveragePerPackage'){
-        let y=p.yield;if(p.variants)y=p.variants[Number(variant.value)||0].yield;const factor=layerCount/(p.layers||1);required=calcArea/y*factor;const count=Math.ceil(required);opt={total:count,counts:{1:count}};main=count+' × '+p.packageLabel;
-      }else{
-        let y=p.yield;if(p.variants)y=p.variants[Number(variant.value)||0].yield;const layerFactor=p.yieldIncludesLayers?1:layerCount;required=calcArea*layerFactor/y;opt=optimize(required,p.packages);main=packageText(opt,p.unit);
+    ],
+    "protection": "consult",
+    "fixedLayers": true,
+    "primerLinks": [
+      {
+        "label": "Zobacz DECOMAL PODKŁAD 1,5 kg",
+        "url": "https://www.sklepdecowant.pl/pl/p/DECOMAL-podklad-1.5-kg/1766"
       }
-      let primer='Podkład: '+p.primer;
-      if(p.primerYield&&p.primerPackages){const pr=calcArea/p.primerYield;const po=optimize(pr,p.primerPackages);primer+=' — do zamówienia: '+packageText(po,p.primerUnit||'kg')}
-      const requiredLabel = p.kind==='coveragePerPackage'
-        ? fmt(required,2)+' opak. ('+p.packageLabel+')'
-        : fmt(required,2)+' '+p.unit;
-      const orderedTotal = opt ? (p.kind==='coveragePerPackage' ? fmt(opt.total,0)+' opak.' : fmt(opt.total,2)+' '+p.unit) : '—';
-      const selectedVariant=p.variants?p.variants[Number(variant.value)||0]:null;const directLink=SHOP_LINKS[product.value];const variantLinks=selectedVariant&&selectedVariant.shopLinks?selectedVariant.shopLinks:[];const allLinks=directLink?[...variantLinks,directLink]:variantLinks;const productLinks=allLinks.length?'<div class="dc-product-links">'+allLinks.map(link=>'<a class="dc-product-link" href="'+link.url+'" target="_blank" rel="noopener">'+link.label+' →</a>').join('')+'</div>':'';const warn=!p.fixedLayers&&layerCount!==p.layers?'<div class="dc-warning">Wybrano '+layerCount+' warstw, podczas gdy ustawienie zalecane dla tego produktu to '+p.layers+'. Wynik został odpowiednio przeliczony.</div>':'';
-      $('dc-output').innerHTML='<h3>Wynik</h3><div class="dc-result-main">Do zamówienia: '+main+'</div><div class="dc-result-grid"><div class="dc-result-box dc-full"><strong>Produkt</strong>'+p.name+'</div><div class="dc-result-box"><strong>Obliczone zapotrzebowanie</strong>'+requiredLabel+'</div><div class="dc-result-box"><strong>Łącznie w zamawianych opakowaniach</strong>'+orderedTotal+'</div><div class="dc-result-box"><strong>Powierzchnia netto</strong>'+fmt(area)+' m²</div><div class="dc-result-box"><strong>Powierzchnia z zapasem</strong>'+fmt(calcArea)+' m²</div><div class="dc-result-box"><strong>Warstwy</strong>'+layerCount+'</div><div class="dc-result-box"><strong>Zapas</strong>'+reserve+'%</div><div class="dc-result-box dc-full"><strong>Podkład</strong>'+primer+'</div><div class="dc-result-box dc-full"><strong>Lakier / zabezpieczenie</strong>'+lacquerText(p,$('dc-room').value,calcArea)+'</div></div>'+warn +productLinks+'<div class="dc-note">'+(p.note?p.note+' ':'')+'Wynik jest orientacyjny i domyślnie nie zawiera zapasu. Obliczenia wykorzystują wyższą wydajność z zakresu technicznego produktu. Rzeczywiste zużycie zależy od chłonności i równości podłoża, sposobu aplikacji oraz doświadczenia wykonawcy. Materiał jest zaokrąglany w górę do pełnych opakowań.</div><a class="dc-shop-link" href="https://www.sklepdecowant.pl/" target="_blank" rel="noopener">Przejdź do sklepu Decowant →</a>';
-    }
-    $('dc-calculate').addEventListener('click',calculate);
-    $('dc-reset').addEventListener('click',()=>{$('dc-area').value=10;$('dc-width').value=4;$('dc-height').value=2.5;$('dc-windows').value=0;$('dc-doors').value=0;product.selectedIndex=0;mode.value='area';$('dc-room').value='dry';updateMode();updateProduct();$('dc-output').innerHTML='<p>Wybierz produkt i wpisz powierzchnię, a następnie kliknij „Oblicz”.</p>'});
-    updateMode();updateProduct();
-  })();
-  </script>
-</div>
-
+    ],
+    "video": "cXsaLeArKhQ",
+    "variants": [
+      {
+        "name": "Pędzel",
+        "yield": 7,
+        "tools": [
+          "brush"
+        ],
+        "note": "Przyjęto 7 m²/kg; zakres 5–7 m²/kg."
+      },
+      {
+        "name": "Paca INOX",
+        "yield": 6,
+        "tools": [
+          "trowel"
+        ],
+        "note": "Przyjęto 6 m²/kg; zakres 5–6 m²/kg."
+      }
+    ]
+  },
+  {
+    "name": "DECOMALmat",
+    "kind": "coveragePerPackage",
+    "yield": 10,
+    "packages": [
+      1
+    ],
+    "packageLabel": "opak. 1 kg",
+    "layers": 1,
+    "waste": 0,
+    "primer": "DECOMAL Podkład",
+    "primerYield": 7,
+    "primerPackages": [
+      1.5
+    ],
+    "primerUnit": "kg",
+    "note": "Wydajność 7–10 m²/kg na jedną warstwę, zgodnie z kartą techniczną DECOMALmat. Przyjęto 10 m²/kg; opakowania liczone w kilogramach.",
+    "id": "decomalmat",
+    "group": "DECOWANT",
+    "tools": [
+      "brush"
+    ],
+    "shopLinks": [
+      {
+        "label": "Zobacz DECOMALmat",
+        "url": "https://www.sklepdecowant.pl/pl/c/DECOMALmat/79"
+      }
+    ],
+    "protection": "consult",
+    "fixedLayers": true,
+    "primerLinks": [
+      {
+        "label": "Zobacz DECOMAL PODKŁAD 1,5 kg",
+        "url": "https://www.sklepdecowant.pl/pl/p/DECOMAL-podklad-1.5-kg/1766"
+      }
+    ],
+    "video": "1H7pptHsFqQ"
+  },
+  {
+    "name": "DECOMAL STAR",
+    "kind": "coveragePerPackage",
+    "yield": 7,
+    "packages": [
+      1
+    ],
+    "packageLabel": "opak. 1 kg",
+    "layers": 1,
+    "waste": 0,
+    "primer": "DECOMAL Podkład",
+    "primerYield": 7,
+    "primerPackages": [
+      1.5
+    ],
+    "primerUnit": "kg",
+    "note": "Wydajność przy nakładaniu pędzlem: 5–7 m²/kg. W obliczeniu przyjęto 7 m²/kg. Przy aplikacji pacą: 5–6 m²/kg.",
+    "id": "decomalStar",
+    "group": "DECOWANT",
+    "tools": [
+      "brush"
+    ],
+    "shopLinks": [
+      {
+        "label": "Zobacz DECOMAL STAR — opakowania 1 kg",
+        "url": "https://www.sklepdecowant.pl/pl/searchquery/DECOMAL%20STAR%201L/1/phot/5?url=DECOMAL%20STAR%201L"
+      }
+    ],
+    "protection": "consult",
+    "fixedLayers": true,
+    "primerLinks": [
+      {
+        "label": "Zobacz DECOMAL PODKŁAD 1,5 kg",
+        "url": "https://www.sklepdecowant.pl/pl/p/DECOMAL-podklad-1.5-kg/1766"
+      }
+    ],
+    "video": "7dY9KxIsYJ0",
+    "variants": [
+      {
+        "name": "Pędzel",
+        "yield": 7,
+        "tools": [
+          "brush"
+        ],
+        "note": "Przyjęto 7 m²/kg; zakres 5–7 m²/kg."
+      },
+      {
+        "name": "Paca INOX",
+        "yield": 6,
+        "tools": [
+          "trowel"
+        ],
+        "note": "Przyjęto 6 m²/kg; zakres 5–6 m²/kg."
+      }
+    ]
+  },
+  {
+    "name": "DECOMAL DUO",
+    "kind": "consult",
+    "yield": 7,
+    "packages": [
+      1
+    ],
+    "packageLabel": "zestaw P1 + P2",
+    "layers": 2,
+    "waste": 0,
+    "primer": "Sprawdź skład wybranego zestawu DUO. Jeżeli zawiera podkład i gąbkę, nie zamawiaj ich ponownie.",
+    "primerYield": null,
+    "primerPackages": [
+      1.5
+    ],
+    "primerUnit": "kg",
+    "note": "Wydajność kompletnego efektu DUO dobierz z nami do techniki i wybranego zestawu. Nie jest sumą wydajności dwóch farb.",
+    "id": "decomalDuo",
+    "group": "DECOWANT",
+    "tools": [
+      "trowel"
+    ],
+    "shopLinks": [
+      {
+        "label": "Zobacz DECOMAL DUO",
+        "url": "https://www.sklepdecowant.pl/pl/c/DECOMAL-DUO/80"
+      }
+    ],
+    "protection": "consult",
+    "fixedLayers": true,
+    "primerLinks": [],
+    "video": "eNCxkrGboRE"
+  },
+  {
+    "id": "weneckie",
+    "name": "Weneckie Przetarcie",
+    "group": "DECOWANT",
+    "kind": "coveragePerPackage",
+    "yield": 6,
+    "packages": [
+      1
+    ],
+    "packageLabel": "zestaw na ok. 6 m²",
+    "layers": 1,
+    "fixedLayers": true,
+    "waste": 0,
+    "includedPrimer": true,
+    "primer": "DECOMAL PODKŁAD",
+    "primerKgPerSet": 1.5,
+    "tools": [
+      "brush",
+      "duo"
+    ],
+    "protection": "consult",
+    "video": "67MsRGMTFPM",
+    "shopLinks": [
+      {
+        "label": "Zobacz zestawy Weneckie Przetarcie",
+        "url": "https://www.sklepdecowant.pl/pl/searchquery/Weneckie%20Przetarcie%20zestaw/1/phot/5?url=Weneckie%20Przetarcie%20zestaw"
+      }
+    ],
+    "note": "Obliczenie: 1 zestaw na około 6 m². Zestaw zawiera dekorację 1 kg i podkład 1,5 kg. Rzeczywiste zużycie zależy od podłoża oraz techniki; w razie potrzeby wybierz zapas."
+  },
+  {
+    "id": "nero",
+    "name": "Weneckie Przetarcie NERO",
+    "group": "DECOWANT",
+    "kind": "coveragePerPackage",
+    "yield": 6,
+    "packages": [
+      1
+    ],
+    "packageLabel": "zestaw na ok. 6 m²",
+    "layers": 1,
+    "fixedLayers": true,
+    "waste": 0,
+    "includedPrimer": true,
+    "primer": "DECOMAL PODKŁAD — kolor dopasowany do zestawu",
+    "primerKgPerSet": 1.5,
+    "tools": [
+      "brush",
+      "duo"
+    ],
+    "protection": "consult",
+    "video": "rjNUAPqplSg",
+    "shopLinks": [
+      {
+        "label": "Zobacz zestawy NERO",
+        "url": "https://www.sklepdecowant.pl/pl/searchquery/Przetarcie%20NERO%20zestaw/1/phot/5?url=Przetarcie%20NERO%20zestaw"
+      }
+    ],
+    "note": "Obliczenie: 1 zestaw na około 6 m². Zestaw zawiera dekorację 1 kg i podkład 1,5 kg. Rzeczywiste zużycie zależy od podłoża oraz techniki; w razie potrzeby wybierz zapas."
+  },
+  {
+    "id": "aksamitna",
+    "name": "Aksamitna Głębia",
+    "group": "DECOWANT",
+    "kind": "coveragePerUnit",
+    "yield": 6,
+    "unit": "kg",
+    "packages": [],
+    "layers": 2,
+    "fixedLayers": true,
+    "yieldIncludesLayers": true,
+    "waste": 0,
+    "primer": "DECOMAL PODKŁAD — biały lub podbarwiony zgodnie z wybranym efektem",
+    "primerYield": 7,
+    "primerPackages": [
+      1.5
+    ],
+    "primerUnit": "kg",
+    "primerLinks": [
+      {
+        "label": "Zobacz DECOMAL PODKŁAD 1,5 kg",
+        "url": "https://www.sklepdecowant.pl/pl/p/DECOMAL-podklad-1.5-kg/1766"
+      }
+    ],
+    "tools": [
+      "trowel"
+    ],
+    "protection": "consult",
+    "video": "HtpFmSRgg8s",
+    "shopLinks": [],
+    "note": "Wydajność 4–6 m²/kg obejmuje dwie warstwy (KT 1.3). Przyjęto 6 m²/kg dla całego efektu. Trzecia warstwa zwiększa zużycie — dobierz ilość po próbie. Wielkość opakowania ustal z Decowant."
+  },
+  {
+    "name": "DECOMAL Podkład",
+    "kind": "coveragePerUnit",
+    "yield": 7,
+    "packages": [
+      1.5
+    ],
+    "unit": "kg",
+    "layers": 1,
+    "waste": 0,
+    "primer": "To jest produkt podkładowy. Grunt głęboko penetrujący dobierz do stanu podłoża.",
+    "id": "podklad",
+    "group": "DECOWANT",
+    "tools": [
+      "primerTools"
+    ],
+    "shopLinks": [
+      {
+        "label": "Zobacz DECOMAL Podkład",
+        "url": "https://www.sklepdecowant.pl/pl/p/DECOMAL-podklad-1.5-kg/1766"
+      }
+    ],
+    "protection": "none",
+    "note": "Wydajność 5–7 m²/kg na jedną warstwę. Przyjęto 7 m²/kg. Wynik dotyczy jednej warstwy; chłonne podłoże może wymagać kolejnej."
+  },
+  {
+    "id": "provence",
+    "name": "Provence",
+    "group": "Pozostałe produkty",
+    "kind": "coveragePerPackage",
+    "yield": 6,
+    "packages": [
+      1
+    ],
+    "packageLabel": "zestaw na ok. 6 m²",
+    "layers": 1,
+    "fixedLayers": true,
+    "waste": 0,
+    "includedPrimer": true,
+    "primer": "DECOVERNI Quarzo",
+    "primerKgPerSet": 1.5,
+    "tools": [
+      "brush",
+      "duo"
+    ],
+    "protection": "provence",
+    "video": "FBQx1L68lqA",
+    "shopLinks": [
+      {
+        "label": "Zobacz zestawy Provence na 6 m²",
+        "url": "https://www.sklepdecowant.pl/pl/searchquery/PROVENCE%20ZESTAW%206m2/1/phot/5?url=PROVENCE%20ZESTAW%206m2"
+      }
+    ],
+    "note": "Obliczenie: 1 zestaw na około 6 m². Zestaw zawiera dekorację 1 kg i podkład 1,5 kg. Rzeczywiste zużycie zależy od podłoża oraz techniki; w razie potrzeby wybierz zapas."
+  },
+  {
+    "name": "Aurum",
+    "kind": "coveragePerUnit",
+    "yield": 8,
+    "packages": [
+      0.75,
+      2.25
+    ],
+    "unit": "kg",
+    "layers": 1,
+    "waste": 0,
+    "primer": "DK Quarzo",
+    "variants": [
+      {
+        "name": "Pędzel – do 8 m²/kg",
+        "yield": 8,
+        "tools": [
+          "brush",
+          "duo"
+        ],
+        "note": "Przyjęto 8 m²/kg przy nakładaniu pędzlem."
+      },
+      {
+        "name": "Paca INOX – do 6 m²/kg",
+        "yield": 6,
+        "tools": [
+          "trowel"
+        ],
+        "note": "Przyjęto 6 m²/kg przy nakładaniu pacą INOX."
+      }
+    ],
+    "id": "aurum",
+    "group": "Pozostałe produkty",
+    "tools": [
+      "brush",
+      "duo"
+    ],
+    "shopLinks": [
+      {
+        "label": "Zobacz Aurum",
+        "url": "https://www.sklepdecowant.pl/pl/searchquery/Aurum/1/phot/5?url=Aurum"
+      }
+    ],
+    "protection": "consult",
+    "video": "NEJC6lW2Ivo",
+    "primerYield": 7,
+    "primerPackages": [
+      1.5
+    ],
+    "primerUnit": "kg",
+    "primerLinks": [
+      {
+        "label": "Zobacz DK Quarzo 1,5 kg",
+        "url": "https://www.sklepdecowant.pl/pl/p/DECOVERNI-QUARZO-1%2C5-KG-FARBA-GRUNTUJACA/615"
+      }
+    ]
+  },
+  {
+    "name": "FOX Color Matt",
+    "kind": "coveragePerUnit",
+    "yield": 14,
+    "packages": [
+      2.5,
+      5,
+      10
+    ],
+    "unit": "l",
+    "layers": 2,
+    "waste": 0,
+    "primer": "Grunt dobierany do chłonności i stanu podłoża.",
+    "note": "Wydajność do 14 m²/l na jedną warstwę.",
+    "id": "colorMatt",
+    "group": "Pozostałe produkty",
+    "tools": [
+      "roller",
+      "handle",
+      "paintbrush"
+    ],
+    "shopLinks": [
+      {
+        "label": "Dobierz kolor Color Matt",
+        "url": "https://marekdecowant.github.io/kalkulator-ncs/"
+      }
+    ],
+    "protection": "none",
+    "layerOptions": [
+      2,
+      3,
+      4
+    ]
+  },
+  {
+    "name": "Decoverni Ceramic White",
+    "kind": "coveragePerUnit",
+    "yield": 16,
+    "packages": [
+      1,
+      2.5
+    ],
+    "unit": "l",
+    "layers": 2,
+    "waste": 0,
+    "primer": "Grunt zależnie od chłonności podłoża",
+    "note": "Przyjęto wydajność do 16 m²/l na jedną warstwę.",
+    "id": "ceramicWhite",
+    "group": "Pozostałe produkty",
+    "tools": [
+      "roller",
+      "handle",
+      "paintbrush"
+    ],
+    "shopLinks": [
+      {
+        "label": "Zobacz Ceramic White",
+        "url": "https://www.sklepdecowant.pl/pl/searchquery/Ceramic%20White/1/phot/5?url=Ceramic-White"
+      }
+    ],
+    "protection": "none",
+    "layerOptions": [
+      2,
+      3,
+      4
+    ]
+  },
+  {
+    "id": "ciq",
+    "name": "CIQ — farba termoizolacyjna biała",
+    "group": "Pozostałe produkty",
+    "kind": "coveragePerUnit",
+    "yield": 10,
+    "unit": "l",
+    "packages": [
+      2.5
+    ],
+    "layers": 2,
+    "layerOptions": [
+      2,
+      3,
+      4
+    ],
+    "waste": 0,
+    "primer": "Grunt odpowiedni do chłonności i stanu podłoża.",
+    "tools": [
+      "roller",
+      "handle",
+      "paintbrush"
+    ],
+    "protection": "none",
+    "video": "lrRVxvZFDoI",
+    "videoLabel": "Zobacz film o CIQ",
+    "shopLinks": [
+      {
+        "label": "Zobacz CIQ 2,5 l",
+        "url": "https://www.sklepdecowant.pl/pl/p/CIQ-farba-termoizolacyjna-wewnetrzna-biala-matowa-2%2C5-l/1211"
+      }
+    ],
+    "note": "Wydajność 7–10 m²/l na jedną warstwę. Przyjęto 10 m²/l. Minimum dwie warstwy; kalkulator uwzględnia obie."
+  },
+  {
+    "name": "Kalahari",
+    "kind": "coveragePerUnit",
+    "yield": 10,
+    "packages": [
+      1
+    ],
+    "unit": "l",
+    "layers": 1,
+    "waste": 0,
+    "primer": "Farba podkładowa w zbliżonym kolorze",
+    "id": "kalahari",
+    "group": "Pozostałe produkty",
+    "tools": [
+      "brush"
+    ],
+    "shopLinks": [
+      {
+        "label": "Zobacz Kalahari",
+        "url": "https://www.sklepdecowant.pl/pl/searchquery/Kalahari/1/phot/5?url=Kalahari"
+      }
+    ],
+    "protection": "consult"
+  },
+  {
+    "name": "Diamento 3D",
+    "kind": "coveragePerUnit",
+    "yield": 5,
+    "packages": [
+      1,
+      3
+    ],
+    "unit": "l",
+    "layers": 1,
+    "waste": 0,
+    "primer": "Farba podkładowa zgodna z systemem",
+    "note": "Opakowanie 3 l może być dostępne tylko dla wybranych wariantów.",
+    "id": "diamento",
+    "group": "Pozostałe produkty",
+    "tools": [
+      "brush"
+    ],
+    "shopLinks": [
+      {
+        "label": "Zobacz Diamento 3D",
+        "url": "https://www.sklepdecowant.pl/pl/searchquery/Diamento%203D/1/phot/5?url=Diamento-3D"
+      }
+    ],
+    "protection": "consult"
+  },
+  {
+    "name": "Trawertyn Wapienny FOX",
+    "kind": "coveragePerUnit",
+    "yield": 0.6,
+    "packages": [
+      5,
+      10
+    ],
+    "unit": "kg",
+    "layers": 2,
+    "fixedLayers": true,
+    "yieldIncludesLayers": true,
+    "waste": 0,
+    "primer": "Grunt sczepny dobrany do systemu FOX Trawertyn Wapienny.",
+    "note": "Wynik obejmuje pełny efekt w dwóch warstwach. Dostępne opakowania zależą od wybranego uziarnienia.",
+    "variants": [
+      {
+        "name": "Ekstra drobne ziarno",
+        "yield": 1.25,
+        "shopLinks": [
+          {
+            "label": "Ekstra drobny 5 kg",
+            "url": "https://www.sklepdecowant.pl/pl/p/FOX-Trawertyn-wapienny-ekstra-drobne-ziarno-5-kg/1142"
+          },
+          {
+            "label": "Ekstra drobny 10 kg",
+            "url": "https://www.sklepdecowant.pl/pl/p/FOX-Trawertyn-wapienny-ekstra-drobne-ziarno-Fox-10-kg/727"
+          }
+        ],
+        "packages": [
+          5,
+          10
+        ],
+        "note": "Przyjęto 1,25 m²/kg dla pełnego efektu dwuwarstwowego."
+      },
+      {
+        "name": "Drobne ziarno",
+        "yield": 0.7,
+        "shopLinks": [
+          {
+            "label": "Drobny 5 kg",
+            "url": "https://www.sklepdecowant.pl/pl/p/FOX-Trawertyn-wapienny-drobne-ziarno-5-kg/355"
+          },
+          {
+            "label": "Drobny 10 kg",
+            "url": "https://www.sklepdecowant.pl/pl/p/FOX-Trawertyn-wapienny-drobne-ziarno-10-kg/675"
+          }
+        ],
+        "packages": [
+          5,
+          10
+        ],
+        "note": "Przyjęto ok. 0,7 m²/kg zgodnie z aktualną ofertą FOX Trawertyn Drobny 10 kg."
+      },
+      {
+        "name": "Grube ziarno",
+        "yield": 0.2631578947368421,
+        "shopLinks": [
+          {
+            "label": "Trawertyn gruby 10 kg",
+            "url": "https://www.sklepdecowant.pl/pl/p/FOX-DEKORATOR-Trawertyn-wapienny-grube-ziarno-10-kg/1143"
+          }
+        ],
+        "packages": [
+          10
+        ],
+        "note": "Przyjęto ok. 3,8 kg/m² zgodnie z ofertą FOX Trawertyn Gruby. Dostępne opakowanie: 10 kg."
+      }
+    ],
+    "id": "trawertyn",
+    "group": "Pozostałe produkty",
+    "tools": [
+      "trowel",
+      "brush"
+    ],
+    "shopLinks": [],
+    "protection": "fox",
+    "video": "SYAtm1b8j_k",
+    "primerLinks": [
+      {
+        "label": "Grunt sczepny FOX STRONG 1 kg",
+        "url": "https://www.sklepdecowant.pl/pl/p/FOX-GRUNT-SCZEPNY-STRONG-1-KG/1078"
+      }
+    ]
+  },
+  {
+    "name": "Concrete Fini",
+    "kind": "consumption",
+    "consumption": 1.2,
+    "packages": [
+      5,
+      22
+    ],
+    "unit": "kg",
+    "layers": 1,
+    "waste": 0,
+    "primer": "DK Quarzo GG",
+    "note": "Zużycie 1,2 kg/m² na jedną warstwę.",
+    "id": "concreteFini",
+    "group": "Pozostałe produkty",
+    "tools": [
+      "trowel"
+    ],
+    "shopLinks": [
+      {
+        "label": "Zobacz Concrete Fini",
+        "url": "https://www.sklepdecowant.pl/pl/p/BETON-CONCRETE-FINI-5-KG/618"
+      }
+    ],
+    "protection": "concrete",
+    "layerOptions": [
+      1,
+      2
+    ],
+    "primerYield": 7,
+    "primerPackages": [
+      1.5
+    ],
+    "primerUnit": "kg",
+    "primerLinks": [
+      {
+        "label": "Zobacz DK Quarzo GG 1,5 kg",
+        "url": "https://www.sklepdecowant.pl/pl/p/DECOVERNI-QUARZO-GG-1%2C5-KG-FARBA-GRUNTUJACA/614"
+      }
+    ]
+  },
+  {
+    "name": "Concrete Grosso",
+    "kind": "consumption",
+    "consumption": 2,
+    "packages": [
+      5,
+      22
+    ],
+    "unit": "kg",
+    "layers": 1,
+    "waste": 0,
+    "primer": "DK Quarzo GG",
+    "note": "Do obliczenia przyjęto korzystniejszą normę 2 kg/m².",
+    "id": "concreteGrosso",
+    "group": "Pozostałe produkty",
+    "tools": [
+      "trowel"
+    ],
+    "shopLinks": [
+      {
+        "label": "Zobacz Concrete Grosso",
+        "url": "https://www.sklepdecowant.pl/pl/searchquery/Concrete%20Grosso/1/phot/5?url=Concrete-Grosso"
+      }
+    ],
+    "protection": "concrete",
+    "layerOptions": [
+      1,
+      2
+    ],
+    "primerYield": 7,
+    "primerPackages": [
+      1.5
+    ],
+    "primerUnit": "kg",
+    "primerLinks": [
+      {
+        "label": "Zobacz DK Quarzo GG 1,5 kg",
+        "url": "https://www.sklepdecowant.pl/pl/p/DECOVERNI-QUARZO-GG-1%2C5-KG-FARBA-GRUNTUJACA/614"
+      }
+    ]
+  },
+  {
+    "name": "Universum",
+    "kind": "consumption",
+    "consumption": 0.65,
+    "packages": [
+      1,
+      2.5,
+      5,
+      10
+    ],
+    "unit": "kg",
+    "layers": 2,
+    "waste": 0,
+    "primer": "Podkład zgodny z systemem",
+    "note": "Przyjęto 0,65 kg/m² dla pełnego efektu w dwóch warstwach. Zużycie zależy od planowanej struktury.",
+    "id": "universum",
+    "group": "Pozostałe produkty",
+    "tools": [
+      "trowel"
+    ],
+    "shopLinks": [
+      {
+        "label": "Zobacz Universum",
+        "url": "https://www.sklepdecowant.pl/pl/searchquery/Universum/1/phot/5?url=Universum"
+      }
+    ],
+    "protection": "consult",
+    "fixedLayers": true,
+    "consumptionIncludesLayers": true
+  }
+];
+const TOOLS = {
+  "brush": {
+    "label": "Pędzel Decowant 120 × 8 mm",
+    "url": "https://www.sklepdecowant.pl/pl/p/Pedzel-Decowant-120x8-MM/891"
+  },
+  "duo": {
+    "label": "Duoszpachelka DECOVERNI",
+    "url": "https://www.sklepdecowant.pl/pl/p/DUOSZPACHELKA-DECOVERNI/650"
+  },
+  "trowel": {
+    "label": "Paca INOX 20 × 8 cm",
+    "url": "https://www.sklepdecowant.pl/pl/p/FOX-DEKORATOR-PACA-WENECKA-PROSTA/325"
+  },
+  "sponge": {
+    "label": "Gąbka syntetyczna",
+    "url": "https://www.sklepdecowant.pl/pl/p/GABKA-SYNTETYK-DO-GLAZURY-230x120x70-070-169/570"
+  },
+  "roller": {
+    "label": "Wałek do farb 25 cm, runo 12 mm",
+    "url": "https://www.sklepdecowant.pl/pl/p/WALEK-POLYACRILFIELD-25-CM-MOTIVE-RUNO-12MM/1864"
+  },
+  "handle": {
+    "label": "Uchwyt do wałka 25 cm / 8 mm",
+    "url": "https://www.sklepdecowant.pl/pl/p/UCHWYT-MALARSKI-GRAFIT-258mm-dl-31cm/1193"
+  },
+  "paintbrush": {
+    "label": "Pędzel do narożników i odcięć",
+    "url": "https://www.sklepdecowant.pl/pl/p/PEDZEL-MOTIVE-RED-2/1546"
+  },
+  "primerTools": {
+    "label": "Wałki i pędzle do podkładu",
+    "url": "https://www.sklepdecowant.pl/pl/c/MALARSKIE/67"
+  }
+};
+const SHARED = {
+  "contact": {
+    "label": "Dobierz z nami",
+    "url": "https://www.sklepdecowant.pl/pl/i/Kontakt-i-dane-firmy/9"
+  },
+  "instructions": {
+    "label": "Instrukcje wykonania",
+    "url": "https://www.sklepdecowant.pl/pl/i/Instrukcje-wykonania-tynkow-i-farb-dekoracyjnych/17"
+  },
+  "protectionGuide": {
+    "label": "Jak dobrać zabezpieczenie?",
+    "url": "https://www.sklepdecowant.pl/pl/n/11"
+  },
+  "foxLacquer": {
+    "label": "Zobacz Lakier Dekoracyjny FOX 1 l",
+    "url": "https://www.sklepdecowant.pl/pl/p/FOX-LAKIER-DO-SCIAN-SATYNA-1L/620"
+  },
+  "cebo": {
+    "label": "Zobacz CeboTech 1 l",
+    "url": "https://www.sklepdecowant.pl/pl/p/CEBOS-CEBOTECH-1L-BEJCA-ZABEZPIECZAJACA-DO-BETONU/651"
+  },
+  "vernice": {
+    "label": "Zobacz Vernice Mat",
+    "url": "https://www.sklepdecowant.pl/pl/p/DECOVERNI-VERNICE-MAT-1L-LAKIER/599"
+  }
+};
+const $ = id => document.getElementById(id);
+const fmt=(n,d=2)=>Number(n).toLocaleString('pl-PL',{maximumFractionDigits:d});
+const escape=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const ceil=n=>Math.ceil(n-1e-10*Math.max(1,Math.abs(n)));
+const linkHtml=(l,primary=false)=>`<a class="button ${primary?'':'secondary'}" href="${escape(l.url)}" target="_blank" rel="noopener">${escape(l.label)} →</a>`;
+const buttons=(links,primary=false)=>`<div class="buttons">${links.map(l=>linkHtml(l,primary)).join('')}</div>`;
+let hasCalculated=false;
+for (const group of ['DECOWANT','Pozostałe produkty']) {
+  const optgroup=document.createElement('optgroup');optgroup.label=group;
+  PRODUCTS.filter(p=>p.group===group).forEach(p=>{const o=document.createElement('option');o.value=p.id;o.textContent=p.name;optgroup.append(o)});
+  $('dc-product').append(optgroup);
+}
+function product(){const p=PRODUCTS.find(p=>p.id===$('dc-product').value);const v=p.variants?.[Number($('dc-variant').value)||0];return {...p,...v,baseName:p.name,variantName:v?.name||'',name:p.name};}
+function productSummary(){const p=product();$('dc-product-summary').innerHTML=`<strong>${escape(p.name)}</strong><p>${escape(p.note||normText(p))}</p>`;}
+function updateProduct(){
+ const p=PRODUCTS.find(p=>p.id===$('dc-product').value);
+ $('dc-variant').replaceChildren();$('dc-variant-wrap').hidden=!p.variants;
+ $('dc-variant-label').textContent=p.id==='trawertyn'?'Uziarnienie tynku':'Sposób nakładania';
+ (p.variants||[]).forEach((v,i)=>{const o=document.createElement('option');o.value=i;o.textContent=v.name;$('dc-variant').append(o)});
+ $('dc-layers').replaceChildren();$('dc-layers-wrap').hidden=!p.layerOptions;
+ (p.layerOptions||[p.layers]).forEach(n=>{const o=document.createElement('option');o.value=n;o.textContent=n+(n===1?' warstwa':' warstwy');$('dc-layers').append(o)});
+ $('dc-layers').value=String(p.layers);productSummary();
+}
+function updateMode(){const dims=$('dc-mode').value==='dimensions';$('dc-area-fields').hidden=dims;$('dc-dim-fields').hidden=!dims;$('dc-opening-fields').hidden=!$('dc-subtract').checked;}
+function numeric(id,label,zero=false){const raw=$(id).value.trim().replace(',','.');if(!/^\d+(?:\.\d+)?$/.test(raw))throw new Error(`Wpisz poprawną wartość: ${label}.`);const n=Number(raw);if(!Number.isFinite(n)||n<0||(!zero&&n===0))throw new Error(`${label} musi być ${zero?'nieujemna':'większa od zera'}.`);return n;}
+function areaValue(){
+ let area;if($('dc-mode').value==='area')area=numeric('dc-area','Powierzchnia');else{
+   area=numeric('dc-width','Szerokość ścian')*numeric('dc-height','Wysokość');
+   if($('dc-subtract').checked){const openings=numeric('dc-windows','Powierzchnia okien',true)+numeric('dc-doors','Powierzchnia drzwi',true);if(openings>=area)throw new Error('Powierzchnia okien i drzwi musi być mniejsza od powierzchni ścian.');area-=openings;}
+ }
+ if(area<0.01)throw new Error('Wpisz powierzchnię co najmniej 0,01 m².');
+ if(area>10000)throw new Error('Dla powierzchni większej niż 10 000 m² skontaktuj się z Decowant w sprawie indywidualnego doboru.');
+ return area;
+}
+// Dobór minimalnej sumy pełnych opakowań. Przy tej samej sumie: najmniej wiader.
+function optimize(required,sizes){
+ if(!sizes?.length||!Number.isFinite(required)||required<=0)return null;
+ const raw=[...new Set(sizes.map(n=>Math.round(n*100)))].sort((a,b)=>b-a);
+ const gcd=(a,b)=>b?gcd(b,a%b):a;const step=raw.reduce(gcd);const scaled=raw.map(n=>n/step);
+ const target=ceil(required*100/step),limit=target+scaled[0];
+ const counts=new Int32Array(limit+1);counts.fill(2147483647);counts[0]=0;const prev=new Int32Array(limit+1);prev.fill(-1);
+ for(let total=1;total<=limit;total++)for(let i=0;i<scaled.length;i++)if(total>=scaled[i]&&counts[total-scaled[i]]+1<counts[total]){counts[total]=counts[total-scaled[i]]+1;prev[total]=i;}
+ let total=target;while(prev[total]===-1&&total<=limit)total++;if(total>limit)return null;
+ const result={total:total*step/100,counts:{}};let remaining=total;
+ while(remaining>0){const i=prev[remaining],size=raw[i]/100;result.counts[size]=(result.counts[size]||0)+1;remaining-=scaled[i];}return result;
+}
+function packageText(opt,unit){return Object.keys(opt.counts).sort((a,b)=>b-a).map(size=>`${opt.counts[size]} × ${fmt(size)} ${unit}`).join(' + ');}
+function normText(p){if(p.kind==='coveragePerPackage')return `1 ${p.packageLabel} na około ${fmt(p.yield)} m².`;if(p.kind==='consumption')return `${fmt(p.consumption)} kg/m² ${p.consumptionIncludesLayers?'dla całego efektu':'na jedną warstwę'}.`;if(p.kind==='consult')return p.note;return `${fmt(p.yield)} m²/${p.unit} ${p.yieldIncludesLayers?'dla całego efektu':'na jedną warstwę'}.`;}
+function quantities(p,area,layers){
+ if(p.kind==='consult')return {main:'Dobierz liczbę zestawów z Decowant',required:null};
+ if(p.kind==='coveragePerPackage'){const count=ceil(area/p.yield);return {main:`${count} × ${p.packageLabel}`,required:area/p.yield,count,total:count,coverage:count*p.yield};}
+ const required=p.kind==='consumption'?area*p.consumption*(p.consumptionIncludesLayers?1:layers):area*(p.yieldIncludesLayers?1:layers)/p.yield;
+ const opt=optimize(required,p.packages);return {main:opt?packageText(opt,p.unit):`${fmt(required)} ${p.unit} produktu`,required,opt,total:opt?.total};
+}
+function primerPanel(p,q,area){
+ if(p.includedPrimer)return `<span class="included">Podkład w zestawie</span><h3>${escape(p.primer)}</h3><p><strong>${q.count} × ${fmt(p.primerKgPerSet)} kg — już w zamawianych zestawach.</strong></p><p class="muted">Nie dokupuj go ponownie. Grunt głęboko penetrujący dobierz osobno do podłoża.</p>`;
+ let amount='';if(p.primerYield){const opt=optimize(area/p.primerYield,p.primerPackages);amount=`<p><strong>Do zamówienia: ${packageText(opt,p.primerUnit||'kg')}</strong></p><p class="muted">Jedna warstwa podkładu, przyjęto ${fmt(p.primerYield)} m²/${p.primerUnit||'kg'}. Jeżeli wybrana oferta farby zawiera podkład, uwzględnij go przed zakupem.</p>`;}
+ return `<h3>Podkład i przygotowanie</h3><p>${escape(p.primer)}</p>${amount}${buttons(p.primerLinks||[])}`;
+}
+function protectionPanel(p,area,room){
+ let html='<h3>Zabezpieczenie powierzchni</h3>';
+ if(p.protection==='none')return html+'<p>Standardowy system nie wymaga dodatkowego lakieru.</p>';
+ if(p.protection==='fox'){
+   const required=area*0.07,opt=optimize(required,[1]);
+   return html+`<p><strong>Lakier Dekoracyjny FOX: ${packageText(opt,'l')}</strong></p><p class="muted">Obliczono dla jednej warstwy: ${fmt(required)} l przy zużyciu 0,07 l/m². Zakres: 0,07–0,10 l/m² na warstwę. Dodatkowa warstwa zwiększa zużycie.</p>`+buttons([SHARED.foxLacquer]);
+ }
+ if(p.protection==='concrete')return html+`<p>Do zabezpieczenia Concrete dobierz CeboTech lub Decowax zgodnie z instrukcją efektu.</p><p class="muted">CeboTech: orientacyjnie ${fmt(area/10)} l gotowej, rozcieńczonej mieszaniny. Ilość koncentratu zależy od rozcieńczenia zalecanego dla Twojego systemu.</p>`+buttons([SHARED.cebo]);
+ if(p.protection==='provence'&&room==='hall')return html+'<p>Przy intensywnym użytkowaniu Provence instrukcja przewiduje zabezpieczenie Vernice Mat. Ilość i wykończenie dobierz do powierzchni oraz koloru.</p>'+buttons([SHARED.vernice,SHARED.protectionGuide]);
+ if(room==='dry')return html+'<p>W suchym pomieszczeniu dodatkowe zabezpieczenie dobierz tylko wtedy, gdy przewiduje je instrukcja produktu lub sposób użytkowania.</p>'+buttons([SHARED.protectionGuide]);
+ return html+'<p>Dobierz kompatybilne zabezpieczenie do produktu, koloru i częstotliwości mycia. Rodzaj pomieszczenia sam w sobie nie określa ilości ani rodzaju lakieru.</p><p class="muted">Lakier może zmienić połysk i odbiór koloru — sprawdź go na próbie.</p>'+buttons([SHARED.protectionGuide,SHARED.contact]);
+}
+function calculate(scroll=false){
+ try{
+  const p=product(),area=areaValue(),reserve=Number($('dc-waste').value),layers=p.layerOptions?Number($('dc-layers').value):p.layers;
+  const calcArea=area*(1+reserve/100),q=quantities(p,calcArea,layers),room=$('dc-room').value;
+  const links=p.shopLinks?.length?p.shopLinks:[SHARED.contact];
+  const amount=q.required==null?'':p.kind==='coveragePerPackage'?`${p.includedPrimer?'Zestawy':'Opakowania'} na łącznie około ${fmt(q.coverage)} m².`:`Obliczone zapotrzebowanie: ${fmt(q.required)} ${p.unit}.${q.opt?' Łącznie w opakowaniach: '+fmt(q.total)+' '+p.unit+'.':''}`;
+  const purchaseLabel=q.required==null?'Dobór ilości':q.opt||q.count?'Do zamówienia':'Orientacyjne zapotrzebowanie';
+  const tools=(p.tools||[]).map(key=>TOOLS[key]);
+  const applicationNote=room==='bathroom'?'<p class="notice">W łazience sprawdź dozwoloną strefę stosowania produktu. Sam lakier nie zastępuje hydroizolacji.</p>':'';
+  $('dc-output').innerHTML=`<div class="result-head"><h2>${purchaseLabel} · ${escape(p.name)}</h2><p class="quantity">${escape(q.main)}</p><p>${escape(amount)}</p>${p.variants?'<p class="muted">'+escape(p.variantName)+'</p>':''}<div class="facts"><span>Powierzchnia: <strong>${fmt(area)} m²</strong></span><span>Zapas: <strong>${reserve}%</strong></span>${p.kind==='consult'?'<span>System: <strong>P1 + P2</strong></span>':'<span>Warstwy: <strong>'+layers+'</strong></span>'}</div></div>
+  <div class="shopping"><article class="panel full"><h3>Kup materiał</h3>${buttons(links,true)}${p.includedPrimer?'<p class="muted">Wybierz w sklepie zestaw na 6 m². Kolor nie zmienia obliczenia.</p>':''}${p.id==='aksamitna'?'<p class="muted">Wielkość dostępnego opakowania i zamówienie ustal z Decowant.</p>':''}</article>
+  <article class="panel">${primerPanel(p,q,calcArea)}</article><article class="panel">${protectionPanel(p,calcArea,room)}</article>
+  <article class="panel"><h3>Potrzebne narzędzia</h3><ul class="tool-list">${tools.map(t=>`<li><a href="${escape(t.url)}" target="_blank" rel="noopener">${escape(t.label)} →</a></li>`).join('')}</ul><p class="muted">Narzędzia dobierz raz do całej pracy. Sprawdź, czy nie masz ich już w zestawie.</p></article>
+  <article class="panel video-panel"><div><h3>Jak wykonać efekt?</h3><p>${p.video?'Zobacz film przed rozpoczęciem pracy i sprawdź kolejność nakładania materiałów.':'Sprawdź instrukcję produktu i przygotowanie podłoża przed rozpoczęciem pracy.'}</p></div>${p.video?linkHtml({label:p.videoLabel||'Obejrzyj instrukcję',url:'https://www.youtube.com/watch?v='+p.video}):linkHtml(SHARED.instructions)}</article></div>
+  <p class="note">${escape(p.note||normText(p))}</p><p class="note">Wynik jest orientacyjny. Zapas ${reserve}% ${reserve?'został uwzględniony w obliczeniu':'oznacza brak dodatkowego zapasu'}; zaokrąglenie do pełnych opakowań może dać nadwyżkę. Rzeczywiste zużycie zależy od przygotowania podłoża i techniki wykonania.</p>${applicationNote}`;
+  $('dc-error').hidden=true;$('dc-output').hidden=false;$('dc-empty').hidden=true;hasCalculated=true;
+  if(scroll){$('dc-output').focus({preventScroll:true});$('dc-output').scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});}
+ }catch(error){$('dc-error').textContent=error.message;$('dc-error').hidden=false;$('dc-output').hidden=true;$('dc-output').replaceChildren();$('dc-empty').hidden=true;if(scroll)$('dc-error').scrollIntoView({block:'nearest'});}
+}
+$('dc-form').addEventListener('submit',event=>{event.preventDefault();hasCalculated=true;calculate(true)});
+$('dc-form').addEventListener('input',event=>{if(event.target.matches('input[type="text"]')&&hasCalculated)calculate()});
+$('dc-form').addEventListener('change',event=>{if(event.target.id==='dc-product')updateProduct();if(event.target.id==='dc-variant')productSummary();if(['dc-mode','dc-subtract'].includes(event.target.id))updateMode();if(hasCalculated)calculate()});
+$('dc-form').addEventListener('reset',()=>{setTimeout(()=>{hasCalculated=false;$('dc-product').selectedIndex=0;$('dc-mode').value='area';$('dc-subtract').checked=true;$('dc-room').value='dry';$('dc-waste').value='0';$('dc-settings').open=false;updateProduct();updateMode();$('dc-output').replaceChildren();$('dc-output').hidden=true;$('dc-error').hidden=true;$('dc-empty').hidden=false;},0)});
+updateProduct();updateMode();
+})();
+</script>
 </body>
 </html>
