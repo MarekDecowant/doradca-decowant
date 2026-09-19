@@ -1,0 +1,9 @@
+{
+  "name": "Kosmiczna Matematyka Marysi",
+  "short_name": "Matematyka Marysi",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#120b2f",
+  "theme_color": "#311b67",
+  "lang": "pl"
+}
