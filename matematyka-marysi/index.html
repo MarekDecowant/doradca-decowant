@@ -5,92 +5,113 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#160d38">
 <link rel="manifest" href="manifest.json">
 <title>Soroban Marysi</title>
-<link rel="stylesheet" href="style.css?v=4">
+<style>
+:root{--bg:#160d38;--ink:#261b47;--muted:#74698e;--gold:#ffd86b;--wood:#9a6037;--wood2:#5f371f}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{margin:0;min-height:100%;overscroll-behavior:none}
+body{font-family:ui-rounded,"SF Pro Rounded","Nunito",system-ui,-apple-system,sans-serif;background:radial-gradient(circle at 15% 0,#49308e 0,transparent 30%),radial-gradient(circle at 100% 15%,#1f4f88 0,transparent 25%),var(--bg);color:#fff}
+button{font:inherit;touch-action:manipulation}
+.app{width:min(100%,560px);margin:auto;padding:calc(10px + env(safe-area-inset-top)) 10px calc(18px + env(safe-area-inset-bottom))}
+.top{display:flex;justify-content:space-between;align-items:center;padding:5px 2px 10px}.brand{font-size:19px;font-weight:950}.stars{background:rgba(255,255,255,.1);padding:8px 10px;border-radius:999px;font-weight:900}
+.modes{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;background:rgba(255,255,255,.08);padding:6px;border-radius:18px;margin-bottom:9px}
+.modes button{border:0;background:transparent;color:#c8c0e7;border-radius:13px;padding:12px 3px;font-weight:900;font-size:13px}.modes button.active{background:#fff;color:#2b1d52}
+.card{background:linear-gradient(#fff,#f6f2ff);color:var(--ink);border-radius:25px;padding:13px;box-shadow:0 18px 45px rgba(0,0,0,.28)}
+.head{display:flex;justify-content:space-between;align-items:center;margin:0 2px 6px}.head b{font-size:17px}.listen{border:0;width:50px;height:50px;border-radius:16px;background:#eee8ff;font-size:24px}
+.cues{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:6px 0 9px}.cue{background:#efe9ff;border-radius:18px;padding:9px 8px;text-align:center}.cue.single{grid-column:1/-1}.cue small{display:block;color:#6b6085;font-weight:900;font-size:11px;text-transform:uppercase;letter-spacing:.08em}.cue strong{display:block;font-size:54px;line-height:1;margin-top:2px;font-weight:1000;color:#21163e}
+.operator{font-size:24px;color:#8b79bc;margin:0 3px}
+.soroban{position:relative;height:390px;border:7px solid var(--wood2);border-radius:24px;background:linear-gradient(90deg,#ddc28d,#eed8a9,#d9ba82);overflow:hidden;box-shadow:inset 0 0 0 3px rgba(255,255,255,.22),inset 0 0 26px rgba(79,44,17,.16)}
+.soroban:before{content:"";position:absolute;left:0;right:0;top:111px;height:12px;background:linear-gradient(#7c4b29,#4c2a17);z-index:5}
+.rods{display:grid;grid-template-columns:1fr 1fr;height:100%}.rod{position:relative;border-right:1px solid rgba(80,45,22,.12)}.rod:last-child{border-right:0}.line{position:absolute;left:50%;top:10px;bottom:38px;width:5px;transform:translateX(-50%);background:linear-gradient(90deg,#815a35,#b78b5b,#704824);border-radius:8px}
+.bead{position:absolute;left:50%;transform:translateX(-50%);z-index:3;width:min(40vw,122px);height:44px;border:0;border-radius:50%;background:linear-gradient(#f4ad51,#d77730 58%,#b85a22);box-shadow:inset 0 3px 4px rgba(255,255,255,.4),0 4px 6px rgba(69,37,15,.28);transition:top .16s ease}.bead.disabled{opacity:.22;filter:grayscale(.6);pointer-events:none}.label{position:absolute;left:0;right:0;bottom:8px;text-align:center;font-size:12px;font-weight:950;color:#5c3d25;letter-spacing:.05em}
+.now{text-align:center;margin:8px 0 1px;color:#74698e;font-size:12px;font-weight:850}.now strong{display:block;font-size:31px;color:#241942;line-height:1}
+.result{display:none;margin:7px 0 2px;text-align:center;background:#e8fff5;border-radius:16px;padding:9px;color:#1b7158}.result.show{display:block}.result small{display:block;font-weight:850}.result strong{font-size:42px;line-height:1}
+.feedback{height:28px;text-align:center;font-weight:950;display:flex;align-items:center;justify-content:center}.feedback.good{color:#187258}.feedback.bad{color:#ae3554}
+.controls{display:grid;grid-template-columns:1fr 1.2fr;gap:8px}.controls button{min-height:54px;border:0;border-radius:16px;font-weight:950;padding:8px}.secondary{background:#ece6fb;color:#62577c}.primary{background:linear-gradient(135deg,var(--gold),#ffbd58);color:#39231c}
+.session{text-align:center;color:#7c7195;font-size:12px;margin-top:10px}
+.tip{color:#c9c1e6;font-size:11px;line-height:1.35;text-align:center;margin:9px 10px 0}
+@media(max-width:390px){.brand{font-size:17px}.card{padding:11px}.cue strong{font-size:58px}.soroban{height:370px}.bead{width:min(41vw,116px);height:42px}.controls button{font-size:13px}}
+@media(max-height:720px){.soroban{height:330px}.cue strong{font-size:46px}.bead{height:39px}}
+</style>
 </head>
 <body>
 <div class="app">
-  <header class="topbar">
-    <div>
-      <div class="brand">🧮 Soroban Marysi</div>
-      <div class="small">liczymy do 10</div>
-    </div>
-    <div class="topactions">
-      <div class="stars" id="stars">⭐ 0</div>
-      <button class="gear" onclick="openSettings()" aria-label="Ustawienia">⚙️</button>
-    </div>
-  </header>
-
-  <main>
-    <div class="modes" role="tablist">
-      <button id="mode-number" onclick="setMode('number')">Liczby</button>
-      <button id="mode-add" class="active" onclick="setMode('add')">Dodawanie</button>
-      <button id="mode-sub" onclick="setMode('sub')">Odejmowanie</button>
-    </div>
-
-    <section class="trainer">
-      <div class="trainerHead">
-        <div>
-          <div class="eyebrow" id="modeTitle">Dodawanie do 10</div>
-          <div class="instruction">Posłuchaj i przesuń koraliki</div>
-        </div>
-        <button class="listen" onclick="repeatInstruction()" aria-label="Powtórz polecenie">🔊</button>
-      </div>
-
-      <div id="sorobanMount"></div>
-
-      <div class="feedback" id="feedback"></div>
-
-      <div class="controls">
-        <button class="secondary" onclick="resetToStart()">↩ Zacznij od początku</button>
-        <button class="primary" onclick="checkTask()">Gotowe ✓</button>
-      </div>
-
-      <div class="session">
-        <div class="dots" id="dots"></div>
-        <div id="sessionText">1 z 10</div>
-      </div>
-    </section>
-
-    <section class="tip">
-      <button onclick="showHelp()">💡 Pomoc</button>
-      <p id="tipText">Lektor poda polecenie. Na ekranie nie pokazujemy działania — Marysia liczy tylko na sorobanie.</p>
-    </section>
-  </main>
+<header class="top"><div class="brand">🧮 Soroban Marysi</div><div class="stars" id="stars">⭐ 0</div></header>
+<div class="modes">
+<button id="m-number" onclick="setMode('number')">Liczby</button>
+<button id="m-add" class="active" onclick="setMode('add')">Dodawanie</button>
+<button id="m-sub" onclick="setMode('sub')">Odejmowanie</button>
 </div>
-
-<div class="sheet" id="settingsSheet" onclick="sheetBackdrop(event)">
-  <div class="sheetBox">
-    <div class="sheetHandle"></div>
-    <div class="sheetTitle">
-      <h2>Ustawienia rodzica</h2>
-      <button onclick="closeSettings()">✕</button>
-    </div>
-
-    <div class="settingRow">
-      <div><b>🔊 Lektor</b><small>Naturalny polski głos z telefonu.</small></div>
-      <input id="voiceToggle" type="checkbox" checked onchange="saveVoiceSetting()">
-    </div>
-
-    <label class="label" for="voiceSelect">Głos</label>
-    <select id="voiceSelect" onchange="selectVoice(this.value)">
-      <option value="">Automatycznie — najlepszy polski</option>
-    </select>
-    <button class="testVoice" onclick="testVoice()">▶ Posłuchaj</button>
-
-    <div class="stats">
-      <div><b id="correctStat">0</b><span>poprawnych</span></div>
-      <div><b id="totalStat">0</b><span>zadań</span></div>
-      <div><b id="accuracyStat">0%</b><span>skuteczność</span></div>
-    </div>
-
-    <button class="danger" onclick="resetProgress()">Wyzeruj postępy</button>
-  </div>
+<section class="card">
+<div class="head"><b id="title">Dodawanie do 10</b><button class="listen" onclick="repeatInstruction()">🔊</button></div>
+<div class="cues" id="cues"></div>
+<div id="mount"></div>
+<div class="now">Teraz na sorobanie<strong id="nowValue">0</strong></div>
+<div class="result" id="result"><small>Poprawny wynik</small><strong id="resultValue">0</strong></div>
+<div class="feedback" id="feedback"></div>
+<div class="controls"><button class="secondary" onclick="resetTask()">↩ Od początku</button><button class="primary" onclick="checkTask()">Gotowe ✓</button></div>
+<div class="session" id="session">1 z 10</div>
+</section>
+<div class="tip">Najpierw widać tylko cyfry potrzebne do zadania. Wynik pojawia się dopiero po sprawdzeniu.</div>
 </div>
+<script>
+const KEY='marysiaSorobanSimpleV5';
+let state=JSON.parse(localStorage.getItem(KEY)||'null')||{stars:0,correct:0,total:0};
+let mode='add',digits=[0,0],task={start:0,change:0,answer:0,index:0,total:10,instruction:'',locked:false};
+let voices=[],voice=null;
+const $=id=>document.getElementById(id),rand=(a,b)=>Math.floor(Math.random()*(b-a+1))+a,value=()=>digits[0]*10+digits[1];
 
-<script src="app.js?v=4"></script>
-</body>
-</html>
+function setMode(m){
+ mode=m;['number','add','sub'].forEach(x=>$('m-'+x).classList.toggle('active',x===m));
+ $('title').textContent=m==='number'?'Liczby od 0 do 10':m==='add'?'Dodawanie do 10':'Odejmowanie do 10';
+ task.index=0;newTask();
+}
+function newTask(){
+ task.locked=false;$('result').classList.remove('show');clearFeedback();
+ if(mode==='number'){task.start=0;task.change=0;task.answer=rand(0,10);task.instruction='Ustaw na sorobanie liczbę '+task.answer;setValue(0)}
+ if(mode==='add'){task.start=rand(0,9);task.change=rand(1,10-task.start);task.answer=task.start+task.change;task.instruction='Na sorobanie jest '+task.start+'. Dodaj '+task.change;setValue(task.start)}
+ if(mode==='sub'){task.start=rand(1,10);task.change=rand(1,task.start);task.answer=task.start-task.change;task.instruction='Na sorobanie jest '+task.start+'. Odejmij '+task.change;setValue(task.start)}
+ renderCues();$('session').textContent=(task.index+1)+' z '+task.total;setTimeout(()=>speak(task.instruction),180)
+}
+function renderCues(){
+ if(mode==='number')$('cues').innerHTML='<div class="cue single"><small>Ustaw</small><strong>'+task.answer+'</strong></div>';
+ if(mode==='add')$('cues').innerHTML='<div class="cue"><small>Start</small><strong>'+task.start+'</strong></div><div class="cue"><small>Dodaj</small><strong>'+task.change+'</strong></div>';
+ if(mode==='sub')$('cues').innerHTML='<div class="cue"><small>Start</small><strong>'+task.start+'</strong></div><div class="cue"><small>Odejmij</small><strong>'+task.change+'</strong></div>';
+}
+function setValue(n){n=Math.max(0,Math.min(10,n));digits=[Math.floor(n/10),n%10];renderSoroban()}
+function renderSoroban(){
+ $('mount').innerHTML='<div class="soroban"><div class="rods">'+rod(0,'DZIESIĄTKI')+rod(1,'JEDNOŚCI')+'</div></div>';$('nowValue').textContent=value()
+}
+function rod(i,label){
+ const d=digits[i],tens=i===0,top=d>=5,low=d%5;let h='<div class="rod"><div class="line"></div>';
+ h+='<button class="bead'+(tens?' disabled':'')+'" style="top:'+(top?61:18)+'px" '+(tens?'disabled':'')+' onclick="toggleTop('+i+')"></button>';
+ for(let k=0;k<4;k++){const dis=tens&&k>0,active=k<low,pos=active?(127+k*42):(168+k*42);h+='<button class="bead'+(dis?' disabled':'')+'" style="top:'+pos+'px" '+(dis?'disabled':'')+' onclick="tapLower('+i+','+k+')"></button>'}
+ return h+'<div class="label">'+label+'</div></div>'
+}
+function toggleTop(i){if(task.locked||i===0)return;const low=digits[1]%5;digits[1]=(digits[1]>=5?0:5)+low;if(value()>10)digits[1]=low;renderSoroban()}
+function tapLower(i,k){
+ if(task.locked)return;
+ if(i===0){digits[0]=digits[0]===1?0:1;if(value()>10)digits[1]=0;renderSoroban();return}
+ const top=digits[1]>=5?5:0,low=digits[1]%5;digits[1]=top+(k<low?k:k+1);if(value()>10)digits=[1,0];renderSoroban()
+}
+function checkTask(){
+ if(task.locked)return;
+ $('resultValue').textContent=task.answer;$('result').classList.add('show');
+ if(value()===task.answer){
+   task.locked=true;state.correct++;state.total++;state.stars+=2;save();feedback('Brawo! ✨','good');speak('Brawo Marysiu. Wynik to '+task.answer);setTimeout(nextTask,1400)
+ }else{
+   state.total++;save();feedback('Spójrz na wynik i spróbuj jeszcze raz','bad');speak('Poprawny wynik to '+task.answer+'. Spróbuj jeszcze raz.');setTimeout(()=>{task.locked=false;$('result').classList.remove('show');clearFeedback();resetTask(false)},1700)
+ }
+}
+function nextTask(){task.index++;if(task.index>=task.total){state.stars+=5;save();task.index=0;speak('Brawo Marysiu. Skończyłaś dziesięć zadań.');setTimeout(newTask,900)}else newTask()}
+function resetTask(withVoice=true){task.locked=false;$('result').classList.remove('show');clearFeedback();setValue(task.start);if(withVoice)repeatInstruction()}
+function feedback(t,c){$('feedback').textContent=t;$('feedback').className='feedback '+c}function clearFeedback(){$('feedback').textContent='';$('feedback').className='feedback'}
+function save(){localStorage.setItem(KEY,JSON.stringify(state));$('stars').textContent='⭐ '+state.stars}
+function repeatInstruction(){speak(task.instruction,true)}
+function loadVoices(){if(!('speechSynthesis'in window))return;voices=speechSynthesis.getVoices()||[];voice=voices.filter(v=>(v.lang||'').toLowerCase().startsWith('pl')).sort((a,b)=>(/natural|neural|google|microsoft/i.test(b.name)?1:0)-(/natural|neural|google|microsoft/i.test(a.name)?1:0))[0]||null}
+function speak(text,force=false){if(!('speechSynthesis'in window))return;try{if(!voices.length)loadVoices();speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang='pl-PL';if(voice)u.voice=voice;u.rate=.86;u.pitch=1.02;speechSynthesis.speak(u)}catch(e){}}
+if('speechSynthesis'in window){loadVoices();speechSynthesis.onvoiceschanged=loadVoices;setTimeout(loadVoices,400)}
+save();newTask();
+</script>
+</body></html>
