@@ -1,60 +1,96 @@
 <!doctype html>
 <html lang="pl">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-<meta name="mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-<meta name="apple-mobile-web-app-title" content="Matematyka Marysi" />
-<meta name="theme-color" content="#311b67" />
-<link rel="manifest" href="manifest.json" />
-<title>Kosmiczna Matematyka Marysi</title>
-<link rel="stylesheet" href="style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#160d38">
+<link rel="manifest" href="manifest.json">
+<title>Soroban Marysi</title>
+<link rel="stylesheet" href="style.css?v=4">
 </head>
 <body>
 <div class="app">
-  <header class="top"><div><div class="brand">🚀 Kosmiczna Matematyka</div><div class="sub">trening Marysi • ok. 8–10 min</div></div><div class="pill" id="starPill">⭐ 0</div></header>
-
-  <main id="home" class="screen active">
-    <section class="hero"><h1>Cześć Marysiu! ✨</h1><p>Dziś ćwiczymy sprytne liczenie. Najpierw koraliki, potem obraz w głowie — krok po kroku.</p><div class="progress"><i id="dayProgress"></i></div><div class="sub" id="dayText" style="margin-top:7px">0 z 10 zadań na dziś</div></section>
-    <div class="sectionTitle"><h2>Twoja misja</h2><span id="levelText">Poziom 1</span></div>
-    <div class="grid" id="lessonGrid"></div>
-    <div class="panel"><div class="row"><div><b>🌟 Cel dnia</b><div class="sub">10 krótkich zadań. Kończymy zanim zrobi się nudno.</div></div><button class="secondary" onclick="startRecommended()">Start</button></div></div>
-  </main>
-
-  <main id="learn" class="screen">
-    <div class="lessonHead"><h2>🧮 Szkoła sorobanu</h2><p>Dotykaj koralików. Górny koralik ma wartość 5, dolne po 1.</p></div>
-    <div class="taskCard">
-      <div class="taskLabel">Wirtualny soroban</div><div class="prompt" id="freePrompt">Ułóż dowolną liczbę</div>
-      <div id="freeSoroban"></div>
-      <div class="hint"><b>Jak czytać?</b> Koraliki dotykające środkowej belki są „włączone”. Prawa kolumna to jedności, środkowa dziesiątki, lewa setki.</div>
-      <div class="row"><button class="secondary" style="color:#392b61;background:#eee9ff" onclick="resetFreeSoroban()">Wyzeruj</button><button class="primary" onclick="speak('To jest liczba ' + freeValue)">🔊 Powiedz liczbę</button></div>
+  <header class="topbar">
+    <div>
+      <div class="brand">🧮 Soroban Marysi</div>
+      <div class="small">liczymy do 10</div>
     </div>
-  </main>
-
-  <main id="training" class="screen">
-    <div class="lessonHead"><h2 id="trainingTitle">Trening</h2><p id="trainingSub">Krótka seria.</p></div>
-    <div class="taskCard" id="taskCard">
-      <div class="taskLabel" id="taskLabel">Zadanie</div><div class="prompt" id="prompt">Gotowa?</div>
-      <div id="taskArea"></div><div class="feedback" id="feedback"></div>
-      <div class="row" style="margin-top:8px"><button class="secondary" style="color:#392b61;background:#eee9ff" onclick="showHint()">💡 Podpowiedź</button><button class="primary" id="nextBtn" onclick="nextTask()" style="display:none">Dalej →</button></div>
+    <div class="topactions">
+      <div class="stars" id="stars">⭐ 0</div>
+      <button class="gear" onclick="openSettings()" aria-label="Ustawienia">⚙️</button>
     </div>
-    <div class="micro" id="sessionCounter">Zadanie 1 z 5</div>
-  </main>
+  </header>
 
-  <main id="parent" class="screen">
-    <div class="lessonHead"><h2>👨‍👩‍👧 Panel rodzica</h2><p>Postępy są zapisywane tylko na tym urządzeniu.</p></div>
-    <div class="panel"><div class="stats"><div class="stat"><b id="statCorrect">0</b><span>poprawnych</span></div><div class="stat"><b id="statAccuracy">0%</b><span>skuteczność</span></div><div class="stat"><b id="statStars">0</b><span>gwiazdek</span></div></div><div class="daily" id="week"></div></div>
-    <div class="panel"><div class="row"><div><b>🔊 Głos lektora</b><div class="sub">Czyta polecenia naturalnym polskim głosem.</div></div><label class="switch"><input id="voiceToggle" type="checkbox" checked onchange="saveSettings()"></label></div><div class="voiceBox"><label for="voiceSelect"><b style="font-size:14px">Wybór głosu</b></label><select id="voiceSelect" class="voiceSelect" onchange="selectVoice(this.value)"><option value="">Automatycznie — najlepszy polski</option></select><div class="voiceActions"><div class="voiceStatus" id="voiceStatus">Szukam polskich głosów w telefonie…</div><button class="secondary" onclick="testVoice()">▶ Posłuchaj</button></div></div></div>
-    <div class="sectionTitle"><h2>Program nauki</h2><span>od konkretu do wyobraźni</span></div>
-    <div class="curriculum" id="curriculum"></div>
-    <div class="panel"><b>Zasada treningu</b><p class="sub">Na początku nie ścigamy czasu. Najważniejszy jest poprawny ruch i rozumienie. Szybkość dokładamy dopiero po automatyzacji.</p><button class="secondary" onclick="resetProgress()">Wyzeruj postępy</button></div>
+  <main>
+    <div class="modes" role="tablist">
+      <button id="mode-number" onclick="setMode('number')">Liczby</button>
+      <button id="mode-add" class="active" onclick="setMode('add')">Dodawanie</button>
+      <button id="mode-sub" onclick="setMode('sub')">Odejmowanie</button>
+    </div>
+
+    <section class="trainer">
+      <div class="trainerHead">
+        <div>
+          <div class="eyebrow" id="modeTitle">Dodawanie do 10</div>
+          <div class="instruction">Posłuchaj i przesuń koraliki</div>
+        </div>
+        <button class="listen" onclick="repeatInstruction()" aria-label="Powtórz polecenie">🔊</button>
+      </div>
+
+      <div id="sorobanMount"></div>
+
+      <div class="feedback" id="feedback"></div>
+
+      <div class="controls">
+        <button class="secondary" onclick="resetToStart()">↩ Zacznij od początku</button>
+        <button class="primary" onclick="checkTask()">Gotowe ✓</button>
+      </div>
+
+      <div class="session">
+        <div class="dots" id="dots"></div>
+        <div id="sessionText">1 z 10</div>
+      </div>
+    </section>
+
+    <section class="tip">
+      <button onclick="showHelp()">💡 Pomoc</button>
+      <p id="tipText">Lektor poda polecenie. Na ekranie nie pokazujemy działania — Marysia liczy tylko na sorobanie.</p>
+    </section>
   </main>
 </div>
 
-<div class="bottom"><nav class="nav"><button class="active" data-go="home" onclick="go('home',this)"><span>🏠</span>Start</button><button data-go="learn" onclick="go('learn',this)"><span>🧮</span>Soroban</button><button data-go="training" onclick="startRecommended(this)"><span>🚀</span>Trening</button><button data-go="parent" onclick="go('parent',this)"><span>📊</span>Rodzic</button></nav></div>
+<div class="sheet" id="settingsSheet" onclick="sheetBackdrop(event)">
+  <div class="sheetBox">
+    <div class="sheetHandle"></div>
+    <div class="sheetTitle">
+      <h2>Ustawienia rodzica</h2>
+      <button onclick="closeSettings()">✕</button>
+    </div>
 
-<div class="modal" id="infoModal"><div class="modalBox"><button class="close" onclick="closeModal()">✕</button><h2 id="modalTitle"></h2><div id="modalBody"></div></div></div>
-<script src="app.js"></script>
-</body></html>
+    <div class="settingRow">
+      <div><b>🔊 Lektor</b><small>Naturalny polski głos z telefonu.</small></div>
+      <input id="voiceToggle" type="checkbox" checked onchange="saveVoiceSetting()">
+    </div>
+
+    <label class="label" for="voiceSelect">Głos</label>
+    <select id="voiceSelect" onchange="selectVoice(this.value)">
+      <option value="">Automatycznie — najlepszy polski</option>
+    </select>
+    <button class="testVoice" onclick="testVoice()">▶ Posłuchaj</button>
+
+    <div class="stats">
+      <div><b id="correctStat">0</b><span>poprawnych</span></div>
+      <div><b id="totalStat">0</b><span>zadań</span></div>
+      <div><b id="accuracyStat">0%</b><span>skuteczność</span></div>
+    </div>
+
+    <button class="danger" onclick="resetProgress()">Wyzeruj postępy</button>
+  </div>
+</div>
+
+<script src="app.js?v=4"></script>
+</body>
+</html>
