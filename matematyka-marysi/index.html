@@ -14,7 +14,7 @@
 body{font-family:ui-rounded,"SF Pro Rounded","Nunito",system-ui,-apple-system,sans-serif;background:radial-gradient(circle at 15% 0,#49308e 0,transparent 30%),radial-gradient(circle at 100% 15%,#1f4f88 0,transparent 25%),var(--bg);color:#fff}
 button{font:inherit;touch-action:manipulation}
 .app{width:min(100%,560px);margin:auto;padding:calc(10px + env(safe-area-inset-top)) 10px calc(18px + env(safe-area-inset-bottom))}
-.top{display:flex;justify-content:space-between;align-items:center;padding:5px 2px 10px}.brand{font-size:19px;font-weight:950}.stars{background:rgba(255,255,255,.1);padding:8px 10px;border-radius:999px;font-weight:900}
+.top{display:flex;justify-content:space-between;align-items:center;padding:5px 2px 10px}.brand{font-size:19px;font-weight:950}.stars{background:rgba(255,255,255,.1);padding:8px 10px;border-radius:999px;font-weight:900}.learnNav{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:9px}.learnNav a{text-align:center;text-decoration:none;color:#fff;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.13);padding:11px 6px;border-radius:14px;font-weight:900;font-size:14px}.learnNav a.active{background:#ffd86b;color:#39231c;border-color:#ffd86b}
 .modes{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;background:rgba(255,255,255,.08);padding:6px;border-radius:18px;margin-bottom:9px}
 .modes button{border:0;background:transparent;color:#c8c0e7;border-radius:13px;padding:12px 3px;font-weight:900;font-size:13px}.modes button.active{background:#fff;color:#2b1d52}
 .card{background:linear-gradient(#fff,#f6f2ff);color:var(--ink);border-radius:25px;padding:13px;box-shadow:0 18px 45px rgba(0,0,0,.28)}
@@ -38,6 +38,7 @@ button{font:inherit;touch-action:manipulation}
 <body>
 <div class="app">
 <header class="top"><div class="brand">🧮 Soroban Marysi</div><div class="stars" id="stars">⭐ 0</div></header>
+<nav class="learnNav" aria-label="Gry Marysi"><a class="active" href="./">🧮 Matematyka</a><a href="czytanie/">📚 Czytanie</a></nav>
 <div class="modes">
 <button id="m-number" onclick="setMode('number')">Liczby</button>
 <button id="m-add" class="active" onclick="setMode('add')">Dodawanie</button>
