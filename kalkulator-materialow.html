@@ -25,7 +25,7 @@ details{border:1px solid var(--line);padding:14px 16px;border-radius:10px;margin
 </style>
 </head>
 <body>
-<main class="shell" id="decowant-material-calculator" data-version="2026-09-18-v2">
+<main class="shell" id="decowant-material-calculator" data-version="2026-11-02-packages">
 <nav class="top" aria-label="Nawigacja"><a class="brand" href="https://www.sklepdecowant.pl/">DECOWANT</a><a href="https://www.sklepdecowant.pl/">Wróć do sklepu →</a></nav>
 <header class="hero"><p class="eyebrow">Kalkulator zużycia materiałów</p><h1>Ile materiału potrzebujesz?</h1><p>Wybierz produkt i podaj metraż. Otrzymasz ilość materiału, potrzebne narzędzia i instrukcję wykonania.</p></header>
 <form id="dc-form" class="form-card" novalidate>
@@ -72,7 +72,8 @@ const PRODUCTS = [
     "primer": "DECOMAL Podkład",
     "primerYield": 7,
     "primerPackages": [
-      1.5
+      1.5,
+      3
     ],
     "primerUnit": "kg",
     "note": "Wydajność przy nakładaniu pędzlem: 5–7 m²/kg. W obliczeniu przyjęto 7 m²/kg. Przy aplikacji pacą: 5–6 m²/kg.",
@@ -91,8 +92,12 @@ const PRODUCTS = [
     "fixedLayers": true,
     "primerLinks": [
       {
-        "label": "Zobacz DECOMAL PODKŁAD 1,5 kg",
+        "label": "DECOMAL PODKŁAD 1,5 kg",
         "url": "https://www.sklepdecowant.pl/pl/p/DECOMAL-podklad-1.5-kg/1766"
+      },
+      {
+        "label": "DECOMAL PODKŁAD 3 kg",
+        "url": "https://www.sklepdecowant.pl/pl/p/DECOMAL-podklad-3-kg/1767"
       }
     ],
     "video": "cXsaLeArKhQ",
@@ -122,16 +127,17 @@ const PRODUCTS = [
     "packages": [
       1
     ],
-    "packageLabel": "opak. 1 kg",
+    "packageLabel": "opak. 1 l",
     "layers": 1,
     "waste": 0,
     "primer": "DECOMAL Podkład",
     "primerYield": 7,
     "primerPackages": [
-      1.5
+      1.5,
+      3
     ],
     "primerUnit": "kg",
-    "note": "Wydajność 7–10 m²/kg na jedną warstwę, zgodnie z kartą techniczną DECOMALmat. Przyjęto 10 m²/kg; opakowania liczone w kilogramach.",
+    "note": "Aktualne oferty DECOMALmat zawierają opakowania 1 l. Przyjęto około 10 m² z opakowania na jedną warstwę, zgodnie z opisem produktu. Rzeczywiste zużycie zależy od podłoża i techniki.",
     "id": "decomalmat",
     "group": "DECOWANT",
     "tools": [
@@ -147,8 +153,12 @@ const PRODUCTS = [
     "fixedLayers": true,
     "primerLinks": [
       {
-        "label": "Zobacz DECOMAL PODKŁAD 1,5 kg",
+        "label": "DECOMAL PODKŁAD 1,5 kg",
         "url": "https://www.sklepdecowant.pl/pl/p/DECOMAL-podklad-1.5-kg/1766"
+      },
+      {
+        "label": "DECOMAL PODKŁAD 3 kg",
+        "url": "https://www.sklepdecowant.pl/pl/p/DECOMAL-podklad-3-kg/1767"
       }
     ],
     "video": "1H7pptHsFqQ"
@@ -166,7 +176,8 @@ const PRODUCTS = [
     "primer": "DECOMAL Podkład",
     "primerYield": 7,
     "primerPackages": [
-      1.5
+      1.5,
+      3
     ],
     "primerUnit": "kg",
     "note": "Wydajność przy nakładaniu pędzlem: 5–7 m²/kg. W obliczeniu przyjęto 7 m²/kg. Przy aplikacji pacą: 5–6 m²/kg.",
@@ -185,8 +196,12 @@ const PRODUCTS = [
     "fixedLayers": true,
     "primerLinks": [
       {
-        "label": "Zobacz DECOMAL PODKŁAD 1,5 kg",
+        "label": "DECOMAL PODKŁAD 1,5 kg",
         "url": "https://www.sklepdecowant.pl/pl/p/DECOMAL-podklad-1.5-kg/1766"
+      },
+      {
+        "label": "DECOMAL PODKŁAD 3 kg",
+        "url": "https://www.sklepdecowant.pl/pl/p/DECOMAL-podklad-3-kg/1767"
       }
     ],
     "video": "7dY9KxIsYJ0",
@@ -309,7 +324,9 @@ const PRODUCTS = [
     "kind": "coveragePerUnit",
     "yield": 6,
     "unit": "kg",
-    "packages": [],
+    "packages": [
+      1
+    ],
     "layers": 2,
     "fixedLayers": true,
     "yieldIncludesLayers": true,
@@ -317,13 +334,18 @@ const PRODUCTS = [
     "primer": "DECOMAL PODKŁAD — biały lub podbarwiony zgodnie z wybranym efektem",
     "primerYield": 7,
     "primerPackages": [
-      1.5
+      1.5,
+      3
     ],
     "primerUnit": "kg",
     "primerLinks": [
       {
-        "label": "Zobacz DECOMAL PODKŁAD 1,5 kg",
+        "label": "DECOMAL PODKŁAD 1,5 kg",
         "url": "https://www.sklepdecowant.pl/pl/p/DECOMAL-podklad-1.5-kg/1766"
+      },
+      {
+        "label": "DECOMAL PODKŁAD 3 kg",
+        "url": "https://www.sklepdecowant.pl/pl/p/DECOMAL-podklad-3-kg/1767"
       }
     ],
     "tools": [
@@ -331,15 +353,21 @@ const PRODUCTS = [
     ],
     "protection": "consult",
     "video": "HtpFmSRgg8s",
-    "shopLinks": [],
-    "note": "Wydajność 4–6 m²/kg obejmuje dwie warstwy (KT 1.3). Przyjęto 6 m²/kg dla całego efektu. Trzecia warstwa zwiększa zużycie — dobierz ilość po próbie. Wielkość opakowania ustal z Decowant."
+    "shopLinks": [
+      {
+        "label": "Wybierz kolor Aksamitnej Głębi 1 kg",
+        "url": "https://www.sklepdecowant.pl/pl/c/Aksamitna-Glebia/85"
+      }
+    ],
+    "note": "Wydajność 4–6 m²/kg obejmuje dwie warstwy (KT 1.3). Przyjęto 6 m²/kg dla całego efektu. Trzecia warstwa zwiększa zużycie — dobierz ilość po próbie. Dobór dotyczy opakowań samej dekoracji 1 kg. Jeśli wybierasz zestaw z podkładem, uwzględnij jego skład."
   },
   {
     "name": "DECOMAL Podkład",
     "kind": "coveragePerUnit",
     "yield": 7,
     "packages": [
-      1.5
+      1.5,
+      3
     ],
     "unit": "kg",
     "layers": 1,
@@ -352,8 +380,12 @@ const PRODUCTS = [
     ],
     "shopLinks": [
       {
-        "label": "Zobacz DECOMAL Podkład",
+        "label": "DECOMAL PODKŁAD 1,5 kg",
         "url": "https://www.sklepdecowant.pl/pl/p/DECOMAL-podklad-1.5-kg/1766"
+      },
+      {
+        "label": "DECOMAL PODKŁAD 3 kg",
+        "url": "https://www.sklepdecowant.pl/pl/p/DECOMAL-podklad-3-kg/1767"
       }
     ],
     "protection": "none",
@@ -361,7 +393,7 @@ const PRODUCTS = [
   },
   {
     "id": "provence",
-    "name": "Provence",
+    "name": "Provence — zestawy na ok. 6 m²",
     "group": "Pozostałe produkty",
     "kind": "coveragePerPackage",
     "yield": 6,
@@ -387,15 +419,14 @@ const PRODUCTS = [
         "url": "https://www.sklepdecowant.pl/pl/searchquery/PROVENCE%20ZESTAW%206m2/1/phot/5?url=PROVENCE%20ZESTAW%206m2"
       }
     ],
-    "note": "Obliczenie: 1 zestaw na około 6 m². Zestaw zawiera dekorację 1 kg i podkład 1,5 kg. Rzeczywiste zużycie zależy od podłoża oraz techniki; w razie potrzeby wybierz zapas."
+    "note": "Obliczenie: 1 zestaw na około 6 m². Zestaw zawiera dekorację 1 kg i podkład 1,5 kg. Rzeczywiste zużycie zależy od podłoża oraz techniki; w razie potrzeby wybierz zapas. Większe zestawy na 12 i 24 m² są dostępne dla wybranych kolorów. Ten wynik dotyczy zestawów na 6 m², a nie samych wiader glinki."
   },
   {
     "name": "Aurum",
     "kind": "coveragePerUnit",
     "yield": 8,
     "packages": [
-      0.75,
-      2.25
+      0.75
     ],
     "unit": "kg",
     "layers": 1,
@@ -409,7 +440,7 @@ const PRODUCTS = [
           "brush",
           "duo"
         ],
-        "note": "Przyjęto 8 m²/kg przy nakładaniu pędzlem."
+        "note": "Przyjęto 8 m²/kg przy nakładaniu pędzlem. Dobór obejmuje opakowania bazy Aurum 0,75 kg, zgodnie z kartą techniczną producenta. Sprawdź dodatek TINER oraz podkład w wybranej ofercie."
       },
       {
         "name": "Paca INOX – do 6 m²/kg",
@@ -417,7 +448,7 @@ const PRODUCTS = [
         "tools": [
           "trowel"
         ],
-        "note": "Przyjęto 6 m²/kg przy nakładaniu pacą INOX."
+        "note": "Przyjęto 6 m²/kg przy nakładaniu pacą INOX. Dobór obejmuje opakowania bazy Aurum 0,75 kg, zgodnie z kartą techniczną producenta. Sprawdź dodatek TINER oraz podkład w wybranej ofercie."
       }
     ],
     "id": "aurum",
@@ -436,13 +467,18 @@ const PRODUCTS = [
     "video": "NEJC6lW2Ivo",
     "primerYield": 7,
     "primerPackages": [
-      1.5
+      1.5,
+      3
     ],
     "primerUnit": "kg",
     "primerLinks": [
       {
-        "label": "Zobacz DK Quarzo 1,5 kg",
+        "label": "DK Quarzo 1,5 kg",
         "url": "https://www.sklepdecowant.pl/pl/p/DECOVERNI-QUARZO-1%2C5-KG-FARBA-GRUNTUJACA/615"
+      },
+      {
+        "label": "DK Quarzo 3 kg",
+        "url": "https://www.sklepdecowant.pl/pl/p/DECOVERNI-QUARZO-3KG-FARBA-GRUNTUJACA/799"
       }
     ]
   },
@@ -478,6 +514,50 @@ const PRODUCTS = [
       2,
       3,
       4
+    ],
+    "variantLabel": "Rodzaj Color Matt",
+    "variants": [
+      {
+        "name": "Barwienie NCS — 2,5 / 5 / 10 l",
+        "packages": [
+          2.5,
+          5,
+          10
+        ],
+        "note": "Wydajność do 14 m²/l na jedną warstwę. Dobór dotyczy opakowań farby barwionej NCS."
+      },
+      {
+        "name": "Gotowy kolor — 2,5 / 5 l",
+        "packages": [
+          2.5,
+          5
+        ],
+        "shopLinks": [
+          {
+            "label": "Wybierz gotowy kolor Color Matt",
+            "url": "https://www.sklepdecowant.pl/pl/c/FARBY-LATEKSOWE/50"
+          }
+        ],
+        "note": "Wydajność do 14 m²/l na jedną warstwę. Sprawdź dostępność wybranego gotowego koloru w tych pojemnościach."
+      },
+      {
+        "name": "Antyreflex biała — 2,5 / 10 l",
+        "packages": [
+          2.5,
+          10
+        ],
+        "shopLinks": [
+          {
+            "label": "Antyreflex biała 2,5 l",
+            "url": "https://www.sklepdecowant.pl/pl/p/-ANTYREFLEX-biala-2%2C5l-FOX-DEKORATOR-COLOR-MATT/254"
+          },
+          {
+            "label": "Antyreflex biała 10 l",
+            "url": "https://www.sklepdecowant.pl/pl/p/-ANTYREFLEX-biala-10l-FOX-DEKORATOR-COLOR-MATT/582"
+          }
+        ],
+        "note": "Wydajność do 14 m²/l na jedną warstwę. Dobór dotyczy białej farby Antyreflex."
+      }
     ]
   },
   {
@@ -569,21 +649,62 @@ const PRODUCTS = [
         "url": "https://www.sklepdecowant.pl/pl/searchquery/Kalahari/1/phot/5?url=Kalahari"
       }
     ],
-    "protection": "consult"
+    "protection": "consult",
+    "variantLabel": "Odmiana farby",
+    "variants": [
+      {
+        "name": "Gotowy kolor — opakowania 1 l",
+        "packages": [
+          1
+        ],
+        "note": "Dobór dotyczy gotowych kolorów oferowanych w opakowaniach 1 l. Wybierz ten sam kolor dla wszystkich opakowań."
+      },
+      {
+        "name": "White — opakowania 1 l i 3 l",
+        "packages": [
+          1,
+          3
+        ],
+        "shopLinks": [
+          {
+            "label": "White 1 l",
+            "url": "https://www.sklepdecowant.pl/pl/p/FOX-KALAHARI%2C-WHITE-1L/227"
+          },
+          {
+            "label": "White 3 l",
+            "url": "https://www.sklepdecowant.pl/pl/p/FOX-KALAHARI%2C-WHITE-3L/228"
+          }
+        ],
+        "note": "Dobór dotyczy odmiany White, dostępnej w opakowaniach 1 l i 3 l."
+      },
+      {
+        "name": "Kremowy Design Decowant — 3 l",
+        "packages": [
+          3
+        ],
+        "shopLinks": [
+          {
+            "label": "Kalahari Kremowy Design Decowant 3 l",
+            "url": "https://www.sklepdecowant.pl/pl/p/KALAHARI-WHITE-KOLOR-KREMOWY-DESIGN-DECOWANT/1173"
+          }
+        ],
+        "note": "Dobór dotyczy samej farby Kremowy Design Decowant w opakowaniu 3 l."
+      }
+    ],
+    "note": "Wybierz odmianę, ponieważ dostępne opakowania zależą od koloru."
   },
   {
     "name": "Diamento 3D",
     "kind": "coveragePerUnit",
     "yield": 5,
     "packages": [
-      1,
-      3
+      1
     ],
     "unit": "l",
     "layers": 1,
     "waste": 0,
     "primer": "Farba podkładowa zgodna z systemem",
-    "note": "Opakowanie 3 l może być dostępne tylko dla wybranych wariantów.",
+    "note": "Wybierz odmianę, ponieważ dostępne opakowania zależą od koloru.",
     "id": "diamento",
     "group": "Pozostałe produkty",
     "tools": [
@@ -595,7 +716,35 @@ const PRODUCTS = [
         "url": "https://www.sklepdecowant.pl/pl/searchquery/Diamento%203D/1/phot/5?url=Diamento-3D"
       }
     ],
-    "protection": "consult"
+    "protection": "consult",
+    "variantLabel": "Odmiana farby",
+    "variants": [
+      {
+        "name": "Gotowy kolor — opakowania 1 l",
+        "packages": [
+          1
+        ],
+        "note": "Dobór dotyczy gotowych kolorów oferowanych w opakowaniach 1 l. Wybierz ten sam kolor dla wszystkich opakowań."
+      },
+      {
+        "name": "White — opakowania 1 l i 3 l",
+        "packages": [
+          1,
+          3
+        ],
+        "shopLinks": [
+          {
+            "label": "White 1 l",
+            "url": "https://www.sklepdecowant.pl/pl/p/Fox-Dekorator-DIAMENTO-3D-WHITE-1L/210"
+          },
+          {
+            "label": "White 3 l",
+            "url": "https://www.sklepdecowant.pl/pl/p/Fox-Dekorator-DIAMENTO-3D-WHITE-3L/211"
+          }
+        ],
+        "note": "Dobór dotyczy odmiany White, dostępnej w opakowaniach 1 l i 3 l."
+      }
+    ]
   },
   {
     "name": "Trawertyn Wapienny FOX",
@@ -688,7 +837,7 @@ const PRODUCTS = [
     "consumption": 1.2,
     "packages": [
       5,
-      22
+      20
     ],
     "unit": "kg",
     "layers": 1,
@@ -702,8 +851,12 @@ const PRODUCTS = [
     ],
     "shopLinks": [
       {
-        "label": "Zobacz Concrete Fini",
+        "label": "Baza — 5 kg",
         "url": "https://www.sklepdecowant.pl/pl/p/BETON-CONCRETE-FINI-5-KG/618"
+      },
+      {
+        "label": "Baza — 20 kg",
+        "url": "https://www.sklepdecowant.pl/pl/p/BETON-CONCRETE-FINI-20-KG/791"
       }
     ],
     "protection": "concrete",
@@ -721,6 +874,269 @@ const PRODUCTS = [
         "label": "Zobacz DK Quarzo GG 1,5 kg",
         "url": "https://www.sklepdecowant.pl/pl/p/DECOVERNI-QUARZO-GG-1%2C5-KG-FARBA-GRUNTUJACA/614"
       }
+    ],
+    "variantLabel": "Kolor Concrete Fini",
+    "variants": [
+      {
+        "name": "Baza",
+        "packages": [
+          5,
+          20
+        ],
+        "shopLinks": [
+          {
+            "label": "Baza — 5 kg",
+            "url": "https://www.sklepdecowant.pl/pl/p/BETON-CONCRETE-FINI-5-KG/618"
+          },
+          {
+            "label": "Baza — 20 kg",
+            "url": "https://www.sklepdecowant.pl/pl/p/BETON-CONCRETE-FINI-20-KG/791"
+          }
+        ],
+        "note": "Zużycie 1,2 kg/m² na jedną warstwę. Dobór opakowań dotyczy wybranego koloru."
+      },
+      {
+        "name": "Ciemny Granat",
+        "packages": [
+          5
+        ],
+        "shopLinks": [
+          {
+            "label": "Ciemny Granat — 5 kg",
+            "url": "https://www.sklepdecowant.pl/pl/p/BETON-CONCRETE-FINI-5-KG-CIEMNY-GRANAT/644"
+          }
+        ],
+        "note": "Zużycie 1,2 kg/m² na jedną warstwę. Dobór opakowań dotyczy wybranego koloru."
+      },
+      {
+        "name": "Butelkowa Zieleń",
+        "packages": [
+          5
+        ],
+        "shopLinks": [
+          {
+            "label": "Butelkowa Zieleń — 5 kg",
+            "url": "https://www.sklepdecowant.pl/pl/p/BETON-CONCRETE-FINI-5-KG-BUTELKOWA-ZIELEN/645"
+          }
+        ],
+        "note": "Zużycie 1,2 kg/m² na jedną warstwę. Dobór opakowań dotyczy wybranego koloru."
+      },
+      {
+        "name": "DB 209/20",
+        "packages": [
+          5,
+          20
+        ],
+        "shopLinks": [
+          {
+            "label": "DB 209/20 — 5 kg",
+            "url": "https://www.sklepdecowant.pl/pl/p/DECOVERNI-Concrete-Fini-5-kg-DB-20920/861"
+          },
+          {
+            "label": "DB 209/20 — 20 kg",
+            "url": "https://www.sklepdecowant.pl/pl/p/BETON-CONCRETE-FINI-20-KG-DB-20920/1512"
+          }
+        ],
+        "note": "Zużycie 1,2 kg/m² na jedną warstwę. Dobór opakowań dotyczy wybranego koloru."
+      },
+      {
+        "name": "DB 215",
+        "packages": [
+          5,
+          20
+        ],
+        "shopLinks": [
+          {
+            "label": "DB 215 — 5 kg",
+            "url": "https://www.sklepdecowant.pl/pl/p/DECOVERNI-Concrete-Fini-5-kg-DB-215/862"
+          },
+          {
+            "label": "DB 215 — 20 kg",
+            "url": "https://www.sklepdecowant.pl/pl/p/BETON-CONCRETE-FINI-20-KG-DB-215/1511"
+          }
+        ],
+        "note": "Zużycie 1,2 kg/m² na jedną warstwę. Dobór opakowań dotyczy wybranego koloru."
+      },
+      {
+        "name": "DB 1008",
+        "packages": [
+          5,
+          20
+        ],
+        "shopLinks": [
+          {
+            "label": "DB 1008 — 5 kg",
+            "url": "https://www.sklepdecowant.pl/pl/p/DECOVERNI-Concrete-Fini-5-kg-DB-1008/863"
+          },
+          {
+            "label": "DB 1008 — 20 kg",
+            "url": "https://www.sklepdecowant.pl/pl/p/BETON-CONCRETE-FINI-20-KG-DB1008/1505"
+          }
+        ],
+        "note": "Zużycie 1,2 kg/m² na jedną warstwę. Dobór opakowań dotyczy wybranego koloru."
+      },
+      {
+        "name": "DB 1005",
+        "packages": [
+          5,
+          20
+        ],
+        "shopLinks": [
+          {
+            "label": "DB 1005 — 5 kg",
+            "url": "https://www.sklepdecowant.pl/pl/p/DECOVERNI-Concrete-Fini-5-kg-DB-1005/864"
+          },
+          {
+            "label": "DB 1005 — 20 kg",
+            "url": "https://www.sklepdecowant.pl/pl/p/BETON-CONCRETE-FINI-20-KG-DB-1005/1516"
+          }
+        ],
+        "note": "Zużycie 1,2 kg/m² na jedną warstwę. Dobór opakowań dotyczy wybranego koloru."
+      },
+      {
+        "name": "DB 1003",
+        "packages": [
+          5,
+          20
+        ],
+        "shopLinks": [
+          {
+            "label": "DB 1003 — 5 kg",
+            "url": "https://www.sklepdecowant.pl/pl/p/DECOVERNI-Concrete-Fini-5-kg-DB-1003/866"
+          },
+          {
+            "label": "DB 1003 — 20 kg",
+            "url": "https://www.sklepdecowant.pl/pl/p/BETON-CONCRETE-FINI-20-KG-DB1003/1506"
+          }
+        ],
+        "note": "Zużycie 1,2 kg/m² na jedną warstwę. Dobór opakowań dotyczy wybranego koloru."
+      },
+      {
+        "name": "DB 202",
+        "packages": [
+          5,
+          20
+        ],
+        "shopLinks": [
+          {
+            "label": "DB 202 — 5 kg",
+            "url": "https://www.sklepdecowant.pl/pl/p/DECOVERNI-Concrete-Fini-5-kg-DB-202/867"
+          },
+          {
+            "label": "DB 202 — 20 kg",
+            "url": "https://www.sklepdecowant.pl/pl/p/BETON-CONCRETE-FINI-20-KG-db202/1508"
+          }
+        ],
+        "note": "Zużycie 1,2 kg/m² na jedną warstwę. Dobór opakowań dotyczy wybranego koloru."
+      },
+      {
+        "name": "DB 207",
+        "packages": [
+          5,
+          20
+        ],
+        "shopLinks": [
+          {
+            "label": "DB 207 — 5 kg",
+            "url": "https://www.sklepdecowant.pl/pl/p/DECOVERNI-Concrete-Fini-5-kg-DB-207/868"
+          },
+          {
+            "label": "DB 207 — 20 kg",
+            "url": "https://www.sklepdecowant.pl/pl/p/BETON-CONCRETE-FINI-20-KG-DB-207/1515"
+          }
+        ],
+        "note": "Zużycie 1,2 kg/m² na jedną warstwę. Dobór opakowań dotyczy wybranego koloru."
+      },
+      {
+        "name": "DB 210",
+        "packages": [
+          5,
+          20
+        ],
+        "shopLinks": [
+          {
+            "label": "DB 210 — 5 kg",
+            "url": "https://www.sklepdecowant.pl/pl/p/DECOVERNI-Concrete-Fini-5-kg-DB-210/869"
+          },
+          {
+            "label": "DB 210 — 20 kg",
+            "url": "https://www.sklepdecowant.pl/pl/p/BETON-CONCRETE-FINI-20-KG-db210/1507"
+          }
+        ],
+        "note": "Zużycie 1,2 kg/m² na jedną warstwę. Dobór opakowań dotyczy wybranego koloru."
+      },
+      {
+        "name": "DB 1001 + Mika Silver",
+        "packages": [
+          5,
+          20
+        ],
+        "shopLinks": [
+          {
+            "label": "DB 1001 + Mika Silver — 5 kg",
+            "url": "https://www.sklepdecowant.pl/pl/p/BETON-CONCRETE-FINI-5-KG-DB-1001-MIKA-SILVER/1136"
+          },
+          {
+            "label": "DB 1001 + Mika Silver — 20 kg",
+            "url": "https://www.sklepdecowant.pl/pl/p/BETON-CONCRETE-FINI-20-KG-db1001-mika-silver/1509"
+          }
+        ],
+        "note": "Zużycie 1,2 kg/m² na jedną warstwę. Dobór opakowań dotyczy wybranego koloru."
+      },
+      {
+        "name": "DB 201 + Mika Gold",
+        "packages": [
+          5,
+          20
+        ],
+        "shopLinks": [
+          {
+            "label": "DB 201 + Mika Gold — 5 kg",
+            "url": "https://www.sklepdecowant.pl/pl/p/BETON-CONCRETE-FINI-5-KG-DB-201-MIKA-GOLD/1137"
+          },
+          {
+            "label": "DB 201 + Mika Gold — 20 kg",
+            "url": "https://www.sklepdecowant.pl/pl/p/BETON-CONCRETE-FINI-20-KG-db-201-mika-gold/1510"
+          }
+        ],
+        "note": "Zużycie 1,2 kg/m² na jedną warstwę. Dobór opakowań dotyczy wybranego koloru."
+      },
+      {
+        "name": "DB 212",
+        "packages": [
+          5,
+          20
+        ],
+        "shopLinks": [
+          {
+            "label": "DB 212 — 5 kg",
+            "url": "https://www.sklepdecowant.pl/pl/p/BETON-CONCRETE-FINI-5-KG-DB-212/1138"
+          },
+          {
+            "label": "DB 212 — 20 kg",
+            "url": "https://www.sklepdecowant.pl/pl/p/BETON-CONCRETE-FINI-20-KG-DB-212/1514"
+          }
+        ],
+        "note": "Zużycie 1,2 kg/m² na jedną warstwę. Dobór opakowań dotyczy wybranego koloru."
+      },
+      {
+        "name": "DB 209/50",
+        "packages": [
+          5,
+          20
+        ],
+        "shopLinks": [
+          {
+            "label": "DB 209/50 — 5 kg",
+            "url": "https://www.sklepdecowant.pl/pl/p/Decoverni-Concrete-Fini-5-kg-beton-dekoracyjny-DB-20950/2089"
+          },
+          {
+            "label": "DB 209/50 — 20 kg",
+            "url": "https://www.sklepdecowant.pl/pl/p/Decoverni-Concrete-Fini-20-kg-beton-dekoracyjny-DB-20950/2103"
+          }
+        ],
+        "note": "Zużycie 1,2 kg/m² na jedną warstwę. Dobór opakowań dotyczy wybranego koloru."
+      }
     ]
   },
   {
@@ -729,7 +1145,7 @@ const PRODUCTS = [
     "consumption": 2,
     "packages": [
       5,
-      22
+      20
     ],
     "unit": "kg",
     "layers": 1,
@@ -743,8 +1159,12 @@ const PRODUCTS = [
     ],
     "shopLinks": [
       {
-        "label": "Zobacz Concrete Grosso",
-        "url": "https://www.sklepdecowant.pl/pl/searchquery/Concrete%20Grosso/1/phot/5?url=Concrete-Grosso"
+        "label": "Baza — 5 kg",
+        "url": "https://www.sklepdecowant.pl/pl/p/BETON-CONCRETE-GROSSO-5KG/795"
+      },
+      {
+        "label": "Baza — 20 kg",
+        "url": "https://www.sklepdecowant.pl/pl/p/DECOVERNI-Concrete-Grosso-20-kg-beton-dekoracyjny/837"
       }
     ],
     "protection": "concrete",
@@ -762,6 +1182,170 @@ const PRODUCTS = [
         "label": "Zobacz DK Quarzo GG 1,5 kg",
         "url": "https://www.sklepdecowant.pl/pl/p/DECOVERNI-QUARZO-GG-1%2C5-KG-FARBA-GRUNTUJACA/614"
       }
+    ],
+    "variantLabel": "Kolor Concrete Grosso",
+    "variants": [
+      {
+        "name": "Baza",
+        "packages": [
+          5,
+          20
+        ],
+        "shopLinks": [
+          {
+            "label": "Baza — 5 kg",
+            "url": "https://www.sklepdecowant.pl/pl/p/BETON-CONCRETE-GROSSO-5KG/795"
+          },
+          {
+            "label": "Baza — 20 kg",
+            "url": "https://www.sklepdecowant.pl/pl/p/DECOVERNI-Concrete-Grosso-20-kg-beton-dekoracyjny/837"
+          }
+        ],
+        "note": "Przyjęto 2 kg/m² na jedną warstwę. Dobór dotyczy samego betonu w wybranym kolorze. Większe zestawy z podkładem sprawdź osobno w sklepie."
+      },
+      {
+        "name": "Cloudy",
+        "packages": [
+          5
+        ],
+        "shopLinks": [
+          {
+            "label": "Cloudy — 5 kg",
+            "url": "https://www.sklepdecowant.pl/pl/p/BETON-CONCRETE-GROSSO-5KG-CLOUDY/983"
+          }
+        ],
+        "note": "Przyjęto 2 kg/m² na jedną warstwę. Dobór dotyczy samego betonu w wybranym kolorze. Większe zestawy z podkładem sprawdź osobno w sklepie."
+      },
+      {
+        "name": "Natural",
+        "packages": [
+          5
+        ],
+        "shopLinks": [
+          {
+            "label": "Natural — 5 kg",
+            "url": "https://www.sklepdecowant.pl/pl/p/BETON-CONCRETE-GROSSO-5KG-NATURAL/984"
+          }
+        ],
+        "note": "Przyjęto 2 kg/m² na jedną warstwę. Dobór dotyczy samego betonu w wybranym kolorze. Większe zestawy z podkładem sprawdź osobno w sklepie."
+      },
+      {
+        "name": "Gray",
+        "packages": [
+          5
+        ],
+        "shopLinks": [
+          {
+            "label": "Gray — 5 kg",
+            "url": "https://www.sklepdecowant.pl/pl/p/BETON-CONCRETE-GROSSO-5KG-GRAY/985"
+          }
+        ],
+        "note": "Przyjęto 2 kg/m² na jedną warstwę. Dobór dotyczy samego betonu w wybranym kolorze. Większe zestawy z podkładem sprawdź osobno w sklepie."
+      },
+      {
+        "name": "Dove",
+        "packages": [
+          5
+        ],
+        "shopLinks": [
+          {
+            "label": "Dove — 5 kg",
+            "url": "https://www.sklepdecowant.pl/pl/p/BETON-CONCRETE-GROSSO-5KG-DOVE/986"
+          }
+        ],
+        "note": "Przyjęto 2 kg/m² na jedną warstwę. Dobór dotyczy samego betonu w wybranym kolorze. Większe zestawy z podkładem sprawdź osobno w sklepie."
+      },
+      {
+        "name": "Black",
+        "packages": [
+          5
+        ],
+        "shopLinks": [
+          {
+            "label": "Black — 5 kg",
+            "url": "https://www.sklepdecowant.pl/pl/p/BETON-CONCRETE-GROSSO-5KG-BLACK/987"
+          }
+        ],
+        "note": "Przyjęto 2 kg/m² na jedną warstwę. Dobór dotyczy samego betonu w wybranym kolorze. Większe zestawy z podkładem sprawdź osobno w sklepie."
+      },
+      {
+        "name": "Cement",
+        "packages": [
+          5
+        ],
+        "shopLinks": [
+          {
+            "label": "Cement — 5 kg",
+            "url": "https://www.sklepdecowant.pl/pl/p/BETON-CONCRETE-GROSSO-5KG-CEMENT/988"
+          }
+        ],
+        "note": "Przyjęto 2 kg/m² na jedną warstwę. Dobór dotyczy samego betonu w wybranym kolorze. Większe zestawy z podkładem sprawdź osobno w sklepie."
+      },
+      {
+        "name": "Brown",
+        "packages": [
+          5
+        ],
+        "shopLinks": [
+          {
+            "label": "Brown — 5 kg",
+            "url": "https://www.sklepdecowant.pl/pl/p/BETON-CONCRETE-GROSSO-5KG-BROWN/989"
+          }
+        ],
+        "note": "Przyjęto 2 kg/m² na jedną warstwę. Dobór dotyczy samego betonu w wybranym kolorze. Większe zestawy z podkładem sprawdź osobno w sklepie."
+      },
+      {
+        "name": "Chalk",
+        "packages": [
+          5
+        ],
+        "shopLinks": [
+          {
+            "label": "Chalk — 5 kg",
+            "url": "https://www.sklepdecowant.pl/pl/p/BETON-CONCRETE-GROSSO-5KG-CHALK/990"
+          }
+        ],
+        "note": "Przyjęto 2 kg/m² na jedną warstwę. Dobór dotyczy samego betonu w wybranym kolorze. Większe zestawy z podkładem sprawdź osobno w sklepie."
+      },
+      {
+        "name": "Silver",
+        "packages": [
+          5
+        ],
+        "shopLinks": [
+          {
+            "label": "Silver — 5 kg",
+            "url": "https://www.sklepdecowant.pl/pl/p/BETON-CONCRETE-GROSSO-5KG-SILVER/991"
+          }
+        ],
+        "note": "Przyjęto 2 kg/m² na jedną warstwę. Dobór dotyczy samego betonu w wybranym kolorze. Większe zestawy z podkładem sprawdź osobno w sklepie."
+      },
+      {
+        "name": "Mist",
+        "packages": [
+          5
+        ],
+        "shopLinks": [
+          {
+            "label": "Mist — 5 kg",
+            "url": "https://www.sklepdecowant.pl/pl/p/BETON-CONCRETE-GROSSO-5KG-MIST/992"
+          }
+        ],
+        "note": "Przyjęto 2 kg/m² na jedną warstwę. Dobór dotyczy samego betonu w wybranym kolorze. Większe zestawy z podkładem sprawdź osobno w sklepie."
+      },
+      {
+        "name": "Latte",
+        "packages": [
+          5
+        ],
+        "shopLinks": [
+          {
+            "label": "Latte — 5 kg",
+            "url": "https://www.sklepdecowant.pl/pl/p/BETON-CONCRETE-GROSSO-5KG-LATTE/993"
+          }
+        ],
+        "note": "Przyjęto 2 kg/m² na jedną warstwę. Dobór dotyczy samego betonu w wybranym kolorze. Większe zestawy z podkładem sprawdź osobno w sklepie."
+      }
     ]
   },
   {
@@ -769,10 +1353,7 @@ const PRODUCTS = [
     "kind": "consumption",
     "consumption": 0.65,
     "packages": [
-      1,
-      2.5,
-      5,
-      10
+      2.5
     ],
     "unit": "kg",
     "layers": 2,
@@ -786,8 +1367,12 @@ const PRODUCTS = [
     ],
     "shopLinks": [
       {
-        "label": "Zobacz Universum",
-        "url": "https://www.sklepdecowant.pl/pl/searchquery/Universum/1/phot/5?url=Universum"
+        "label": "Universum Silver 2,5 kg",
+        "url": "https://www.sklepdecowant.pl/pl/p/UNIVERSUM-SILVER-2%2C5KG/1754"
+      },
+      {
+        "label": "Universum DB218 2,5 kg",
+        "url": "https://www.sklepdecowant.pl/pl/p/UNIVERSUM-SILVER-2%2C5KG-DB218/1755"
       }
     ],
     "protection": "consult",
@@ -872,7 +1457,7 @@ function productSummary(){const p=product();$('dc-product-summary').innerHTML=`<
 function updateProduct(){
  const p=PRODUCTS.find(p=>p.id===$('dc-product').value);
  $('dc-variant').replaceChildren();$('dc-variant-wrap').hidden=!p.variants;
- $('dc-variant-label').textContent=p.id==='trawertyn'?'Uziarnienie tynku':'Sposób nakładania';
+ $('dc-variant-label').textContent=p.variantLabel||(p.id==='trawertyn'?'Uziarnienie tynku':'Sposób nakładania');
  (p.variants||[]).forEach((v,i)=>{const o=document.createElement('option');o.value=i;o.textContent=v.name;$('dc-variant').append(o)});
  $('dc-layers').replaceChildren();$('dc-layers-wrap').hidden=!p.layerOptions;
  (p.layerOptions||[p.layers]).forEach(n=>{const o=document.createElement('option');o.value=n;o.textContent=n+(n===1?' warstwa':' warstwy');$('dc-layers').append(o)});
@@ -936,7 +1521,7 @@ function calculate(scroll=false){
   const tools=(p.tools||[]).map(key=>TOOLS[key]);
   const applicationNote=room==='bathroom'?'<p class="notice">W łazience sprawdź dozwoloną strefę stosowania produktu. Sam lakier nie zastępuje hydroizolacji.</p>':'';
   $('dc-output').innerHTML=`<div class="result-head"><h2>${purchaseLabel} · ${escape(p.name)}</h2><p class="quantity">${escape(q.main)}</p><p>${escape(amount)}</p>${p.variants?'<p class="muted">'+escape(p.variantName)+'</p>':''}<div class="facts"><span>Powierzchnia: <strong>${fmt(area)} m²</strong></span><span>Zapas: <strong>${reserve}%</strong></span>${p.kind==='consult'?'<span>System: <strong>P1 + P2</strong></span>':'<span>Warstwy: <strong>'+layers+'</strong></span>'}</div></div>
-  <div class="shopping"><article class="panel full"><h3>Kup materiał</h3>${buttons(links,true)}${p.includedPrimer?'<p class="muted">Wybierz w sklepie zestaw na 6 m². Kolor nie zmienia obliczenia.</p>':''}${p.id==='aksamitna'?'<p class="muted">Wielkość dostępnego opakowania i zamówienie ustal z Decowant.</p>':''}</article>
+  <div class="shopping"><article class="panel full"><h3>Kup materiał</h3>${buttons(links,true)}${p.includedPrimer?'<p class="muted">Wybierz w sklepie zestaw na 6 m². Kolor nie zmienia obliczenia.</p>':''}${p.id==='aksamitna'?'<p class="muted">Wybierz samą dekorację 1 kg lub zestaw z podkładem. Nie zamawiaj podkładu ponownie, jeśli jest już w zestawie.</p>':''}</article>
   <article class="panel">${primerPanel(p,q,calcArea)}</article><article class="panel">${protectionPanel(p,calcArea,room)}</article>
   <article class="panel"><h3>Potrzebne narzędzia</h3><ul class="tool-list">${tools.map(t=>`<li><a href="${escape(t.url)}" target="_blank" rel="noopener">${escape(t.label)} →</a></li>`).join('')}</ul><p class="muted">Narzędzia dobierz raz do całej pracy. Sprawdź, czy nie masz ich już w zestawie.</p></article>
   <article class="panel video-panel"><div><h3>Jak wykonać efekt?</h3><p>${p.video?'Zobacz film przed rozpoczęciem pracy i sprawdź kolejność nakładania materiałów.':'Sprawdź instrukcję produktu i przygotowanie podłoża przed rozpoczęciem pracy.'}</p></div>${p.video?linkHtml({label:p.videoLabel||'Obejrzyj instrukcję',url:'https://www.youtube.com/watch?v='+p.video}):linkHtml(SHARED.instructions)}</article></div>
@@ -954,3 +1539,4 @@ updateProduct();updateMode();
 </script>
 </body>
 </html>
+
